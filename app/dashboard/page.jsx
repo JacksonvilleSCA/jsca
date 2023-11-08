@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useState } from "react";
 
-const  dashboard = () => {
+const  Dashboard = () => {
   const router = useRouter();
 
   const [currentUser, setCurrentUser] = useState(null);
@@ -49,5 +49,5 @@ const  dashboard = () => {
     ) : null
   }
 
-  export default dashboard;
+  export default Dashboard;
   
