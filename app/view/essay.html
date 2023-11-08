@@ -1,0 +1,30 @@
+<!Doctype html>
+<html lang = "en"> 
+<html>
+    <head> 
+
+    </head>
+    <body> 
+        <form>
+        <input
+            type="file"
+            id="docpicker"
+            accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+
+        <h4> OR </h4>
+        <textarea name = "text" id = "docpicker" rows = "23" cols = "73" > </textarea> 
+        <br></br> 
+        <button type = "button" onclick="store()" > Submit </button>
+        <button type = "button" href="popup1.html" onclick="show('popup1')">  Cancel </button>
+        </form>
+    </body>
+
+    <script type="text/javascript">
+        function store() {
+            var essay = document.getElementById("docpicker"); 
+            localStorage.setItem("docpicker",essay.value); 
+        }
+    </script>
+
+
+</html>
