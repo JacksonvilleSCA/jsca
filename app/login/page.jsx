@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
 
-const login = () => {
+const Login = () => {
 
   const router = useRouter();
   console.log(router);
@@ -95,4 +95,4 @@ const login = () => {
   )
 }
 
-export default login
+export default Login
