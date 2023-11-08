@@ -1,7 +1,10 @@
-import './globals.css'
-import { Inter } from 'next/font/google'
+// import { Inter } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+// const inter = Inter({ subsets: ['latin'] })
+
+// import Head from 'next/head'
+import Head from 'next/head'
+import styles from './layout.module.css'
 
 export const metadata = {
   title: 'Create Next App',
@@ -11,7 +14,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head> 
+        <script src="https://cdn.tiny.cloud/1/mnjsi8c00iga0yq3zcnsif090me3lskqlwtz5y5mmr6twwdg/tinymce/5/tinymce.min.js" referrerPolicy="origin"></script>
+        </head>
+      <body className={styles.body}>
+        {children}
+        </body>
     </html>
   )
 }
