@@ -33,7 +33,7 @@ const Login = () => {
 
 
 
-  const handleSubmit = event =>{
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     const formElements = form.elements;
@@ -41,7 +41,7 @@ const Login = () => {
     const username = formElements.username.value;
     const password = formElements.password.value;
 
-    const users = JSON.parse(localStorage.getItem("users") || "[]") || []
+    const users = await JSON.parse(localStorage.getItem("users") || "[]") || []
 
     const user = users.find(
       user => user.username === username && user.password === password
