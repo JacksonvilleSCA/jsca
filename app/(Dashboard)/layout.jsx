@@ -6,7 +6,6 @@ const layout = ({ children }) => {
     <div>
       <Navabar/>
         {children}
-      
     </div>
   );
 };
