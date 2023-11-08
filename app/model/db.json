@@ -1,0 +1,17 @@
+{
+    "list": [
+        {
+            "id": "1", 
+            "day": "1",
+            "time": "2:15",
+            "activity": "test"
+        },
+        {
+            "id": "2", 
+            "day": "2",
+            "time": "1:15",
+            "activity": "test again"
+        }
+
+    ]
+}

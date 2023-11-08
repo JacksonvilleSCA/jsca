@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import logo from '@/public/JSCALogo.webp'
 
+
 const imageStyle = {
     height: '50px',
     width: '50px',
@@ -17,8 +18,8 @@ export default function Nav() {
                     Jacksonville Sister Cities Association
                 </a>
                     <div className="nav nav-tabs">
-                        <a className="nav-link link-opacity-75-hover">Home</a>
-                        <a className="nav-link link-opacity-75-hover" >Events</a>
+                        <Link href='/'> <a className="nav-link link-opacity-75-hover"> Home</a> </Link>
+                        <Link href='view/listMenu'> <a className="nav-link link-opacity-75-hover" >Event </a></Link>
                         <a className="nav-link link-opacity-75-hover" >Members</a>
                         <a className="nav-link link-opacity-75-hover" >Create account</a>
                         <a className="nav-link link-opacity-75-hover" >Login</a>
