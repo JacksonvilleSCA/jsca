@@ -1,98 +1,98 @@
-"use client"
-import Link from 'next/link'
-import { useState } from 'react'
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { useSearchParams } from 'next/navigation'
+// "use client"
+// import Link from 'next/link'
+// import { useState } from 'react'
+// import { useEffect } from 'react'
+// import { useRouter } from 'next/navigation'
+// import { useSearchParams } from 'next/navigation'
 
-const Login = () => {
+// const Login = () => {
 
-  const router = useRouter();
-  console.log(router);
+//   const router = useRouter();
+//   console.log(router);
 
-  const [errorMessage, setErrorMessage] = useState("");
-  const [username, setUserName] = useState('');
-  const [password, setPassword] = useState("");
+//   const [errorMessage, setErrorMessage] = useState("");
+//   const [username, setUserName] = useState('');
+//   const [password, setPassword] = useState("");
 
-  const searchParams = useSearchParams();
+//   const searchParams = useSearchParams();
 
-  useEffect(() => {
-    const userName = searchParams.get("username");
-    if(username){
-      setUserName(userName);
-    }
+//   useEffect(() => {
+//     const userName = searchParams.get("username");
+//     if(username){
+//       setUserName(userName);
+//     }
 
-    const error = searchParams.get("error");
-    if(error){
-      setErrorMessage(error);
-    }
+//     const error = searchParams.get("error");
+//     if(error){
+//       setErrorMessage(error);
+//     }
 
-  }, [setUserName,setErrorMessage,searchParams]);
+//   }, [setUserName,setErrorMessage,searchParams]);
 
   
 
 
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const formElements = form.elements;
+//   const handleSubmit = async (event) => {
+//     event.preventDefault();
+//     const form = event.currentTarget;
+//     const formElements = form.elements;
     
-    const username = formElements.username.value;
-    const password = formElements.password.value;
+//     const username = formElements.username.value;
+//     const password = formElements.password.value;
 
-    const users = await JSON.parse(localStorage.getItem("users") || "[]") || []
+//     const users = await JSON.parse(localStorage.getItem("users") || "[]") || []
 
-    const user = users.find(
-      user => user.username === username && user.password === password
-    )
+//     const user = users.find(
+//       user => user.username === username && user.password === password
+//     )
 
-    if(user) {
-      localStorage.setItem("currentUser", JSON.stringify({user}))
+//     if(user) {
+//       localStorage.setItem("currentUser", JSON.stringify({user}))
 
-      router.push("/dashboard")
-    }else{
-      setErrorMessage("Invalid username or password")
+//       router.push("/dashboard")
+//     }else{
+//       setErrorMessage("Invalid username or password")
 
-    }
+//     }
 
 
     
 
-  }
+//   }
 
   
 
   
-  return (
-    <div>
-    <h1>JSCA</h1>
-    <h3>Login</h3>
-    {errorMessage && <p>{errorMessage}</p>}
+//   return (
+//     <div>
+//     <h1>JSCA</h1>
+//     <h3>Login</h3>
+//     {errorMessage && <p>{errorMessage}</p>}
 
-    <form onSubmit={handleSubmit}>
-      <input
-        defaultValue={username ?? ""}
-        type="text"
-        placeholder="Username"
-        id="username"
-      />
+//     <form onSubmit={handleSubmit}>
+//       <input
+//         defaultValue={username ?? ""}
+//         type="text"
+//         placeholder="Username"
+//         id="username"
+//       />
 
-      <input
-        type="password"
-        placeholder="Password"
-        id="password"
-      />
+//       <input
+//         type="password"
+//         placeholder="Password"
+//         id="password"
+//       />
 
-      <button type="submit">Login</button>
+//       <button type="submit">Login</button>
 
-    </form>
+//     </form>
 
-    <Link href="/">Return</Link>
+//     <Link href="/">Return</Link>
 
 
-    </div>
-  )
-}
+//     </div>
+//   )
+// }
 
-export default Login
+// export default Login
