@@ -19,7 +19,12 @@ export default function Nav() {
                 </a>
                     <div className="nav nav-tabs">
                         <Link href='/'> <a className="nav-link link-opacity-75-hover"> Home</a> </Link>
-                        <Link href='view/listMenu'> <a className="nav-link link-opacity-75-hover" >Event </a></Link>
+
+                        <Link href='view/Dashboard'> <a className="nav-link link-opacity-75-hover" >Event </a></Link>
+
+                        <Link href='/EventHistory' className="nav-link active">Event</Link>
+
+
                         <a className="nav-link link-opacity-75-hover" >Members</a>
                         <a className="nav-link link-opacity-75-hover" >Create account</a>
                         <a className="nav-link link-opacity-75-hover" >Login</a>

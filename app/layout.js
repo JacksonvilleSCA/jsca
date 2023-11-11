@@ -12,6 +12,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+            <head> 
+        <script src="https://cdn.tiny.cloud/1/mnjsi8c00iga0yq3zcnsif090me3lskqlwtz5y5mmr6twwdg/tinymce/5/tinymce.min.js" referrerPolicy="origin"></script>
+        </head>
       <body className={inter.className}>
         <Nav/>
         {children}
