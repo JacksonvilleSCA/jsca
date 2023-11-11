@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { POST } from "../api/routes/evemtRoute";
 import Edit from "../components/Edit";
 
