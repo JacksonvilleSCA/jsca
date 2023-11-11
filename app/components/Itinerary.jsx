@@ -1,6 +1,6 @@
 "use client"
 import { useState } from 'react';
-import 'bootstrap-icons/font/bootstrap-icons.css'
+// import 'bootstrap-icons/font/bootstrap-icons.css'
 
 export default function Itinerary() {
 
