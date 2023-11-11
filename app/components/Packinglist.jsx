@@ -31,13 +31,15 @@ const TodoList = () => {
 
   return (
     <div>
+        <h1>To-Do List</h1>
       <input
+        className='form-control w-25'
         type="text"
         value={newTask}
         onChange={(e) => setNewTask(e.target.value)}
         placeholder="Add a new task"
       />
-      <button onClick={addTask}>Add</button>
+      <button className='btn btn-primary mt-2' onClick={addTask}>Add</button>
       <ul>
         {tasks.map((task) => (
           <li key={task.id}>
@@ -54,8 +56,8 @@ const TodoList = () => {
             ) : (
               <>
                 {task.text}
-                <button onClick={() => deleteTask(task.id)}>Delete</button>
-                <button onClick={() => startEdit(task)}>Edit</button>
+                <button className="btn btn-danger mx-3 my-3" onClick={() => deleteTask(task.id)}>Delete</button>
+                <button className="btn btn-warning" onClick={() => startEdit(task)}>Edit</button>
               </>
             )}
           </li>
