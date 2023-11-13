@@ -1,15 +1,9 @@
 "use client";
 import { useState } from "react";
-import {POST} from "../../api/routes/evemtRoute"
-import Edit from "../../components/Edit";
+import {POST} from "../../../api/routes/evemtRoute"
+import Edit from "../../../components/Edit";
 
 export default function Home(props) {
-    // const [amount, setAmount] = useState();
-    // const [image, setImage] = useState();
-    // const [startTime, setStartTime] = useState();
-    // const [endTime, setEndTime] = useState();
-    // const [location, setLocation] = useState();
-    // const [details, setDetails] = useState();
     const [amount, setAmount] = useState("");
     const [image, setImage] = useState("");
     const [startTime, setStartTime] = useState("");

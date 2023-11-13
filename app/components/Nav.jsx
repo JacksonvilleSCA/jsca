@@ -1,15 +1,20 @@
+'use client'
 import Link from 'next/link'
 import Image from 'next/image'
 import logo from '@/public/JSCALogo.webp'
-
+import { useEffect } from 'react';
 
 const imageStyle = {
     height: '50px',
     width: '50px',
 }
 
-
 export default function Nav() {
+
+    useEffect(() => {
+        require("bootstrap/dist/js/bootstrap.bundle.min.js");
+    },[])
+
     return (
         <nav className="navbar bg-body-tertiary" >
             <div className='container-fluid '>
@@ -17,18 +22,25 @@ export default function Nav() {
                     <Image className='d-inline-block align-text-middle me-2' src={logo} alt='logo' style={imageStyle} quality={100} />
                     Jacksonville Sister Cities Association
                 </a>
-                    <div className="nav nav-tabs">
-                        <Link href='/'> <a className="nav-link link-opacity-75-hover"> Home</a> </Link>
+                <div className="nav nav-tabs">
+                    <Link href='/'className="nav-link link-opacity-75-hover"> Home</Link>
 
-                        <Link href='view/Dashboard'> <a className="nav-link link-opacity-75-hover" >Event </a></Link>
+                    <li className="nav-item dropdown">
+                        <Link href='/' className="nav-link dropdown-toggle link-opacity-75-hover" data-bs-toggle="dropdown" aria-expanded="false" > Event</Link>
 
-                        <Link href='/EventHistory' className="nav-link active">Event</Link>
+                            <ul className='dropdown-menu'>
+                                <li><Link href='/' className='dropdown-item'> test</Link></li>
+                                <li><Link href='/' className='dropdown-item'>test</Link></li>
+                                <li><Link href='/' className='dropdown-item'>Itenerary</Link></li>
+                                <li><Link href='/' className='dropdown-item'>Packing List</Link></li>
+                                <li><Link href='/' className='dropdown-item'>(if) Admin</Link></li>
+                            </ul>
+                    </li>
 
-
-                        <a className="nav-link link-opacity-75-hover" >Members</a>
-                        <a className="nav-link link-opacity-75-hover" >Create account</a>
-                        <a className="nav-link link-opacity-75-hover" >Login</a>
-                    </div>
+                    <Link href='/' className="nav-link link-opacity-75-hover" >Members</Link>
+                    <Link href='/' className="nav-link link-opacity-75-hover" >Create account</Link>
+                    <Link href='/' className="nav-link link-opacity-75-hover" >Login</Link>
+                </div>
             </div>
         </nav>
     )

@@ -3,7 +3,7 @@
 // import React, { useEffect } from "react";
 import {GET as getEvent} from "../../../api/routes/evemtRoute"
 
-const page = () => {
+export default function Page(){
 
   // useEffect(() => {
 
@@ -73,4 +73,4 @@ const page = () => {
   );
 };
 
-export default page;
+
