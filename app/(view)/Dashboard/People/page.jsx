@@ -1,9 +1,8 @@
 import React from 'react'
 
-const page = () => {
+export default function Page(){
   return (
     <>
-    
     <div className="container mt-5">
       <div className="card" style={{width: '90%'}}>
         <div className="card-title text-center mt-3 mb-3">
@@ -45,5 +44,3 @@ const page = () => {
  </>
   )
 }
-
-export default page
