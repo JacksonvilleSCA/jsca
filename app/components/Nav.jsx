@@ -29,8 +29,8 @@ export default function Nav() {
                         <Link href='/' className="nav-link dropdown-toggle link-opacity-75-hover" data-bs-toggle="dropdown" aria-expanded="false" > Event</Link>
 
                             <ul className='dropdown-menu'>
-                                <li><Link href='/' className='dropdown-item'> test</Link></li>
-                                <li><Link href='/' className='dropdown-item'>test</Link></li>
+                                <li><Link href='/Dashboard/EventHistory' className='dropdown-item'>Event List</Link></li>
+                                <li><Link href='/Dashboard/Home' className='dropdown-item'>Create Event</Link></li>
                                 <li><Link href='/' className='dropdown-item'>Itenerary</Link></li>
                                 <li><Link href='/' className='dropdown-item'>Packing List</Link></li>
                                 <li><Link href='/' className='dropdown-item'>(if) Admin</Link></li>
