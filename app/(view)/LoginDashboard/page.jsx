@@ -10,7 +10,7 @@ import {accInfo} from "../../api/routes/accountInfo"
 const Dashboard = () => {
 
 
-  const [name, setName] = useState('');
+  //const [name, setName] = useState('');
 
   const router = useRouter();
 
@@ -25,27 +25,27 @@ const Dashboard = () => {
   //}
 
 
-  useEffect(() => {
-    loadPage();
- }, []);
+  //useEffect(() => {
+    //loadPage();
+ //}, []);
 
 
-  const loadPage = async () =>{
+  //const loadPage = async () =>{
 
-    try{
-      var acc = await accInfo(search);
-      var firstName = acc.firstname;
+    //try{
+     // var acc = await accInfo(search);
+      //var firstName = acc.firstname;
 
-      setName(firstName);
+      //setName(firstName);
 
 
-    } catch (error){
-    console.log(error);
-    }  
+    //} catch (error){
+    //console.log(error);
+   // }  
 
 
   
-  } 
+  //} 
 
 
 
@@ -74,7 +74,7 @@ const Dashboard = () => {
     return (
       <div>
       <h1>JSCA Dashboard</h1>
-      <h2>Welcome {name}</h2>
+      <h2>Welcome</h2>
       <br></br>
       <br></br>
       <button onClick={manageAccount}>Manage Account</button>
