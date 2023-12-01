@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
-//import { accInfo } from "../api/routes/accountInfo";
-//import { accUpdate } from "../api/routes/accountUpdate";
+import { accInfo } from "../api/routes/accountInfo";
+import { accUpdate } from "../api/routes/accountUpdate";
 import {accInfo} from "../../api/routes/accountInfo";
 import { accUpdate} from "../../api/routes/accountUpdate"
 
@@ -33,31 +33,31 @@ export default function Accountmanage() {
   var search = searchParams.get('myID')
 
 
-  //if(search == null){
-    //router.push('/login');
+  if(search == null){
+    router.push('/login');
     
-  //}
+  }
 
   
-  //useEffect(() => {
-    //loadPage();
- // }, []);
+  useEffect(() => {
+    loadPage();
+  }, []);
 
 
-  //const loadPage = async () =>{
+  const loadPage = async () =>{
 
-    //try{
-      //const acc = await accInfo(search);
-      //setAccData(acc);
+    try{
+      const acc = await accInfo(search);
+      setAccData(acc);
 
 
-    //} catch (error){
-    //console.log(error);
-    //}  
+    } catch (error){
+    console.log(error);
+    }  
 
 
   
-  //} 
+  } 
 
 
   const handleFirstName = (e) =>{
