@@ -113,7 +113,7 @@ export default function Accountmanage() {
     console.log(formData);
 
     try{
-      const result = await accUpdate(search,formData);
+      const result = accUpdate(search,formData);
       alert("Account Update succesful");
       location.reload(true);
     }
