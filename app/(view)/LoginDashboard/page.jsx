@@ -27,7 +27,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     loadPage();
-  }, []);
+ }, []);
 
 
   const loadPage = async () =>{

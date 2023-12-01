@@ -11,7 +11,7 @@ import { accUpdate} from "../../api/routes/accountUpdate"
 
 
 
-export default function accountmanage() {
+export default function Accountmanage() {
   const router = useRouter();
   const [USER, setUSER] = useState('');
   const [PASSWORD, setPASSWORD] = useState('');
