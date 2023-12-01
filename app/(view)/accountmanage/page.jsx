@@ -111,16 +111,25 @@ export default function Accountmanage() {
     }
 
     console.log(formData);
-    
-    const result = accUpdate(search,formData)
-    .then((response) => response.json())
-    .then((data) => console.log(data));
 
-    if(result != "wilco"){
-      console.log("Account Update Succesful")
+    try{
+      const result = await accUpdate(search,formData);
       alert("Account Update succesful");
       location.reload(true);
     }
+    catch(e){
+      console.log(e);
+    }
+    
+    //const result = accUpdate(search,formData)
+    //.then((response) => response.json())
+   // .then((data) => console.log(data));
+
+   // if(result != "wilco"){
+     // console.log("Account Update Succesful")
+     // alert("Account Update succesful");
+      //location.reload(true);
+   // }
 
 
   }
