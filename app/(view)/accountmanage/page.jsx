@@ -113,9 +113,14 @@ export default function Accountmanage() {
     console.log(formData);
 
     try{
-      const result = accUpdate(search,formData);
-      alert("Account Update succesful");
-      location.reload(true);
+      const result = await accUpdate(search,formData);
+      if(result != "wilco"){
+        alert("failed to update");
+      }
+      else{
+        alert("Account Update succesful");
+        location.reload(true);
+      }
     }
     catch(e){
       console.log(e);
