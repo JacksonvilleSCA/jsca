@@ -38,8 +38,8 @@ export default function Nav() {
                     </li>
 
                     <Link href='/' className="nav-link link-opacity-75-hover" >Members</Link>
-                    <Link href='/' className="nav-link link-opacity-75-hover" >Create account</Link>
-                    <Link href='/' className="nav-link link-opacity-75-hover" >Login</Link>
+                    <Link href='/accountcreate' className="nav-link link-opacity-75-hover" >Create account</Link>
+                    <Link href='/login' className="nav-link link-opacity-75-hover" >Login</Link>
                 </div>
             </div>
         </nav>

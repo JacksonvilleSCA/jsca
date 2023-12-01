@@ -1,98 +1,115 @@
-"use client"
+"use client";
 import Link from 'next/link'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
+import styles from './page.module.css'
+import {POST2} from '../../api/routes/logIn'
 
-const login = () => {
 
+
+
+const Login = () => {
   const router = useRouter();
-  console.log(router);
 
-  const [errorMessage, setErrorMessage] = useState("");
-  const [username, setUserName] = useState('');
-  const [password, setPassword] = useState("");
+  const [userValue, setUserValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+  const [error, setError] = useState('');
 
-  const searchParams = useSearchParams();
+  var Value1 = null;
 
-  useEffect(() => {
-    const userName = searchParams.get("username");
-    if(username){
-      setUserName(userName);
+
+
+
+  const handleUsername = (e) =>{
+    setUserValue(e.target.value);
+  }
+
+
+  const handlePassword = (e) =>{
+    setPasswordValue(e.target.value);
+  }
+
+
+
+  const handleSubmit = async (e) =>{
+    e.preventDefault();
+    const formData = {
+      username: userValue,
+      password: passwordValue,
     }
-
-    const error = searchParams.get("error");
-    if(error){
-      setErrorMessage(error);
-    }
-
-  }, [setUserName,setErrorMessage,searchParams]);
-
-  
-
-
-
-  const handleSubmit = event =>{
-    event.preventDefault();
-    const form = event.currentTarget;
-    const formElements = form.elements;
     
-    const username = formElements.username.value;
-    const password = formElements.password.value;
-
-    const users = JSON.parse(localStorage.getItem("users") || "[]") || []
-
-    const user = users.find(
-      user => user.username === username && user.password === password
-    )
-
-    if(user) {
-      localStorage.setItem("currentUser", JSON.stringify({user}))
-
-      router.push("/dashboard")
-    }else{
-      setErrorMessage("Invalid username or password")
+    try{
+      const data1 = await POST2(formData);
+      console.log("Response" + data1);
+      Value1 = data1;
+    }
+    catch (e) {
+      console.log(e);
 
     }
 
+    if(Value1 == null){
+      setError("User does not exist. Check input values.");
 
-    
+    }
+    else{
+      const myID = Value1.ID;
+      const Name= Value1.firstname
+      console.log(Name);
+      console.log(myID);
+      router.push(`/LoginDashboard?myID=${myID}`)
+    }
+
 
   }
 
   
-
-  
   return (
-    <div>
-    <h1>JSCA</h1>
-    <h3>Login</h3>
-    {errorMessage && <p>{errorMessage}</p>}
+    
+    <div> 
+  
+    <br></br>
+    <h3 className={styles.container}>Login</h3>
 
-    <form onSubmit={handleSubmit}>
+
+
+    <form className={styles.form} onSubmit={handleSubmit}>
       <input
-        defaultValue={username ?? ""}
         type="text"
         placeholder="Username"
+        name="username"
+        value={userValue}
+        onChange={handleUsername}
         id="username"
       />
+
+      <br></br>
 
       <input
         type="password"
         placeholder="Password"
+        name="password"
+        value={passwordValue}
+        onChange={handlePassword}
         id="password"
       />
+      <br></br>
 
       <button type="submit">Login</button>
 
-    </form>
+      <br>
+      </br>
+      {error && <p style={{color: 'red'}}>{error}</p>}
+      
 
-    <Link href="/">Return</Link>
+    </form>
+    <br></br>
 
 
     </div>
   )
 }
 
-export default login
+export default Login
