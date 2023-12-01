@@ -6,7 +6,6 @@ import React from "react";
 
 
 export async function accUpdate(ID, formData){
-await connect();
 //replace null value with previous information from account
 
 var returnResult;
