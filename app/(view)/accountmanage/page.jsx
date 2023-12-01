@@ -112,7 +112,9 @@ export default function Accountmanage() {
 
     console.log(formData);
     
-    const result = accUpdate(search,formData);
+    const result = accUpdate(search,formData)
+    .then((response) => response.json())
+    .then((data) => console.log(data));
 
     if(result != "wilco"){
       console.log("Account Update Succesful")
@@ -121,24 +123,12 @@ export default function Accountmanage() {
     }
 
 
-
   }
 
-
-
-  
-  
-
-
-  
   function dashB(){
 
-    router.back('/LoginDashboard')
-
-    
+    router.back('/LoginDashboard') 
   }
-
-
 
 
   firstN = accData.firstname;
