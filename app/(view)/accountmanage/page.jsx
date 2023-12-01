@@ -39,25 +39,25 @@ export default function Accountmanage() {
   //}
 
   
-  useEffect(() => {
-    loadPage();
-  }, []);
+  //useEffect(() => {
+    //loadPage();
+ // }, []);
 
 
-  const loadPage = async () =>{
+  //const loadPage = async () =>{
 
-    try{
-      const acc = await accInfo(search);
-      setAccData(acc);
+    //try{
+      //const acc = await accInfo(search);
+      //setAccData(acc);
 
 
-    } catch (error){
-    console.log(error);
-    }  
+    //} catch (error){
+    //console.log(error);
+    //}  
 
 
   
-  } 
+  //} 
 
 
   const handleFirstName = (e) =>{
