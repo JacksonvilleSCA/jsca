@@ -4,8 +4,6 @@ import { convertFileToBuffer } from "./convert";
 import connect from "../db/dbConnection";
 import Event from "../schema/Event";
 
-
-
 export async function GET(){
 
     // const data = await Event.find({});

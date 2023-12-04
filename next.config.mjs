@@ -5,4 +5,4 @@ const nextConfig = {
       serverComponentsExternalPackages: ['mongoose']
     }
   }
-module.exports = nextConfig
+export default nextConfig
