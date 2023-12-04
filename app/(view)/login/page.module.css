@@ -1,7 +1,18 @@
 .container{
-    display: flex;
-    align-items: center;
-    gap: 50px;
-    margin-bottom: 50px;
-    
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  border-bottom: 2px solid #ccc;
+
+  
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  align-items: center;
+  margin-top: 10px;
+
+}
