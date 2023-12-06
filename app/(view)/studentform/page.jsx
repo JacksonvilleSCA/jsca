@@ -265,7 +265,7 @@ import { POST } from '@/app/api/routes/essayroutes';
             </label>
             <br />
             <br />
-  //PARENT SIGNATURE
+             { /* PARENT SIGNATURE */ } 
             <br />
             <br />
             <label>
