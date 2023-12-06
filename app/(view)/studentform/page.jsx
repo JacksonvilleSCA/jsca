@@ -18,7 +18,7 @@ import { POST } from '@/app/api/routes/essayroutes';
             </label>
             <br /> <br />
             <label>
-                {" "}
+                
                 First/Given Name:
                 <input type="text" name="text" id="text" />
             </label>
