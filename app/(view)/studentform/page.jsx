@@ -297,11 +297,11 @@ import { POST } from '@/app/api/routes/essayroutes';
             <label htmlFor="no"> No </label>
             <br />
             <br />
-            {/* UPLOAD ESSAY */}
+            
             <button >
                 <Link href='/essay'> essay </Link>
             </button>
-            {/* <Link href='/essay'> essay</Link> */}
+           
         </form>
     </>
     ); 
