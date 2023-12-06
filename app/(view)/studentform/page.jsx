@@ -9,7 +9,7 @@ import { POST } from '@/app/api/routes/essayroutes';
     <>
     <h1 id="title">
                 Jacksonville Sister Cities  Landon Middle Student Exchange Program Application Form</h1>
-            <h1 id="Section1">Section I: Students Legal Name, Contact Data and Information (Do not use nicknames)</h1>
+            <h1 id="Section1">Section I: Student&apos;s Legal Name, Contact Data and Information (Do not use nicknames)</h1>
 
             <form action={POST}>
             <label>
