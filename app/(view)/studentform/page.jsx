@@ -145,7 +145,7 @@ import { POST } from '@/app/api/routes/essayroutes';
             <textarea name="text" id="textbox" rows={13} cols={63} defaultValue={" "} />
             <br />
             <br />
-            <h1>Section II: Parent's Name, Address and Contract Data</h1>
+            <h1>Section II: Parent&apos;s Name, Address and Contract Data</h1>
             <br />
             <br />
             <label>
@@ -238,7 +238,7 @@ import { POST } from '@/app/api/routes/essayroutes';
             <br />
             <label>
                 {" "}
-                Parent 1's Phone Number:
+                Parent 1&apos;s Phone Number:
                 <input
                     type="tel"
                     name="telephone"
@@ -249,7 +249,7 @@ import { POST } from '@/app/api/routes/essayroutes';
             <br />
             <label>
                 {" "}
-                Parent 2's Phone Number:
+                Parent 2&apos;s Phone Number:
                 <input
                     type="tel"
                     name="telephone"
@@ -276,7 +276,7 @@ import { POST } from '@/app/api/routes/essayroutes';
             <br />
             <label>
                 {" "}
-                Parent's Printed Name:
+                Parent&apos;s Printed Name:
                 <input type="text" name="text" />
             </label>
             <br />
