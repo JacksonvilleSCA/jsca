@@ -299,7 +299,7 @@ import { POST } from '@/app/api/routes/essayroutes';
             <br />
              { /* UPLOAD ESSAY */ }
             <button >
-                <Link href='/essay'> essay </Link>
+                <Link href='/essay'> Essay </Link>
             </button>
              { /* <link href='/essay'>essay</Link> */ }
            
