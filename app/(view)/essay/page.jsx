@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link'; 
 import { useState } from 'react';
 
-const essay = () => {
+const Essay = () => {
     const [text, setText] = useState('');
     const minWordCount = 10;
     const maxWordCount = 10000;
@@ -47,4 +47,4 @@ const essay = () => {
     );
   };
   
-  export default essay;
+  export default Essay;

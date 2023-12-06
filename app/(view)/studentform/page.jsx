@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link'; 
 import essay from '../essay/page';
-import { POST } from '@/app/api/routes/essayroutes'; 
+{/*import { POST } from '@/app/api/routes/essayroutes'; */}
 
  const StudentForm = () => {
   
@@ -11,7 +11,7 @@ import { POST } from '@/app/api/routes/essayroutes';
                 Jacksonville Sister Cities  Landon Middle Student Exchange Program Application Form</h1>
             <h1 id="Section1">Section I: Student's Legal Name, Contact Data and Information (Do not use nicknames)</h1>
 
-            <form action={POST}>
+           {/* <form action={POST}> */} 
             <label>
                 Last/Family Name:
                 <input type="text" name="text" id="text" />
@@ -299,10 +299,10 @@ import { POST } from '@/app/api/routes/essayroutes';
             <br />
             {/* UPLOAD ESSAY */}
             <button >
-                <Link href='/essay'> essay </Link>
+                <Link href='/essay'> Essay </Link>
             </button>
             {/* <Link href='/essay'> essay</Link> */}
-        </form>
+       {/*} </form> */}
     </>
     ); 
 }; 
