@@ -9,7 +9,7 @@ import essay from '../essay/page';
     <>
     <h1 id="title">
                 Jacksonville Sister Cities  Landon Middle Student Exchange Program Application Form</h1>
-            <h1 id="Section1">Section I: Student's Legal Name, Contact Data and Information (Do not use nicknames)</h1>
+            <h1 id="Section1">Section I: Student&apos;s Legal Name, Contact Data and Information (Do not use nicknames)</h1>
 
            {/* <form action={POST}> */} 
             <label>
@@ -18,7 +18,7 @@ import essay from '../essay/page';
             </label>
             <br /> <br />
             <label>
-                {" "}
+             {" "}
                 First/Given Name:
                 <input type="text" name="text" id="text" />
             </label>
@@ -145,7 +145,7 @@ import essay from '../essay/page';
             <textarea name="text" id="textbox" rows={13} cols={63} defaultValue={" "} />
             <br />
             <br />
-            <h1>Section II: Parent's Name, Address and Contract Data</h1>
+            <h1>Section II: Parent&apos;s Name, Address and Contract Data</h1>
             <br />
             <br />
             <label>
@@ -238,7 +238,7 @@ import essay from '../essay/page';
             <br />
             <label>
                 {" "}
-                Parent 1's Phone Number:
+                Parent 1&apos;s Phone Number:
                 <input
                     type="tel"
                     name="telephone"
@@ -249,7 +249,7 @@ import essay from '../essay/page';
             <br />
             <label>
                 {" "}
-                Parent 2's Phone Number:
+                Parent 2&apos;s Phone Number:
                 <input
                     type="tel"
                     name="telephone"
@@ -265,7 +265,7 @@ import essay from '../essay/page';
             </label>
             <br />
             <br />
-  //PARENT SIGNATURE
+             { /* PARENT SIGNATURE */ } 
             <br />
             <br />
             <label>
@@ -276,7 +276,7 @@ import essay from '../essay/page';
             <br />
             <label>
                 {" "}
-                Parent's Printed Name:
+                Parent&apos;s Printed Name:
                 <input type="text" name="text" />
             </label>
             <br />
@@ -297,12 +297,13 @@ import essay from '../essay/page';
             <label htmlFor="no"> No </label>
             <br />
             <br />
-            {/* UPLOAD ESSAY */}
+             { /* UPLOAD ESSAY */ }
             <button >
+                <Link href='/essay'> Essay </Link>
                 <Link href='/essay'> Essay </Link>
             </button>
             {/* <Link href='/essay'> essay</Link> */}
-       {/*} </form> */}
+        {/*</form>*/}
     </>
     ); 
 }; 
