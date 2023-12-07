@@ -1,6 +1,18 @@
 import mongoose from "mongoose";
 
-const connect = mongoose.connect("mongodb+srv://vercel-admin-user:A7aWHvEWX6maVLbh@cluster0.fgw4fx7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+const connect = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_DB_URI3,{
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+
+        });
+        console.log("DB connected");
+    } catch (error) {
+        console.log("Error connecting to the database", error);
+    }
+
+}
 
 
 export default connect;
