@@ -16,7 +16,7 @@ export default function Nav() {
     },[])
 
     return (
-        <nav className="navbar bg-body-tertiary" >
+        <nav className="navbar bg-body-tertiary" style={{boxShadow: "0px 16px 15px -13px rgba(0,0,0,0.1)"}} >
             <div className='container-fluid '>
                 <a className='navbar-brand'>
                     <Image className='d-inline-block align-text-middle me-2' src={logo} alt='logo' style={imageStyle} quality={100} />

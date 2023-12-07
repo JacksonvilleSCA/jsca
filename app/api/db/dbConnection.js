@@ -1,26 +1,18 @@
-// import mongoose from "mongoose";
-
-// let client;
-
-// const connection = async () =>{
-
-//     try{
-//         client = await  mongoose.connect(MONGO_DB_URI);
-//         console.log('DB connected');
-//     }catch(error){
-//         console.log('Error connecting to the database', error)
-//     }
-
-// }
-
-// connection();
-
-
-
 import mongoose from "mongoose";
-// const connect = mongoose.connect("mongodb+srv://JJAA55:lQc9jbseb3GD4J49@cluster0.dko7y2g.mongodb.net/JSCA?retryWrites=true&w=majority");
-const connect = mongoose.connect('mongodb+srv://admin:3q%24aq9MR%23YxuM%24L@cluster0.fgw4fx7.mongodb.net/');
 
+const connect = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_DB_URI3,{
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+
+        });
+        console.log("DB connected");
+    } catch (error) {
+        console.log("Error connecting to the database", error);
+    }
+
+}
 
 
 export default connect;
