@@ -138,6 +138,7 @@ const Createaccount = () => {
       <div>
         <div className={styles.container}>
         <h1 className={styles.title}>Account Creation</h1>
+          <br></br>
 
           <br>
           </br>
