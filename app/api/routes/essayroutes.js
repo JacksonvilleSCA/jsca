@@ -1,7 +1,11 @@
 "use server"
 
-import client from "../db/dbConnection";
-const collection = client.db().collection('collection');
+import connect from "../db/dbConnection";
+import Form from "../schema/Form";
+
+
+
+//const collection = client.db().collection('collection');
 
 export async function POST(formData){
 

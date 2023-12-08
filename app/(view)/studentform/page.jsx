@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link'; 
 import essay from '../essay/page';
-{/*import { POST } from '@/app/api/routes/essayroutes'; */}
+import { POST } from '@/app/api/routes/essayroutes';
 
  const StudentForm = () => {
   
@@ -11,7 +11,7 @@ import essay from '../essay/page';
                 Jacksonville Sister Cities  Landon Middle Student Exchange Program Application Form</h1>
             <h1 id="Section1">Section I: Student&apos;s Legal Name, Contact Data and Information (Do not use nicknames)</h1>
 
-           {/* <form action={POST}> */} 
+            <form action={POST}>
             <label>
                 Last/Family Name:
                 <input type="text" name="text" id="text" />
@@ -44,7 +44,7 @@ import essay from '../essay/page';
                 <input
                     type="tel"
                     name="telephone"
-                    pattern="[0-0]{3}-[0-9]{3}-[0-9]{4}"
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     required="" />
             </label>
             <br />
@@ -175,60 +175,11 @@ import essay from '../essay/page';
             </label>
             <br />
             <br />
-            <label id="state"> State </label>
-            <select name="state" size={1}>
-                <option value="Select State"> Select State </option>
-                <option value="Alabama"> Alabama </option>
-                <option value="Alaska"> Alaska </option>
-                <option value="Arizona"> Arizona </option>
-                <option value="Arkansas"> Arkansas </option>
-                <option value="California"> California </option>
-                <option value="Colorado"> Colorado </option>
-                <option value="Connecticut"> Connecticut </option>
-                <option value="Delaware"> Delaware </option>
-                <option value="Florida"> Florida </option>
-                <option value="Georgia"> Georgia </option>
-                <option value=" Hawaii"> Hawaii </option>
-                <option value="Idaho"> Idaho </option>
-                <option value="Illinois"> Illinois </option>
-                <option value="Indiana"> Indiana </option>
-                <option value="Iowa"> Iowa </option>
-                <option value="Kansas"> Kansas </option>
-                <option value="Kentucky"> Kentucky </option>
-                <option value="Louisiana"> Louisiana </option>
-                <option value="Maine"> Maine </option>
-                <option value="Maryland"> Maryland </option>
-                <option value="Massachusetts"> Massachusetts </option>
-                <option value="Michigan"> Michigan </option>
-                <option value="Minnesota"> Minnesota </option>
-                <option value="Mississippi"> Mississippi </option>
-                <option value="Missouri"> Missouri </option>
-                <option value="Montana"> Montana </option>
-                <option value="Nebraska"> Nebraska </option>
-                <option value="Nevada"> Nevada </option>
-                <option value="New Hampshire"> New Hampshire </option>
-                <option value="New jersey"> New Jersey </option>
-                <option value="New Mexico"> New Mexico </option>
-                <option value="New York"> New York </option>
-                <option value="North Carolina"> North Carolina </option>
-                <option value="North Dakota"> North Dakota </option>
-                <option value="Ohio"> Ohio </option>
-                <option value="Oklahoma"> Oklahoma </option>
-                <option value="Oregon"> Oregon </option>
-                <option value="Pennsylvania"> Pennsylvania </option>
-                <option value="Rhode Island"> Rhode Island </option>
-                <option value="South Carolina"> South Carolina </option>
-                <option value="South Dakota"> South Dakota </option>
-                <option value="Tennessee"> Tennessee </option>
-                <option value="Texas"> Texas </option>
-                <option value="Utah"> Utah </option>
-                <option value="Vermont"> Vermont </option>
-                <option value="Virginia"> Virginia </option>
-                <option value="Washington"> Washington </option>
-                <option value="West Virginia"> West Virginia </option>
-                <option value="Wisconsin"> Wisconsin </option>
-                <option value="Wyoming"> Wyoming </option>
-            </select>
+            <label id="state"> State: 
+                <input type="text" />
+
+            </label>
+            
             <br /> <br />
             <label>
                 Zip Code:
@@ -242,7 +193,7 @@ import essay from '../essay/page';
                 <input
                     type="tel"
                     name="telephone"
-                    pattern="[0-0]{3}-[0-9]{3}-[0-9]{4}"
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     required="" />
             </label>
             <br />
@@ -253,7 +204,7 @@ import essay from '../essay/page';
                 <input
                     type="tel"
                     name="telephone"
-                    pattern="[0-0]{3}-[0-9]{3}-[0-9]{4}"
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     required="" />
             </label>
             <br />
@@ -300,10 +251,11 @@ import essay from '../essay/page';
              { /* UPLOAD ESSAY */ }
             <button >
                 <Link href='/essay'> Essay </Link>
-                <Link href='/essay'> Essay </Link>
+                
             </button>
-            {/* <Link href='/essay'> essay</Link> */}
-        {/*</form>*/}
+                <button type = "submit" value= "submit" >  Submit</button>
+           
+        </form>
     </>
     ); 
 }; 
