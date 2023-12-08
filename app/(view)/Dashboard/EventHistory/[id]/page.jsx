@@ -26,7 +26,7 @@ export default  function Page({params}) {
 
   return (
     <>
-    <div
+    <div key={eventInfo._id}
       className="container-sm "
       style={{ width: "60%", height: "100vh", marginBottom: "300px" }}
     >
