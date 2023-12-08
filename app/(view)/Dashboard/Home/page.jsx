@@ -112,7 +112,7 @@ export default function Home(props) {
                 Details
             </label>
             <div>
-                <textarea name="details" id="" cols="100" rows="10"  onChange={(e) => {
+                <textarea name="details" id="" cols="60" rows="10"  onChange={(e) => {
                   setDetails(e.target.value);
                 }}
                 value={details}
