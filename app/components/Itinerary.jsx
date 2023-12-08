@@ -12,94 +12,46 @@ export default function Itinerary() {
     const [day, setDay] = useState('');
     const [time, setTime] = useState('');
     const [activity, setActivity] = useState('');
-    // const [isLoading, setisLoading] = useState(false)
-    const [error, setError] = useState([]);
+    const [editText, setEditText] = useState('');
+    const [editId, setEditId] = useState(null);
 
-
-
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-    
-        try {
-            const res = await fetch('http://localhost:3000/api/schedule', {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify({
-                    title,
-                    day,
-                    time,
-                    activity,
-                }),
-            });
-    
-            // Check if the response status is not in the 2xx range (e.g., 404, 500)
-            if (!res.ok) {
-                throw new Error('Failed to submit data');
-            }
-    
-            // Assuming the server returns a JSON response
-            const { msg } = await res.json();
-    
-            // Do something with the success message if needed
-            console.log(msg);
-    
-            const newScheduleItem = { id: Date.now(), day, time, activity };
-            setSchedule([...schedule, newScheduleItem]);
-    
-            // Reset form fields
-            // setDay('');
-            // setTime('');
-            // setActivity('');
-    
-        } catch (error) {
-            // Handle errors, such as network issues, failed fetch, etc.
-            console.error('Error submitting data:', error);
-    
-            // Set an error state or display an error message to the user
-            setError('Failed to submit data');
+
+        if (!day || !time || !activity) {
+            // Handle validation error
+            return;
         }
+
+        if (editId !== null) {
+            // Update existing item
+            const updatedSchedule = schedule.map((item) =>
+                item.id === editId
+                    ? { ...item, day, time, activity }
+                    : item
+            );
+            setSchedule(updatedSchedule);
+            setEditId(null);
+        } else {
+            // Add new item
+            setSchedule([...schedule, { id: Date.now(), day, time, activity }]);
+        }
+
+        // Reset form fields
+        setDay('');
+        setTime('');
+        setActivity('');
     };
-    
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault() //prevents reloading the browser
-    //     // setisLoading(true)
-
-    //     const res = await fetch('http://localhost:3000/api/schedule', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //             title,
-    //             day,
-    //             time,
-    //             activity,
-    //         }),
-    //     });
-    //     //what is this for??
-    //     // const { msg } = await res.json();
-    //     // setError(msg);
-    //     // console.log(error)
+    const handleCancel = () => {
+        // Reset form fields on cancel
+        setDay('');
+        setTime('');
+        setActivity('');
+        // setError('');
+    };
 
 
-    //     const newScheduleItem = { id: Date.now(), day, time, activity };
-    //     setSchedule([...schedule, newScheduleItem]);
-
-    //     // Reset form fields
-    //     setDay('');
-    //     setTime('');
-    //     setActivity('');
-    //     // setIsLoading(false);
-
-    //     const { msg } = await res.json();
-    //     setError(msg);
-    //     console.log(error);
-
-
-    // };
     const handleDelete = (itemId) => {
         // Filter out the item to be deleted
         const updatedSchedule = schedule.filter((item) => item.id !== itemId);
@@ -157,10 +109,10 @@ export default function Itinerary() {
                                         <th><textarea rows="4" cols="50" value={activity} onChange={(e) => setActivity(e.target.value)} required style={{ resize: 'none' }}></textarea></th>
                                         <th> <div className="d-flex">
                                             <button className="btn btn-primary mx-2"
-                                            type="submit" >
+                                                type="submit">
                                                 submit
                                             </button>
-                                            <button className="btn btn-primary" >cancel</button>
+                                            <button className="btn btn-primary" onClick={handleCancel} >cancel</button>
                                         </div></th>
                                     </tr>
                                 </tbody>
@@ -198,12 +150,12 @@ export default function Itinerary() {
                                                 >
                                                     Delete
                                                 </button>
-
+                                                {/* 
                                                 <div className='d-flex align-items-center'>
                                                     <button type="button" className="btn btn-outline-dark mx-2">Save</button>
                                                     <button type="button" className="btn btn-outline-dark ">Delete</button>
 
-                                                </div>
+                                                </div> */}
                                             </td>
                                         </tr>
                                     ))}
@@ -211,13 +163,20 @@ export default function Itinerary() {
                             </table>
                         </div>
                     </div>
+
+                    <div className="mt-10">
+                        <div className="card my-3 w-75 mx-auto">
+
+                            <div className='d-flex align-items-center'>
+                                <button type="button" className="btn btn-outline-dark mx-2">Save</button>
+                                <button type="button" className="btn btn-outline-dark ">Delete</button>
+
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </form>
-            <div>
-                <div>
-                    Error message
-                </div>
-            </div>
         </>
     )
 }

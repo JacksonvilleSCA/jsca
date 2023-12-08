@@ -2,7 +2,23 @@
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import { useState } from 'react';
 
-const TodoList = () => {
+
+
+const getItems = async() => {
+  try{
+    const res = await fetch('http:localhost:3000/api/packinglist', {
+      cache: "no-store",
+    })
+    if(!res.ok){
+      throw new Error('Failed to fetch');
+    }
+    return res.json();
+  }catch(error){
+    console.log('Error loading items', error);
+  }
+}
+
+export default function TodoList() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
   const [edit, setEdit] = useState(null);
@@ -29,6 +45,7 @@ const TodoList = () => {
     setEditText('');
   };
 
+  //  const {packinglist} =  await getItems();
   return (
     <div>
         <h1>To-Do List</h1>
@@ -66,5 +83,3 @@ const TodoList = () => {
     </div>
   );
 };
-
-export default TodoList;
