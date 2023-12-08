@@ -26,12 +26,13 @@ export default  function Page({params}) {
 
   return (
     <>
-    <div key={eventInfo._id}
+    <div 
+        key={eventInfo._id}
       className="container-sm "
       style={{ width: "60%", height: "100vh", marginBottom: "300px" }}
     >
       <h1 className="mb-4 text-center mt-3">Update Event</h1>
-      <form action={PUT} >
+      <form key={eventInfo._id} action={PUT} >
         <div className="mb-1">
           <label htmlFor="" className="form-label">
             Amount

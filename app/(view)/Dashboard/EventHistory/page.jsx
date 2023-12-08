@@ -31,9 +31,8 @@ export default function Page() {
       <div className="container" style={{ marginBottom: "30px" }}>
         <div className="row row-cols-1 row-cols-md-3 g-4">
           {eventInfomration.map((event, index) => (
-            <div class="col">
+            <div key={event._id} class="col">
               <div
-                key={event._id}
                 className="card mt-5"
                 style={{ width: "80%", boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)" }}
               >

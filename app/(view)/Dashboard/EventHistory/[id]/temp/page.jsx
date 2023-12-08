@@ -51,7 +51,8 @@ export default function Page({params}) {
           reverse={ReverserPop}
         />
       )}
-      <div className="container " style={{ marginTop: "5%"}}>
+      <div key={eventInfo._id} className="container " style={{ marginTop: "5%"}}>
+
           <div key={eventInfo._id} className="card" style={{boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)"}}>
             <div className="d-flex">
               {/* <img src={eventInfo.img} className="card-img-top" alt="image" /> */}
@@ -102,6 +103,9 @@ export default function Page({params}) {
               </div>
             </div>
           </div>
+
+            
+
       </div>
     </>
   );
