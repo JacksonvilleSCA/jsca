@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link'; 
 import { useState } from 'react';
 
+
 const Essay = () => {
     const [text, setText] = useState('');
     const minWordCount = 10;
@@ -32,6 +33,7 @@ const Essay = () => {
         <button onClick={() => handleFormatClick('italic')}>Italic</button>
         <button onClick={() => handleFormatClick('underline')}>Underline</button>
         </div>
+        <form> 
         <textarea
           value={text}
           onChange={handleTextChange}
@@ -42,7 +44,8 @@ const Essay = () => {
         <div>
           Word Count: {text.split(/\s+/).filter((word) => word !== '').length}
         </div>
-
+        <button type = "submit" value= "submit" >  Submit</button>
+        </form>
       </div>
     );
   };
