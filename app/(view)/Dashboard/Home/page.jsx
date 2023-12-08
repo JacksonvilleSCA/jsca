@@ -10,7 +10,12 @@ export default function Home(props) {
     const [endTime, setEndTime] = useState("");
     const [location, setLocation] = useState("");
     const [details, setDetails] = useState("");
-  
+    const [textarea, setTextarea] = useState("");
+
+
+
+
+    // encType="multipart/form-data"
     return (
       <>
         <div
@@ -18,8 +23,8 @@ export default function Home(props) {
           style={{ width: "60%", height: "100vh", marginBottom: "300px" }}
         >
           <h1 className="mb-4 text-center mt-3">Create Event</h1>
-          {/* <form onSubmit={formSubmition}> */}
-          <form action={POST} encType="multipart/form-data">
+          <form action={POST} >
+          {/* <form action={eventCreation}> */}
             <div className="mb-1">
               <label htmlFor="" className="form-label">
                 Amount
@@ -34,6 +39,7 @@ export default function Home(props) {
                 // onChange={(e) => {
                 //   setAmount(e.target.value);
                 // }}
+                // value={amount}
                 required
               ></input>
             </div>
@@ -45,7 +51,7 @@ export default function Home(props) {
                 className="form-control"
                 name="avatar"
                 accept="image/png, image/jpeg"
-                // onChange={(e) => setImage(e.target.files?.[0])}
+                onChange={(e) => setImage(e.target.files?.[0])}
                 required
               />
             </div>
@@ -63,6 +69,7 @@ export default function Home(props) {
                 // onChange={(e) => {
                 //   setStartTime(e.target.value);
                 // }}
+                // value={startTime}
                 required
               ></input>
             </div>
@@ -78,6 +85,7 @@ export default function Home(props) {
                 // onChange={(e) => {
                 //   setEndTime(e.target.value);
                 // }}
+                // value={endTime}
                 required
               ></input>
             </div>
@@ -94,26 +102,32 @@ export default function Home(props) {
                 // onChange={(e) => {
                 //   setLocation(e.target.value);
                 // }}
+                // value={location}
                 required
               ></input>
             </div>
-  
-  
-            {/* <div>
+
+             <div>
             <label htmlFor="" className="form-label ">
                 Details
             </label>
-                <textarea name="details" id="" cols="30" rows="10">
+            <div>
+                <textarea name="details" id="" cols="118" rows="10"  onChange={(e) => {
+                  setDetails(e.target.value);
+                }}
+                value={details}
+                 >
                 </textarea>
-            </div> */}
+            </div>
+            </div> 
   
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label htmlFor="" className="form-label ">
                 Details
               </label>
-              <Edit details={setDetails} />
-              <input type="hidden" value={details} name="details" />
-            </div>
+              <Edit valueOfTextarea={textarea} details={setDetails} />
+              <input type="hidden" value={details}  name="details" />
+            </div> */}
   
             <div className="d-grid vstack gap-2">
               <button type="submit" className="btn btn-primary mb-4">
