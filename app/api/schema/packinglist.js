@@ -3,13 +3,9 @@ import { Schema } from "mongoose";
 
 const packingSchema = new Schema(
     {
-        items: [
-            {
-                itemName:{
-                    type: String
-                }
-            } 
-        ]
+        items: [{
+            type: String
+          }]
     });
 
 const Packlist = mongoose.models.Packlist ||mongoose.model("Packlist", packingSchema);

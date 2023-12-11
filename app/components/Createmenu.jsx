@@ -16,7 +16,7 @@ export default function CreateMenu() {
                 <div className="col-sm-6 p-3">
                     <div className="card border border-5">
                         <div className="card-body">
-                            <h5 className="card-title">Create an itenerary</h5>
+                            <h5 className="card-title">Create an itinerary</h5>
                             <p className="card-text">Create planned routes and journeys.</p>
                            <Link href='/list'><button className="btn btn-success">Create</button></Link> 
                         </div>
@@ -37,7 +37,7 @@ export default function CreateMenu() {
                 <div className="col-sm-6 p-3">
                     <div className="card border border-5">
                         <div className="card-body">
-                            <h5 className="card-title">Manage an itenerary</h5>
+                            <h5 className="card-title">Manage an itinerary</h5>
                             <p className="card-text">Update or delete your planned routes and journeys.</p>
                             <a href="#" className="btn btn-primary">Manage</a>
                         </div>

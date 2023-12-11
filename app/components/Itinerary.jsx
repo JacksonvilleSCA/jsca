@@ -1,5 +1,6 @@
 "use client"
 import { useState } from 'react';
+import { POST } from '../api/routes/itineraryroute';
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
 export default function Itinerary() {
@@ -15,33 +16,16 @@ export default function Itinerary() {
     const [editText, setEditText] = useState('');
     const [editId, setEditId] = useState(null);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        if (!day || !time || !activity) {
-            // Handle validation error
-            return;
-        }
-
-        if (editId !== null) {
-            // Update existing item
-            const updatedSchedule = schedule.map((item) =>
-                item.id === editId
-                    ? { ...item, day, time, activity }
-                    : item
-            );
-            setSchedule(updatedSchedule);
-            setEditId(null);
-        } else {
-            // Add new item
-            setSchedule([...schedule, { id: Date.now(), day, time, activity }]);
-        }
-
-        // Reset form fields
+    
+    const handleAddSchedule = () => {
+        // Add the new schedule item
+        setSchedule([...schedule, {day, time, activity }]);
+        // Reset schedule input fields
         setDay('');
         setTime('');
         setActivity('');
     };
+
 
     const handleCancel = () => {
         // Reset form fields on cancel
@@ -51,6 +35,30 @@ export default function Itinerary() {
         // setError('');
     };
 
+
+    
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const itineraryData = {
+        title,
+        duration: {
+            startDate,
+            endDate,
+        },
+        schedule
+    };
+
+    try {
+        await POST(itineraryData);
+        setTitle('');
+        setStartDate('');
+        setEndDate('');
+        setSchedule([]);
+    } catch (error) {
+        console.error("Error saving the itinerary:", error);
+    }
+  };
 
     const handleDelete = (itemId) => {
         // Filter out the item to be deleted
@@ -78,15 +86,13 @@ export default function Itinerary() {
                             <div className="row">
 
                                 <div className="col"> <label className="fs-3" htmlFor="title" >Set a title</label></div>
-                                <div className="col"> <input className="form-control" value={title} onChange={(e) => setTitle(e.target.value)} id='title' placeholder="e.g. Travel itinerary" type="text"></input></div>
+                                <div className="col"> <input className="form-control" name='title' value={title} onChange={(e) => setTitle(e.target.value)} id='title' placeholder="e.g. Travel itinerary" type="text"></input></div>
 
                             </div>
                             <div className="row">
                                 <div className="col"> <label className="fs-3">Set a date range</label></div>
-                                <div className='col'><input type='date' className='form-control' value={startDate} onChange={(e) => setstartDate(e.target.value)}></input></div>
-                                <div className='col'><input type='date' className='form-control' value={endDate} onChange={(e) => setendDate(e.target.value)}></input></div>
-                                {/* <div className="col"><DateRangePicker onChange={setValue} value={value} /></div> */}
-                                {/* <p>The value is : {Array.isArray(value) ? value.map(date => date?.toString()).join(' - ') : value?.toString()}</p> */}
+                                <div className='col'><input type='date' name='start' className='form-control' value={startDate} onChange={(e) => setstartDate(e.target.value)}></input></div>
+                                <div className='col'><input type='date' name='end'  className='form-control' value={endDate} onChange={(e) => setendDate(e.target.value)}></input></div>
                             </div>
                         </div>
                     </div>
@@ -103,13 +109,13 @@ export default function Itinerary() {
                                 </thead>
                                 <tbody className='table-group-divider'>
                                     <tr>
-                                        <th><input type='number' min="1" required value={day} onChange={(e) => setDay(e.target.value)}></input></th>
-                                        <th><input type='time' required value={time} onChange={(e) => setTime(e.target.value)}></input></th>
+                                        <th><input type='number' min="1" name='day' value={day} onChange={(e) => setDay(e.target.value)}></input></th>
+                                        <th><input type='time'  name='time' value={time} onChange={(e) => setTime(e.target.value)}></input></th>
 
-                                        <th><textarea rows="4" cols="50" value={activity} onChange={(e) => setActivity(e.target.value)} required style={{ resize: 'none' }}></textarea></th>
+                                        <th><textarea rows="4" cols="50" name='activity'  value={activity} onChange={(e) => setActivity(e.target.value)} style={{ resize: 'none' }}></textarea></th>
                                         <th> <div className="d-flex">
-                                            <button className="btn btn-primary mx-2"
-                                                type="submit">
+                                            <button onClick={handleAddSchedule} className="btn btn-primary mx-2"
+                                                type="button">
                                                 submit
                                             </button>
                                             <button className="btn btn-primary" onClick={handleCancel} >cancel</button>
@@ -168,7 +174,7 @@ export default function Itinerary() {
                         <div className="card my-3 w-75 mx-auto">
 
                             <div className='d-flex align-items-center'>
-                                <button type="button" className="btn btn-outline-dark mx-2">Save</button>
+                                <button type="submit" className="btn btn-outline-dark mx-2">Save</button>
                                 <button type="button" className="btn btn-outline-dark ">Delete</button>
 
                             </div>

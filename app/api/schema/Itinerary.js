@@ -14,7 +14,7 @@ const ItinerarySchema = new Schema(
         },
        schedule: [
         {
-            day: {type: Number},
+            day: {type: String},
             time: {type: String},
             activity: {type: String},
         }
