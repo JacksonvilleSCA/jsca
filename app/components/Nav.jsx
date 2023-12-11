@@ -33,7 +33,7 @@ export default function Nav() {
                                 <li><Link href='/Dashboard/Home' className='dropdown-item'>Create Event</Link></li>
                                 <li><Link href='/' className='dropdown-item'>Itenerary</Link></li>
                                 <li><Link href='/' className='dropdown-item'>Packing List</Link></li>
-                                <li><Link href='/' className='dropdown-item'>(if) Admin</Link></li>
+                                <li><Link href='/studentform' className='dropdown-item'>Student Form</Link></li>
                             </ul>
                     </li>
 
