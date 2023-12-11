@@ -3,13 +3,10 @@ import React, { useEffect } from 'react'
 import { getEvent as GET } from '@/app/api/routes/evemtRoute'
 import { PUT } from '@/app/api/routes/evemtRoute';
 import { useState } from 'react';
-import Edit from '@/app/components/Edit';
-
-
+// import Edit from '@/app/components/Edit';
 
 export default  function Page({params}) {
  
-
     const [details, setDetails] = useState("");
     const [eventInfo, setEventInfo] = useState("");
     
@@ -34,7 +31,7 @@ export default  function Page({params}) {
       <h1 className="mb-4 text-center mt-3">Update Event</h1>
       <form key={eventInfo._id} action={PUT} >
         <div className="mb-1">
-          <label htmlFor="" className="form-label">
+          <label className="form-label">
             Amount
           </label>
           <input
@@ -54,7 +51,7 @@ export default  function Page({params}) {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="" className="form-label"></label>
+          <label className="form-label"></label>
           <input
             type="file"
             className="form-control"
@@ -68,7 +65,7 @@ export default  function Page({params}) {
           
 
         <div className="mb-4">
-          <label htmlFor="" className="form-label">
+          <label className="form-label">
             Start Time
           </label>
           <input
@@ -85,7 +82,7 @@ export default  function Page({params}) {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="" className="form-label">
+          <label className="form-label">
             End Time
           </label>
           <input
@@ -102,7 +99,7 @@ export default  function Page({params}) {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="" className="form-label">
+          <label className="form-label">
             Location
           </label>
           <input
@@ -119,27 +116,27 @@ export default  function Page({params}) {
           ></input>
         </div>
 
-        {/* <div>
-        <label htmlFor="" className="form-label ">
+        <div>
+        <label  className="form-label ">
             Details
         </label>
         <div>
-            <textarea name="details" id="" cols="80" rows="10"  onChange={(e) => {
+            <textarea style={{width: "100%"}} name="details" id="" cols="" rows="10"  onChange={(e) => {
               setDetails(e.target.value);
             }}
             value={details}
              >
             </textarea>
         </div>
-        </div> */}
+        </div>
 
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label htmlFor="" className="form-label ">
             Details
           </label>
           <Edit details={setDetails} />
           <input type="hidden" value={details}  name="details" />
-        </div>
+        </div> */}
 
         <input type="hidden" name='event' defaultValue={eventInfo._id} />
 

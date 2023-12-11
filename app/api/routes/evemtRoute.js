@@ -31,7 +31,7 @@ import {redirect} from 'next/navigation'
 
 export async function GET() {
 
-  await connect();
+  // await connect();
 
   let data = await Event.find({}).lean().exec();
 
@@ -50,7 +50,7 @@ export async function GET() {
 
 export async function getEvent(eventData){
 
-     await connect();
+    //  await connect();
     let data = await Event.findOne({_id: eventData.id}).lean().exec();
 
     data['_id'] = data['_id'].toString();
@@ -76,7 +76,7 @@ export async function DELETE(Data){
 }
 
 export async function PUT(formData){
-  await connect();
+  // await connect();
   const data = Object.fromEntries(formData);
   const file = data.avatar;
   const bytes = await file.arrayBuffer()    
@@ -101,7 +101,7 @@ export async function PUT(formData){
 }
 
 export async function POST(formData){
-  await connect();
+  // await connect();
     const data = Object.fromEntries(formData);
 
     const file = data.avatar;

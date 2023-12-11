@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import {POST} from "../../../api/routes/evemtRoute"
-import Edit from "../../../components/Edit";
+// import Edit from "../../../components/Edit";
 
 export default function Home(props) {
     const [amount, setAmount] = useState("");
@@ -26,7 +26,7 @@ export default function Home(props) {
           <form action={POST} >
           {/* <form action={eventCreation}> */}
             <div className="mb-1">
-              <label htmlFor="" className="form-label">
+              <label className="form-label">
                 Amount
               </label>
               <input
@@ -45,7 +45,7 @@ export default function Home(props) {
             </div>
   
             <div className="mb-4">
-              <label htmlFor="" className="form-label"></label>
+              <label className="form-label"></label>
               <input
                 type="file"
                 className="form-control"
@@ -59,7 +59,7 @@ export default function Home(props) {
               
 
             <div className="mb-4">
-              <label htmlFor="" className="form-label">
+              <label  className="form-label">
                 Start Time
               </label>
               <input
@@ -75,7 +75,7 @@ export default function Home(props) {
             </div>
   
             <div className="mb-4">
-              <label htmlFor="" className="form-label">
+              <label className="form-label">
                 End Time
               </label>
               <input
@@ -91,7 +91,7 @@ export default function Home(props) {
             </div>
   
             <div className="mb-4">
-              <label htmlFor="" className="form-label">
+              <label  className="form-label">
                 Location
               </label>
               <input
@@ -108,11 +108,11 @@ export default function Home(props) {
             </div>
 
              <div>
-            <label htmlFor="" className="form-label ">
+            <label className="form-label ">
                 Details
             </label>
             <div>
-                <textarea name="details" id="" cols="80" rows="10"  onChange={(e) => {
+                <textarea style={{width: "100%"}} name="details" id="" cols="" rows="10"  onChange={(e) => {
                   setDetails(e.target.value);
                 }}
                 value={details}

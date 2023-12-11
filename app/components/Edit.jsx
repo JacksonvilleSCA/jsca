@@ -5,10 +5,7 @@ import { Editor } from "@tinymce/tinymce-react";
 
 const Edit = (props) => {
 
-      
-
-  
-
+    
   const editorRef = useRef(null);
 
   function one(editor){

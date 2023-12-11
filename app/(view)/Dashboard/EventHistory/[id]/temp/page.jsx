@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { getEvent as GET } from "../../../../../api/routes/evemtRoute";
-import { DELETE as deleteEvent } from "../../../../../api/routes/evemtRoute";
+import { DELETE as DeleteEvent } from "../../../../../api/routes/evemtRoute";
 
 import ConfirmDelete from "@/app/components/ConfirmDeletion";
 import TextContent from "@/app/components/Text";
@@ -36,7 +36,7 @@ export default function Page({params}) {
     }
 
     if (holdValue.onActive) {
-      deleteEvent({ val: active.id });
+      DeleteEvent({ val: active.id });
     }
   }
 
