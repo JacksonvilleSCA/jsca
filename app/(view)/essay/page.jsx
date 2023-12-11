@@ -2,23 +2,17 @@
 import React from 'react';
 import Link from 'next/link'; 
 import { useState } from 'react';
-
+import { POST } from '@/app/api/routes/essayroutes';
 
 const Essay = () => {
     const [text, setText] = useState('');
-    const minWordCount = 10;
-    const maxWordCount = 10000;
-  
+   
     const handleTextChange = (event) => { 
       const inputText = event.target.value;
       const words = inputText.split(/\s+/); // Split the text into words
       const wordCount = words.filter((word) => word !== '').length;
       setText(inputText);
   
-      // Check if the word count is within the specified range
-      if (wordCount >= minWordCount && wordCount <= maxWordCount) {
-        setText(inputText);
-      }
     };
   
   
@@ -33,13 +27,15 @@ const Essay = () => {
         <button onClick={() => handleFormatClick('italic')}>Italic</button>
         <button onClick={() => handleFormatClick('underline')}>Underline</button>
         </div>
-        <form> 
+        <form action={POST}> 
         <textarea
-          value={text}
+         // value={text}
+          name = "essay"
           onChange={handleTextChange}
           placeholder="Type your text here..."
           rows={44}
           cols={103}
+
         />
         <div>
           Word Count: {text.split(/\s+/).filter((word) => word !== '').length}
