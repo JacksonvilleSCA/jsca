@@ -16,7 +16,7 @@ export default function Nav() {
     },[])
 
     return (
-        <nav className="navbar bg-body-tertiary" style={{boxShadow: "0px 16px 15px -13px rgba(0,0,0,0.1)"}} >
+        <nav className="navbar bg-body-tertiary" >
             <div className='container-fluid '>
                 <a className='navbar-brand'>
                     <Image className='d-inline-block align-text-middle me-2' src={logo} alt='logo' style={imageStyle} quality={100} />
@@ -31,9 +31,9 @@ export default function Nav() {
                             <ul className='dropdown-menu'>
                                 <li><Link href='/Dashboard/EventHistory' className='dropdown-item'>Event List</Link></li>
                                 <li><Link href='/Dashboard/Home' className='dropdown-item'>Create Event</Link></li>
-                                <li><Link href='/' className='dropdown-item'>Itenerary</Link></li>
-                                <li><Link href='/' className='dropdown-item'>Packing List</Link></li>
-                                <li><Link href='/studentform' className='dropdown-item'>Student Form</Link></li>
+                                <li><Link href='/listMenu' className='dropdown-item'>Itenerary</Link></li>
+                                <li><Link href='/createPackingList' className='dropdown-item'>Packing List</Link></li>
+                                <li><Link href='/studentform' className='dropdown-item'>(if) Admin</Link></li>
                             </ul>
                     </li>
 
