@@ -34,14 +34,22 @@ const formSchema = new Schema({
         type: String, 
         required: true, 
     }, 
-    gradelevel:{
+    grade:{
         type: String, 
         required: true, 
     }, 
-    programsOfInt:{ 
+    proInterest1:{ 
         type: String, 
-        required: true, 
+        required: false, 
     }, 
+    proInterest2: {
+        type: String, 
+        required: false, 
+    }, 
+    proInterest3: {
+        type: String, 
+        required: false, 
+    },
     passport:{
         type: String, 
         required: true, 
@@ -78,7 +86,7 @@ const formSchema = new Schema({
         type: String, 
         required: true, 
     }, 
-    zipcode:{
+    zip:{
         type: Number, 
         required: true, 
     }, 
@@ -106,10 +114,6 @@ const formSchema = new Schema({
         type: String, 
         required: true, 
 
-    }, 
-    travel:{
-        type: String, 
-        required: true, 
     }, 
     hostfam:{
         type: String, 
