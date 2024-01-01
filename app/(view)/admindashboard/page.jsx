@@ -32,6 +32,11 @@ const AdminDash = () => {
       <div>
       <h1>JSCA ADMIN</h1>
       <h2>Welcome Admin</h2>
+      <div>
+        <div>
+        <Link href='/adminManage'>Admin</Link>
+        </div>
+      </div>
       <br></br>
       <br></br>
       <br></br>

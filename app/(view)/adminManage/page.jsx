@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { accUpdate} from "../../api/routes/accountUpdate"
+import Link from 'next/link';
 
 
 
@@ -75,6 +76,11 @@ export default function AdminAccountManage() {
             <p>PassWord: </p>
             <input className={styles.textbox} type="text" id="lastName" placeholder="Password"
              />
+      
+            
+            
+
+             
          
             <br></br>
             <br></br>
@@ -87,7 +93,7 @@ export default function AdminAccountManage() {
         </div>
         <div>
           <p>Manage Users</p>
-          <p>Create Admin</p>
+          <Link href='/adminCreate'>Admin Creation</Link>
           <br></br>
           <br></br>
         </div>

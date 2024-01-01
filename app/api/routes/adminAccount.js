@@ -6,26 +6,40 @@ import React from "react";
 
 
 export async function POST(formData){
+//For admin, if a user does not have an ADMIN ID during log in, kick user. 
 
+const min = 1000000000; 
+const max = 9999999999; 
+const AdminID = Math.floor(Math.random() * (max - min + 1)) + min;
+AdminID.toString();
 
 const data = (formData);
 console.log(data);
-var resultReturn; 
+console.log(AdminID)
+var resultReturn;
+
 const response = await Admin.create({
+    adminID: AdminID,
+    email: data.email,
     username: data.username,
     password: data.password,
+    firstname: data.firstname,
+    lastname: data.lastname, 
+    phonenumber: data.phonenumber,
+    country: data.country,
+    state: data.state,
+    city: data.city,
 
-});
+})
 
 if(response){
-    console.log("ok")
-    resultReturn = "true";
-
-    
-
+    console.log("Admin created.");
+    resultReturn = "true"
 }
 
 return resultReturn;
+
+
 
 
 }
