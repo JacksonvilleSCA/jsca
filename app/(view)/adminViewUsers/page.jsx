@@ -7,42 +7,34 @@ import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import {accInfo} from "../../api/routes/accountInfo"
 
-const AdminDash = () => {
+const AdminUV = () => {
 
   const router = useRouter();
   const searchParams = useSearchParams();
   var search = searchParams.get('myID')
 
 
-  function manageAccount(){
+  function back(){
 
-    router.push(`/adminManage?myID=${search}`);
+    router.back('/adminManage') 
 
     
   }
-
-
-    function signOut(){
-        search = null;
-        if(search == null){
-        router.push('/adminLogin');
-      
-        }
-    }
 
   
  
 
     return (
       <div>
-      <h1>JSCA ADMIN</h1>
-      <h2>Welcome {search}</h2>
+      <h1>ADMIN OVERVIEW</h1>
+      <h2>{search}</h2>
       <div>
         <div>
-        <button onClick={manageAccount}>Manage Account</button>
+          <p>User list goes here.</p>
+       
         </div>
         <div>
-        <button onClick={signOut}>Log Out</button>
+        <button onClick={back}>Return</button>
         </div>
       </div>
       <br></br>
@@ -56,4 +48,4 @@ const AdminDash = () => {
     )
   }
 
-export default AdminDash
+export default AdminUV

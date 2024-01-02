@@ -26,6 +26,11 @@ const AdminCreate= () => {
 
 
 
+  function back(){
+
+    Router.back('/adminManage') 
+  }
+
   const handleCountry = (e) =>{
     setUserCountry(e.target.value);
     console.log(userCountry);
@@ -445,7 +450,8 @@ const AdminCreate= () => {
 
           </form>
             </div>
-        <Link href='/adminManage'>Return</Link>
+            <button onClick={back}> Return </button>
+
         </div>
       </div>
      
