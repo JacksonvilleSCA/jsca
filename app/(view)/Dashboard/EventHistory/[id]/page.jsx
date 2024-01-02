@@ -124,7 +124,7 @@ export default  function Page({params}) {
             <textarea style={{width: "100%"}} name="details" id="" cols="" rows="10"  onChange={(e) => {
               setDetails(e.target.value);
             }}
-            value={details}
+            defaultValue={eventInfo.details}
              >
             </textarea>
         </div>

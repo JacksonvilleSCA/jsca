@@ -13,12 +13,26 @@ export default function Page({params}) {
   const router = useRouter();
 
   const [active, setActive] = useState({ Active: false, id: -1 });
-
   const [eventInfo, setEventInfo] = useState("");
+  const [maxPeople, setMaxPeople] = useState("");
+  const [currentPeople, setCurrentPeople] = useState("");
+  const [availableSpace, setAvailableSpace] = useState("");
+
+
 
   useEffect(() => {
     const fetchData = async () =>{
         const data  = await GET(params);
+        setMaxPeople(data.amount);
+
+          if(data.attendees.length === 0){
+            setCurrentPeople(data.attendees.length)
+          }else{
+            setCurrentPeople(0);
+          }
+
+          setAvailableSpace(maxPeople - data.attendees.length)
+
         setEventInfo(data);
       }
       fetchData();
@@ -40,6 +54,10 @@ export default function Page({params}) {
     }
   }
 
+
+
+ 
+
   
 
   return (
@@ -51,9 +69,24 @@ export default function Page({params}) {
           reverse={ReverserPop}
         />
       )}
-      <div key={eventInfo._id} className="container " style={{ marginTop: "5%"}}>
+      <div key={eventInfo._id} className="container " style={{ marginTop: "5%", marginBottom: "10%", width: "80%", height: "40%"}}>
 
           <div key={eventInfo._id} className="card" style={{boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)"}}>
+            <div className="card-header">
+                <div style={{textAlign: "center"}}>
+                <span style={{marginRight: "20px"}}>
+                Max: {maxPeople}
+              </span>
+              <span style={{marginRight: "20px"}}>
+                Current : {currentPeople}
+              </span>
+              <span style={{marginRight: "20px"}}>
+              Available: {availableSpace}
+              </span>
+                </div>
+
+
+            </div>
             <div className="d-flex">
               {/* <img src={eventInfo.img} className="card-img-top" alt="image" /> */}
               <img

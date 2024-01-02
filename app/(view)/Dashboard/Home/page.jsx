@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import {POST} from "../../../api/routes/evemtRoute"
-// import Edit from "../../../components/Edit";
+import Edit from "../../../components/Edit";
 
 export default function Home(props) {
     const [amount, setAmount] = useState("");
@@ -11,8 +11,6 @@ export default function Home(props) {
     const [location, setLocation] = useState("");
     const [details, setDetails] = useState("");
     const [textarea, setTextarea] = useState("");
-
-
 
 
     // encType="multipart/form-data"
