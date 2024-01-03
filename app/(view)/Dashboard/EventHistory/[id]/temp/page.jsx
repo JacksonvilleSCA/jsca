@@ -93,10 +93,9 @@ export default function Page({params}) {
                   src="https://picsum.photos/200"
                   className="card-img-top"
                   alt="image"
-                  width={"10%"}
-                  height={"700px"}
+                  width={"100%"}
                 />
-              <div className="card-body">
+              <div className="card-body" style={{width: "100%"}}>
                 {/* <div>
                   <h3> {eventInfo.startTime} </h3>
                   <hr />
