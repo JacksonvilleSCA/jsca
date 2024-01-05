@@ -34,8 +34,13 @@ export default function Page() {
             <div key={event._id} className="col">
               <div
                 className="card mt-5"
-                style={{ width: "80%", boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)" }}
+                style={{ width: "80%", boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)", position: "relative"}}
               >
+                {
+                  event.active === false &&
+
+                <div style={{backgroundColor: "gray", width: "100%", zIndex: "1", height: "100%", opacity: '25%', position: "absolute"}}> </div>
+                }
                 <img
                   src="https://picsum.photos/200"
                   className="card-img-top"

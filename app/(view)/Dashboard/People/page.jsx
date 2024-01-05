@@ -32,7 +32,11 @@ export default function Page(){
     <div className="container" style={{ marginBottom: "30px" }}>
         <div className="row row-cols-1 row-cols-md-3 g-4">
           {eventInformation.map((event, index) => (
+
             <div key={event._id} className="col">
+
+              {event.active && 
+
               <div
                 className="card mt-5"
                 style={{ width: "80%", boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)" }}
@@ -61,6 +65,7 @@ export default function Page(){
                   </button>
                 </div>
               </div>
+                  }
             </div>
           ))}
         </div>

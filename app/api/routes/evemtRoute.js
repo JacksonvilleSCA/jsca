@@ -82,13 +82,24 @@ export async function PUT(formData){
   const bytes = await file.arrayBuffer()    
   const buffer = Buffer.from(bytes);
 
+  let active;
+
+  if(data.activation === "Activate"){
+     active = true;
+  }else{
+     active = false;
+  }
+
+
+
   const res = await Event.updateOne({_id: data.event},{
     amount: data.totalPeople,
     img: buffer,
     startTime: data.startTime,
     endTime: data.endTime,
     location: data.Location,
-    details: data.details
+    details: data.details,
+    active: active
   })
 
   if(res){

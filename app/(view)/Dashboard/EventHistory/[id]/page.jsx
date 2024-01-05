@@ -30,7 +30,7 @@ export default  function Page({params}) {
     >
       <h1 className="mb-4 text-center mt-3">Update Event</h1>
       <form key={eventInfo._id} action={PUT} >
-        <div className="mb-1">
+        <div className="mb-3">
           <label className="form-label">
             Amount
           </label>
@@ -49,6 +49,30 @@ export default  function Page({params}) {
             required
           ></input>
         </div>
+
+        <div className="mb-1">
+          <label className='form-label'>
+            Activation
+          </label>
+          <div>
+            <select name="activation" className='form-select' style={{width: "30%"}} >
+              { eventInfo.active &&
+              <>
+              <option value="Activate">Activate</option>
+              <option value="Deactivate">Deactivate</option>
+              </>
+              }
+              { eventInfo.active === false &&
+              <>
+              <option value="Deactivate">Deactivate</option>
+              <option value="Activate">Activate</option>
+              </>
+              }
+
+              
+            </select>
+          </div>
+       </div>
 
         <div className="mb-4">
           <label className="form-label"></label>

@@ -21,10 +21,10 @@ export default function Home(props) {
           style={{ width: "60%", height: "100vh", marginBottom: "300px" }}
         >
           <h1 className="mb-4 text-center mt-3">Create Event</h1>
-          <form action={POST} >
+          <form action={POST}>
           {/* <form action={eventCreation}> */}
             <div className="mb-1">
-              <label className="form-label">
+              <label  htmlFor="validationCustom01" className="form-label">
                 Amount
               </label>
               <input

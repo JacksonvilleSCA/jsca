@@ -117,7 +117,6 @@ export default function Page({params}) {
             </div>
             <div className="card-footer">
               <div className="d-flex justify-content-evenly">
-                <button className="btn btn-primary px-5">Active</button>
                 <button
                   onClick={(e) => {
                     router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
