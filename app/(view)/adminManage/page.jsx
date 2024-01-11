@@ -91,6 +91,11 @@ export default function AdminAccountManage() {
         <div className={styles.textbox}>
           <form onSubmit={handleSubmit}>
             <h2>(WIP) Admin ID: {search}</h2>
+            <p>Fix Students with city, state and country.</p>
+            <p>Then, create code to allow admin to edit, delete, or create user.</p>
+            <p>Allow super admin to create junior admin.</p>
+            <p> Fix admin account updating account info. </p>
+            <p>Return when needed for more info: </p>
 
             <p>UserName:</p>
             <p></p>
