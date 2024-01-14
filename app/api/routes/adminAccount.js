@@ -7,6 +7,7 @@ import React from "react";
 
 export async function POST(formData){
 //For admin, if a user does not have an ADMIN ID during log in, kick user. 
+//For junior admins, add a single letter tag to the front of their code. This signifies a junior admin. 
 
 const min = 1000000000; 
 const max = 9999999999; 

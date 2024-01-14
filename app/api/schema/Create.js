@@ -29,6 +29,16 @@ const createSchema = new Schema({
         type: String,
         required: true,
         
+    },
+    country: {
+        type: String,
+        required: true,
+    },
+    state: {
+        type: String,
+    },
+    city: {
+        type:String,
     }
 
 })

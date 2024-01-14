@@ -17,7 +17,10 @@ const response = await Create.create({
     password: data.password,
     firstname: data.firstname,
     lastname: data.lastname,
-    phonenumber: data.phonenumber
+    phonenumber: data.phonenumber,
+    country: data.country,
+    state: data.state,
+    city: data.city,
 
 });
 

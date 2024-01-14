@@ -7,9 +7,8 @@ import React from "react";
 
 export async function getAllUsers() {
   try {
-      const users = await Create.find({}); // Fetch all users from the 'Create' collection
+      const users = await Create.find({}); 
       
-      // Optional: Transform the user data to fit your needs
       const formattedUsers = users.map(user => ({
           email: user.email,
           username: user.username,
