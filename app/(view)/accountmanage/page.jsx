@@ -411,6 +411,7 @@ export default function Accountmanage() {
             <p>User Name: </p>
             <input className={styles.textbox} type="text" id="userName"
             value={USER} onChange={handleUser} name="userName" placeholder={userN}/>
+            
             <p>Password:</p>
             <input className={styles.textbox} type="text" id="passWord"
             value={PASSWORD} onChange={handlePassword} name="passWord" placeholder={passW}/>
