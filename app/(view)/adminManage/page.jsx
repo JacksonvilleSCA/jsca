@@ -189,11 +189,12 @@ export default function AdminAccountManage() {
         <div className={styles.textbox}>
           <form onSubmit={handleSubmit}>
             <h2>(WIP) Admin ID: {search}</h2>
-            <p>Then, create code to allow admin to edit, delete, or create user.</p>
             <p>Allow super admin to create junior admin.</p>
+            <p>Admin deletes user.</p>
+            <p>Admin edits user.</p>
+            <p>Admin creates student.</p>
             <p>Hide admin creation from junior admins</p>
-            <p>Allow admins to create students</p>
-            <p> Fix admin account updating account info. </p>
+            <p>Fix ID transfer by using session storage.</p>
             <p>Return when needed for more info: </p>
 
             <p>First Name:</p>
