@@ -10,13 +10,18 @@ export async function getAllUsers() {
       const users = await Create.find({}); 
       
       const formattedUsers = users.map(user => ({
+        _id: user._id ? user._id.toString() : null,
           email: user.email,
           username: user.username,
           password: user.password,
           firstname: user.firstname,
           lastname: user.lastname,
-          phonenumber: user.phonenumber
-      }));
+          phonenumber: user.phonenumber,
+          country: user.country,
+          state: user.state,
+          city: user.city
+        }));
+
       console.log("users are:")
       console.log(formattedUsers);
       return formattedUsers;

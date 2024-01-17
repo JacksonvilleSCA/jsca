@@ -194,6 +194,7 @@ export default function AdminAccountManage() {
             <p>Admin edits user.</p>
             <p>Admin creates student.</p>
             <p>Hide admin creation from junior admins</p>
+            <p> Show only certain locations to junior admins</p>
             <p>Fix ID transfer by using session storage.</p>
             <p>Return when needed for more info: </p>
 

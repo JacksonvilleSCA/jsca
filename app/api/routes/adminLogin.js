@@ -8,8 +8,12 @@ import Admin from "../schema/Admin";
 export async function POSTA(formData){
     var returnValue;
     console.log(formData);
-    const username = formData.username;
-    const password = formData.password;  
+    let userNAME = formData.username;
+    let passWORD = formData.password;
+    const username = userNAME.replace(/\s/g, "");
+    const password = passWORD.replace(/\s/g, "");
+  
+
     const admin = await Admin.findOne({username,password})
     
     if(!admin){

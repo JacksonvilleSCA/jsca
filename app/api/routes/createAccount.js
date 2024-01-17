@@ -6,7 +6,7 @@ import React from "react";
 
 
 export async function POST(formData){
-
+//need to add check for email, password, and username. 
 
 const data = (formData);
 console.log(data);
@@ -27,9 +27,6 @@ const response = await Create.create({
 if(response){
     console.log("ok")
     resultReturn = "true";
-
-    
-
 }
 
 return resultReturn;

@@ -8,14 +8,17 @@ const createSchema = new Schema({
     email:{
         type: String,
         required: true,
+        unique: true
     },
     username: {
         type: String,
         required: true,
+        unique: true
     },
     password: {
         type: String,
         required: true,
+        unique: true
     },
     firstname: {
         type: String,
@@ -42,6 +45,7 @@ const createSchema = new Schema({
     }
 
 })
+
 
 const Create = mongoose.models.create || mongoose.model('create', createSchema)
 

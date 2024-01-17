@@ -1,0 +1,16 @@
+.userlist {
+    list-style: none;
+    padding: 0;
+  }
+
+  .useritem {
+    margin-bottom: 10px; /* Adjust the margin as needed */
+  }
+
+  .userInfo {
+    margin-right: 10px; /* Adjust the margin as needed */
+  }
+
+  .deletebutton {
+    margin-top: 5px; /* Adjust the margin as needed */
+  }
