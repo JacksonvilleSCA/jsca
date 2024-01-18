@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { getEvent as GET } from '@/app/api/routes/evemtRoute'
 import { PUT } from '@/app/api/routes/evemtRoute';
 import { useState } from 'react';
-// import Edit from '@/app/components/Edit';
+import Edit from '@/app/components/Edit';
 
 export default  function Page({params}) {
  
@@ -140,7 +140,7 @@ export default  function Page({params}) {
           ></input>
         </div>
 
-        <div>
+        {/* <div>
         <label  className="form-label ">
             Details
         </label>
@@ -152,15 +152,15 @@ export default  function Page({params}) {
              >
             </textarea>
         </div>
-        </div>
+        </div> */}
 
-        {/* <div className="mb-4">
-          <label htmlFor="" className="form-label ">
+        <div className="mb-4">
+          <label className="form-label ">
             Details
           </label>
-          <Edit details={setDetails} />
+          <Edit currentDetails={eventInfo.details} details={setDetails} />
           <input type="hidden" value={details}  name="details" />
-        </div> */}
+        </div>
 
         <input type="hidden" name='event' defaultValue={eventInfo._id} />
 

@@ -4,33 +4,36 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { GET as GetEvent } from "../../../api/routes/evemtRoute";
 import { useRouter } from "next/navigation";
+import DOMPurify from "dompurify";
 
 export default function Page() {
   const router = useRouter();
 
-  const [eventInfomration, setEventInformation] = useState([]);
+  const [eventInformation, setEventInformation] = useState([]);
 
   // Utility function to check if two arrays are equal
   const AreArraysEqual = (array1, array2) => {
     return JSON.stringify(array1) === JSON.stringify(array2);
   };
 
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await GetEvent();
 
-      if (!AreArraysEqual(eventInfomration, data)) {
+      console.log("hello")
+      if (!AreArraysEqual(eventInformation, data)) {
         setEventInformation(data);
       }
     };
     fetchData();
-  }, [eventInfomration]);
+  }, [eventInformation]);
 
   return (
     <>
       <div className="container" style={{ marginBottom: "30px" }}>
         <div className="row row-cols-1 row-cols-md-3 g-4">
-          {eventInfomration.map((event, index) => (
+          {eventInformation.map((event, index) => (
             <div key={event._id} className="col">
               <div
                 className="card mt-5"
@@ -38,7 +41,6 @@ export default function Page() {
               >
                 {
                   event.active === false &&
-
                 <div style={{backgroundColor: "gray", width: "100%", zIndex: "1", height: "100%", opacity: '25%', position: "absolute"}}> </div>
                 }
                 <img
@@ -46,20 +48,23 @@ export default function Page() {
                   className="card-img-top"
                   alt="image"
                 />
-                <div className="card-body">
+                <div className="card-body" style={{position: "relative"}}>
                   <div className="card-title" style={{ textAlign: "center" }}>
                     {event.location}
                   </div>
                   <hr />
-                  <p className="card-text">
-                   {event.details}
-                  </p>
+                  <div className="card-text">
+                  {/* <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(event.details) }} />
+                   */}
+                  <div dangerouslySetInnerHTML={{ __html: event.details }} />
+
+                  </div >
                   <button
                     onClick={(e) => {
                       router.push(`/Dashboard/EventHistory/${event._id}/temp`);
                     }}
                     className="btn btn-primary px-5"
-                    style={{ width: "100%" }}
+                    style={{ width: "100%",position: "relative", zIndex: "2"}}
                   >
                     Edit
                   </button>

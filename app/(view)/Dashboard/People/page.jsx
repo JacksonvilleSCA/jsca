@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { GET as GetEvent } from "../../../api/routes/evemtRoute";
 import { useRouter } from "next/navigation";
+import DOMPurify from 'dompurify';
 
 
 export default function Page(){
@@ -52,7 +53,8 @@ export default function Page(){
                   </div>
                   <hr />
                   <p className="card-text">
-                   {event.details}
+                   
+                   <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(event.details) }} />
                   </p>
                   <button
                     onClick={(e) => {

@@ -24,7 +24,7 @@ export default function Home(props) {
           <form action={POST}>
           {/* <form action={eventCreation}> */}
             <div className="mb-1">
-              <label  htmlFor="validationCustom01" className="form-label">
+              <label className="form-label">
                 Amount
               </label>
               <input
@@ -105,7 +105,7 @@ export default function Home(props) {
               ></input>
             </div>
 
-             <div>
+             {/* <div>
             <label className="form-label ">
                 Details
             </label>
@@ -117,15 +117,15 @@ export default function Home(props) {
                  >
                 </textarea>
             </div>
-            </div> 
+            </div>  */}
   
-            {/* <div className="mb-4">
-              <label htmlFor="" className="form-label ">
+            <div className="mb-4">
+              <label  className="form-label ">
                 Details
               </label>
               <Edit valueOfTextarea={textarea} details={setDetails} />
               <input type="hidden" value={details}  name="details" />
-            </div> */}
+            </div>
   
             <div className="d-grid vstack gap-2">
               <button type="submit" className="btn btn-primary mb-4">

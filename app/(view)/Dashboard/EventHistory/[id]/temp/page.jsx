@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { getEvent as GET } from "../../../../../api/routes/evemtRoute";
 import { DELETE as DeleteEvent } from "../../../../../api/routes/evemtRoute";
-
+import DOMPurify from "dompurify";
 import ConfirmDelete from "@/app/components/ConfirmDeletion";
 import TextContent from "@/app/components/Text";
 import { redirect, useRouter } from "next/navigation";
@@ -109,9 +109,11 @@ export default function Page({params}) {
                 <div  >
                   <h3>{eventInfo.location}, {eventInfo.startTime}</h3>
                   <hr />
-                  <p className="card-text">
-                        {eventInfo.details}
-                  </p>
+                  <div className="card-text">
+                  {/* <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(eventInfo.details) }} /> */}
+                  <div dangerouslySetInnerHTML={{ __html: eventInfo.details }} />
+
+                  </div>
                 </div>
               </div>
             </div>
