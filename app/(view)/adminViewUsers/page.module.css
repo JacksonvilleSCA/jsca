@@ -2,15 +2,19 @@
     list-style: none;
     padding: 0;
   }
-
   .useritem {
-    margin-bottom: 10px; /* Adjust the margin as needed */
+    margin-bottom: 10px; 
   }
-
   .userInfo {
-    margin-right: 10px; /* Adjust the margin as needed */
+    margin-right: 10px; 
   }
 
   .deletebutton {
-    margin-top: 5px; /* Adjust the margin as needed */
+    margin-top: 5px; 
+    color:red;
+  }
+
+  .editbutton {
+    margin-top: 5px; 
+    color: blue;
   }

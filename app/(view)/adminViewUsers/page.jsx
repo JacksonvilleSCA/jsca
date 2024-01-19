@@ -31,6 +31,15 @@ const AdminUV = () => {
     fetchUsers();
   }, []);
 
+
+  const handleEdit = async(user)=>{
+    alert("Edit in progress.");
+    const uid = user._id;
+    console.log(uid);
+    router.push(`/adminEditUser?myID=${search}&ID=${uid}`);
+
+
+  }
   
 
   const handleDelete = async (user)=>{
@@ -68,6 +77,8 @@ const AdminUV = () => {
     return (
       <div>
       <h1>ADMIN OVERVIEW</h1>
+      <button onClick={back}>Return</button>
+
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -77,6 +88,7 @@ const AdminUV = () => {
             {users.map((user, index) => (
               <li key={index} className={styles.useritem}>
                 <span className={styles.userInfo}>First Name: {user.firstname}, Last Name: {user.lastname}, User Name: {user.username}</span>
+                <button className ={styles.editbutton} onClick = {() =>handleEdit(user)}>Edit</button>
                 <button className={styles.deletebutton} onClick={() => handleDelete(user)}>Delete</button></li>
             ))}
           </ul>
