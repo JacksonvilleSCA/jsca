@@ -11,13 +11,21 @@ export async function POST(formData){
 
 const min = 1000000000; 
 const max = 9999999999; 
-const AdminID = Math.floor(Math.random() * (max - min + 1)) + min;
+var AdminID = Math.floor(Math.random() * (max - min + 1)) + min;
 AdminID.toString();
 
 const data = (formData);
 console.log(data);
 console.log(AdminID)
 var resultReturn;
+var check = data.checkbox;
+console.log("ROFL COPTER");
+console.log(check);
+
+var j = "j"
+if(check != false){
+    AdminID = j + AdminID;
+}
 
 const response = await Admin.create({
     adminID: AdminID,
@@ -29,7 +37,8 @@ const response = await Admin.create({
     phonenumber: data.phonenumber,
     country: data.country,
     state: data.state,
-    city: data.city,
+    city: data.city
+
 
 })
 

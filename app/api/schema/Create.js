@@ -7,7 +7,6 @@ const { Schema, model, SchemaTypes} = mongoose;
 const createSchema = new Schema({
     email:{
         type: String,
-        required: true,
         unique: true
     },
     username: {

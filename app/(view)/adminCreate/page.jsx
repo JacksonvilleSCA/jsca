@@ -21,6 +21,7 @@ const AdminCreate= () => {
   const [userCountry, setUserCountry] = useState('')
   const [userState, setUserState] = useState('');
   const [userCity, setUserCity] = useState('')
+  const [checkBox, setCheckBox] = useState(false)
   const [error, setError] = useState('');
 
 
@@ -74,6 +75,11 @@ const AdminCreate= () => {
     console.log(userPhone);
   }
 
+  const handleCheckbox = (e) =>{
+    setCheckBox(e.target.value);
+    console.log(checkBox);
+  }
+
 
   const handleSubmit = async (e) =>{
     e.preventDefault();
@@ -94,7 +100,8 @@ const AdminCreate= () => {
       phonenumber: userPhone,
       country: userCountry,
       state: userState,
-      city: userCity
+      city: userCity,
+      checkbox: checkBox
     }
 
     console.log(Object);
@@ -121,7 +128,7 @@ const AdminCreate= () => {
     }
     else{
       alert("Account Created!");
-      Router.push('/login')
+      Router.back('/adminManage') 
     }
 
     
@@ -425,6 +432,18 @@ const AdminCreate= () => {
               name="usercity"
               placeholder="City"/>
             </div>
+
+            <div>
+              <label htmlFor="checkbox">Checkbox: </label>
+              <input 
+              type="checkbox" 
+              id="checkbox" 
+              onChange={handleCheckbox}
+              name="checkbox"
+              />
+            </div>
+
+
 
 
 
