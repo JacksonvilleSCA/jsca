@@ -14,6 +14,22 @@ export default function Home(props) {
 
 
     // encType="multipart/form-data"
+
+
+    //  async function test(){
+
+    //   console.log("hello");
+    //   console.log(typeof image);
+    //    console.log(image)
+    //   const bytes = await image.arrayBuffer();
+    //    console.log(typeof bytes)
+    //   console.log(bytes)
+    //   const buffer = Buffer.from(bytes);
+    //   console.log(typeof buffer);
+    //   console.log(buffer)
+    //   // POST() 
+    //   }
+
     return (
       <>
         <div
@@ -131,6 +147,7 @@ export default function Home(props) {
               <button type="submit" className="btn btn-primary mb-4">
                 Submit
               </button>
+            {/* <button type="button" onClick={test}>Submit</button> */}
             </div>
           </form>
         </div>

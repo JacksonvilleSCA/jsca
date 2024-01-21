@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { getEvent as GET } from "../../../../../api/routes/evemtRoute";
 import { DELETE as DeleteEvent } from "../../../../../api/routes/evemtRoute";
-import DOMPurify from "dompurify";
+import Image from "next/image";
 import ConfirmDelete from "@/app/components/ConfirmDeletion";
 import TextContent from "@/app/components/Text";
 import { redirect, useRouter } from "next/navigation";
@@ -55,11 +55,6 @@ export default function Page({params}) {
   }
 
 
-
- 
-
-  
-
   return (
     <>
       {active.Active && (
@@ -88,12 +83,21 @@ export default function Page({params}) {
 
             </div>
             <div className="d-flex">
-              {/* <img src={eventInfo.img} className="card-img-top" alt="image" /> */}
-              <img
+              {/* <img
                   src="https://picsum.photos/200"
                   className="card-img-top"
                   alt="image"
                   width={"100%"}
+                /> */}
+                  <Image
+                  alt="Picture of the Event"
+                  src={eventInfo.img}
+                  width={50}
+                  height={300}
+                  style={{
+                    width: '50%',
+                    height:'100%',
+                  }}
                 />
               <div className="card-body" style={{width: "100%"}}>
                 {/* <div>
@@ -119,6 +123,14 @@ export default function Page({params}) {
             </div>
             <div className="card-footer">
               <div className="d-flex justify-content-evenly">
+              <button
+                  onClick={(e) => {
+                    router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
+                  }}
+                  className="btn btn-primary px-5"
+                >
+                  Update
+                </button>
                 <button
                   onClick={(e) => {
                     router.push(`/Dashboard/EventHistory/${eventInfo._id}`);

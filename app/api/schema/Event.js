@@ -8,8 +8,7 @@ const eventSchema = new Schema({
   },
   img: {
     data: Buffer,
-    type: String,
-    required: true,
+    contentType: String,
   },
   startTime: {
     type: String,

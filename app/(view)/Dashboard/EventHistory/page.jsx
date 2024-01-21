@@ -4,7 +4,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { GET as GetEvent } from "../../../api/routes/evemtRoute";
 import { useRouter } from "next/navigation";
-import DOMPurify from "dompurify";
+import Image from "next/image";
 
 export default function Page() {
   const router = useRouter();
@@ -21,13 +21,15 @@ export default function Page() {
     const fetchData = async () => {
       const data = await GetEvent();
 
-      console.log("hello")
+      // console.log(data)
+
+      // console.log("hello")
       if (!AreArraysEqual(eventInformation, data)) {
         setEventInformation(data);
       }
     };
     fetchData();
-  }, [eventInformation]);
+  }, []);
 
   return (
     <>
@@ -43,11 +45,26 @@ export default function Page() {
                   event.active === false &&
                 <div style={{backgroundColor: "gray", width: "100%", zIndex: "1", height: "100%", opacity: '25%', position: "absolute"}}> </div>
                 }
-                <img
+
+
+
+                <Image
+                  alt="Picture of the Event"
+                  src={event.img}
+                  width={100}
+                  height={300}
+                  style={{
+                    width: '100%',
+                  }}
+                />
+
+                {/* <img
                   src="https://picsum.photos/200"
                   className="card-img-top"
                   alt="image"
-                />
+                /> */}
+
+
                 <div className="card-body" style={{position: "relative"}}>
                   <div className="card-title" style={{ textAlign: "center" }}>
                     {event.location}

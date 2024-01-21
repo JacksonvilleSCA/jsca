@@ -2,6 +2,7 @@
 
 import React, { useEffect,useState } from 'react'
 import { getEvent as GET} from '@/app/api/routes/evemtRoute'
+import Image from 'next/image';
 
 export default function Page({params}){
   
@@ -26,12 +27,22 @@ export default function Page({params}){
         </div>
 
         <div className='d-flex'>
-        <img
+        {/* <img
           src="https://picsum.photos/200"
           className="card-img-top"
           alt="image"
           width={"100%"}
-          />
+          /> */}
+               <Image
+                  alt="Picture of the Event"
+                  src={eventInfo.img}
+                  width={50}
+                  height={300}
+                  style={{
+                    width: '50%',
+                    height:'100%',
+                  }}
+                />
 
 
         <div className="card-body" style={{width: "100%"}}>
@@ -50,7 +61,7 @@ export default function Page({params}){
             </p>
           </div>
 
-          <button type="button" class="btn btn-success" style={{marginTop: "70px",marginLeft: "100px",width: "60%", boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)"}}>Join</button>
+          <button type="button" class="btn btn-success" style={{marginTop: "60px",marginLeft: "100px",width: "60%", boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)"}}>Join</button>
         </div>
 
          
