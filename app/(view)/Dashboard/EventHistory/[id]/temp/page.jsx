@@ -129,7 +129,15 @@ export default function Page({params}) {
                   }}
                   className="btn btn-primary px-5"
                 >
-                  Update
+                  Itinerary
+                </button>
+                <button
+                  onClick={(e) => {
+                    router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
+                  }}
+                  className="btn btn-info px-5"
+                >
+                  Wait List
                 </button>
                 <button
                   onClick={(e) => {
