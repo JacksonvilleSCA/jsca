@@ -142,12 +142,15 @@ const Createaccount = () => {
           </br>
           <form onSubmit={handleSubmit}>
             {error && <p className={styles.textbox2}style={{color: 'red'}}>{error}</p>}
-
+            <div className={styles.textbox2}>
+            <p>* represents required information.</p>
+            </div>
+           
 
 
 
             <div className={styles.textbox2}>
-              <label htmlFor="email">Enter Email: </label>
+              <label htmlFor="email">*Enter Email: </label>
               <input 
               type="email" 
               id="email" 
@@ -158,7 +161,7 @@ const Createaccount = () => {
 
 
             <div className={styles.textbox2}>
-              <label htmlFor="username">Enter Username: </label>
+              <label htmlFor="username">*Enter Username: </label>
               <input 
               type="text" 
               id="username" 
@@ -169,7 +172,7 @@ const Createaccount = () => {
 
 
             <div className={styles.textbox2}>
-              <label htmlFor="password">Enter Password: </label>
+              <label htmlFor="password">*Enter Password: </label>
               <input 
               type="password" 
               id="password" 

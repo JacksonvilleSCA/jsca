@@ -5,6 +5,7 @@ import { useParams } from "next/navigation"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useSearchParams } from "next/navigation"
+import { AdminInfo } from '@/app/api/routes/adminInfo';
 import Link from "next/link"
 import { getAllUsers } from "@/app/api/routes/users"
 import { deleteUsers } from "@/app/api/routes/deleteUser"
@@ -16,20 +17,27 @@ const AdminUV = () => {
   var search = searchParams.get('myID')
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [accData, setAccData] = useState('');
+
 
   useEffect(() => {
-    async function fetchUsers() {
-      try {
-        const usersData = await getAllUsers();
-        setUsers(usersData);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-        setLoading(false);
-      }
-    }
     fetchUsers();
   }, []);
+
+
+  const fetchUsers= async () => {
+    try {
+      const acc = await AdminInfo(search);
+      setAccData(acc)
+      console.log(acc.AdminID);
+      const usersData = await getAllUsers(acc);
+      setUsers(usersData);
+      setLoading(false);    
+    } catch (error) {
+      console.error('Error with obtaining data.', error);
+      setLoading(false);
+    }
+  }
 
 
   const handleEdit = async(user)=>{
@@ -37,7 +45,6 @@ const AdminUV = () => {
     const uid = user._id;
     console.log(uid);
     router.push(`/adminEditUser?myID=${search}&ID=${uid}`);
-
 
   }
   
@@ -49,15 +56,15 @@ const AdminUV = () => {
       try{
         const result = await deleteUsers(user);
        if(result != "wilco"){
-        alert("Error, failed ot delete.")
+        alert("Error, failed to delete.")
        }
        else{
         alert(result);
         location.reload(true);
        }
       }
-      catch(e){
-        alert(e);
+      catch(error){
+        alert(error);
       }
 
       
@@ -66,17 +73,18 @@ const AdminUV = () => {
   }
 
   function back(){
-
-    router.back('/adminManage') 
-
+    router.push(`/adminManage?myID=${search}`)
   }
+
+ 
+
 
   
  
 
     return (
       <div>
-      <h1>ADMIN OVERVIEW</h1>
+      <h1>ADMIN OVERVIEW {accData.country}</h1>
       <button onClick={back}>Return</button>
 
       {loading ? (
@@ -87,7 +95,7 @@ const AdminUV = () => {
           <ul className={styles.userlist}>
             {users.map((user, index) => (
               <li key={index} className={styles.useritem}>
-                <span className={styles.userInfo}>First Name: {user.firstname}, Last Name: {user.lastname}, User Name: {user.username}</span>
+                <span className={styles.userInfo}>First Name: {user.firstname}, Last Name: {user.lastname}, User Name: {user.username} Country: {user.country}, City: {user.city}</span>
                 <button className ={styles.editbutton} onClick = {() =>handleEdit(user)}>Edit</button>
                 <button className={styles.deletebutton} onClick={() => handleDelete(user)}>Delete</button></li>
             ))}

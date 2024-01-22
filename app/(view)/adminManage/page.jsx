@@ -190,10 +190,11 @@ export default function AdminAccountManage() {
         <div className={styles.textbox}>
           <form onSubmit={handleSubmit}>
             <h2>(WIP) Admin ID: {search}</h2>
-            <p> Show only certain locations to junior admins</p>
             <p>Fix ID transfer by using session storage.</p>
-            <p> Fix how Users are displayed</p>
             <p>Add  check to ensure ! duplicate accounts</p>
+            <p> Fix how Users are displayed</p>
+            <p>Fix buttons and layout (return buttons change to go to previous page).</p>
+            <p>Fix Dashboard</p>
             <p>Return when needed for more info: </p>
 
             <p>First Name:</p>

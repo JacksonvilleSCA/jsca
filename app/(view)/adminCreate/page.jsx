@@ -6,9 +6,7 @@ import { useRouter } from "next/navigation"
 import { useSearchParams } from "next/navigation"
 import { POST } from "@/app/api/routes/adminAccount"
 import Link from "next/link"
-// replace with admin import {accInfo} from "../../api/routes/accountInfo"
-//Admin second ID is created automatically without user input. This will be set and used
-//for only admins to see
+import styles from "./page.module.css"
 
 const AdminCreate= () => {
   const Router = useRouter();
@@ -142,17 +140,16 @@ const AdminCreate= () => {
 
   
     return (
-      <div>
-      <h1>JSCA ADMIN CREATION</h1>
-      <h2>Fill in: </h2>
-      <div>
-        <div>
-            <div>
+      <div  className={styles.container}>
+      <h1 className={styles.title}>JSCA ADMIN CREATION</h1>
+      <button onClick={back}> Return </button>
+      <br></br>
+      <br></br>
+  
             <form onSubmit={handleSubmit}>
-            <h3 >Fill in Information Below</h3>
-            {error && <p style={{color: 'red'}}>{error}</p>}
+            {error && <p className={styles.textbox2} style={{color: 'red'}}>{error}</p>}
             
-            <div >
+            <div className={styles.textbox2}>
               <label htmlFor="email">Enter Email: </label>
               <input 
               type="email" 
@@ -163,7 +160,7 @@ const AdminCreate= () => {
             </div>
 
 
-            <div >
+            <div className={styles.textbox2}>
               <label htmlFor="username">Enter Username: </label>
               <input 
               type="text" 
@@ -174,7 +171,7 @@ const AdminCreate= () => {
             </div>
 
 
-            <div >
+            <div className={styles.textbox2}>
               <label htmlFor="password">Enter Password: </label>
               <input 
               type="password" 
@@ -185,7 +182,7 @@ const AdminCreate= () => {
               placeholder="password"/>
             </div>
 
-            <div >
+            <div className={styles.textbox2}>
               <label htmlFor="firstname">Enter First Name: </label>
               <input 
               type="firstname" 
@@ -195,7 +192,7 @@ const AdminCreate= () => {
               placeholder="first name"/>
             </div>
 
-            <div >
+            <div className={styles.textbox2}>
               <label htmlFor="lastname">Enter Last Name: </label>
               <input 
               type="lastname" 
@@ -205,7 +202,7 @@ const AdminCreate= () => {
               placeholder="last name"/>
             </div>
 
-            <div >
+            <div className={styles.textbox2}>
               <label htmlFor="phonenumber">Enter Phone Number: </label>
               <input 
               type="phonenumber" 
@@ -215,7 +212,9 @@ const AdminCreate= () => {
               placeholder="phonenumber"/>
             </div>
 
-            <div>
+            
+
+            <div className={styles.textbox2}>
             <label htmlFor="country">Select Country:</label>
             <select name="country" id="country" onChange={handleCountry}>
             <option value="">Select a country</option>
@@ -412,8 +411,9 @@ const AdminCreate= () => {
             <option value="Zambia">Zambia</option>
             <option value="Zimbabwe">Zimbabwe</option>
             </select>
+            </div>
 
-            <div >
+            <div className={styles.textbox2}>
               <label htmlFor="userstate">Enter State (Optional): </label>
               <input 
               type="text" 
@@ -422,8 +422,11 @@ const AdminCreate= () => {
               name="userstate"
               placeholder="State"/>
             </div>
+        
 
-            <div >
+         
+
+            <div className={styles.textbox2}>
               <label htmlFor="usercity">Enter City: </label>
               <input 
               type="text" 
@@ -433,8 +436,8 @@ const AdminCreate= () => {
               placeholder="City"/>
             </div>
 
-            <div>
-              <label htmlFor="checkbox">Checkbox: </label>
+            <div className={styles.textbox2}>
+              <label htmlFor="checkbox">Select for Junior Admin: </label>
               <input 
               type="checkbox" 
               id="checkbox" 
@@ -442,18 +445,19 @@ const AdminCreate= () => {
               name="checkbox"
               />
             </div>
+            
+            <p className={styles.textbox3}>Junior admins are limited to those they can see, being members,
+              in the same area as them.
+            </p>
 
 
 
 
 
-          
-
-            </div>
+        
 
 
-
-            <div>
+            <div className={styles.buttons}>
               <button type="submit">Create Account</button>
     
               <button  type="reset">Reset</button>
@@ -468,14 +472,12 @@ const AdminCreate= () => {
 
 
           </form>
-            </div>
-            <button onClick={back}> Return </button>
+           
 
-        </div>
       </div>
      
 
-      </div>
+      
 
       
     )

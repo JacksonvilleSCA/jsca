@@ -21,20 +21,20 @@ const createSchema = new Schema({
     },
     firstname: {
         type: String,
-        required: true,
+        
     },
     lastname: {
         type: String,
-        required: true,
+        
     },
     phonenumber: {
         type: String,
-        required: true,
+        
         
     },
     country: {
         type: String,
-        required: true,
+        
     },
     state: {
         type: String,
