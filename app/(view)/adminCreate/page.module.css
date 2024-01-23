@@ -1,0 +1,41 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.textbox{
+    border: 1px;
+    border-radius: 5px;
+    text-align: center;
+
+}
+
+.textbox2{
+    border: 1px;
+    border-radius: 5px;
+    position: relative;
+    bottom: 50px;
+    text-align:center;
+    padding: 10px;
+
+}
+
+.textbox3 {
+    font-size: small;
+    border: 1px solid black; 
+    padding: 10px; 
+  }
+
+.buttons{
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    
+}
+
+
+.title{
+    text-align: left;
+}

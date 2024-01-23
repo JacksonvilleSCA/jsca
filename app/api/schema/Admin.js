@@ -4,37 +4,37 @@ const { Schema, model, SchemaTypes} = mongoose;
 
 
 
-const createSchema = new Schema({
-    email:{
+const AdminSchema = new Schema({
+    adminID: {
         type: String,
-        unique: true
+    },
+    email: {
+        type: String,
+        required: true,
     },
     username: {
         type: String,
         required: true,
-        unique: true
     },
     password: {
         type: String,
         required: true,
-        unique: true
     },
     firstname: {
         type: String,
-        
+        required: true,
     },
     lastname: {
         type: String,
-        
+        required: true,
     },
     phonenumber: {
         type: String,
-        
-        
+        required: true,
     },
     country: {
         type: String,
-        
+        required: true,
     },
     state: {
         type: String,
@@ -43,9 +43,10 @@ const createSchema = new Schema({
         type:String,
     }
 
+
+
 })
 
+const Admin = mongoose.models.Admin || mongoose.model('Admin', AdminSchema)
 
-const Create = mongoose.models.create || mongoose.model('create', createSchema)
-
-export default Create;
+export default Admin;

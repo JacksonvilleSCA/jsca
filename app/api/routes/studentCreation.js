@@ -5,8 +5,7 @@ import connect from "../db/dbConnection";
 import React from "react";
 
 
-export async function POST(formData){
-//need to add check for email, password, and username. 
+export async function STUDP(formData){
 
 const data = (formData);
 console.log(data);
