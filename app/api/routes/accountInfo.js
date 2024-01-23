@@ -17,7 +17,10 @@ export async function accInfo(ID){
         password: user.password,
         firstname: user.firstname,
         lastname: user.lastname,
-        phonenumber: user.phonenumber
+        phonenumber: user.phonenumber,
+        country: user.country,
+        state: user.state,
+        city: user.city,
 
     }
 

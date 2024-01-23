@@ -36,7 +36,9 @@ export default function Accountmanage() {
 
 
   const searchParams = useSearchParams();
-  var search = searchParams.get('myID')
+  var search = searchParams.get('ID');
+  var adminID = searchParams.get('myID');
+
 
 
   if(search == null){
@@ -140,29 +142,21 @@ export default function Accountmanage() {
       }
       else{
         alert("Account Update succesful");
-        location.reload(true);
+        router.push(`/adminViewUsers?myID=${adminID}`)
       }
     }
     catch(e){
       console.log(e);
     }
+
+
     
-    //const result = accUpdate(search,formData)
-    //.then((response) => response.json())
-   // .then((data) => console.log(data));
-
-   // if(result != "wilco"){
-     // console.log("Account Update Succesful")
-     // alert("Account Update succesful");
-      //location.reload(true);
-   // }
-
 
   }
 
   function dashB(){
 
-    router.back('/LoginDashboard') 
+    router.back('/adminViewUsers') 
   }
 
 
@@ -180,8 +174,8 @@ export default function Accountmanage() {
       
       <div>
 
-      <h1>Manage Account</h1>
-      <button onClick={dashB}> Return </button>
+      <h1>Admin Edit by {adminID}</h1>
+      <button onClick={dashB}>Return</button>
 
       <br></br>
 

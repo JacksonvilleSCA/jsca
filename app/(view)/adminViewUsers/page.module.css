@@ -1,0 +1,20 @@
+.userlist {
+    list-style: none;
+    padding: 0;
+  }
+  .useritem {
+    margin-bottom: 10px; 
+  }
+  .userInfo {
+    margin-right: 10px; 
+  }
+
+  .deletebutton {
+    margin-top: 5px; 
+    color:red;
+  }
+
+  .editbutton {
+    margin-top: 5px; 
+    color: blue;
+  }
