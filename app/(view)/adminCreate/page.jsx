@@ -24,6 +24,12 @@ const AdminCreate= () => {
 
 
 
+  useEffect(() => {
+    const search = sessionStorage.getItem('AID');
+    if (search == null) {
+      Router.push('/login');
+    }
+  }, []);
 
   function back(){
 

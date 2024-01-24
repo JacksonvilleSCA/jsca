@@ -36,7 +36,12 @@ export default function AdminAccountManage() {
 
 
   const searchParams = useSearchParams();
-  var search = searchParams.get('myID')
+  var search = sessionStorage.getItem('AID');
+
+  if(search == null){
+    router.push('/login');
+    
+  }
   const showCreate = search && !search.includes('j');
 
   
@@ -103,13 +108,13 @@ export default function AdminAccountManage() {
 
   function manageUsers(){
 
-    router.push(`/adminViewUsers?myID=${search}`)
+    router.push('/adminViewUsers')
  
   }
 
   function dashB(){
 
-    router.back('/admindashboard') 
+    router.push('/admindashboard') 
   }
 
 
@@ -190,11 +195,10 @@ export default function AdminAccountManage() {
         <div className={styles.textbox}>
           <form onSubmit={handleSubmit}>
             <h2>(WIP) Admin ID: {search}</h2>
-            <p>Fix ID transfer by using session storage.</p>
             <p>Add  check to ensure ! duplicate accounts</p>
             <p> Fix how Users are displayed</p>
-            <p>Fix buttons and layout (return buttons change to go to previous page).</p>
             <p>Fix Dashboard</p>
+            <p>Fix management</p>
             <p>Return when needed for more info: </p>
 
             <p>First Name:</p>

@@ -39,6 +39,12 @@ export default function Accountmanage() {
   var search = searchParams.get('ID');
   var adminID = searchParams.get('myID');
 
+  var search = sessionStorage.getItem('uid');
+  var adminID = sessionStorage.getItem('AID');
+  if(search == null){
+    router.push('/login');
+    
+  }
 
 
   if(search == null){
@@ -142,7 +148,8 @@ export default function Accountmanage() {
       }
       else{
         alert("Account Update succesful");
-        router.push(`/adminViewUsers?myID=${adminID}`)
+        sessionStorage.removeItem('uid');
+        router.push('/adminViewUsers')
       }
     }
     catch(e){

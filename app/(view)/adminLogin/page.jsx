@@ -58,8 +58,8 @@ const Login = () => {
     }
     else{
       const myID = Value1.AdminID;
-      console.log(myID);
-      router.push(`/admindashboard?myID=${myID}`)
+      sessionStorage.setItem('AID', myID)
+      router.push('/admindashboard');
     }
 
 

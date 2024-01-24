@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react"
 import { STUDP } from "@/app/api/routes/studentCreation";
 import styles from './page.module.css'
 
@@ -20,7 +21,12 @@ const Createaccount = () => {
   const [userCity, setUserCity] = useState('')
   const [error, setError] = useState('');
 
-
+  useEffect(() => {
+    const search = sessionStorage.getItem('AID');
+    if (search == null) {
+      Router.push('/login');
+    }
+  }, []);
 
   function dashB(){
 
