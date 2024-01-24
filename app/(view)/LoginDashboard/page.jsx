@@ -10,54 +10,13 @@ import {accInfo} from "../../api/routes/accountInfo"
 const Dashboard = () => {
 
   var search;
-  //const [name, setName] = useState('');
 
-  const router = useRouter();
-  if(typeof window !== 'undefined'){
-    search = sessionStorage.getItem('ID');
-  }
-
-  if(search == null){
-    router.push('/login');
-    
-  }
-
-
-
-
-
-
-  //const searchParams = useSearchParams();
- // var search = searchParams.get('myID')
-
-
-  //if(search == null){
-    //router.push('/login');
-    
-  //}
-
-
-  //useEffect(() => {
-    //loadPage();
- //}, []);
-
-
-  //const loadPage = async () =>{
-
-    //try{
-     // var acc = await accInfo(search);
-      //var firstName = acc.firstname;
-
-      //setName(firstName);
-
-
-    //} catch (error){
-    //console.log(error);
-   // }  
-
-
-  
-  //} 
+  useEffect(() => {
+    const search = sessionStorage.getItem('ID');
+    if (search == null) {
+      router.push('/login');
+    }
+  }, []);
 
 
 
