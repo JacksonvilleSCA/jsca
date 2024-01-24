@@ -9,12 +9,13 @@ import {accInfo} from "../../api/routes/accountInfo"
 
 const Dashboard = () => {
 
-
+  var search;
   //const [name, setName] = useState('');
 
   const router = useRouter();
-
-  var search = sessionStorage.getItem('ID');
+  if(typeof window !== 'undefined'){
+    search = sessionStorage.getItem('ID');
+  }
 
   if(search == null){
     router.push('/login');
