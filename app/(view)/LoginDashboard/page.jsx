@@ -14,9 +14,20 @@ const Dashboard = () => {
 
   const router = useRouter();
 
+  var search = sessionStorage.getItem('ID');
 
-  const searchParams = useSearchParams();
-  var search = searchParams.get('myID')
+  if(search == null){
+    router.push('/login');
+    
+  }
+
+
+
+
+
+
+  //const searchParams = useSearchParams();
+ // var search = searchParams.get('myID')
 
 
   //if(search == null){
@@ -52,7 +63,7 @@ const Dashboard = () => {
 
   function manageAccount(){
 
-    router.push(`/accountmanage?myID=${search}`);
+    router.push('/accountmanage');
 
     
   }
@@ -61,11 +72,9 @@ const Dashboard = () => {
 
 
   function signOut(){
-    search = null;
-    if(search == null){
-      router.push('/login');
-      
-    }
+    sessionStorage.removeItem('ID');
+    router.push('/login');
+    
   }
 
   

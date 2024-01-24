@@ -13,8 +13,12 @@ import { deleteUsers } from "@/app/api/routes/deleteUser"
 const AdminUV = () => {
 
   const router = useRouter();
-  const searchParams = useSearchParams();
-  var search = searchParams.get('myID')
+  var search = sessionStorage.getItem('AID');
+  if(search == null){
+    router.push('/login');
+    
+  }
+
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [accData, setAccData] = useState('');
@@ -44,7 +48,8 @@ const AdminUV = () => {
     alert("Edit in progress.");
     const uid = user._id;
     console.log(uid);
-    router.push(`/adminEditUser?myID=${search}&ID=${uid}`);
+    sessionStorage.setItem('uid', uid);
+    router.push('/adminEditUser');
 
   }
   
@@ -73,7 +78,7 @@ const AdminUV = () => {
   }
 
   function back(){
-    router.push(`/adminManage?myID=${search}`)
+    router.push('/adminManage')
   }
 
  

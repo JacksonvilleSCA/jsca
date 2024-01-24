@@ -11,7 +11,13 @@ const AdminDash = () => {
 
   const router = useRouter();
   const searchParams = useSearchParams();
-  var search = searchParams.get('myID')
+  var search = sessionStorage.getItem('AID');
+
+
+  if(search == null){
+    router.push('/adminLogin');
+    
+  }
 
 
   function manageAccount(){

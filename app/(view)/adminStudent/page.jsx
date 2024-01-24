@@ -20,7 +20,12 @@ const Createaccount = () => {
   const [userCity, setUserCity] = useState('')
   const [error, setError] = useState('');
 
+  var search = sessionStorage.getItem('AID');
 
+  if(search == null){
+    Router.push('/login');
+    
+  }
 
   function dashB(){
 

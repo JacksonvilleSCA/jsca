@@ -55,11 +55,10 @@ const Login = () => {
 
     }
     else{
-      const myID = Value1.ID;
-      const Name= Value1.firstname
-      console.log(Name);
-      console.log(myID);
-      router.push(`/LoginDashboard?myID=${myID}`)
+      const myID = Value1.ID
+      sessionStorage.setItem('ID',myID)
+      router.push('/LoginDashboard');
+      
     }
 
 
@@ -72,7 +71,6 @@ const Login = () => {
   
     <br></br>
     <h3 className={styles.container}>Login</h3>
-
 
 
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -101,6 +99,8 @@ const Login = () => {
 
       <br>
       </br>
+      <br></br>
+      <p><Link href='/adminLogin'>Staff Login</Link></p>
       {error && <p style={{color: 'red'}}>{error}</p>}
       
 
