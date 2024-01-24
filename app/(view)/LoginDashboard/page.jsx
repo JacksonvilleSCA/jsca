@@ -9,7 +9,6 @@ import {accInfo} from "../../api/routes/accountInfo"
 
 const Dashboard = () => {
 
-  var search;
 
   useEffect(() => {
     const search = sessionStorage.getItem('ID');

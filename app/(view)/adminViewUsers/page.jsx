@@ -13,23 +13,26 @@ import { deleteUsers } from "@/app/api/routes/deleteUser"
 const AdminUV = () => {
 
   const router = useRouter();
-  var search = sessionStorage.getItem('AID');
-  if(search == null){
-    router.push('/login');
+  useEffect(() => {
+    const search = sessionStorage.getItem('AID');
+    if (search == null) {
+      router.push('/login');
+    }
+    else {
+      fetchUsers(search);
+    }
     
-  }
+  }, []);
 
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [accData, setAccData] = useState('');
 
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
 
 
-  const fetchUsers= async () => {
+
+  const fetchUsers= async (search) => {
     try {
       const acc = await AdminInfo(search);
       setAccData(acc)
