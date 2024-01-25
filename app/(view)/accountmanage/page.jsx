@@ -4,8 +4,6 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
-//import { accInfo } from "../api/routes/accountInfo";
-//import { accUpdate } from "../api/routes/accountUpdate";
 import {accInfo} from "../../api/routes/accountInfo";
 import { accUpdate} from "../../api/routes/accountUpdate"
 
@@ -35,7 +33,6 @@ export default function Accountmanage() {
   
 
 
-  const searchParams = useSearchParams();
   var search = sessionStorage.getItem('uid');
 
 

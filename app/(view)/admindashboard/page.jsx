@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import {accInfo} from "../../api/routes/accountInfo"
+import styles from './page.module.css';
+
 
 const AdminDash = () => {
 
@@ -47,19 +49,32 @@ const AdminDash = () => {
         <div>
         <button onClick={manageAccount}>Manage Account</button>
         </div>
-        <div>
+        <div className={styles.container}>
+
           <br></br>
+          <div>
           <p>Events</p>
           <p>Create Events</p>
+             
+          </div>
+        
 
 
           <br>
           </br>
 
+          <div>
           <p>Itenerary</p>
           <p>Packing List</p>
 
+          </div>
 
+          <p>Itenerary</p>
+          <p>Create Itenerary</p>
+          <p>Packing Lists</p>
+          <p>Create Packing Lists</p>
+
+           
           <br>
           </br>
           <p>Student Forms and Essays.</p>
