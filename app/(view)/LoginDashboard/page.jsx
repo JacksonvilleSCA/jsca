@@ -12,7 +12,7 @@ const Dashboard = () => {
 
 
   useEffect(() => {
-    const search = sessionStorage.getItem('ID');
+    const search = sessionStorage.getItem('uid');
     if (search == null) {
       router.push('/login');
     }
@@ -32,7 +32,7 @@ const Dashboard = () => {
 
 
   function signOut(){
-    sessionStorage.removeItem('ID');
+    sessionStorage.removeItem('uid');
     router.push('/login');
     
   }

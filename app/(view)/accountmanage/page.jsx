@@ -36,8 +36,7 @@ export default function Accountmanage() {
 
 
   const searchParams = useSearchParams();
-  //var search = searchParams.get('myID')
-  var search = sessionStorage.getItem('ID');
+  var search = sessionStorage.getItem('uid');
 
 
   if(search == null){
