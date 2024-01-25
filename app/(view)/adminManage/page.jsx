@@ -442,7 +442,7 @@ export default function AdminAccountManage() {
             </form>
 
           </div>
-          <div>
+          <div className={styles.textbox3}>
           <button onClick={manageUsers}>ManageUsers</button>
           {showCreate && (
           <Link href='/adminCreate'>Admin Creation</Link>

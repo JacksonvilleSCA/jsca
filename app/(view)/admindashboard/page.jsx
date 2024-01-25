@@ -22,7 +22,7 @@ const AdminDash = () => {
 
   function manageAccount(){
 
-    router.push(`/adminManage?myID=${search}`);
+    router.push('/adminManage');
 
     
   }
@@ -46,6 +46,26 @@ const AdminDash = () => {
       <div>
         <div>
         <button onClick={manageAccount}>Manage Account</button>
+        </div>
+        <div>
+          <br></br>
+          <p>Events</p>
+          <p>Create Events</p>
+
+
+          <br>
+          </br>
+
+          <p>Itenerary</p>
+          <p>Packing List</p>
+
+
+          <br>
+          </br>
+          <p>Student Forms and Essays.</p>
+
+
+          <br></br>
         </div>
         <div>
         <button onClick={signOut}>Log Out</button>
