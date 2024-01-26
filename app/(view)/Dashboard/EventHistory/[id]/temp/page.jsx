@@ -8,8 +8,7 @@ import ConfirmDelete from "@/app/components/ConfirmDeletion";
 import TextContent from "@/app/components/Text";
 import { redirect, useRouter } from "next/navigation";
 
-export default function Page({params}) {
-
+export default function Page({ params }) {
   const router = useRouter();
 
   const [active, setActive] = useState({ Active: false, id: -1 });
@@ -18,24 +17,22 @@ export default function Page({params}) {
   const [currentPeople, setCurrentPeople] = useState("");
   const [availableSpace, setAvailableSpace] = useState("");
 
-
-
   useEffect(() => {
-    const fetchData = async () =>{
-        const data  = await GET(params);
-        setMaxPeople(data.amount);
+    const fetchData = async () => {
+      const data = await GET(params);
+      setMaxPeople(data.amount);
 
-          if(data.attendees.length === 0){
-            setCurrentPeople(data.attendees.length)
-          }else{
-            setCurrentPeople(0);
-          }
-
-          setAvailableSpace(maxPeople - data.attendees.length)
-
-        setEventInfo(data);
+      if (data.attendees.length === 0) {
+        setCurrentPeople(data.attendees.length);
+      } else {
+        setCurrentPeople(0);
       }
-      fetchData();
+
+      setAvailableSpace(maxPeople - data.attendees.length);
+
+      setEventInfo(data);
+    };
+    fetchData();
   }, []);
 
   function Pop(id) {
@@ -54,7 +51,6 @@ export default function Page({params}) {
     }
   }
 
-
   return (
     <>
       {active.Active && (
@@ -64,43 +60,72 @@ export default function Page({params}) {
           reverse={ReverserPop}
         />
       )}
-      <div key={eventInfo._id} className="container " style={{ marginTop: "5%", marginBottom: "10%", width: "80%", height: "40%"}}>
-
-          <div key={eventInfo._id} className="card" style={{boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)"}}>
-            <div className="card-header">
-                <div style={{textAlign: "center"}}>
-                <span style={{marginRight: "20px"}}>
-                Max: {maxPeople}
-              </span>
-              <span style={{marginRight: "20px"}}>
+      <div
+        key={eventInfo._id}
+        className="container "
+        style={{
+          marginTop: "5%",
+          marginBottom: "10%",
+          width: "80%",
+          height: "40%",
+        }}
+      >
+        <div
+          key={eventInfo._id}
+          className="card"
+          style={{ boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)" }}
+        >
+          <div className="card-header">
+            <div style={{ textAlign: "center" }}>
+              <span style={{ marginRight: "20px" }}>Max: {maxPeople}</span>
+              <span style={{ marginRight: "20px" }}>
                 Current : {currentPeople}
               </span>
-              <span style={{marginRight: "20px"}}>
-              Available: {availableSpace}
+              <span style={{ marginRight: "20px" }}>
+                Available: {availableSpace}
               </span>
-                </div>
-
-
             </div>
-            <div className="d-flex">
-              {/* <img
-                  src="https://picsum.photos/200"
-                  className="card-img-top"
-                  alt="image"
-                  width={"100%"}
-                /> */}
-                  <Image
-                  alt="Picture of the Event"
-                  src={eventInfo.img}
-                  width={50}
-                  height={300}
-                  style={{
-                    width: '50%',
-                    height:'100%',
-                  }}
-                />
-              <div className="card-body" style={{width: "100%"}}>
-                {/* <div>
+          </div>
+          <div className="d-flex">
+
+            {/* {eventInfo.img && (
+              <Image
+                alt="Picture of the Event"
+                src={eventInfo.img}
+                width={50}
+                height={300}
+                style={{
+                  width: "50%",
+                  height: "100%",
+                }}
+              />
+            )} */}
+            
+
+            {eventInfo.img && eventInfo.img.startsWith("data:image") ? (
+              <img
+                alt="Picture of the Event"
+                src={eventInfo.img}
+                width={100}
+                height={300}
+                style={{
+                  width: "100%",
+                }}
+              />
+            ) : (
+              <Image
+                alt="Picture of the Event"
+                src={eventInfo.img}
+                width={100}
+                height={300}
+                style={{
+                  width: "100%",
+                }}
+              />
+            )}
+
+            <div className="card-body" style={{ width: "100%" }}>
+              {/* <div>
                   <h3> {eventInfo.startTime} </h3>
                   <hr />
                   <p className="card-text">
@@ -110,57 +135,56 @@ export default function Page({params}) {
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   </p>
                 </div> */}
-                <div  >
-                  <h3>{eventInfo.location}, {eventInfo.startTime}</h3>
-                  <hr />
-                  <div className="card-text">
+              <div>
+                <h3>
+                  {eventInfo.location}, {eventInfo.startTime}
+                </h3>
+                <hr />
+                <div className="card-text">
                   {/* <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(eventInfo.details) }} /> */}
-                  <div dangerouslySetInnerHTML={{ __html: eventInfo.details }} />
-
-                  </div>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: eventInfo.details }}
+                  />
                 </div>
               </div>
             </div>
-            <div className="card-footer">
-              <div className="d-flex justify-content-evenly">
+          </div>
+          <div className="card-footer">
+            <div className="d-flex justify-content-evenly">
               <button
-                  onClick={(e) => {
-                    router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
-                  }}
-                  className="btn btn-primary px-5"
-                >
-                  Itinerary
-                </button>
-                <button
-                  onClick={(e) => {
-                    router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
-                  }}
-                  className="btn btn-info px-5"
-                >
-                  Wait List
-                </button>
-                <button
-                  onClick={(e) => {
-                    router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
-                  }}
-                  className="btn btn-success px-5"
-                >
-                  Update
-                </button>
-                <button
-                  onClick={(e) => Pop(eventInfo._id)}
-                  className="btn btn-danger px-5"
-                >
-                  Delete
-                </button>
-              </div>
+                onClick={(e) => {
+                  router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
+                }}
+                className="btn btn-primary px-5"
+              >
+                Itinerary
+              </button>
+              <button
+                onClick={(e) => {
+                  router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
+                }}
+                className="btn btn-info px-5"
+              >
+                Wait List
+              </button>
+              <button
+                onClick={(e) => {
+                  router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
+                }}
+                className="btn btn-success px-5"
+              >
+                Update
+              </button>
+              <button
+                onClick={(e) => Pop(eventInfo._id)}
+                className="btn btn-danger px-5"
+              >
+                Delete
+              </button>
             </div>
           </div>
-
-            
-
+        </div>
       </div>
     </>
   );
 }
-

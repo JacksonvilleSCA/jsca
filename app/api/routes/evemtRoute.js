@@ -10,7 +10,7 @@ export async function GET() {
   let data = await Event.find({}).lean().exec();
 
   data.forEach((item, index) => {
-    console.log(typeof item.img);
+    // console.log(typeof item.img);
     const base64Image = item.img.data.buffer.toString('base64');
     data[index].img = `data:${item.img.contentType};base64,${base64Image}`;
     item._id = item._id.toString();

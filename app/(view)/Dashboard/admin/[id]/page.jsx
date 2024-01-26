@@ -1,8 +1,11 @@
 import React from "react";
+import styles from "./style.module.css"
 
-const YourPageName = () => {
+const page = ({parm}) => {
+
+
   return (
-    <div className={styles.container}>
+    <div className="container">
       <div className={`card ${styles.one}`}>
         <h4>Name: Jean-Kerby Auguste</h4>
         <p>
@@ -37,5 +40,7 @@ const YourPageName = () => {
     </div>
   );
 };
+
+
 
 export default page;

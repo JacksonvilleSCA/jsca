@@ -47,22 +47,42 @@ export default function Page() {
                 }
 
 
+                  {/* {event.img &&  
+                                  <Image
+                                  alt="Picture of the Event"
+                                  src={event.img}
+                                  width={100}
+                                  height={300}
+                                  style={{
+                                    width: '100%',
+                                  }}
+                                />
+                  } */}
 
-                <Image
-                  alt="Picture of the Event"
-                  src={event.img}
-                  width={100}
-                  height={300}
-                  style={{
-                    width: '100%',
-                  }}
-                />
+{event.img.startsWith('data:image') ? (
+  <img
+    alt="Picture of the Event"
+    src={event.img}
+    width={100}
+    height={300}
+    style={{
+      width: '100%',
+    }}
+  />
+) : (
+  <Image
+    alt="Picture of the Event"
+    src={event.img}
+    width={100}
+    height={300}
+    style={{
+      width: '100%',
+    }}
+  />
+)}
 
-                {/* <img
-                  src="https://picsum.photos/200"
-                  className="card-img-top"
-                  alt="image"
-                /> */}
+
+
 
 
                 <div className="card-body" style={{position: "relative"}}>
