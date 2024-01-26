@@ -9,9 +9,12 @@ import TextContent from "@/app/components/Text";
 import { redirect, useRouter } from "next/navigation";
 
 export default function Page({ params }) {
+
   const router = useRouter();
 
   const [active, setActive] = useState({ Active: false, id: -1 });
+
+
   const [eventInfo, setEventInfo] = useState("");
   const [maxPeople, setMaxPeople] = useState("");
   const [currentPeople, setCurrentPeople] = useState("");
@@ -35,6 +38,8 @@ export default function Page({ params }) {
     fetchData();
   }, []);
 
+
+
   function Pop(id) {
     setActive({ Active: true, id: id });
   }
@@ -51,8 +56,10 @@ export default function Page({ params }) {
     }
   }
 
+
   return (
     <>
+
       {active.Active && (
         <ConfirmDelete
           value={active.Active}
@@ -88,21 +95,9 @@ export default function Page({ params }) {
           </div>
           <div className="d-flex">
 
-            {/* {eventInfo.img && (
-              <Image
-                alt="Picture of the Event"
-                src={eventInfo.img}
-                width={50}
-                height={300}
-                style={{
-                  width: "50%",
-                  height: "100%",
-                }}
-              />
-            )} */}
             
 
-            {eventInfo.img && eventInfo.img.startsWith("data:image") ? (
+            {/* {eventInfo.img && eventInfo.img.startsWith("data:image") ? (
               <img
                 alt="Picture of the Event"
                 src={eventInfo.img}
@@ -122,7 +117,21 @@ export default function Page({ params }) {
                   width: "100%",
                 }}
               />
-            )}
+            )} */}
+
+
+            <div>
+            <img
+                alt="Picture of the Event"
+                src={eventInfo.img}
+                style={{
+                  width: "100%",
+                  height: "100%"
+                }}
+              />
+            </div>
+
+
 
             <div className="card-body" style={{ width: "100%" }}>
               {/* <div>
@@ -137,7 +146,7 @@ export default function Page({ params }) {
                 </div> */}
               <div>
                 <h3>
-                  {eventInfo.location}, {eventInfo.startTime}
+                  {/* {eventInfo.location}, {eventInfo.startTime} */}
                 </h3>
                 <hr />
                 <div className="card-text">
@@ -161,12 +170,13 @@ export default function Page({ params }) {
               </button>
               <button
                 onClick={(e) => {
-                  router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
+                  router.push(`/Dashboard/admin`);
                 }}
                 className="btn btn-info px-5"
               >
                 Wait List
               </button>
+
               <button
                 onClick={(e) => {
                   router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
@@ -188,3 +198,5 @@ export default function Page({ params }) {
     </>
   );
 }
+
+

@@ -84,17 +84,24 @@ export default function Page() {
                     <hr />
                     <div className="card-text">
                       <div
-                        dangerouslySetInnerHTML={{
-                          __html: DOMPurify.sanitize(event.details),
+                        className="card-text"
+                        style={{
+                          height: "280px",
+                          overflow: "hidden",
+                          overflowY: "scroll",
                         }}
-                      />
+                      >
+                        <div
+                          dangerouslySetInnerHTML={{ __html: event.details }}
+                        />
+                      </div>
                     </div>
                     <button
                       onClick={(e) => {
                         router.push(`/Dashboard/People/${event._id}`);
                       }}
                       className="btn btn-primary px-5"
-                      style={{ width: "100%" }}
+                      style={{ width: "100%", marginTop: "20px" }}
                     >
                       More Info
                     </button>

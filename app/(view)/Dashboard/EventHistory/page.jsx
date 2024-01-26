@@ -16,14 +16,12 @@ export default function Page() {
     return JSON.stringify(array1) === JSON.stringify(array2);
   };
 
-
   useEffect(() => {
     const fetchData = async () => {
       const data = await GetEvent();
 
-      // console.log(data)
+  
 
-      // console.log("hello")
       if (!AreArraysEqual(eventInformation, data)) {
         setEventInformation(data);
       }
@@ -39,69 +37,65 @@ export default function Page() {
             <div key={event._id} className="col">
               <div
                 className="card mt-5"
-                style={{ width: "80%", boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)", position: "relative"}}
+                style={{
+                  width: "80%",
+                  boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
+                  position: "relative",
+                }}
               >
-                {
-                  event.active === false &&
-                <div style={{backgroundColor: "gray", width: "100%", zIndex: "1", height: "100%", opacity: '25%', position: "absolute"}}> </div>
-                }
+                {event.active === false && (
+                  <div
+                    style={{
+                      backgroundColor: "gray",
+                      width: "100%",
+                      zIndex: "1",
+                      height: "100%",
+                      opacity: "25%",
+                      position: "absolute",
+                    }}
+                  >
+                    {" "}
+                  </div>
+                )}
 
+                {event.img.startsWith("data:image") ? (
+                  <img
+                    alt="Picture of the Event"
+                    src={event.img}
+                    width={100}
+                    height={300}
+                    style={{
+                      width: "100%",
+                    }}
+                  />
+                ) : (
+                  <Image
+                    alt="Picture of the Event"
+                    src={event.img}
+                    width={100}
+                    height={300}
+                    style={{
+                      width: "100%",
+                    }}
+                  />
+                )}
 
-                  {/* {event.img &&  
-                                  <Image
-                                  alt="Picture of the Event"
-                                  src={event.img}
-                                  width={100}
-                                  height={300}
-                                  style={{
-                                    width: '100%',
-                                  }}
-                                />
-                  } */}
-
-{event.img.startsWith('data:image') ? (
-  <img
-    alt="Picture of the Event"
-    src={event.img}
-    width={100}
-    height={300}
-    style={{
-      width: '100%',
-    }}
-  />
-) : (
-  <Image
-    alt="Picture of the Event"
-    src={event.img}
-    width={100}
-    height={300}
-    style={{
-      width: '100%',
-    }}
-  />
-)}
-
-
-
-
-
-                <div className="card-body" style={{position: "relative"}}>
+                <div className="card-body" style={{ position: "relative" }}>
                   <div className="card-title" style={{ textAlign: "center" }}>
                     {event.location}
                   </div>
                   <hr />
-                  <div className="card-text">
-                  {/* <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(event.details) }} />
-                   */}
-                  <div dangerouslySetInnerHTML={{ __html: event.details }} />
 
-                  </div >
+                  <div className="card-text" style={{height:"280px", overflow: "hidden", overflowY: "scroll"}}>
+                    <div dangerouslySetInnerHTML={{ __html: event.details  }} />
+                  </div>
+
                   <button
                     onClick={(e) => {
                       router.push(`/Dashboard/EventHistory/${event._id}/temp`);
                     }}
                     className="btn btn-primary px-5"
-                    style={{ width: "100%",position: "relative", zIndex: "2"}}
+                    style={{ width: "100%", position: "relative", zIndex: "2", marginTop: "20px" }}
                   >
                     Edit
                   </button>
@@ -114,3 +108,6 @@ export default function Page() {
     </>
   );
 }
+
+
+

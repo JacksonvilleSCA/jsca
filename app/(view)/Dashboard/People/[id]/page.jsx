@@ -30,43 +30,52 @@ export default function Page({ params }) {
           </div>
 
           <div className="d-flex">
-            
-            {/* {eventInfo.img && (
+  
+
+            {/* <div>
+            {eventInfo.img.startsWith("data:image") ? (
+              <img
+                alt="Picture of the Event"
+                src={eventInfo.img}
+                width={100}
+                height={422}
+                style={{
+                  width: "100%",
+                  height: "100%"
+                }}
+              />
+            ) : (
               <Image
                 alt="Picture of the Event"
                 src={eventInfo.img}
-                width={50}
+                width={100}
                 height={300}
                 style={{
-                  width: "50%",
-                  height: "100%",
+                  width: "100%",
+                  height: "100%"
+
                 }}
               />
-            )} */}
+            )}
+            </div> */}
+
+              <div>
+                {eventInfo.img && 
+                            <Image
+                            alt="Picture of the Event"
+                            src={eventInfo.img}
+                            width={100}
+                            height={300}
+                            style={{
+                              width: "100%",
+                              height: "100%"
+                            }}
+                          />}
+
+              </div>
 
 
 
-{eventInfo.img && eventInfo.img.startsWith("data:image") ? (
-  <img
-    alt="Picture of the Event"
-    src={eventInfo.img}
-    width={100}
-    height={422}
-    style={{
-      width: "100%",
-    }}
-  />
-) : (
-  <Image
-    alt="Picture of the Event"
-    src={eventInfo.img}
-    width={100}
-    height={300}
-    style={{
-      width: "100%",
-    }}
-  />
-)}
 
             <div className="card-body" style={{ width: "100%" }}>
               <div>
