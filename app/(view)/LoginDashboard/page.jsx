@@ -8,6 +8,7 @@ import Link from "next/link"
 import {accInfo} from "../../api/routes/accountInfo"
 
 const Dashboard = () => {
+  const router = useRouter();
 
 
   useEffect(() => {
