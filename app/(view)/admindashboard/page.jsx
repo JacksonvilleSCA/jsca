@@ -49,40 +49,33 @@ const AdminDash = () => {
         <div>
         <button onClick={manageAccount}>Manage Account</button>
         </div>
+        <br></br>
         <div className={styles.container}>
+          <div className={styles.square}>
+            <p>Events</p>
+            <p>Create Events</p>
 
+
+          </div>
           <br></br>
-          <div>
-          <p>Events</p>
-          <p>Create Events</p>
-             
+          <div className={styles.square}>
+            <p>Itinerary</p>
+            <p>Create Itinerary</p>
+            <p>Packing Lists</p>
+            <p>Create Packing Lists</p>
           </div>
-        
-
-
-          <br>
-          </br>
-
-          <div>
-          <p>Itenerary</p>
-          <p>Packing List</p>
-
+          <br></br>
+          <div className={styles.square}>
+            <p>Student Forms and Essays</p>
           </div>
 
-          <p>Itenerary</p>
-          <p>Create Itenerary</p>
-          <p>Packing Lists</p>
-          <p>Create Packing Lists</p>
-
-           
-          <br>
-          </br>
-          <p>Student Forms and Essays.</p>
 
 
           <br></br>
         </div>
+        <br></br>
         <div>
+
         <button onClick={signOut}>Log Out</button>
         </div>
       </div>
