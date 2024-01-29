@@ -103,7 +103,7 @@ export default function Page({ params }) {
                       className="card-title"
                       style={{ textAlign: "center", marginBottom: "60px" }}
                     >
-                      Update Image
+                      Update Image 
                     </h5>
                     <input
                       type="file"
@@ -111,8 +111,8 @@ export default function Page({ params }) {
                       name="avatar"
                       accept="image/png, image/jpeg"
                       // onChange={(e) => setImage(e.target.files?.[0])}
-                      required
                     />
+                    <input type="hidden" name="avatarTwo" value={eventInfo.img} />
                   </div>
                 </div>
               </div>
