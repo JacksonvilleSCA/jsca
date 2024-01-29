@@ -8,51 +8,22 @@ import Link from "next/link"
 import {accInfo} from "../../api/routes/accountInfo"
 
 const Dashboard = () => {
-
-
-  //const [name, setName] = useState('');
-
   const router = useRouter();
 
 
-  const searchParams = useSearchParams();
-  var search = searchParams.get('myID')
-
-
-  //if(search == null){
-    //router.push('/login');
-    
-  //}
-
-
-  //useEffect(() => {
-    //loadPage();
- //}, []);
-
-
-  //const loadPage = async () =>{
-
-    //try{
-     // var acc = await accInfo(search);
-      //var firstName = acc.firstname;
-
-      //setName(firstName);
-
-
-    //} catch (error){
-    //console.log(error);
-   // }  
-
-
-  
-  //} 
+  useEffect(() => {
+    const search = sessionStorage.getItem('ID');
+    if (search == null) {
+      router.push('/login');
+    }
+  }, []);
 
 
 
 
   function manageAccount(){
 
-    router.push(`/accountmanage?myID=${search}`);
+    router.push('/accountmanage');
 
     
   }
@@ -61,11 +32,9 @@ const Dashboard = () => {
 
 
   function signOut(){
-    search = null;
-    if(search == null){
-      router.push('/login');
-      
-    }
+    sessionStorage.removeItem('ID');
+    router.push('/login');
+    
   }
 
   

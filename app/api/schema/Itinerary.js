@@ -1,10 +1,22 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+const {Schema} = mongoose;
 
 
-const ItinerarySchema = new mongoose.Schema(
+
+const ItinerarySchema = new Schema(
     {
-        day: string,
-        time: string,
-        activity: string
-    }
-)
+        title: {
+            type: String
+        },
+       schedule: [
+        {
+            day: {type: String},
+            time: {type: String},
+            activity: {type: String},
+        }
+       ]
+});
+
+const Itinerary =  mongoose.models.Itinerary || mongoose.model('Itinerary', ItinerarySchema) 
+
+export default Itinerary;

@@ -5,8 +5,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
 import styles from './page.module.css'
-import {POST2} from '../../api/routes/logIn'
-
+import { POSTA } from '@/app/api/routes/adminLogin';
 
 
 
@@ -41,7 +40,7 @@ const Login = () => {
     }
     
     try{
-      const data1 = await POST2(formData);
+      const data1 = await POSTA(formData);
       console.log("Response" + data1);
       Value1 = data1;
     }
@@ -51,14 +50,16 @@ const Login = () => {
     }
 
     if(Value1 == null){
-      setError("User does not exist. Check input values.");
+      setError("Admin does not exist. Check input values.");
 
     }
+    else if(Value1 == "null1"){
+      setError("User log in detected.Please, access different Log In Page.")
+    }
     else{
-      const myID = Value1.ID
-      sessionStorage.setItem('ID',myID)
-      router.push('/LoginDashboard');
-      
+      const myID = Value1.AdminID;
+      sessionStorage.setItem('AID', myID)
+      router.push('/admindashboard');
     }
 
 
@@ -70,7 +71,8 @@ const Login = () => {
     <div> 
   
     <br></br>
-    <h3 className={styles.container}>Login</h3>
+    <h3 className={styles.container}>Admin Login</h3>
+
 
 
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -99,8 +101,6 @@ const Login = () => {
 
       <br>
       </br>
-      <br></br>
-      <p><Link href='/adminLogin'>Staff Login</Link></p>
       {error && <p style={{color: 'red'}}>{error}</p>}
       
 

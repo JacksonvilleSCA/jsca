@@ -1,70 +1,69 @@
 "use client";
-import styles from './page.module.css';
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import React from "react";
+//import Button from "../../components/Button/Button";
+import Link from "next/link";
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
-//import { accInfo } from "../api/routes/accountInfo";
-//import { accUpdate } from "../api/routes/accountUpdate";
-import {accInfo} from "../../api/routes/accountInfo";
-import { accUpdate} from "../../api/routes/accountUpdate"
+import { useRouter } from "next/navigation";
+import { useEffect } from "react"
+import { STUDP } from "@/app/api/routes/studentCreation";
+import styles from './page.module.css'
 
-
-
-export default function Accountmanage() {
-  const router = useRouter();
-  const [USER, setUSER] = useState('');
-  const [PASSWORD, setPASSWORD] = useState('');
-  const [FIRSTN, setFIRSTN] = useState('');
-  const [LASTN, setLASTN] = useState('');
-  const [EMAIL, setEMAIL] = useState('');
-  const [PHONENUMBER, setPHONENUMBER] = useState('');
+const Createaccount = () => {
+  const Router = useRouter();
+  const [userEmail, setUserEmail] = useState('')
+  const [userN, setUserN] = useState('')
+  const [userP, setUserP] = useState('')
+  const [userFirst, setUserFirst] = useState('')
+  const [userLast, setUserLast] = useState('')
+  const [userPhone, setUserPhone] = useState('')
   const [userCountry, setUserCountry] = useState('')
   const [userState, setUserState] = useState('');
   const [userCity, setUserCity] = useState('')
-  const [accData, setAccData] = useState('');
-  var firstN;
-  var lastN;
-  var userN;
-  var passW;
-  var email;
-  var phone;
-  var countRY;
-  var staTE;
-  var ciTY;
-  
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const search = sessionStorage.getItem('AID');
+    if (search == null) {
+      Router.push('/login');
+    }
+  }, []);
+
+  function dashB(){
+
+    Router.back('/adminManage') 
+  }
 
 
-  const searchParams = useSearchParams();
-  //var search = searchParams.get('myID')
-  var search = sessionStorage.getItem('ID');
-
-
-  if(search == null){
-    router.push('/login');
+  const handleEmail = (e) =>{
+    setUserEmail(e.target.value);
+    console.log(userEmail);
     
   }
 
-  
-  useEffect(() => {
-    loadPage();
-  }, []);
+  const handleUserName = (e) =>{
+    setUserN(e.target.value);
+    console.log(userN);
+  }
 
+  const handleUserPass = (e) =>{
+    setUserP(e.target.value);
+    console.log(userP);
+  }
 
-  const loadPage = async () =>{
+  const handleFirst = (e) =>{
+    setUserFirst(e.target.value);
+    console.log(userFirst);
+  }
 
-    try{
-      const acc = await accInfo(search);
-      setAccData(acc);
+  const handleLast = (e) =>{
+    setUserLast(e.target.value);
+    console.log(userLast);
+  }
 
-
-    } catch (error){
-    console.log(error);
-    }  
-
-
-  
-  } 
+  const handlePhone = (e) =>{
+    setUserPhone(e.target.value);
+    console.log(userPhone);
+  }
 
   const handleCountry = (e) =>{
     setUserCountry(e.target.value);
@@ -79,134 +78,150 @@ export default function Accountmanage() {
     console.log(userCity);
   }
 
-  const handleFirstName = (e) =>{
-    setFIRSTN(e.target.value);
-    
-  }
 
-  const handleLastName = (e) =>{
-    setLASTN(e.target.value);
-    
-  }
-
-  const handleEmail = (e) =>{
-    setEMAIL(e.target.value);
-    
-  }
-
-  const handlePhone = (e) =>{
-    setPHONENUMBER(e.target.value);
-
-  }
-
-  const handleUser = (e) =>{
-    setUSER(e.target.value);
-  }
-
-  const handlePassword = (e) =>{
-    setPASSWORD(e.target.value);
-  }
-
-
-  const handleSubmit = async (e) => {
-    console.log("xxxxx")
-    console.log(FIRSTN);
-    console.log(LASTN);
-    console.log(EMAIL);
-    console.log(PHONENUMBER);
-    console.log(USER);
-    console.log(PASSWORD);
-    
-
+  const handleSubmit = async (e) =>{
     e.preventDefault();
-    const formData ={
-      firstname: FIRSTN,
-      lastname: LASTN,
-      email: EMAIL,
-      phone: PHONENUMBER,
-      username: USER,
-      password: PASSWORD,
+
+
+    var Check = 0;
+    if(!userFirst || !userLast ) {
+      Check = 1;
+    }
+
+
+    const Object = {
+      email: userEmail,
+      username: userN,
+      password: userP,
+      firstname: userFirst,
+      lastname: userLast,
+      phonenumber: userPhone,
       country: userCountry,
       state: userState,
-      city: userCity,
-
+      city: userCity
     }
 
-    console.log(formData);
+    console.log(Object);
+    var Value;
 
-    try{
-      const result = await accUpdate(search,formData);
-      if(result != "wilco"){
-        alert("failed to update");
+    if(Check == 0){
+      console.log("Create Account Processing.")
+      try{
+        const data1 = await STUDP(Object)
+        console.log("Response" + data1)
+        Value = data1;
       }
-      else{
-        alert("Account Update succesful");
-        location.reload(true);
+      catch(e){
+        console.log(e);
       }
     }
-    catch(e){
-      console.log(e);
+
+    if(Check == 1){
+      console.log("ERROR DETECTED");
+      setError("-Form must be complete. Check input value.-");
     }
+
+    if(Value != "true"){
+      setError("-Form must be complete. Check input value.-");
+    }
+    else{
+      alert("Account Created!");
+      Router.back('/adminManage') 
+
+    }
+
     
-    //const result = accUpdate(search,formData)
-    //.then((response) => response.json())
-   // .then((data) => console.log(data));
-
-   // if(result != "wilco"){
-     // console.log("Account Update Succesful")
-     // alert("Account Update succesful");
-      //location.reload(true);
-   // }
-
-
+    
+    
   }
+ 
 
-  function dashB(){
-
-    router.back('/LoginDashboard') 
-  }
-
-
-  firstN = accData.firstname;
-  lastN = accData.lastname;
-  userN = accData.username;
-  passW = accData.password;
-  email = accData.email;
-  phone = accData.phonenumber;
-  countRY = accData.country;
-  staTE = accData.state;
-  ciTY = accData.city;
-
-    return(
-      
+    return (
       <div>
+        <div className={styles.container}>
+        <h1 className={styles.title}>Student Account Creation</h1>
+        <button onClick={dashB}> Return </button>
 
-      <h1>Manage Account</h1>
-      <button onClick={dashB}> Return </button>
+          <br></br>
 
-      <br></br>
-
-      <div className={styles.container}>
-        <div className={styles.textbox}>
+          <br>
+          </br>
           <form onSubmit={handleSubmit}>
-            <h2>User ID: {search}</h2>
-            <p>First Name:</p>
-            <p></p>
-            <input className={styles.textbox} type="text" id="firstName" 
-            value ={FIRSTN} onChange={handleFirstName} name ="firstname" placeholder={firstN}/>
-            <p>Last Name: </p>
-            <input className={styles.textbox} type="text" id="lastName" 
-            value={LASTN} onChange={handleLastName} name="lastname" placeholder={lastN} />
-            <p>Email: </p>
-            <input className={styles.textbox} type="text" id="email" 
-            value={EMAIL} onChange={handleEmail} name="email" placeholder={email} />
-            <p>Phone Number: </p>
-            <input className={styles.textbox} type="text" id="phonenumber"
-            value={PHONENUMBER} onChange={handlePhone} name="phonenumber" placeholder={phone}/>
+            {error && <p className={styles.textbox2}style={{color: 'red'}}>{error}</p>}
+            <div className={styles.textbox2}>
+            <p>* represents required information.</p>
+            </div>
+           
 
-            <p>Country:</p>
+
+
+            <div className={styles.textbox2}>
+              <label htmlFor="email">*Enter Email: </label>
+              <input 
+              type="email" 
+              id="email" 
+              name="email"
+              onChange={handleEmail}
+              placeholder="email"/>
+            </div>
+
+
+            <div className={styles.textbox2}>
+              <label htmlFor="username">*Enter Username: </label>
+              <input 
+              type="text" 
+              id="username" 
+              onChange={handleUserName}
+              name="username"
+              placeholder="username"/>
+            </div>
+
+
+            <div className={styles.textbox2}>
+              <label htmlFor="password">*Enter Password: </label>
+              <input 
+              type="password" 
+              id="password" 
+              onChange={handleUserPass}
+              name="password"
+
+              placeholder="password"/>
+            </div>
+
+            <div className={styles.textbox2}>
+              <label htmlFor="firstname">Enter First Name: </label>
+              <input 
+              type="firstname" 
+              id="firstname" 
+              onChange={handleFirst}
+              name="firstname"
+              placeholder="first name"/>
+            </div>
+
+            <div className={styles.textbox2}>
+              <label htmlFor="lastname">Enter Last Name: </label>
+              <input 
+              type="lastname" 
+              id="lastname" 
+              onChange={handleLast}
+              name="lastname"
+              placeholder="last name"/>
+            </div>
+
+            <div className={styles.textbox2}>
+              <label htmlFor="phonenumber">Enter Phone Number: </label>
+              <input 
+              type="phonenumber" 
+              id="phonenumber" 
+              onChange={handlePhone}
+              name="phonenumber"
+              placeholder="phonenumber"/>
+            </div>
+
+            <div className={styles.textbox2}>
+            <label htmlFor="country">Select Country:</label>
             <select name="country" id="country" onChange={handleCountry}>
-            <option value="">{countRY}</option>
+            <option value="">Select a country</option>
             <option value="Afghanistan">Afghanistan</option>
             <option value="Albania">Albania</option>
             <option value="Algeria">Algeria</option>
@@ -400,45 +415,54 @@ export default function Accountmanage() {
             <option value="Zambia">Zambia</option>
             <option value="Zimbabwe">Zimbabwe</option>
             </select>
+            </div>
 
-            <p>City:</p>
-            <input className={styles.textbox} type="text" id="citY"
-            value={userCity} onChange={handleCity} name="citY" placeholder={ciTY}/>
+            <div className={styles.textbox2}>
+              <label htmlFor="userstate">Enter State (Optional): </label>
+              <input 
+              type="text" 
+              id="userstate" 
+              onChange={handleState}
+              name="userstate"
+              placeholder="State"/>
+            </div>
 
-            <p>State:</p>
-            <input className={styles.textbox} type="text" id="passWord"
-            value={userState} onChange={handleState} name="passWord" placeholder={staTE}/>
+            <div className={styles.textbox2}>
+              <label htmlFor="usercity">Enter City: </label>
+              <input 
+              type="text" 
+              id="usercity" 
+              onChange={handleCity}
+              name="usercity"
+              placeholder="City"/>
+            </div>
 
-            <p>User Name: </p>
-            <input className={styles.textbox} type="text" id="userName"
-            value={USER} onChange={handleUser} name="userName" placeholder={userN}/>
+
+
+
+            <div className="styles.buttons">
+              <button className={styles.rightbutton} type="submit">Create Account</button>
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+              <button className={styles.leftbutton} type="reset">Reset</button>
+
+
             
-            <p>Password:</p>
-            <input className={styles.textbox} type="text" id="passWord"
-            value={PASSWORD} onChange={handlePassword} name="passWord" placeholder={passW}/>
-            <br></br>
-            <br></br>
-            <br></br>
+            </div>
 
-            <button type="submit" className={styles.textbox3}>Update</button>
+          
 
-            </form>
+            
 
+
+          </form>
         </div>
-        <div>
-          <br></br>
-          <br></br>
-        </div>
-
-
       </div>
-      
 
       
-
-
-  
-      </div>
     )
   }
+
+export default Createaccount
   

@@ -14,6 +14,7 @@ console.log(ID);
 console.log(formData);
 const user = await Create.findById(ID);
 const userID = user._id;
+
 if(formData.email == ''){
     console.log("EMPTY FIELD");
     formData.email = user.email;
@@ -46,6 +47,22 @@ if(formData.phone == ''){
     console.log("EMPTY UPDATE: " + formData.phone);
 }
 
+if(formData.country == ''){
+    console.log("EMPTY FIELD");
+    formData.country = user.country;
+    console.log("EMPTY UPDATE: " + formData.country);
+}
+if(formData.state == ''){
+    console.log("EMPTY FIELD");
+    formData.state = user.state;
+    console.log("EMPTY UPDATE: " + formData.state);
+}
+if(formData.city == ''){
+    console.log("EMPTY FIELD");
+    formData.city = user.city;
+    console.log("EMPTY UPDATE: " + formData.city);
+}
+
 
 console.log("00000")
 console.log(user);
@@ -55,6 +72,9 @@ var email = formData.email;
 var firstname = formData.firstname;
 var lastname = formData.lastname;
 var phonenumber = formData.phone;
+var country = formData.country;
+var state = formData.state;
+var city = formData.city;
 
 
 const filter = {_id: userID};
@@ -64,7 +84,10 @@ const updateInfo = {
     password: password,
     firstname: firstname,
     lastname: lastname,
-    phonenumber: phonenumber
+    phonenumber: phonenumber,
+    country: country,
+    state: state,
+    city: city,
 
 }
 console.log("INFO TO BE UPDATED");

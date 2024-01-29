@@ -4,14 +4,13 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
-//import { accInfo } from "../api/routes/accountInfo";
-//import { accUpdate } from "../api/routes/accountUpdate";
-import {accInfo} from "../../api/routes/accountInfo";
-import { accUpdate} from "../../api/routes/accountUpdate"
+import Link from 'next/link';
+import { AdminInfo } from '@/app/api/routes/adminInfo';
+import { AdminUpdate } from '@/app/api/routes/adminUpdate';
 
 
 
-export default function Accountmanage() {
+export default function AdminAccountManage() {
   const router = useRouter();
   const [USER, setUSER] = useState('');
   const [PASSWORD, setPASSWORD] = useState('');
@@ -32,18 +31,18 @@ export default function Accountmanage() {
   var countRY;
   var staTE;
   var ciTY;
+
   
 
 
   const searchParams = useSearchParams();
-  //var search = searchParams.get('myID')
-  var search = sessionStorage.getItem('ID');
-
+  var search = sessionStorage.getItem('AID');
 
   if(search == null){
     router.push('/login');
     
   }
+  const showCreate = search && !search.includes('j');
 
   
   useEffect(() => {
@@ -54,13 +53,13 @@ export default function Accountmanage() {
   const loadPage = async () =>{
 
     try{
-      const acc = await accInfo(search);
+      const acc = await AdminInfo(search);
       setAccData(acc);
 
 
-    } catch (error){
-    console.log(error);
-    }  
+   } catch (error){
+   console.log(error);
+   }  
 
 
   
@@ -107,9 +106,19 @@ export default function Accountmanage() {
     setPASSWORD(e.target.value);
   }
 
+  function manageUsers(){
+
+    router.push('/adminViewUsers')
+ 
+  }
+
+  function dashB(){
+
+    router.push('/admindashboard') 
+  }
+
 
   const handleSubmit = async (e) => {
-    console.log("xxxxx")
     console.log(FIRSTN);
     console.log(LASTN);
     console.log(EMAIL);
@@ -132,10 +141,8 @@ export default function Accountmanage() {
 
     }
 
-    console.log(formData);
-
     try{
-      const result = await accUpdate(search,formData);
+      const result = await AdminUpdate(search,formData);
       if(result != "wilco"){
         alert("failed to update");
       }
@@ -147,26 +154,16 @@ export default function Accountmanage() {
     catch(e){
       console.log(e);
     }
-    
-    //const result = accUpdate(search,formData)
-    //.then((response) => response.json())
-   // .then((data) => console.log(data));
 
-   // if(result != "wilco"){
-     // console.log("Account Update Succesful")
-     // alert("Account Update succesful");
-      //location.reload(true);
-   // }
 
 
   }
 
-  function dashB(){
 
-    router.back('/LoginDashboard') 
-  }
+  console.log("Rofl copter");
+  console.log(accData);
 
-
+  
   firstN = accData.firstname;
   lastN = accData.lastname;
   userN = accData.username;
@@ -177,19 +174,33 @@ export default function Accountmanage() {
   staTE = accData.state;
   ciTY = accData.city;
 
+
+
+
+
+
+  
+
     return(
       
       <div>
 
-      <h1>Manage Account</h1>
+      <h1>Manage Admin Account</h1>
       <button onClick={dashB}> Return </button>
+
 
       <br></br>
 
       <div className={styles.container}>
         <div className={styles.textbox}>
           <form onSubmit={handleSubmit}>
-            <h2>User ID: {search}</h2>
+            <h2>(WIP) Admin ID: {search}</h2>
+            <p>Add  check to ensure ! duplicate accounts</p>
+            <p> Fix how Users are displayed</p>
+            <p>Fix Dashboard</p>
+            <p>Fix management</p>
+            <p>Return when needed for more info: </p>
+
             <p>First Name:</p>
             <p></p>
             <input className={styles.textbox} type="text" id="firstName" 
@@ -416,16 +427,29 @@ export default function Accountmanage() {
             <p>Password:</p>
             <input className={styles.textbox} type="text" id="passWord"
             value={PASSWORD} onChange={handlePassword} name="passWord" placeholder={passW}/>
-            <br></br>
-            <br></br>
-            <br></br>
+      
+            
+            
+
+             
+         
+          <br></br>
+          <br></br>
+          <br></br>
 
             <button type="submit" className={styles.textbox3}>Update</button>
 
             </form>
 
-        </div>
-        <div>
+          </div>
+          <div>
+          <button onClick={manageUsers}>ManageUsers</button>
+          {showCreate && (
+          <Link href='/adminCreate'>Admin Creation</Link>
+          )}
+
+          <Link href='/adminStudent'>Student Account Creation</Link>
+
           <br></br>
           <br></br>
         </div>

@@ -118,6 +118,10 @@ const formSchema = new Schema({
     hostfam:{
         type: String, 
         required: true, 
+    },
+    essay: {
+        type: String, 
+        required: true, 
     }
 
 })

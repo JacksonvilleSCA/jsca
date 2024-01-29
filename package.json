@@ -17,8 +17,8 @@
     "eslint": "8.49.0",
     "eslint-config-next": "^14.0.4",
     "filereader": "^0.10.3",
-    "formik": "^2.4.5",
     "fs": "^0.0.1-security",
+    "i": "^0.3.7",
     "isomorphic-dompurify": "^1.9.0",
     "jquery": "^3.7.1",
     "mongodb": "^6.3.0",
@@ -29,7 +29,6 @@
     "react-bootstrap": "^2.9.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
-    "sass": "^1.68.0",
-    "yup": "^1.2.0"
+    "sass": "^1.68.0"
   }
 }
