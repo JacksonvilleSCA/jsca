@@ -7,12 +7,14 @@ import Image from "next/image";
 import ConfirmDelete from "@/app/components/ConfirmDeletion";
 import TextContent from "@/app/components/Text";
 import { redirect, useRouter } from "next/navigation";
+import ItineraryModal from "@/app/components/ItineraryModal";
 
 export default function Page({ params }) {
 
   const router = useRouter();
 
   const [active, setActive] = useState({ Active: false, id: -1 });
+  const [active2, setActive2] = useState({ Active: false, id: -1 });
 
 
   const [eventInfo, setEventInfo] = useState("");
@@ -57,8 +59,42 @@ export default function Page({ params }) {
   }
 
 
+  function Itinerary(id) {
+    setActive2({ Active: true, id: id });
+  }
+
+  function ItineraryReverse(holdValue) {
+    if (holdValue.onActive) {
+      setActive2({ Active: false, id: holdValue.holdId });
+    } else {
+      setActive2({ Active: holdValue.onActive, id: holdValue.holdId });
+    }
+
+    if (holdValue.onActive) {
+      if (holdValue.location === "Packaging") {
+          console.log("Packaging")
+          router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
+      } else if(holdValue.location === "Itinerary"){
+          console.log("Itinerary")
+          router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
+      }else if(holdValue.location === "Planning"){
+          console.log("Planning")
+          router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
+      }
+    }
+  }
+
+
+
   return (
     <>
+        {active2.Active && (
+        <ItineraryModal
+          value={active2.Active}
+          value2={active2.id}
+          reverse={ItineraryReverse}
+        />
+      )}
 
       {active.Active && (
         <ConfirmDelete
@@ -128,6 +164,7 @@ export default function Page({ params }) {
                   width: "100%",
                   height: "100%"
                 }}
+                priority={true}
               />
             </div>
 
@@ -160,14 +197,14 @@ export default function Page({ params }) {
           </div>
           <div className="card-footer">
             <div className="d-flex justify-content-evenly">
+
               <button
-                onClick={(e) => {
-                  router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
-                }}
+                onClick={(e) => Itinerary(eventInfo._id)}
                 className="btn btn-primary px-5"
               >
                 Itinerary
               </button>
+
               <button
                 onClick={(e) => {
                   router.push(`/Dashboard/admin`);
@@ -185,12 +222,15 @@ export default function Page({ params }) {
               >
                 Update
               </button>
+
               <button
                 onClick={(e) => Pop(eventInfo._id)}
                 className="btn btn-danger px-5"
               >
                 Delete
               </button>
+
+
             </div>
           </div>
         </div>
