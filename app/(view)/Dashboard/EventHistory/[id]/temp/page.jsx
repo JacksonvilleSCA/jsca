@@ -73,13 +73,13 @@ export default function Page({ params }) {
     if (holdValue.onActive) {
       if (holdValue.location === "Packaging") {
           console.log("Packaging")
-          router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
+          router.push(`/createPackingList`);
       } else if(holdValue.location === "Itinerary"){
           console.log("Itinerary")
-          router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
+          router.push(`/ItineraryView`);
       }else if(holdValue.location === "Planning"){
           console.log("Planning")
-          router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
+          router.push(`/listMenu`);
       }
     }
   }
@@ -164,7 +164,6 @@ export default function Page({ params }) {
                   width: "100%",
                   height: "100%"
                 }}
-                priority={true}
               />
             </div>
 
