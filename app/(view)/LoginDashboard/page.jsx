@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import {accInfo} from "../../api/routes/accountInfo"
+import styles from "./page.module.css"
 
 const Dashboard = () => {
   const router = useRouter();
@@ -49,6 +50,26 @@ const Dashboard = () => {
       <button onClick={manageAccount}>Manage Account</button>
       <br></br>
       <br></br>
+      <div className={styles.container}>
+          <div className={styles.square}>
+            <p>Events</p>
+
+
+          </div>
+          <br></br>
+          <div className={styles.square}>
+            <p>Itinerary</p>
+            <p>Packing Lists</p>
+          </div>
+          <br></br>
+          <div className={styles.square}>
+            <p>Student Forms and Essays</p>
+          </div>
+
+        </div>
+        <br></br>
+
+      
 
       <button onClick={signOut}>Log Out</button>
       </div>

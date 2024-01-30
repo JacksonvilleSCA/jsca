@@ -148,15 +148,7 @@ export default function Accountmanage() {
       console.log(e);
     }
     
-    //const result = accUpdate(search,formData)
-    //.then((response) => response.json())
-   // .then((data) => console.log(data));
-
-   // if(result != "wilco"){
-     // console.log("Account Update Succesful")
-     // alert("Account Update succesful");
-      //location.reload(true);
-   // }
+   
 
 
   }
