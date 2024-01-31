@@ -138,6 +138,7 @@ export default function Accountmanage() {
       const result = await accUpdate(UID,formData);
       if(result != "wilco"){
         alert("failed to update");
+        location.reload(true);
       }
       else{
         alert("Account Update succesful");

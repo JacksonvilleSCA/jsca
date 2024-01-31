@@ -6,14 +6,33 @@ import Admin from "../schema/Admin";
 
 
 export async function AdminUpdate(adminID,formData){
-    //WIP
+
     console.log(adminID);
     const admin = await Admin.findOne({adminID : adminID})
     const userID = admin._id;
     var returnResult;
-    
 
-    console.log("View admin");
+
+
+    let emailCheck = formData.email;
+    let usernameCheck = formData.username;
+    let passwordCheck = formData.password;
+
+
+    const check1 = await Admin.findOne({email : emailCheck})
+    const check2 = await Admin.findOne({username: usernameCheck})
+    const check3 = await Admin.findOne({password: passwordCheck})
+
+
+    if(check1 || check2 || check3 != null){
+        console.log(check1)
+        console.log(check2)
+        console.log(check3)
+
+        returnResult= false;
+    
+    }else{
+        console.log("View admin");
     console.log(admin);
     console.log(formData);
 
@@ -75,43 +94,48 @@ export async function AdminUpdate(adminID,formData){
     console.log(userID);
 
 
-var username = formData.username;
-var password = formData.password;
-var email = formData.email;
-var firstname = formData.firstname;
-var lastname = formData.lastname;
-var phonenumber = formData.phone;
-var country = formData.country;
-var state = formData.state;
-var city = formData.city;
+    var username = formData.username;
+    var password = formData.password;
+    var email = formData.email;
+    var firstname = formData.firstname;
+    var lastname = formData.lastname;
+    var phonenumber = formData.phone;
+    var country = formData.country;
+    var state = formData.state;
+    var city = formData.city;
 
 
-const filter = { _id: userID };
-const updateInfo = {
-    $set: {
-        email: email,
-        AdminID: admin.adminID,
-        username: username,
-        password: password,
-        firstname: firstname,
-        lastname: lastname,
-        phonenumber: phonenumber,
-        country: country,
-        state: state,
-        city: city,
+    const filter = { _id: userID };
+    const updateInfo = {
+        $set: {
+            email: email,
+            AdminID: admin.adminID,
+            username: username,
+            password: password,
+            firstname: firstname,
+            lastname: lastname,
+            phonenumber: phonenumber,
+            country: country,
+            state: state,
+            city: city,
+        }
+    };
+
+    console.log("INFO TO BE UPDATED");
+    console.log(updateInfo);
+    const result = await Admin.updateOne(filter, updateInfo);  
+    console.log(`${result.modifiedCount} document updated`);
+
+    if(result){
+        returnResult = "wilco";
     }
-};
 
-console.log("INFO TO BE UPDATED");
-console.log(updateInfo);
-const result = await Admin.updateOne(filter, updateInfo);  
-console.log(`${result.modifiedCount} document updated`);
+    }
+    
 
-if(result){
-    returnResult = "wilco";
-}
+    
 
-return returnResult;
+    return returnResult;
 
 
 

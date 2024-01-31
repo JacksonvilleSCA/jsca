@@ -145,6 +145,8 @@ export default function AdminAccountManage() {
       const result = await AdminUpdate(search,formData);
       if(result != "wilco"){
         alert("failed to update");
+        location.reload(true);
+
       }
       else{
         alert("Account Update succesful");
