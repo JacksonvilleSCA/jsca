@@ -84,7 +84,7 @@ const Createaccount = () => {
 
 
     var Check = 0;
-    if(!userFirst || !userLast ) {
+    if(!userN || !userP || !userEmail ) {
       Check = 1;
     }
 
@@ -122,7 +122,7 @@ const Createaccount = () => {
     }
 
     if(Value != "true"){
-      setError("-Form must be complete. Check input value.-");
+      setError("-Error with form input.-");
     }
     else{
       alert("Account Created!");

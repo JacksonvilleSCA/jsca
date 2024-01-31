@@ -4,8 +4,6 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
-//import { accInfo } from "../api/routes/accountInfo";
-//import { accUpdate } from "../api/routes/accountUpdate";
 import {accInfo} from "../../api/routes/accountInfo";
 import { accUpdate} from "../../api/routes/accountUpdate"
 
@@ -23,6 +21,7 @@ export default function Accountmanage() {
   const [userState, setUserState] = useState('');
   const [userCity, setUserCity] = useState('')
   const [accData, setAccData] = useState('');
+  const [search, setSearch] = useState('');
   var firstN;
   var lastN;
   var userN;
@@ -32,29 +31,29 @@ export default function Accountmanage() {
   var countRY;
   var staTE;
   var ciTY;
+
+  
   
 
 
-  const searchParams = useSearchParams();
-  //var search = searchParams.get('myID')
-  var search = sessionStorage.getItem('ID');
-
-
-  if(search == null){
-    router.push('/login');
-    
-  }
-
-  
   useEffect(() => {
-    loadPage();
+    const uid = sessionStorage.getItem('uid');
+    if (uid == null) {
+      router.push('/login');
+    }
+    else{
+      setSearch(uid)
+      loadPage(uid);
+    }
   }, []);
 
 
-  const loadPage = async () =>{
+
+
+  const loadPage = async (uid) =>{
 
     try{
-      const acc = await accInfo(search);
+      const acc = await accInfo(uid);
       setAccData(acc);
 
 
@@ -108,7 +107,7 @@ export default function Accountmanage() {
   }
 
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e,search) => {
     console.log("xxxxx")
     console.log(FIRSTN);
     console.log(LASTN);
@@ -131,13 +130,15 @@ export default function Accountmanage() {
       city: userCity,
 
     }
-
+    
     console.log(formData);
 
     try{
-      const result = await accUpdate(search,formData);
+      const UID = sessionStorage.getItem('uid')
+      const result = await accUpdate(UID,formData);
       if(result != "wilco"){
         alert("failed to update");
+        location.reload(true);
       }
       else{
         alert("Account Update succesful");
@@ -148,15 +149,7 @@ export default function Accountmanage() {
       console.log(e);
     }
     
-    //const result = accUpdate(search,formData)
-    //.then((response) => response.json())
-   // .then((data) => console.log(data));
-
-   // if(result != "wilco"){
-     // console.log("Account Update Succesful")
-     // alert("Account Update succesful");
-      //location.reload(true);
-   // }
+   
 
 
   }

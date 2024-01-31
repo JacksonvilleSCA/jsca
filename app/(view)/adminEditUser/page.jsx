@@ -145,6 +145,8 @@ export default function Accountmanage() {
       const result = await accUpdate(search,formData);
       if(result != "wilco"){
         alert("failed to update");
+        location.reload(true);
+
       }
       else{
         alert("Account Update succesful");
@@ -185,10 +187,15 @@ export default function Accountmanage() {
       <button onClick={dashB}>Return</button>
 
       <br></br>
-
+      <br></br>
+      <br></br>
+      <br></br>
       <div className={styles.container}>
         <div className={styles.textbox}>
+    
           <form onSubmit={handleSubmit}>
+            <br></br>
+            <br></br>
             <h2>User ID: {search}</h2>
             <p>First Name:</p>
             <p></p>
@@ -421,7 +428,9 @@ export default function Accountmanage() {
             <br></br>
 
             <button type="submit" className={styles.textbox3}>Update</button>
-
+            <br>
+            </br>
+            <br></br>
             </form>
 
         </div>

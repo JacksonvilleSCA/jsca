@@ -145,6 +145,8 @@ export default function AdminAccountManage() {
       const result = await AdminUpdate(search,formData);
       if(result != "wilco"){
         alert("failed to update");
+        location.reload(true);
+
       }
       else{
         alert("Account Update succesful");
@@ -442,13 +444,24 @@ export default function AdminAccountManage() {
             </form>
 
           </div>
+          <br></br>
+          <div className={styles.textbox3}>
+
+            
           <div>
           <button onClick={manageUsers}>ManageUsers</button>
+
+          </div>
+
+          <div>
           {showCreate && (
           <Link href='/adminCreate'>Admin Creation</Link>
           )}
-
+          </div>
+      
+          <div>
           <Link href='/adminStudent'>Student Account Creation</Link>
+          </div>
 
           <br></br>
           <br></br>
