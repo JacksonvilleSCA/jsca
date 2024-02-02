@@ -10,6 +10,7 @@ import styles from './page.module.css';
 
 
 const AdminDash = () => {
+  const router = useRouter();
 
   var search
   useEffect(() => {
