@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import {POST} from "../../../api/routes/evemtRoute"
-// import Edit from "../../../components/Edit";
+import Edit from "../../../components/Edit";
 
 export default function Home(props) {
     const [amount, setAmount] = useState("");
@@ -13,9 +13,23 @@ export default function Home(props) {
     const [textarea, setTextarea] = useState("");
 
 
-
-
     // encType="multipart/form-data"
+
+
+    //  async function test(){
+
+    //   console.log("hello");
+    //   console.log(typeof image);
+    //    console.log(image)
+    //   const bytes = await image.arrayBuffer();
+    //    console.log(typeof bytes)
+    //   console.log(bytes)
+    //   const buffer = Buffer.from(bytes);
+    //   console.log(typeof buffer);
+    //   console.log(buffer)
+    //   // POST() 
+    //   }
+
     return (
       <>
         <div
@@ -23,7 +37,7 @@ export default function Home(props) {
           style={{ width: "60%", height: "100vh", marginBottom: "300px" }}
         >
           <h1 className="mb-4 text-center mt-3">Create Event</h1>
-          <form action={POST} >
+          <form action={POST}>
           {/* <form action={eventCreation}> */}
             <div className="mb-1">
               <label className="form-label">
@@ -107,7 +121,7 @@ export default function Home(props) {
               ></input>
             </div>
 
-             <div>
+             {/* <div>
             <label className="form-label ">
                 Details
             </label>
@@ -119,20 +133,21 @@ export default function Home(props) {
                  >
                 </textarea>
             </div>
-            </div> 
+            </div>  */}
   
-            {/* <div className="mb-4">
-              <label htmlFor="" className="form-label ">
+            <div className="mb-4">
+              <label  className="form-label ">
                 Details
               </label>
               <Edit valueOfTextarea={textarea} details={setDetails} />
               <input type="hidden" value={details}  name="details" />
-            </div> */}
+            </div>
   
             <div className="d-grid vstack gap-2">
               <button type="submit" className="btn btn-primary mb-4">
                 Submit
               </button>
+            {/* <button type="button" onClick={test}>Submit</button> */}
             </div>
           </form>
         </div>

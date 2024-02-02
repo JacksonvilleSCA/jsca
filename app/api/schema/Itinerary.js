@@ -8,10 +8,6 @@ const ItinerarySchema = new Schema(
         title: {
             type: String
         },
-        duration: {
-            startDate: String,
-            endDate: String,
-        },
        schedule: [
         {
             day: {type: String},
