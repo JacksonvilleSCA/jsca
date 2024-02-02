@@ -11,10 +11,7 @@ export default function Page() {
 
   const [eventInformation, setEventInformation] = useState([]);
 
-  var search = sessionStorage.getItem('AID');
-  if(search == null){
-    router.push('/login');
-  }
+  
 
 
   // Utility function to check if two arrays are equal
@@ -23,6 +20,10 @@ export default function Page() {
   };
 
   useEffect(() => {
+    var search = sessionStorage.getItem('AID');
+    if(search == null){
+    router.push('/login');
+    }
     const fetchData = async () => {
       const data = await GetEvent();
 
