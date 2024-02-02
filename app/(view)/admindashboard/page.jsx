@@ -12,7 +12,6 @@ import styles from './page.module.css';
 const AdminDash = () => {
 
   const router = useRouter();
-  const searchParams = useSearchParams();
   var search = sessionStorage.getItem('AID');
 
 
@@ -31,11 +30,11 @@ const AdminDash = () => {
 
 
     function signOut(){
-        search = null;
-        if(search == null){
-        router.push('/adminLogin');
+      sessionStorage.removeItem('AID')
+      sessionStorage.removeItem('gid')
+      router.push('/adminLogin');
       
-        }
+        
     }
 
   
@@ -52,7 +51,7 @@ const AdminDash = () => {
         <br></br>
         <div className={styles.container}>
           <div className={styles.square}>
-            <p>Events</p>
+            <p><Link href='Dashboard/EventHistory'>Event History</Link></p>
             <p>Create Events</p>
 
 

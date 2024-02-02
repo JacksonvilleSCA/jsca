@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation'
 import styles from './page.module.css'
 import { POSTA } from '@/app/api/routes/adminLogin';
 
-
+ 
 
 const Login = () => {
   const router = useRouter();
@@ -58,7 +58,9 @@ const Login = () => {
     }
     else{
       const myID = Value1.AdminID;
+      const GID = myID
       sessionStorage.setItem('AID', myID)
+      sessionStorage.setItem('gid', GID)
       router.push('/admindashboard');
     }
 

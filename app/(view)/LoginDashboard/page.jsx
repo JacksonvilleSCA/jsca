@@ -34,6 +34,7 @@ const Dashboard = () => {
 
   function signOut(){
     sessionStorage.removeItem('uid');
+    sessionStorage.removeItem('gid');
     router.push('/login');
     
   }
@@ -52,7 +53,7 @@ const Dashboard = () => {
       <br></br>
       <div className={styles.container}>
           <div className={styles.square}>
-            <p>Events</p>
+            <Link href='Dashboard/People'>Events</Link>
 
 
           </div>

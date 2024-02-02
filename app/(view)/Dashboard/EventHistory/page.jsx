@@ -11,6 +11,12 @@ export default function Page() {
 
   const [eventInformation, setEventInformation] = useState([]);
 
+  var search = sessionStorage.getItem('AID');
+  if(search == null){
+    router.push('/login');
+  }
+
+
   // Utility function to check if two arrays are equal
   const AreArraysEqual = (array1, array2) => {
     return JSON.stringify(array1) === JSON.stringify(array2);
