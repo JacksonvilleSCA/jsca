@@ -1,11 +1,9 @@
 "use client"
 import React, { useState } from "react"
-import { useParams } from "next/navigation"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
-import {accInfo} from "../../api/routes/accountInfo"
 import styles from './page.module.css';
 
 
@@ -18,7 +16,7 @@ const AdminDash = () => {
     if(search == null){
     router.push('/login');
     }
-  }, []);
+  }, [router]);
   
 
 
