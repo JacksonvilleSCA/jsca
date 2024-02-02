@@ -34,7 +34,6 @@ const AdminDash = () => {
 
     function signOut(){
       sessionStorage.removeItem('AID')
-      sessionStorage.removeItem('gid')
       router.push('/adminLogin');
       
         

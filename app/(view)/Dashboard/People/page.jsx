@@ -19,7 +19,7 @@ export default function Page() {
   };
 
   useEffect(() => {
-    var search = sessionStorage.getItem('gid');
+    var search = sessionStorage.getItem('uid');
     if(search == null){
       router.push('/login');
     }

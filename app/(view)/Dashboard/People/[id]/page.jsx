@@ -8,6 +8,10 @@ export default function Page({ params }) {
   const [eventInfo, setEventInfo] = useState("");
 
   useEffect(() => {
+    var search = sessionStorage.getItem('uid');
+    if(search == null){
+      router.push('/login');
+    }
     const fetchData = async () => {
       const data = await GET(params);
       setEventInfo(data);

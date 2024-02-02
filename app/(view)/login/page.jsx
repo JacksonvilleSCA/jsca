@@ -56,9 +56,7 @@ const Login = () => {
     }
     else{
       const myID = Value1.ID
-      const uniID = myID
       sessionStorage.setItem('uid',myID)
-      sessionStorage.setItem('gid',uniID)
       router.push('/LoginDashboard');
       
     }

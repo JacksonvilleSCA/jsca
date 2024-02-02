@@ -58,9 +58,7 @@ const Login = () => {
     }
     else{
       const myID = Value1.AdminID;
-      const GID = myID
       sessionStorage.setItem('AID', myID)
-      sessionStorage.setItem('gid', GID)
       router.push('/admindashboard');
     }
 

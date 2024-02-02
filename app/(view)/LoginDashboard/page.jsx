@@ -34,7 +34,7 @@ const Dashboard = () => {
 
   function signOut(){
     sessionStorage.removeItem('uid');
-    sessionStorage.removeItem('gid');
+  
     router.push('/login');
     
   }
@@ -58,10 +58,6 @@ const Dashboard = () => {
 
           </div>
           <br></br>
-          <div className={styles.square}>
-            <p>Itinerary</p>
-            <p>Packing Lists</p>
-          </div>
           <br></br>
           <div className={styles.square}>
             <p>Student Forms and Essays</p>
