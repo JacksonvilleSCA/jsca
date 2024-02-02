@@ -19,11 +19,6 @@ const AdminDash = () => {
   
 
 
-  if(search == null){
-    router.push('/adminLogin');
-    
-  }
-
 
   function manageAccount(){
 
