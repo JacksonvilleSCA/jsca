@@ -10,13 +10,16 @@ import styles from './page.module.css';
 
 const AdminDash = () => {
   const router = useRouter();
+  const [search, setSearch] = useState(null);
 
   useEffect(() => {
-    const search = sessionStorage.getItem('AID');
-    if (search == null) {
+    const searcH = sessionStorage.getItem('AID');
+    if (searcH == null) {
       router.push('/login');
+    }else{
+      setSearch(searchValue);
     }
-  }, []);;
+  }, [router]);
   
 
 
