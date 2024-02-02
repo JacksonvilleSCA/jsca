@@ -19,14 +19,22 @@ const Edit = (props) => {
         apiKey="mnjsi8c00iga0yq3zcnsif090me3lskqlwtz5y5mmr6twwdg"
         onInit={(evt, editor) => (editorRef.current = editor)}
         onEditorChange={one}
-        initialValue = {props.currentDetails}
+        // initialValue={initValue}
         init={{
           height: 400,
           menubar: false,
-          plugins:[
-            "anchor", "autolink", "charmap", "codesample", "emoticons", "image", "link", "lists", "media", "searchreplace", "table",  "visualblocks", "wordcount"
+          plugins: [
+            "advlist autolink lists link image charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table paste code help wordcount",
           ],
-          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+          toolbar:
+            "undo redo | formatselect | " +
+            "bold italic backcolor | alignleft aligncenter " +
+            "alignright alignjustify | bullist numlist outdent indent | " +
+            "removeformat | help",
+          content_style:
+            "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}
       />
     </>

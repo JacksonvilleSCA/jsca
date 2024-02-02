@@ -14,6 +14,10 @@ export async function POST(formData){
         // await connect();
         const newItinerary = new Itinerary({
             title: formData.title,
+            duration: {
+                startDate: formData.duration.startDate,
+                endDate: formData.duration.endDate,
+            },
             schedule: formData.schedule,
         });
 
@@ -25,13 +29,19 @@ export async function POST(formData){
     }
 }
 
-export async function getServerSideProps(){
-    const result = await Itinerary.find();
-    const itineraries = result.map((doc) => {
-        const itinerary = doc.toObject();
-        itinerary._id = itinerary._id.toString();
-        return itinerary;
-    })
 
-    return { props: { itineraries: JSON.parse(JSON.stringify(itineraries)) } };
-}
+
+
+// export async function POST(req){
+//     const{title, startDate, endDate, day, time, activity} = await req.json();
+
+//     console.log("title", title );
+//     console.log("start date", startDate);
+//     console.log("end date", endDate );
+//     console.log("schedule", day );
+//     console.log("schedule", time );
+//     console.log("schedule", activity );
+
+//     //what does this do?? this msg is what we expect in itinerary
+//     return NextResponse.json({msg: ['hi from schedule route']});
+// }
