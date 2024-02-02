@@ -9,10 +9,7 @@ import Image from "next/image";
 export default function Page() {
   const router = useRouter();
 
-  var search = sessionStorage.getItem('gid');
-  if(search == null){
-    router.push('/login');
-  }
+  
 
   const [eventInformation, setEventInformation] = useState([]);
 
@@ -22,6 +19,10 @@ export default function Page() {
   };
 
   useEffect(() => {
+    var search = sessionStorage.getItem('gid');
+    if(search == null){
+      router.push('/login');
+    }
     const fetchData = async () => {
       const data = await GetEvent();
 
