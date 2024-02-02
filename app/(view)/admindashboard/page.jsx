@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useSearchParams } from "next/navigation"
+import { useParams } from "next/navigation"
 import Link from "next/link"
 import styles from './page.module.css';
 
