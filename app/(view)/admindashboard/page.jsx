@@ -11,8 +11,9 @@ import styles from './page.module.css';
 
 const AdminDash = () => {
 
+  var search
   useEffect(() => {
-    var search = sessionStorage.getItem('AID');
+    search = sessionStorage.getItem('AID');
     if(search == null){
     router.push('/login');
     }
