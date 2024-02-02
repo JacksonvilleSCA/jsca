@@ -3,15 +3,18 @@ import { useState } from "react";
 import {POST} from "../../../api/routes/evemtRoute"
 import Edit from "../../../components/Edit";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home(props) {
 
   const router = useRouter();
 
-  var search = sessionStorage.getItem('AID');
-  if(search == null){
+  useEffect(() => {
+    var search = sessionStorage.getItem('AID');
+    if(search == null){
     router.push('/login');
-  }
+    }
+  }, []);
 
     const [amount, setAmount] = useState("");
     const [image, setImage] = useState("");
