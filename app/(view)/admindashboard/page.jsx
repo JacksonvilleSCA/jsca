@@ -1,25 +1,27 @@
 "use client"
 import React, { useState } from "react"
-import { useParams } from "next/navigation"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useSearchParams } from "next/navigation"
+import { useParams } from "next/navigation"
 import Link from "next/link"
-import {accInfo} from "../../api/routes/accountInfo"
 import styles from './page.module.css';
 
 
 const AdminDash = () => {
-
   const router = useRouter();
-  const searchParams = useSearchParams();
-  var search = sessionStorage.getItem('AID');
+  const [search, setSearch] = useState(null);
 
+  useEffect(() => {
+    const searcH = sessionStorage.getItem('AID');
+    if (searcH == null) {
+      router.push('/login');
+    }else{
+      setSearch(searchValue);
+    }
+  }, [router]);
+  
 
-  if(search == null){
-    router.push('/adminLogin');
-    
-  }
 
 
   function manageAccount(){
@@ -31,11 +33,10 @@ const AdminDash = () => {
 
 
     function signOut(){
-        search = null;
-        if(search == null){
-        router.push('/adminLogin');
+      sessionStorage.removeItem('AID')
+      router.push('/adminLogin');
       
-        }
+        
     }
 
   
@@ -52,7 +53,7 @@ const AdminDash = () => {
         <br></br>
         <div className={styles.container}>
           <div className={styles.square}>
-            <p>Events</p>
+            <p><Link href='Dashboard/EventHistory'>Event History</Link></p>
             <p>Create Events</p>
 
 

@@ -13,6 +13,14 @@ export default function Page({ params }) {
 
   const router = useRouter();
 
+
+  var search = sessionStorage.getItem('AID');
+  if(search == null){
+    router.push('/login');
+  }
+
+
+
   const [active, setActive] = useState({ Active: false, id: -1 });
   const [active2, setActive2] = useState({ Active: false, id: -1 });
 

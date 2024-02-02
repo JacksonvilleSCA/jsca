@@ -8,6 +8,14 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 export default function Page({ params }) {
+
+  const router = useRouter();
+
+  var search = sessionStorage.getItem('AID');
+  if(search == null){
+    router.push('/login');
+  }
+
   const [details, setDetails] = useState("");
   const [eventInfo, setEventInfo] = useState("");
 

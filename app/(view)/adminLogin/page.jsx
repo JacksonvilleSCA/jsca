@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation'
 import styles from './page.module.css'
 import { POSTA } from '@/app/api/routes/adminLogin';
 
-
+ 
 
 const Login = () => {
   const router = useRouter();

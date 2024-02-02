@@ -6,8 +6,20 @@ import Image from "next/image";
 
 export default function Page({ params }) {
   const [eventInfo, setEventInfo] = useState("");
+  //userID can be used for the member currently signed in. 
+  const [userID, setUserID] = useState("")
 
+  //This code checks to see if the user when accessing the page has an ID.
   useEffect(() => {
+    var search = sessionStorage.getItem('uid');
+    if(search == null){
+      //If no ID then kick back to login
+      router.push('/login');
+    }else{
+      setUserID(search)
+    }
+    //Code above was added
+
     const fetchData = async () => {
       const data = await GET(params);
       setEventInfo(data);
