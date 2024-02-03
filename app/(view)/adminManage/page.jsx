@@ -197,12 +197,9 @@ export default function AdminAccountManage() {
         <div className={styles.textbox}>
           <form onSubmit={handleSubmit}>
             <h2>(WIP) Admin ID: {search}</h2>
-            <p>Manage users on dashboard</p>
-            <p>Student creation on Manage users</p>
-            <p>Admin Creation on Manage Users</p>
-            <p>Manage Admins button on manage users(only for super admins.)</p>
-            <p> Fix how Users are displayed</p>
+            <p>Add button to take a admin to a page containing all admins</p>
             <p>Fix Dashboard</p>
+            <p> Fix how Users are displayed</p>
             <p>Set up account recovery</p>
             <p>Return when needed for more info: </p>
 
@@ -462,9 +459,6 @@ export default function AdminAccountManage() {
           )}
           </div>
       
-          <div>
-          <Link href='/adminStudent'>Student Account Creation</Link>
-          </div>
 
           <br></br>
           <br></br>

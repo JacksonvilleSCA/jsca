@@ -17,7 +17,7 @@ const AdminDash = () => {
     if (searcH == null) {
       router.push('/login');
     }else{
-      setSearch(searchValue);
+      setSearch(searcH);
     }
   }, [router]);
   
@@ -54,16 +54,14 @@ const AdminDash = () => {
         <div className={styles.container}>
           <div className={styles.square}>
             <p><Link href='Dashboard/EventHistory'>Event History</Link></p>
-            <p>Create Events</p>
+            <p>Create Events(Add link)</p>
 
 
           </div>
           <br></br>
           <div className={styles.square}>
-            <p>Itinerary</p>
-            <p>Create Itinerary</p>
-            <p>Packing Lists</p>
-            <p>Create Packing Lists</p>
+          <p><Link href='/adminViewUsers'>Manage Users</Link></p>
+
           </div>
           <br></br>
           <div className={styles.square}>
