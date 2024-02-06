@@ -7,9 +7,10 @@ import { POST } from '@/app/api/routes/essayroutes';
   
   return (
     <>
-    <h1 id="title">
+    <div className="page-container">
+    <h1 style={{ textAlign: 'center' }}>
                 Jacksonville Sister Cities  Landon Middle Student Exchange Program Application Form</h1>
-            <h1 id="Section1">Section I: Student&apos;s Legal Name, Contact Data and Information (Do not use nicknames)</h1>
+            <h1 style={{ textAlign: 'center' }}>Section I: Student&apos;s Legal Name, Contact Data and Information (Do not use nicknames)</h1>
 
             <form action={POST}>
             <label>
@@ -145,7 +146,7 @@ import { POST } from '@/app/api/routes/essayroutes';
             <textarea name="allergies" id="textbox" rows={13} cols={63} defaultValue={" "} />
             <br />
             <br />
-            <h1>Section II: Parent&apos;s Name, Address and Contract Data</h1>
+            <h1 style={{ textAlign: 'center' }}>Section II: Parent&apos;s Name, Address and Contract Data</h1>
             <br />
             <br />
             <label>
@@ -232,7 +233,7 @@ import { POST } from '@/app/api/routes/essayroutes';
             </label>
             <br />
             <br />
-            <h1>Section III: Student Exchange Host & Travel Interest</h1>
+            <h1 style={{ textAlign: 'center' }}>Section III: Student Exchange Host & Travel Interest</h1>
             <input type="radio" id="HostandTravel" name="host" value="Host and Travel" />
             <label htmlFor="HostandTravel"> Host Family* and Travel </label>
             <input type="radio" id="Host" name = "host" value =" Host" />
@@ -256,6 +257,7 @@ import { POST } from '@/app/api/routes/essayroutes';
                 <button type = "submit" value= "submit" >  Submit</button>
            
         </form>
+    </div>  
     </>
     ); 
 }; 
