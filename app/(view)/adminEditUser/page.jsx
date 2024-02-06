@@ -20,6 +20,8 @@ export default function Accountmanage() {
   const [userState, setUserState] = useState('');
   const [userCity, setUserCity] = useState('')
   const [accData, setAccData] = useState('');
+  const [search, setSearch] = useState('')
+  const [adminID, setAdminID] = useState('')
   var firstN;
   var lastN;
   var userN;
@@ -31,22 +33,18 @@ export default function Accountmanage() {
   var ciTY;
   
 
-  var search = sessionStorage.getItem('uid');
-  var adminID = sessionStorage.getItem('AID');
-  if(search == null){
-    router.push('/login');
-    
-  }
-
-
-  if(search == null){
-    router.push('/login');
-    
-  }
-
   
   useEffect(() => {
-    loadPage();
+    const searcH = sessionStorage.getItem('uid')
+    const adminid = sessionStorage.getItem('AID')
+    if(searcH == null){
+      router.push('/login');
+    }
+    else{
+      setSearch(searcH)
+      setAdminID(adminid)
+      loadPage();
+    }
   }, []);
 
 
