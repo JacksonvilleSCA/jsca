@@ -11,22 +11,25 @@ import { getAllUsers } from "@/app/api/routes/users"
 import { deleteUsers } from "@/app/api/routes/deleteUser"
 
 const AdminUV = () => {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [accData, setAccData] = useState('');
+  const [search, setSearch] = useState(null);
+  const showCreate = search && !search.includes('j');
 
   const router = useRouter();
   useEffect(() => {
-    const search = sessionStorage.getItem('AID');
-    if (search == null) {
+    const searcH = sessionStorage.getItem('AID');
+    if (searcH == null) {
       router.push('/login');
     }
     else {
-      fetchUsers(search);
+      setSearch(searcH);
+      fetchUsers(searcH);
     }
     
   }, []);
 
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [accData, setAccData] = useState('');
 
 
 
@@ -81,7 +84,7 @@ const AdminUV = () => {
   }
 
   function back(){
-    router.push('/adminManage')
+    router.push('/admindashboard')
   }
 
  
@@ -93,7 +96,19 @@ const AdminUV = () => {
     return (
       <div>
       <h1>ADMIN OVERVIEW {accData.country}</h1>
+      <br></br>
       <button onClick={back}>Return</button>
+
+      <div>
+      {showCreate && (
+          <Link href='/adminCreate'>Admin Creation</Link>
+        )
+      }
+      </div>
+
+      <div>
+      <Link href='/adminStudent'>Student Account Creation</Link>
+      </div>
 
       {loading ? (
         <p>Loading...</p>
