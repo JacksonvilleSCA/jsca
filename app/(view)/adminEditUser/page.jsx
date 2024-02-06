@@ -43,15 +43,15 @@ export default function Accountmanage() {
     else{
       setSearch(searcH)
       setAdminID(adminid)
-      loadPage();
+      loadPage(searcH);
     }
   }, []);
 
 
-  const loadPage = async () =>{
+  const loadPage = async (searcH) =>{
 
     try{
-      const acc = await accInfo(search);
+      const acc = await accInfo(searcH);
       setAccData(acc);
 
 

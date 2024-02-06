@@ -49,7 +49,7 @@ export default function AdminAccountManage() {
     }
     else{
       setSearch(searcH)
-      loadPage();
+      loadPage(searcH);
 
     }
   }, []);
@@ -57,10 +57,10 @@ export default function AdminAccountManage() {
   const showCreate = search && !search.includes('j');
 
 
-  const loadPage = async () =>{
+  const loadPage = async (searcH) =>{
 
     try{
-      const acc = await AdminInfo(search);
+      const acc = await AdminInfo(searcH);
       setAccData(acc);
 
 
