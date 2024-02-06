@@ -9,6 +9,8 @@ import Image from "next/image";
 export default function Page() {
   const router = useRouter();
 
+  
+
   const [eventInformation, setEventInformation] = useState([]);
 
   // Utility function to check if two arrays are equal
@@ -17,6 +19,10 @@ export default function Page() {
   };
 
   useEffect(() => {
+    var search = sessionStorage.getItem('uid');
+    if(search == null){
+      router.push('/login');
+    }
     const fetchData = async () => {
       const data = await GetEvent();
 

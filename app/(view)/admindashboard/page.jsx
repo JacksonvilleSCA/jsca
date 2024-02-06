@@ -1,39 +1,42 @@
 "use client"
 import React, { useState } from "react"
-import { useParams } from "next/navigation"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useSearchParams } from "next/navigation"
+import { useParams } from "next/navigation"
 import Link from "next/link"
-import {accInfo} from "../../api/routes/accountInfo"
+import styles from './page.module.css';
+
 
 const AdminDash = () => {
-
   const router = useRouter();
-  const searchParams = useSearchParams();
-  var search = sessionStorage.getItem('AID');
+  const [search, setSearch] = useState(null);
 
+  useEffect(() => {
+    const searcH = sessionStorage.getItem('AID');
+    if (searcH == null) {
+      router.push('/login');
+    }else{
+      setSearch(searchValue);
+    }
+  }, [router]);
+  
 
-  if(search == null){
-    router.push('/adminLogin');
-    
-  }
 
 
   function manageAccount(){
 
-    router.push(`/adminManage?myID=${search}`);
+    router.push('/adminManage');
 
     
   }
 
 
     function signOut(){
-        search = null;
-        if(search == null){
-        router.push('/adminLogin');
+      sessionStorage.removeItem('AID')
+      router.push('/adminLogin');
       
-        }
+        
     }
 
   
@@ -47,7 +50,33 @@ const AdminDash = () => {
         <div>
         <button onClick={manageAccount}>Manage Account</button>
         </div>
+        <br></br>
+        <div className={styles.container}>
+          <div className={styles.square}>
+            <p><Link href='Dashboard/EventHistory'>Event History</Link></p>
+            <p>Create Events</p>
+
+
+          </div>
+          <br></br>
+          <div className={styles.square}>
+            <p>Itinerary</p>
+            <p>Create Itinerary</p>
+            <p>Packing Lists</p>
+            <p>Create Packing Lists</p>
+          </div>
+          <br></br>
+          <div className={styles.square}>
+            <p>Student Forms and Essays</p>
+          </div>
+
+
+
+          <br></br>
+        </div>
+        <br></br>
         <div>
+
         <button onClick={signOut}>Log Out</button>
         </div>
       </div>

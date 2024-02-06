@@ -128,7 +128,7 @@ const AdminCreate= () => {
     }
 
     if(Value != "true"){
-      setError("-Form must be complete. Check input value.-");
+      setError("-Error with form. Check input values.-");
     }
     else{
       alert("Account Created!");
