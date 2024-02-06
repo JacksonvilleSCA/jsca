@@ -3,7 +3,6 @@ import styles from './page.module.css';
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
 import Link from 'next/link';
 import { AdminInfo } from '@/app/api/routes/adminInfo';
 import { AdminUpdate } from '@/app/api/routes/adminUpdate';
@@ -35,7 +34,6 @@ export default function AdminAccountManage() {
   
 
 
-  const searchParams = useSearchParams();
   var search = sessionStorage.getItem('AID');
 
   if(search == null){
