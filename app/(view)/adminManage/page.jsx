@@ -21,6 +21,7 @@ export default function AdminAccountManage() {
   const [userState, setUserState] = useState('');
   const [userCity, setUserCity] = useState('')
   const [accData, setAccData] = useState('');
+  const [search, setSearch] = useState('');
   var firstN;
   var lastN;
   var userN;
@@ -34,18 +35,26 @@ export default function AdminAccountManage() {
   
 
 
-  var search = sessionStorage.getItem('AID');
 
   if(search == null){
     router.push('/login');
     
   }
-  const showCreate = search && !search.includes('j');
 
   
   useEffect(() => {
-    loadPage();
+    const searcH = sessionStorage.getItem('AID')
+    if(searcH == null){
+      router.push('/login');
+    }
+    else{
+      setSearch(searcH)
+      loadPage();
+
+    }
   }, []);
+
+  const showCreate = search && !search.includes('j');
 
 
   const loadPage = async () =>{
