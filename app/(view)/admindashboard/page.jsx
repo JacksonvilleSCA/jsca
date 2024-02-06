@@ -17,7 +17,7 @@ const AdminDash = () => {
     if (searcH == null) {
       router.push('/login');
     }else{
-      setSearch(searchValue);
+      setSearch(searcH);
     }
   }, [router]);
   
