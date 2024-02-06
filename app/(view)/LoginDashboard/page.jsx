@@ -60,7 +60,7 @@ const Dashboard = () => {
           <br></br>
           <br></br>
           <div className={styles.square}>
-            <p>Student Forms and Essays</p>
+            <p><Link href='/studentform'>Student Forms and Essays</Link></p>
           </div>
 
         </div>

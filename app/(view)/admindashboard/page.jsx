@@ -54,7 +54,7 @@ const AdminDash = () => {
         <div className={styles.container}>
           <div className={styles.square}>
             <p><Link href='Dashboard/EventHistory'>Event History</Link></p>
-            <p>Create Events(Add link)</p>
+            <p><Link href='/Dashboard/Home'>Create Events</Link></p>
 
 
           </div>
@@ -65,7 +65,7 @@ const AdminDash = () => {
           </div>
           <br></br>
           <div className={styles.square}>
-            <p>Student Forms and Essays</p>
+            <p><Link href='/adminForms'>Student Forms and Essays</Link></p>
           </div>
 
 
