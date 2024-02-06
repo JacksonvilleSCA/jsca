@@ -3,9 +3,6 @@ import styles from './page.module.css';
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
-//import { accInfo } from "../api/routes/accountInfo";
-//import { accUpdate } from "../api/routes/accountUpdate";
 import {accInfo} from "../../api/routes/accountInfo";
 import { accUpdate} from "../../api/routes/accountUpdate"
 
@@ -33,11 +30,6 @@ export default function Accountmanage() {
   var staTE;
   var ciTY;
   
-
-
-  const searchParams = useSearchParams();
-  var search = searchParams.get('ID');
-  var adminID = searchParams.get('myID');
 
   var search = sessionStorage.getItem('uid');
   var adminID = sessionStorage.getItem('AID');
