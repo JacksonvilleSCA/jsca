@@ -196,7 +196,7 @@ export default function Itinerary() {
                                 </button>
 
                                 <button type="button" className="btn btn-outline-dark ">Delete</button>
-                                <button type="button" className="btn btn-outline-dark mx-2"><Link href='/'></Link>View itinerary </button>
+                                <Link href='/ItineraryView'><button type="button" className="btn btn-outline-dark mx-2">View itinerary </button></Link> 
 
                             </div>
                         </div>
