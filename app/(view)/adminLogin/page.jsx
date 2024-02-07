@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation'
 import styles from './page.module.css'
 import { POSTA } from '@/app/api/routes/adminLogin';
 
-
+ 
 
 const Login = () => {
   const router = useRouter();
@@ -58,8 +58,8 @@ const Login = () => {
     }
     else{
       const myID = Value1.AdminID;
-      console.log(myID);
-      router.push(`/admindashboard?myID=${myID}`)
+      sessionStorage.setItem('AID', myID)
+      router.push('/admindashboard');
     }
 
 
@@ -71,7 +71,7 @@ const Login = () => {
     <div> 
   
     <br></br>
-    <h3 className={styles.container}>Admin Login</h3>
+    <h3 className={styles.container}>Staff Login</h3>
 
 
 
@@ -101,7 +101,11 @@ const Login = () => {
 
       <br>
       </br>
+      <br></br>
+      <p><Link href='/login'>Member Login</Link></p>
+
       {error && <p style={{color: 'red'}}>{error}</p>}
+
       
 
     </form>

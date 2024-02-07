@@ -3,7 +3,6 @@ import styles from './page.module.css';
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
 import Link from 'next/link';
 import { AdminInfo } from '@/app/api/routes/adminInfo';
 import { AdminUpdate } from '@/app/api/routes/adminUpdate';
@@ -22,6 +21,7 @@ export default function AdminAccountManage() {
   const [userState, setUserState] = useState('');
   const [userCity, setUserCity] = useState('')
   const [accData, setAccData] = useState('');
+  const [search, setSearch] = useState('');
   var firstN;
   var lastN;
   var userN;
@@ -35,20 +35,32 @@ export default function AdminAccountManage() {
   
 
 
-  const searchParams = useSearchParams();
-  var search = searchParams.get('myID')
-  const showCreate = search && !search.includes('j');
+
+  if(search == null){
+    router.push('/login');
+    
+  }
 
   
   useEffect(() => {
-    loadPage();
+    const searcH = sessionStorage.getItem('AID')
+    if(searcH == null){
+      router.push('/login');
+    }
+    else{
+      setSearch(searcH)
+      loadPage(searcH);
+
+    }
   }, []);
 
+  const showCreate = search && !search.includes('j');
 
-  const loadPage = async () =>{
+
+  const loadPage = async (searcH) =>{
 
     try{
-      const acc = await AdminInfo(search);
+      const acc = await AdminInfo(searcH);
       setAccData(acc);
 
 
@@ -103,13 +115,13 @@ export default function AdminAccountManage() {
 
   function manageUsers(){
 
-    router.push(`/adminViewUsers?myID=${search}`)
+    router.push('/adminViewUsers')
  
   }
 
   function dashB(){
 
-    router.back('/admindashboard') 
+    router.push('/admindashboard') 
   }
 
 
@@ -140,6 +152,8 @@ export default function AdminAccountManage() {
       const result = await AdminUpdate(search,formData);
       if(result != "wilco"){
         alert("failed to update");
+        location.reload(true);
+
       }
       else{
         alert("Account Update succesful");
@@ -190,11 +204,10 @@ export default function AdminAccountManage() {
         <div className={styles.textbox}>
           <form onSubmit={handleSubmit}>
             <h2>(WIP) Admin ID: {search}</h2>
-            <p>Fix ID transfer by using session storage.</p>
-            <p>Add  check to ensure ! duplicate accounts</p>
-            <p> Fix how Users are displayed</p>
-            <p>Fix buttons and layout (return buttons change to go to previous page).</p>
+            <p>Add button to take a admin to a page containing all admins</p>
             <p>Fix Dashboard</p>
+            <p> Fix how Users are displayed</p>
+            <p>Set up account recovery</p>
             <p>Return when needed for more info: </p>
 
             <p>First Name:</p>
@@ -438,13 +451,21 @@ export default function AdminAccountManage() {
             </form>
 
           </div>
+          <br></br>
+          <div className={styles.textbox3}>
+
+            
           <div>
           <button onClick={manageUsers}>ManageUsers</button>
+
+          </div>
+
+          <div>
           {showCreate && (
           <Link href='/adminCreate'>Admin Creation</Link>
           )}
-
-          <Link href='/adminStudent'>Student Account Creation</Link>
+          </div>
+      
 
           <br></br>
           <br></br>

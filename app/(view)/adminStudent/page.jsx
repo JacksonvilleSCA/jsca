@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react"
 import { STUDP } from "@/app/api/routes/studentCreation";
 import styles from './page.module.css'
 
@@ -20,7 +21,12 @@ const Createaccount = () => {
   const [userCity, setUserCity] = useState('')
   const [error, setError] = useState('');
 
-
+  useEffect(() => {
+    const search = sessionStorage.getItem('AID');
+    if (search == null) {
+      Router.push('/login');
+    }
+  }, []);
 
   function dashB(){
 
@@ -78,7 +84,7 @@ const Createaccount = () => {
 
 
     var Check = 0;
-    if(!userFirst || !userLast ) {
+    if(!userN || !userP || !userEmail ) {
       Check = 1;
     }
 
@@ -116,7 +122,7 @@ const Createaccount = () => {
     }
 
     if(Value != "true"){
-      setError("-Form must be complete. Check input value.-");
+      setError("-Error with form input.-");
     }
     else{
       alert("Account Created!");

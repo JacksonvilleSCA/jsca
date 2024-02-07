@@ -4,11 +4,15 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { GET as GetEvent } from "../../../api/routes/evemtRoute";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Page() {
   const router = useRouter();
 
-  const [eventInfomration, setEventInformation] = useState([]);
+  const [eventInformation, setEventInformation] = useState([]);
+
+  
+
 
   // Utility function to check if two arrays are equal
   const AreArraysEqual = (array1, array2) => {
@@ -16,45 +20,89 @@ export default function Page() {
   };
 
   useEffect(() => {
+    var search = sessionStorage.getItem('AID');
+    if(search == null){
+    router.push('/login');
+    }
     const fetchData = async () => {
       const data = await GetEvent();
 
-      if (!AreArraysEqual(eventInfomration, data)) {
+  
+
+      if (!AreArraysEqual(eventInformation, data)) {
         setEventInformation(data);
       }
     };
     fetchData();
-  }, [eventInfomration]);
+  }, []);
 
   return (
     <>
       <div className="container" style={{ marginBottom: "30px" }}>
         <div className="row row-cols-1 row-cols-md-3 g-4">
-          {eventInfomration.map((event, index) => (
+          {eventInformation.map((event, index) => (
             <div key={event._id} className="col">
               <div
                 className="card mt-5"
-                style={{ width: "80%", boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)" }}
+                style={{
+                  width: "80%",
+                  boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
+                  position: "relative",
+                }}
               >
-                <img
-                  src="https://picsum.photos/200"
-                  className="card-img-top"
-                  alt="image"
-                />
-                <div className="card-body">
+                {event.active === false && (
+                  <div
+                    style={{
+                      backgroundColor: "gray",
+                      width: "100%",
+                      zIndex: "1",
+                      height: "100%",
+                      opacity: "25%",
+                      position: "absolute",
+                    }}
+                  >
+                    {" "}
+                  </div>
+                )}
+
+                {event.img.startsWith("data:image") ? (
+                  <img
+                    alt="Picture of the Event"
+                    src={event.img}
+                    width={100}
+                    height={300}
+                    style={{
+                      width: "100%",
+                    }}
+                  />
+                ) : (
+                  <Image
+                    alt="Picture of the Event"
+                    src={event.img}
+                    width={100}
+                    height={300}
+                    style={{
+                      width: "100%",
+                    }}
+                  />
+                )}
+
+                <div className="card-body" style={{ position: "relative" }}>
                   <div className="card-title" style={{ textAlign: "center" }}>
                     {event.location}
                   </div>
                   <hr />
-                  <p className="card-text">
-                   {event.details}
-                  </p>
+
+                  <div className="card-text" style={{height:"280px", overflow: "hidden", overflowY: "scroll"}}>
+                    <div dangerouslySetInnerHTML={{ __html: event.details  }} />
+                  </div>
+
                   <button
                     onClick={(e) => {
                       router.push(`/Dashboard/EventHistory/${event._id}/temp`);
                     }}
                     className="btn btn-primary px-5"
-                    style={{ width: "100%" }}
+                    style={{ width: "100%", position: "relative", zIndex: "2", marginTop: "20px" }}
                   >
                     Edit
                   </button>
@@ -67,3 +115,6 @@ export default function Page() {
     </>
   );
 }
+
+
+

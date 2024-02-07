@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
-const Edit = (props) => {
+const EditTwo = (props) => {
 
     
   const editorRef = useRef(null);
@@ -24,13 +24,13 @@ const Edit = (props) => {
           height: 400,
           menubar: false,
           plugins:[
-            "anchor", "autolink", "charmap", "codesample", "emoticons", "image", "link", "lists", "media", "searchreplace", "table",  "visualblocks", "wordcount"
+            "anchor", "autolink", "charmap", "codesample", "emoticons",  "lists", "media", "searchreplace", "table",  "visualblocks", "wordcount"
           ],
-          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |  align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
         }}
       />
     </>
   );
 };
 
-export default Edit;
+export default EditTwo;

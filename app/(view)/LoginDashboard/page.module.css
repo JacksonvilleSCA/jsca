@@ -1,0 +1,16 @@
+.container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+}
+
+
+.square{
+    width: calc(33.33% - 20px);
+    background-color: blanchedalmond;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+}

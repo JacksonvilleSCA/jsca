@@ -11,21 +11,31 @@ import { getAllUsers } from "@/app/api/routes/users"
 import { deleteUsers } from "@/app/api/routes/deleteUser"
 
 const AdminUV = () => {
-
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  var search = searchParams.get('myID')
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [accData, setAccData] = useState('');
+  const [search, setSearch] = useState(null);
+  const showCreate = search && !search.includes('j');
 
-
+  const router = useRouter();
   useEffect(() => {
-    fetchUsers();
+    const searcH = sessionStorage.getItem('AID');
+    if (searcH == null) {
+      router.push('/login');
+    }
+    else {
+      setSearch(searcH);
+      fetchUsers(searcH);
+    }
+    
   }, []);
 
 
-  const fetchUsers= async () => {
+
+
+
+
+  const fetchUsers= async (search) => {
     try {
       const acc = await AdminInfo(search);
       setAccData(acc)
@@ -44,7 +54,8 @@ const AdminUV = () => {
     alert("Edit in progress.");
     const uid = user._id;
     console.log(uid);
-    router.push(`/adminEditUser?myID=${search}&ID=${uid}`);
+    sessionStorage.setItem('uid', uid);
+    router.push('/adminEditUser');
 
   }
   
@@ -73,7 +84,7 @@ const AdminUV = () => {
   }
 
   function back(){
-    router.push(`/adminManage?myID=${search}`)
+    router.push('/admindashboard')
   }
 
  
@@ -85,7 +96,19 @@ const AdminUV = () => {
     return (
       <div>
       <h1>ADMIN OVERVIEW {accData.country}</h1>
+      <br></br>
       <button onClick={back}>Return</button>
+
+      <div>
+      {showCreate && (
+          <Link href='/adminCreate'>Admin Creation</Link>
+        )
+      }
+      </div>
+
+      <div>
+      <Link href='/adminStudent'>Student Account Creation</Link>
+      </div>
 
       {loading ? (
         <p>Loading...</p>

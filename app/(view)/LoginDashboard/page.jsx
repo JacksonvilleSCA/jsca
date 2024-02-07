@@ -6,53 +6,25 @@ import { useRouter } from "next/navigation"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import {accInfo} from "../../api/routes/accountInfo"
+import styles from "./page.module.css"
 
 const Dashboard = () => {
-
-
-  //const [name, setName] = useState('');
-
   const router = useRouter();
 
 
-  const searchParams = useSearchParams();
-  var search = searchParams.get('myID')
-
-
-  //if(search == null){
-    //router.push('/login');
-    
-  //}
-
-
-  //useEffect(() => {
-    //loadPage();
- //}, []);
-
-
-  //const loadPage = async () =>{
-
-    //try{
-     // var acc = await accInfo(search);
-      //var firstName = acc.firstname;
-
-      //setName(firstName);
-
-
-    //} catch (error){
-    //console.log(error);
-   // }  
-
-
-  
-  //} 
+  useEffect(() => {
+    const search = sessionStorage.getItem('uid');
+    if (search == null) {
+      router.push('/login');
+    }
+  }, []);
 
 
 
 
   function manageAccount(){
 
-    router.push(`/accountmanage?myID=${search}`);
+    router.push('/accountmanage');
 
     
   }
@@ -61,11 +33,10 @@ const Dashboard = () => {
 
 
   function signOut(){
-    search = null;
-    if(search == null){
-      router.push('/login');
-      
-    }
+    sessionStorage.removeItem('uid');
+  
+    router.push('/login');
+    
   }
 
   
@@ -80,6 +51,22 @@ const Dashboard = () => {
       <button onClick={manageAccount}>Manage Account</button>
       <br></br>
       <br></br>
+      <div className={styles.container}>
+          <div className={styles.square}>
+            <Link href='Dashboard/People'>Events</Link>
+
+
+          </div>
+          <br></br>
+          <br></br>
+          <div className={styles.square}>
+            <p><Link href='/studentform'>Student Forms and Essays</Link></p>
+          </div>
+
+        </div>
+        <br></br>
+
+      
 
       <button onClick={signOut}>Log Out</button>
       </div>

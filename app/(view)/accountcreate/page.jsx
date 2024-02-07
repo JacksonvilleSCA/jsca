@@ -112,7 +112,7 @@ const Createaccount = () => {
     }
 
     if(Value != "true"){
-      setError("-Form must be complete. Check input value.-");
+      setError("-Error with form. Change inputs.-");
     }
     else{
       alert("Account Created!");

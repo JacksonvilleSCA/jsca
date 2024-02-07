@@ -1,46 +1,29 @@
 'use client'
-import React from 'react';
+import React, { useState } from "react";
 import Link from 'next/link'; 
-import { useState } from 'react';
 import { POST } from '@/app/api/routes/essayroutes';
+import { useRef } from "react";
+import EditTwo from "@/app/components/EditTwo";
 
-const Essay = () => {
-    const [text, setText] = useState('');
+const Essay = (props) => {
+
+  const [details, setDetails] = useState("");
+  const [textarea, setTextarea] = useState("");
+  
    
-    const handleTextChange = (event) => { 
-      const inputText = event.target.value;
-      const words = inputText.split(/\s+/); // Split the text into words
-      const wordCount = words.filter((word) => word !== '').length;
-      setText(inputText);
-  
-    };
-  
-  
-    const handleFormatClick = (format) => {
-      document.execCommand(format, false, null);
-    };
+   // const editorRef = useRef(null);
+
   
     return (
       <div>
-       <div> 
-        <button onClick={() => handleFormatClick('bold')}>Bold</button>
-        <button onClick={() => handleFormatClick('italic')}>Italic</button>
-        <button onClick={() => handleFormatClick('underline')}>Underline</button>
-        </div>
-        <form action={POST}> 
-        <textarea
-         // value={text}
-          name = "essay"
-          onChange={handleTextChange}
-          placeholder="Type your text here..."
-          rows={44}
-          cols={103}
+        <form action = {POST}> 
+          <div className = "page-container"> 
 
-        />
-        <div>
-          Word Count: {text.split(/\s+/).filter((word) => word !== '').length}
-        </div>
-        <button type = "submit" value= "submit" >  Submit</button>
+          <EditTwo valueOfTextarea={textarea} details={setDetails} />
+            <input type="hidden" value={details}  name="essay" />
+           </div>
+        <br></br>
+        <button type = "submit" >  Submit</button>
         </form>
       </div>
     );

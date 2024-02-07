@@ -3,9 +3,6 @@ import styles from './page.module.css';
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
-//import { accInfo } from "../api/routes/accountInfo";
-//import { accUpdate } from "../api/routes/accountUpdate";
 import {accInfo} from "../../api/routes/accountInfo";
 import { accUpdate} from "../../api/routes/accountUpdate"
 
@@ -23,6 +20,8 @@ export default function Accountmanage() {
   const [userState, setUserState] = useState('');
   const [userCity, setUserCity] = useState('')
   const [accData, setAccData] = useState('');
+  const [search, setSearch] = useState('')
+  const [adminID, setAdminID] = useState('')
   var firstN;
   var lastN;
   var userN;
@@ -34,28 +33,25 @@ export default function Accountmanage() {
   var ciTY;
   
 
-
-  const searchParams = useSearchParams();
-  var search = searchParams.get('ID');
-  var adminID = searchParams.get('myID');
-
-
-
-  if(search == null){
-    router.push('/login');
-    
-  }
-
   
   useEffect(() => {
-    loadPage();
+    const searcH = sessionStorage.getItem('uid')
+    const adminid = sessionStorage.getItem('AID')
+    if(searcH == null){
+      router.push('/login');
+    }
+    else{
+      setSearch(searcH)
+      setAdminID(adminid)
+      loadPage(searcH);
+    }
   }, []);
 
 
-  const loadPage = async () =>{
+  const loadPage = async (searcH) =>{
 
     try{
-      const acc = await accInfo(search);
+      const acc = await accInfo(searcH);
       setAccData(acc);
 
 
@@ -139,10 +135,13 @@ export default function Accountmanage() {
       const result = await accUpdate(search,formData);
       if(result != "wilco"){
         alert("failed to update");
+        location.reload(true);
+
       }
       else{
         alert("Account Update succesful");
-        router.push(`/adminViewUsers?myID=${adminID}`)
+        sessionStorage.removeItem('uid');
+        router.push('/adminViewUsers')
       }
     }
     catch(e){
@@ -178,10 +177,15 @@ export default function Accountmanage() {
       <button onClick={dashB}>Return</button>
 
       <br></br>
-
+      <br></br>
+      <br></br>
+      <br></br>
       <div className={styles.container}>
         <div className={styles.textbox}>
+    
           <form onSubmit={handleSubmit}>
+            <br></br>
+            <br></br>
             <h2>User ID: {search}</h2>
             <p>First Name:</p>
             <p></p>
@@ -414,7 +418,9 @@ export default function Accountmanage() {
             <br></br>
 
             <button type="submit" className={styles.textbox3}>Update</button>
-
+            <br>
+            </br>
+            <br></br>
             </form>
 
         </div>
