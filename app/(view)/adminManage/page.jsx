@@ -188,27 +188,34 @@ export default function AdminAccountManage() {
 
 
 
-  
+  //Add button to take a admin to a page containing all admins with edit and delete (only for super admins).
+  //Set up account recovery.
+  //Show junior admins cities that are checked by string.
 
     return(
       
       <div>
+      <div className={styles.title}>
+      <h1 >Manage Admin Account</h1>
 
-      <h1>Manage Admin Account</h1>
+      </div>
+
+      <div className={styles.title}>
       <button onClick={dashB}> Return </button>
+      </div>
 
 
       <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      
+      
 
       <div className={styles.container}>
         <div className={styles.textbox}>
           <form onSubmit={handleSubmit}>
-            <h2>(WIP) Admin ID: {search}</h2>
-            <p>Add button to take a admin to a page containing all admins</p>
-            <p>Fix Dashboard</p>
-            <p> Fix how Users are displayed</p>
-            <p>Set up account recovery</p>
-            <p>Return when needed for more info: </p>
+            <h2>Admin ID: {search}</h2>
 
             <p>First Name:</p>
             <p></p>
@@ -452,24 +459,7 @@ export default function AdminAccountManage() {
 
           </div>
           <br></br>
-          <div className={styles.textbox3}>
-
-            
-          <div>
-          <button onClick={manageUsers}>ManageUsers</button>
-
-          </div>
-
-          <div>
-          {showCreate && (
-          <Link href='/adminCreate'>Admin Creation</Link>
-          )}
-          </div>
-      
-
-          <br></br>
-          <br></br>
-        </div>
+          
 
 
       </div>
