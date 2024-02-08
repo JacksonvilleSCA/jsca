@@ -23,7 +23,7 @@ const Essay = (props) => {
             <input type="hidden" value={details}  name="essay" />
            </div>
         <br></br>
-        <button type = "submit" >  Submit</button>
+        <button type = "submit" value= "submit" class="btn btn-primary">  Submit</button>
         </form>
       </div>
     );
