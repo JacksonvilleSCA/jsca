@@ -7,14 +7,13 @@ import Itinerary from "../schema/Itinerary"
 export async function POST(formData){
     "use server"
     const data = (formData)
-    console.log(data)
-    "use server";
-
     try {
         // await connect();
         const newItinerary = new Itinerary({
+            // eventId: formData.eventId,
             title: formData.title,
             schedule: formData.schedule,
+          
         });
 
         await newItinerary.save();

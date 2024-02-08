@@ -1,10 +1,15 @@
-import mongoose from 'mongoose';
+import mongoose, { SchemaType } from 'mongoose';
 const {Schema} = mongoose;
 
 
 
 const ItinerarySchema = new Schema(
     {
+        // eventId: {
+        //     type: Schema.Types.ObjectId,
+        //     ref:'event',
+        //     required: false
+        // },
         title: {
             type: String
         },

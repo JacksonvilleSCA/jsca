@@ -81,7 +81,7 @@ export default function Page({ params }) {
     if (holdValue.onActive) {
       if (holdValue.location === "Packaging") {
           console.log("Packaging")
-          router.push(`/createPackingList`);
+          router.push(`/packingView`);
       } else if(holdValue.location === "Itinerary"){
           console.log("Itinerary")
           router.push(`/ItineraryView`);

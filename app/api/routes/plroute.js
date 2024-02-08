@@ -10,6 +10,7 @@ export const AddItem = async (formData)=> {
     try {
         // connect();
         const newList = await Packlist.create({
+            // eventId: formData.eventId,
             items: formData.items
         });
 
