@@ -174,10 +174,22 @@ export default function Accountmanage() {
       
       <div>
 
-      <h1>Manage Account</h1>
+      <div className={styles.title}>
+      <h1 >Manage Account</h1>
+
+      </div>
+      
+      <div className={styles.title}>
       <button onClick={dashB}> Return </button>
+      </div>
+
 
       <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      
+    
 
       <div className={styles.container}>
         <div className={styles.textbox}>
