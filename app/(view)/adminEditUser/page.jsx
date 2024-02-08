@@ -180,6 +180,11 @@ export default function Accountmanage() {
       <br></br>
       <br></br>
       <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <div className={styles.container}>
         <div className={styles.textbox}>
     
