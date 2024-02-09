@@ -12,6 +12,9 @@ const AdminDash = () => {
   const router = useRouter();
   const [search, setSearch] = useState(null);
 
+  const showCreate = search && !search.includes('j');
+
+
   useEffect(() => {
     const searcH = sessionStorage.getItem('AID');
     if (searcH == null) {
@@ -62,7 +65,13 @@ const AdminDash = () => {
           </div>
           <br></br>
           <div className={styles.square}>
-          <p><Link className={styles.colorP} href='/adminViewUsers'>Manage Users</Link></p>
+          <p><Link className={styles.colorP} href='/adminViewUsers'>Manage Members/Students</Link></p>
+          {showCreate && (
+            <p><Link className={styles.colorP} href='/adminViewAdmins'>Manage Admins</Link></p>
+
+          )
+        }
+
 
           </div>
           <br></br>
