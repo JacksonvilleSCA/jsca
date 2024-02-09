@@ -71,7 +71,7 @@ const Login = () => {
     <div> 
   
     <br></br>
-    <h3 className={styles.container}>Admin Login</h3>
+    <h3 className={styles.container}>Staff Login</h3>
 
 
 
@@ -101,7 +101,11 @@ const Login = () => {
 
       <br>
       </br>
+      <br></br>
+      <p><Link href='/login'>Member Login</Link></p>
+
       {error && <p style={{color: 'red'}}>{error}</p>}
+
       
 
     </form>

@@ -44,32 +44,36 @@ const Dashboard = () => {
 
     return (
       <div>
-      <h1>JSCA Dashboard</h1>
-      <h2>Welcome</h2>
+        <div className={styles.container2}>
+          <div><h1 className={styles.title}>Dashboard</h1></div>
+        </div>
       <br></br>
       <br></br>
-      <button onClick={manageAccount}>Manage Account</button>
+      <div className={styles.padding}>
+      <button className={styles.button2} onClick={manageAccount}>Manage Account</button>
+      </div>
+      <br></br>
       <br></br>
       <br></br>
       <div className={styles.container}>
           <div className={styles.square}>
-            <Link href='Dashboard/People'>Events</Link>
-
-
+            <p className={styles.colorP}><Link className={styles.colorP} href='Dashboard/People'>Events</Link></p>
           </div>
-          <br></br>
-          <br></br>
+         
           <div className={styles.square}>
-            <p>Student Forms and Essays</p>
+            <p className={styles.colorP}><Link className={styles.colorP} href='/studentform'>Student Forms and Essays</Link></p>
           </div>
 
         </div>
         <br></br>
 
-      
-
-      <button onClick={signOut}>Log Out</button>
-      </div>
+        <br>
+        </br>
+        <br></br>
+        <div className={styles.padding}>
+        <button className={styles.button} onClick={signOut}>Log Out</button>
+        </div>
+        </div>
 
       
     )

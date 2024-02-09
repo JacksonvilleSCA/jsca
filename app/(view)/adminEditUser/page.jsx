@@ -3,9 +3,6 @@ import styles from './page.module.css';
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
-//import { accInfo } from "../api/routes/accountInfo";
-//import { accUpdate } from "../api/routes/accountUpdate";
 import {accInfo} from "../../api/routes/accountInfo";
 import { accUpdate} from "../../api/routes/accountUpdate"
 
@@ -23,6 +20,8 @@ export default function Accountmanage() {
   const [userState, setUserState] = useState('');
   const [userCity, setUserCity] = useState('')
   const [accData, setAccData] = useState('');
+  const [search, setSearch] = useState('')
+  const [adminID, setAdminID] = useState('')
   var firstN;
   var lastN;
   var userN;
@@ -34,34 +33,25 @@ export default function Accountmanage() {
   var ciTY;
   
 
-
-  const searchParams = useSearchParams();
-  var search = searchParams.get('ID');
-  var adminID = searchParams.get('myID');
-
-  var search = sessionStorage.getItem('uid');
-  var adminID = sessionStorage.getItem('AID');
-  if(search == null){
-    router.push('/login');
-    
-  }
-
-
-  if(search == null){
-    router.push('/login');
-    
-  }
-
   
   useEffect(() => {
-    loadPage();
+    const searcH = sessionStorage.getItem('uid')
+    const adminid = sessionStorage.getItem('AID')
+    if(searcH == null){
+      router.push('/login');
+    }
+    else{
+      setSearch(searcH)
+      setAdminID(adminid)
+      loadPage(searcH);
+    }
   }, []);
 
 
-  const loadPage = async () =>{
+  const loadPage = async (searcH) =>{
 
     try{
-      const acc = await accInfo(search);
+      const acc = await accInfo(searcH);
       setAccData(acc);
 
 
@@ -186,6 +176,11 @@ export default function Accountmanage() {
       <h1>Admin Edit by {adminID}</h1>
       <button onClick={dashB}>Return</button>
 
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <br></br>
       <br></br>
       <br></br>

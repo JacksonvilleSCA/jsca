@@ -8,7 +8,7 @@ import { useEffect } from "react";
 export default function Home(props) {
 
   const router = useRouter();
-
+  //Add possible loading check? -Sam
   useEffect(() => {
     var search = sessionStorage.getItem('AID');
     if(search == null){
@@ -26,7 +26,7 @@ export default function Home(props) {
 
 
     // encType="multipart/form-data"
-
+  
 
     //  async function test(){
 

@@ -95,32 +95,68 @@ const AdminUV = () => {
 
     return (
       <div>
-      <h1>ADMIN OVERVIEW {accData.country}</h1>
+      <h1>ADMIN OVERVIEW </h1>
+      <div className={styles.topContainer}>
+        {showCreate && (
+            <Link href='/adminCreate'>Admin Creation</Link>
+          )
+        }
+        <Link href='/adminStudent'>Student Account Creation</Link>
+
+      </div>
+      
+
+      
       <br></br>
-      <button onClick={back}>Return</button>
+      <div className={styles.padding}>
+      <button  onClick={back}>Return</button>
 
-      <div>
-      {showCreate && (
-          <Link href='/adminCreate'>Admin Creation</Link>
-        )
-      }
       </div>
+      
 
-      <div>
-      <Link href='/adminStudent'>Student Account Creation</Link>
-      </div>
-
+      <br></br>
+     
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div>
-          <p>User list goes here.</p>
+        <div className={styles.container}>
           <ul className={styles.userlist}>
+            <h1 className={styles.title}>Database Users</h1>
+            <br></br>
             {users.map((user, index) => (
-              <li key={index} className={styles.useritem}>
-                <span className={styles.userInfo}>First Name: {user.firstname}, Last Name: {user.lastname}, User Name: {user.username} Country: {user.country}, City: {user.city}</span>
+              <li key={index} className={`${styles.useritem} ${index % 2 === 0 ? styles.darkblue : styles.lightblue}`}>
+                <div className={styles.userInfo}>
+                <div className={styles.userDetail}>
+                <span>First Name: </span>
+                <span>{user.firstname}</span>
+                </div>
+                <div className={styles.userDetail}>
+                <span>Last Name: </span>
+                <span>{user.lastname}</span>
+                </div>
+                <div className={styles.userDetail}>
+                <span>User Name: </span>
+                <span>{user.username}</span>
+                </div>
+                <div className={styles.userDetail}>
+                <span>Country: </span>
+                <span>{user.country}</span>
+                </div>
+                <div className={styles.userDetail}>
+                <span>City: </span>
+                <span>{user.city}</span>
+                </div>
+                </div>
+
+                <div className={styles.buttons}>
                 <button className ={styles.editbutton} onClick = {() =>handleEdit(user)}>Edit</button>
-                <button className={styles.deletebutton} onClick={() => handleDelete(user)}>Delete</button></li>
+                <button className={styles.deletebutton} onClick={() => handleDelete(user)}>Delete</button>
+                </div>
+              
+                
+              </li>
+             
+              
             ))}
           </ul>
         </div>

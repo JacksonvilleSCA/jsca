@@ -7,20 +7,20 @@ import Packlist from "../schema/packinglist";
 export const AddItem = async (formData)=> {
     "use server"
     const data = (formData)
-    console.log(data)
     try {
         // connect();
         const newList = await Packlist.create({
+            // eventId: formData.eventId,
             items: formData.items
         });
 
         await newList.save();
 
-        if(newList){
-            console.log('ok');
-            console.log(newList);
-            newList.save()
-        }
+        // if(newList){
+        //     console.log('ok');
+        //     console.log(newList);
+        //     newList.save()
+        // }
    
     } catch (error) {
         console.log(error)
@@ -30,9 +30,18 @@ export const AddItem = async (formData)=> {
 
 }
   
-export async function GET(_id){
-    const data = await Packlist.findById()
+export async function GET(){
+    const data = await Packlist.find()
+    const packlists = data.map((doc) =>{
+        const plist = doc.toObject();
+        plist._id = plist._id.toString()
+        return plist;
+    })
+
+    return {props: {packlists: JSON.parse(JSON.stringify(packlists))}}
 }
+
+
 // export async function AddItem(formData){
 //     const  packinglist = formData.get('item');
 

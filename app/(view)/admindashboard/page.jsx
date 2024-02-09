@@ -44,28 +44,30 @@ const AdminDash = () => {
 
     return (
       <div>
-      <h1>JSCA ADMIN</h1>
-      <h2>Welcome {search}</h2>
-      <div>
-        <div>
-        <button onClick={manageAccount}>Manage Account</button>
+        <div className={styles.container2}>
+          <div><h1 className={styles.title}>Dashboard</h1></div>
         </div>
+      
+      <div>
+      <div className={styles.padding}>
+      <button className={styles.button2} onClick={manageAccount}>Manage Account</button>
+      </div>
         <br></br>
         <div className={styles.container}>
           <div className={styles.square}>
-            <p><Link href='Dashboard/EventHistory'>Event History</Link></p>
-            <p>Create Events(Add link)</p>
+            <p><Link className={styles.colorP} href='Dashboard/EventHistory'>Event History</Link></p>
+            <p><Link className={styles.colorP} href='/Dashboard/Home'>Create Events</Link></p>
 
 
           </div>
           <br></br>
           <div className={styles.square}>
-          <p><Link href='/adminViewUsers'>Manage Users</Link></p>
+          <p><Link className={styles.colorP} href='/adminViewUsers'>Manage Users</Link></p>
 
           </div>
           <br></br>
           <div className={styles.square}>
-            <p>Student Forms and Essays</p>
+            <p><Link className={styles.colorP} href='/adminForms'>Student Forms and Essays</Link></p>
           </div>
 
 
@@ -73,9 +75,8 @@ const AdminDash = () => {
           <br></br>
         </div>
         <br></br>
-        <div>
-
-        <button onClick={signOut}>Log Out</button>
+        <div className={styles.padding}>
+        <button className={styles.button} onClick={signOut}>Log Out</button>
         </div>
       </div>
       <br></br>
