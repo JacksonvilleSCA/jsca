@@ -29,11 +29,20 @@ const Login = () => {
   
   const handleSubmit = async (e) =>{
     e.preventDefault();
+    setError("")
     const formData = {
       email: email
     }
     
     const response = await contact(formData)
+    if(response){
+      alert("Email was sent! Check spam incase email does not show up in a few minutes.")
+      router.push('/login')
+    }
+    else if(response == 0){
+      setError("Error with email, check input.");
+
+    }
      
 
   }
@@ -73,6 +82,9 @@ const Login = () => {
       
 
       <button type="submit">Submit</button>
+
+      {error && <p style={{color: 'red'}}>{error}</p>}
+
 
       <br>
       </br>
