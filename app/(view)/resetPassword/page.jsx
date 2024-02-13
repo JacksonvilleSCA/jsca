@@ -19,12 +19,20 @@ const ResetPass = () => {
 
   
   useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search);
-    const tokenFromURL = searchParams.get('Token');
-    if(tokenFromURL == "" || tokenFromURL == null || isNaN(tokenFromURL)){
+    //const searchParams = new URLSearchParams(window.location.search);
+    //const tokenFromURL = searchParams.get('Token');
+    //if(tokenFromURL == "" || tokenFromURL == null || isNaN(tokenFromURL)){
+      //router.push('/login')
+    //}
+    const Tok = sessionStorage.getItem('token');
+    const id = sessionStorage.getItem('id');
+    if(Tok == null || id == null){
       router.push('/login')
     }
-    setToken(tokenFromURL);
+    else{
+      setToken(Tok)
+    }
+    //setToken(tokenFromURL);
   }, []);
   
   
@@ -63,6 +71,8 @@ const ResetPass = () => {
     if(result == "wilco"){
       alert("Update successful!")
       router.push('/login')
+      sessionStorage.removeItem('token')
+      sessionStorage.removeItem('id')
     }
     else{
       setError("Error with password.")

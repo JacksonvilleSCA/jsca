@@ -3,23 +3,19 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useSearchParams } from 'next/navigation'
 import styles from './page.module.css'
-import { contact } from '@/app/api/routes/contact';
+import { tokencheck } from '@/app/api/routes/checkToken';
  
 
 const forgotPassword = () => {
   const router = useRouter();
-
-  const [userValue, setUserValue] = useState('');
-  const [email, setEmail] = useState('');
+  const [token, setToken] = useState('');
   const [error, setError] = useState('');
 
-  var Value1 = null;
 
 
-  const handleEmail = (e) =>{
-    setEmail(e.target.value);
+  const handleToken = (e) =>{
+    setToken(e.target.value);
   }
 
 
@@ -31,39 +27,38 @@ const forgotPassword = () => {
     e.preventDefault();
     setError("")
     const formData = {
-      email: email
+      token : token
     }
-    
-    const response = await contact(formData)
-    if(response){
-      alert("Email was sent! Check spam incase email does not show up in a few minutes.")
-      router.push('/login')
-    }
-    else if(response == 0){
-      setError("Error with email, check input.");
+
+    const result = await tokencheck(formData)
+
+    if(result == false){
+      setError("Error with token.")
+      
 
     }
-     
+    else{
+      const value1 = result.token
+      const value2 = result.userID
+      sessionStorage.setItem('token', value1)
+      sessionStorage.setItem('id', value2)
+      router.push('/resetPassword')
+    }
 
   }
 
   
 
 
-  function dashB(){
-
-    router.back() 
-  }
 
 
   
   return (
     
     <div> 
-    <button onClick={dashB}> Return </button>
   
     <br></br>
-    <h3 className={styles.container}>Forgot Password?</h3>
+    <h3 className={styles.container}>Token Check</h3>
 
 
 
@@ -71,10 +66,10 @@ const forgotPassword = () => {
         
       <input
         type="text"
-        placeholder="email"
-        name="email"
-        onChange={handleEmail}
-        id="email"
+        placeholder="Insert Token"
+        name="token"
+        onChange={handleToken}
+        id="token"
       />
 
       <br></br>
