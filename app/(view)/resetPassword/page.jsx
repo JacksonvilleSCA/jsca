@@ -6,7 +6,8 @@ import { useSearchParams } from 'next/navigation'
 import { resetPassword } from '@/app/api/routes/resetPassword';
 import styles from './page.module.css'
  
-
+//make secondary window that requires the user to enter their token.
+//after they enter their token they are taken to the password reset
 const ResetPass = () => {
   const router = useRouter();
 
