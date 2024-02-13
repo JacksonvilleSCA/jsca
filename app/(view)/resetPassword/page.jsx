@@ -16,9 +16,9 @@ const ResetPass = () => {
   const [token, setToken] = useState('');
   const [error, setError] = useState('');
 
-  const searchParams = useSearchParams();
   
   useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
     const tokenFromURL = searchParams.get('Token');
     if(tokenFromURL == "" || tokenFromURL == null || isNaN(tokenFromURL)){
       router.push('/login')

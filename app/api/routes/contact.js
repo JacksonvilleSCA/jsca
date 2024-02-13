@@ -74,13 +74,13 @@ export async function contact(data) {
       console.log("New token created:", newToken);
     }
 
-    // Check if the index exists before attempting to drop it
+    // Check if the index exists before attempting to drop it.
     const indexExists = await Token.collection.indexExists("tokenCreatedAt_1");
     if (indexExists) {
       await Token.collection.dropIndex("tokenCreatedAt_1");
     }
 
-    // Create the new index with the desired options
+    // Create the new index.
     await Token.collection.createIndex(
       { tokenCreatedAt: 1 },
       { expireAfterSeconds: 3600, name: "tokenCreatedAt_3600" }
