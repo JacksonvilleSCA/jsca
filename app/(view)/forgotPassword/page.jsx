@@ -8,7 +8,7 @@ import styles from './page.module.css'
 import { contact } from '@/app/api/routes/contact';
  
 
-const forgotPassword = () => {
+const ForgotPassword = () => {
   const router = useRouter();
 
   const [userValue, setUserValue] = useState('');
@@ -103,4 +103,4 @@ const forgotPassword = () => {
   )
 }
 
-export default forgotPassword
+export default ForgotPassword

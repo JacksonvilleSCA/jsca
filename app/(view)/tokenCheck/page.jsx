@@ -6,8 +6,9 @@ import { useRouter } from 'next/navigation'
 import styles from './page.module.css'
 import { tokencheck } from '@/app/api/routes/checkToken';
  
+//add measure so that one email can only be used on either member or admin
 
-const forgotPassword = () => {
+const TokenCheck = () => {
   const router = useRouter();
   const [token, setToken] = useState('');
   const [error, setError] = useState('');
@@ -98,4 +99,4 @@ const forgotPassword = () => {
   )
 }
 
-export default forgotPassword
+export default TokenCheck
