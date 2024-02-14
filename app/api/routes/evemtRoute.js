@@ -122,5 +122,31 @@ export async function POST(formData) {
 
     revalidatePath("/Dashboard/EventHistory");
     redirect("/Dashboard/EventHistory");
+}
+
+
+
+export async function  PostWaitList(formData){
+
+
+  
+}
+
+
+export async function GetWaitList(){
+
+
+
+}
+
+export async function PostAcceptanceList(formData){
+
+
+
+}
+
+export async function GetAcceptanceList(){
+
+
 
 }

@@ -21,10 +21,10 @@ const Edit = (props) => {
         onEditorChange={one}
         initialValue = {props.currentDetails}
         init={{
-          height: 400,
+          // height: 400,
           menubar: false,
           plugins:[
-            "anchor", "autolink", "charmap", "codesample", "emoticons", "image", "link", "lists", "media", "searchreplace", "table",  "visualblocks", "wordcount"
+            'anchor','autolink','charmap','codesample','emoticons','image','link','lists','media','searchreplace','table','visualblocks','wordcount'
           ],
           toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
         }}

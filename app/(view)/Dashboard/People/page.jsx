@@ -1,15 +1,14 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { GET as GetEvent } from "../../../api/routes/evemtRoute";
 import { useRouter } from "next/navigation";
 import DOMPurify from "dompurify";
 import Image from "next/image";
+import Loading from "./loading";
 
 export default function Page() {
   const router = useRouter();
-
-  
 
   const [eventInformation, setEventInformation] = useState([]);
 
@@ -35,16 +34,23 @@ export default function Page() {
 
   return (
     <>
-      <div className="container" style={{ marginBottom: "30px" }}>
+         <div className="container" style={{ marginBottom: "30px" }}>
         <div className="row row-cols-1 row-cols-md-3 g-4">
+
           {eventInformation.map((event, index) => (
             <div key={event._id} className="col">
+
+              
+              
               {event.active && (
+                  
+
                 <div
                   className="card mt-5"
                   style={{
                     width: "80%",
                     boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
+                    position: "relative",
                   }}
                 >
                   {/* {
@@ -83,7 +89,7 @@ export default function Page() {
                     />
                   )}
 
-                  <div className="card-body">
+                  <div className="card-body" style={{ position: "relative" }}>
                     <div className="card-title" style={{ textAlign: "center" }}>
                       {event.location}
                     </div>
@@ -113,8 +119,13 @@ export default function Page() {
                     </button>
                   </div>
                 </div>
+
               )}
+                
+
             </div>
+
+            
           ))}
         </div>
       </div>
