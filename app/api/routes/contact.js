@@ -43,6 +43,9 @@ export async function contact(data) {
     console.log("Email not found")
     return 0;
   }
+
+  const foundUser = admin || member;
+  const USERNAME = foundUser.username;
   
 
 
@@ -118,6 +121,7 @@ export async function contact(data) {
       html:`
       <h1>Hello JSCA Member!</h1>
       <p>This email is sent because of a password reset request.</p>
+      <p>Your username:${USERNAME}</p>
       <p>Your password reset token is: ${tokenNumber}.
       <p>If you wish to reset your password click here and enter your token: <a href="https://jsca.vercel.app/tokenCheck">Reset Password</a></p>    
       <p>If you are not a member of JSCA please ignore this email or consider joining today!</p>
