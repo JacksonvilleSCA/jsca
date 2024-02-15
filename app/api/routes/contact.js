@@ -11,10 +11,8 @@ import { NextRequest } from "next/server";
 const nodemailer = require('nodemailer');
 
 
-//set up encryption and decryption for the page.
-//We will encryp the user's id then decrypt it on the recieving page.
-//This will then allow the system to know which user this is. 
-//Must find a way to set up a check if it is a member or admin.
+//Note: Rewrite server connection function with host for nodemailer.
+//Issue is server timeout on vercel with current code. 
 
 export async function contact(data) {
   const username = process.env.NEXT_PUBLIC_EMAIL_USERNAME;
