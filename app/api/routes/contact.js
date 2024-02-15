@@ -123,7 +123,7 @@ export async function contact(data) {
       <p>This email is sent because of a password reset request.</p>
       <p>Your username:${USERNAME}</p>
       <p>Your password reset token is: ${tokenNumber}.
-      <p>If you wish to reset your password click here and enter your token: <a href="http://localhost:3000/tokenCheck">Reset Password</a></p>    
+      <p>If you wish to reset your password click here and enter your token: <a href="https://jsca.vercel.app/tokenCheck">Reset Password</a></p>    
       <p>If you are not a member of JSCA please ignore this email or consider joining today!</p>
       <p><a href="https://www.jsca.org/">www.jsca.org</a></p>
       `
