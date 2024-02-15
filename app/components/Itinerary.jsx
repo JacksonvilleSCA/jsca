@@ -96,16 +96,13 @@ export default function Itinerary() {
                     <div className="card my-3 w-75 mx-auto">
                         <div className="card-body">
                             <div className="row">
+                            <div className="col"> <label className="fs-3" htmlFor="title" >Select an Event: </label></div>
+                                <div className="col"> <input className="form-control" name='title' value={title} onChange={(e) => setTitle(e.target.value)} id='title' placeholder="search an event" type="text"></input></div>
 
                                 <div className="col"> <label className="fs-3" htmlFor="title" >Set a title: </label></div>
                                 <div className="col"> <input className="form-control" name='title' value={title} onChange={(e) => setTitle(e.target.value)} id='title' placeholder="e.g. Travel itinerary" type="text"></input></div>
 
                             </div>
-                            {/* <div className="row g-3">
-                                <div className="col-sm"> <label className="fs-3">Set a date range: </label></div>
-                                <div className='col-sm'><input type='date' name='start' className='form-control' value={startDate} onChange={(e) => setstartDate(e.target.value)}></input></div>
-                                <div className='col-sm'><input type='date' name='end' className='form-control' value={endDate} onChange={(e) => setendDate(e.target.value)}></input></div>
-                            </div> */}
                         </div>
                     </div>
 

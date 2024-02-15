@@ -31,7 +31,7 @@ export default function CreateMenu() {
                             <h5 className="card-title">Manage a packing list</h5>
                             <p className="card-text">Update or delete your packing lists.</p>
                             <Link href="/packingView"> <button className="btn btn-primary">Manage</button></Link>
-                            <button type="button" className="btn btn-outline-dark ">Delete</button>
+                            {/* <button type="button" className="btn btn-outline-dark ">Delete</button> */}
                         </div>
                     </div>
                 </div>

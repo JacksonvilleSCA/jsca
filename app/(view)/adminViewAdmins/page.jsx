@@ -7,10 +7,10 @@ import { useRouter } from "next/navigation"
 import { useSearchParams } from "next/navigation"
 import { AdminInfo } from '@/app/api/routes/adminInfo';
 import Link from "next/link"
-import { getAllUsers } from "@/app/api/routes/users"
-import { deleteUsers } from "@/app/api/routes/deleteUser"
+import { getAllAdmins } from "@/app/api/routes/admins"
+import { deleteAdmins } from "@/app/api/routes/deleteAdmin"
 
-const AdminUV = () => {
+const AdminAV = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [accData, setAccData] = useState('');
@@ -40,7 +40,7 @@ const AdminUV = () => {
       const acc = await AdminInfo(search);
       setAccData(acc)
       console.log(acc.AdminID);
-      const usersData = await getAllUsers(acc);
+      const usersData = await getAllAdmins(acc);
       setUsers(usersData);
       setLoading(false);    
     } catch (error) {
@@ -52,20 +52,20 @@ const AdminUV = () => {
 
   const handleEdit = async(user)=>{
     alert("Edit in progress.");
-    const uid = user._id;
+    const uid = user.adminID;
     console.log(uid);
     sessionStorage.setItem('uid', uid);
-    router.push('/adminEditUser');
+    router.push('/adminEditAdmin');
 
   }
   
 
   const handleDelete = async (user)=>{
-    const confirm = window.confirm(`Are you sure you want to remove this user ${user.firstname} ${user.lastname}?`)
+    const confirm = window.confirm(`Are you sure you want to remove this Admin ${user.firstname} ${user.lastname}?`)
     if(confirm){
-      console.log("user is being deleted...");
+      console.log("Admin is being deleted...");
       try{
-        const result = await deleteUsers(user);
+        const result = await deleteAdmins(user);
        if(result != "wilco"){
         alert("Error, failed to delete.")
        }
@@ -121,7 +121,7 @@ const AdminUV = () => {
       ) : (
         <div className={styles.container}>
           <ul className={styles.userlist}>
-            <h1 className={styles.title}>Database Users</h1>
+            <h1 className={styles.title}>Database Admins</h1>
             <br></br>
             {users.map((user, index) => (
               <li key={index} className={`${styles.useritem} ${index % 2 === 0 ? styles.darkblue : styles.lightblue}`}>
@@ -165,4 +165,4 @@ const AdminUV = () => {
     )
   }
 
-export default AdminUV
+export default AdminAV

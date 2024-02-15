@@ -1,16 +1,22 @@
 import plroute from '@/app/api/schema/packinglist'
 export default async function page() {
 
-    const packignlist = await plroute.find();
+    const packinglist = await plroute.find();
     return (
-        <>
-            {packignlist.map((item, index) => (
-                <div key={index}>
-                    <ul className="list-group">
-                        <li className="list-group-item">{item.items}</li>
-                    </ul>
-                </div>
-            ))}
+        <><h1>Recommended items to bring: </h1>
+            <div className='d-flex justify-content-center align-items-center mt-5'>
+                
+                {packinglist.map((packlist, index) => (
+                    <div key={index} className="list-group shadow-sm mx-auto w-50">
+                        <ol className='list-group-numbered'>
+                            {packlist.items.map((item, itemIndex) => (
+                                <li key={itemIndex} className="list-group-item fw-semibold">{item}</li>
+                            ))}
+                        </ol>
+                    </div>
+                ))}
+            </div>
+
         </>
     )
 }

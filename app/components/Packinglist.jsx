@@ -74,14 +74,14 @@ export default function TodoList() {
               {tasks.map((task) => (
                 <li key={task.id}>
                   {edit === task.id ? (
-                    <div className='d-flex justify-content-center m-auto'>
+                    <div className='d-flex justify-content-center m-auto mt-2'>
                       <input
                         className='form-control w-auto'
                         type="text"
                         value={editText}
                       />
-                      <button className='btn btn-success mx-2' type='button' onClick={() => applyEdit(task.id)}>Save</button>
-                      <button className="btn btn-danger mx-2" type='button' onClick={() => setEdit(null)}>Cancel</button>
+                      <button className='btn btn-success btn-sm mx-2' type='button' onClick={() => applyEdit(task.id)}>Save</button>
+                      <button className="btn btn-danger btn-sm mx-2" type='button' onClick={() => setEdit(null)}>Cancel</button>
                     </div>
                   ) : (
                     <div className="d-flex justify-content-between align-items-center w-100 mt-2">

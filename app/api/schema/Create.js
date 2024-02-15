@@ -2,24 +2,9 @@ import mongoose, {SchemaType} from "mongoose";
 const { Schema, model, SchemaTypes} = mongoose;
 
 
-const ItinerarySchema = new Schema(
-    {
-       schedule: [
-        {
-            day: {type: String},
-            time: {type: String},
-            activity: {type: String},
-        }
-       ]
-});
-
 
 const createSchema = new Schema({
-    itinerary: {
-        day: {type: String},
-        time: {type: String},
-        activity: {type: String},
-    },
+
     email:{
         type: String,
         unique: true

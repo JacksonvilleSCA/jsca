@@ -22,6 +22,8 @@ export default function AdminAccountManage() {
   const [userCity, setUserCity] = useState('')
   const [accData, setAccData] = useState('');
   const [search, setSearch] = useState('');
+  const [adminID, setAdminID] = useState('')
+
   var firstN;
   var lastN;
   var userN;
@@ -43,23 +45,27 @@ export default function AdminAccountManage() {
 
   
   useEffect(() => {
-    const searcH = sessionStorage.getItem('AID')
+    const searcH = sessionStorage.getItem('uid')
+    const IDADMIN = sessionStorage.getItem('AID')
     if(searcH == null){
       router.push('/login');
     }
     else{
       setSearch(searcH)
+      setAdminID(IDADMIN)
+
       loadPage(searcH);
 
     }
   }, []);
 
-  const showCreate = search && !search.includes('j');
 
 
   const loadPage = async (searcH) =>{
 
     try{
+      console.log("ro")
+      console.log(searcH)
       const acc = await AdminInfo(searcH);
       setAccData(acc);
 
@@ -90,6 +96,7 @@ export default function AdminAccountManage() {
     
   }
 
+
   const handleLastName = (e) =>{
     setLASTN(e.target.value);
     
@@ -113,15 +120,11 @@ export default function AdminAccountManage() {
     setPASSWORD(e.target.value);
   }
 
-  function manageUsers(){
-
-    router.push('/adminViewUsers')
- 
-  }
+  
 
   function dashB(){
 
-    router.push('/admindashboard') 
+    router.push('/adminViewAdmins') 
   }
 
 
@@ -157,7 +160,8 @@ export default function AdminAccountManage() {
       }
       else{
         alert("Account Update succesful");
-        location.reload(true);
+        sessionStorage.removeItem('uid');
+        router.push('/adminViewAdmins')
       }
     }
     catch(e){
@@ -187,16 +191,11 @@ export default function AdminAccountManage() {
 
 
 
-
-  //Add button to take a admin to a page containing all admins with edit and delete (only for super admins).
-  //Set up account recovery.
-  //Show junior admins cities that are checked by string.
-
     return(
       
       <div>
       <div className={styles.title}>
-      <h1 >Manage Admin Account</h1>
+      <h1>Admin Edit by {adminID}</h1>
 
       </div>
 

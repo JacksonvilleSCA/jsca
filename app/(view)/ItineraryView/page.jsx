@@ -23,12 +23,13 @@ export default async function Page() {
                             <div key={idx}>
                                 <h5 className="card-title">Day: {item.day}</h5>
                                 <p className="card-text">Details: {item.activity}</p>
+                                <p className="card-text">Time: {item.time}</p>
                             </div>
-                        ))};
+                        ))}
                     </div>
-                    <div className="card-footer bg-transparent ">Time</div>
+                    <div className="card-footer bg-transparent"></div>
                 </div>
-            ))};
+            ))}
 
         </>
     )
