@@ -24,9 +24,9 @@ export async function contact(data) {
   var ID
   console.log(email)
   const admin = await Admin.findOne({email: email})
-  console.log(admin)
   if(admin != null){
     ID = admin._id;
+    console.log(admin)
   }
 
 
@@ -34,6 +34,7 @@ export async function contact(data) {
   if(admin == null){
     member = await Create.findOne({email : email})
     ID = member._id;
+    console.log(member)
 
   }
 
