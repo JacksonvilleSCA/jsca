@@ -41,7 +41,7 @@ const createSchema = new Schema({
     },
     city: {
         type:String,
-    }
+    },
 
 })
 

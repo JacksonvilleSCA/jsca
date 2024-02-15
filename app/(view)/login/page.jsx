@@ -100,6 +100,10 @@ const Login = () => {
       <br>
       </br>
       <br></br>
+      <p><Link href='/forgotPassword'>Forgot Password?</Link></p>
+      <div>
+        <p>---------------------------------------------</p>
+      </div>
       <p><Link href='/adminLogin'>Staff Login</Link></p>
       {error && <p style={{color: 'red'}}>{error}</p>}
       
