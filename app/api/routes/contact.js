@@ -100,9 +100,6 @@ export async function contact(data) {
   const transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com",
     port: 587,
-    tls: {
-      ciphers: "SSLv3",
-    },
     auth: { 
       user: username,
       pass: password
