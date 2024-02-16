@@ -103,7 +103,10 @@ export async function contact(data) {
     auth: { 
       user: username,
       pass: password
-    }
+    },
+    connectionTimeout: 20000, 
+    greetingTimeout: 20000,   
+    socketTimeout: 20000  
     
   });
 
