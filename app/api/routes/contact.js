@@ -124,6 +124,7 @@ export async function contact(data) {
       <p><a href="https://www.jsca.org/">www.jsca.org</a></p>
       `
     })
+    console.log(mail)
     
     return { status: 200, body: { message: "Success: email was sent" } };
 
