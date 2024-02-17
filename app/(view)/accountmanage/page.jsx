@@ -201,7 +201,7 @@ export default function Accountmanage() {
 
     return(
       
-      <div>
+      <div ref={printRef}>
 
       <div className={styles.title}>
       <h1 >Manage Account</h1>
@@ -223,7 +223,7 @@ export default function Accountmanage() {
       
     
 
-      <div ref={printRef} className={styles.container}>
+      <div  className={styles.container}>
         <div className={styles.textbox}>
           <form onSubmit={handleSubmit}>
             <h2>User ID: {search}</h2>
