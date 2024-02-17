@@ -80,6 +80,7 @@ const Createaccount = () => {
 
 
   const handleSubmit = async (e) =>{
+    setError("");
     e.preventDefault();
 
 

@@ -1,11 +1,13 @@
 "use client";
 import styles from './page.module.css';
+import React from 'react';
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useState } from "react";
 import {accInfo} from "../../api/routes/accountInfo";
 import { accUpdate} from "../../api/routes/accountUpdate"
-
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 
 export default function Accountmanage() {
@@ -31,6 +33,7 @@ export default function Accountmanage() {
   var countRY;
   var staTE;
   var ciTY;
+  const printRef = React.useRef();
   
 
   
@@ -158,6 +161,31 @@ export default function Accountmanage() {
     router.back('/adminViewUsers') 
   }
 
+  function printScreen(){
+    const confirm = window.confirm("Confirm to download document.")
+    if(confirm){
+      console.log("Downloading...");
+      try{
+        const element = printRef.current;
+        html2canvas(element).then(canvas => {
+          const data = canvas.toDataURL('image/png');
+          const pdf = new jsPDF();
+          const imgProperties = pdf.getImageProperties(data);
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+          pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          pdf.save('AccountInfo.pdf');
+        })
+      }
+      catch(e){
+        alert(e)
+      }
+
+      
+    }
+
+  }
+
 
   firstN = accData.firstname;
   lastN = accData.lastname;
@@ -175,6 +203,8 @@ export default function Accountmanage() {
 
       <h1>Admin Edit by {adminID}</h1>
       <button onClick={dashB}>Return</button>
+      <button onClick={printScreen}>Export to PDF</button>
+
 
       <br></br>
       <br></br>
@@ -185,7 +215,7 @@ export default function Accountmanage() {
       <br></br>
       <br></br>
       <br></br>
-      <div className={styles.container}>
+      <div ref={printRef} className={styles.container}>
         <div className={styles.textbox}>
     
           <form onSubmit={handleSubmit}>

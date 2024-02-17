@@ -45,7 +45,7 @@ const AdminUV = () => {
       setLoading(false);    
     } catch (error) {
       console.error('Error with obtaining data.', error);
-      setLoading(false);
+      setLoading(true);
     }
   }
 
@@ -120,6 +120,9 @@ const AdminUV = () => {
         <p>Loading...</p>
       ) : (
         <div className={styles.container}>
+          {users.length == 0? (
+            <p>No users found. Check account details for misspelled city names or contact an admin for support.</p>
+          ) : ( 
           <ul className={styles.userlist}>
             <h1 className={styles.title}>Database Users</h1>
             <br></br>
@@ -159,6 +162,7 @@ const AdminUV = () => {
               
             ))}
           </ul>
+          )}
         </div>
       )}
     </div>

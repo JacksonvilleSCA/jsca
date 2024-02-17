@@ -34,6 +34,7 @@ const Login = () => {
 
 
   const handleSubmit = async (e) =>{
+    setError("");
     e.preventDefault();
     const formData = {
       username: userValue,

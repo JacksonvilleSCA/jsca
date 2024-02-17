@@ -1,4 +1,5 @@
 "use client";
+import React from 'react';
 import styles from './page.module.css';
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -6,6 +7,8 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import {accInfo} from "../../api/routes/accountInfo";
 import { accUpdate} from "../../api/routes/accountUpdate"
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 
 
@@ -31,6 +34,7 @@ export default function Accountmanage() {
   var countRY;
   var staTE;
   var ciTY;
+  const printRef = React.useRef();
 
   
   
@@ -159,6 +163,31 @@ export default function Accountmanage() {
     router.back('/LoginDashboard') 
   }
 
+  function printScreen(){
+    const confirm = window.confirm("Confirm to download document.")
+    if(confirm){
+      console.log("Downloading...");
+      try{
+        const element = printRef.current;
+        html2canvas(element).then(canvas => {
+          const data = canvas.toDataURL('image/png');
+          const pdf = new jsPDF();
+          const imgProperties = pdf.getImageProperties(data);
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+          pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          pdf.save('AccountInfo.pdf');
+        })
+      }
+      catch(e){
+        alert(e)
+      }
+
+      
+    }
+
+  }
+
 
   firstN = accData.firstname;
   lastN = accData.lastname;
@@ -179,8 +208,11 @@ export default function Accountmanage() {
 
       </div>
       
-      <div className={styles.title}>
+      <div className={styles.paddingButton}>
       <button onClick={dashB}> Return </button>
+      <button onClick={printScreen}>Export to PDF</button>
+
+
       </div>
 
 
@@ -191,7 +223,7 @@ export default function Accountmanage() {
       
     
 
-      <div className={styles.container}>
+      <div ref={printRef} className={styles.container}>
         <div className={styles.textbox}>
           <form onSubmit={handleSubmit}>
             <h2>User ID: {search}</h2>

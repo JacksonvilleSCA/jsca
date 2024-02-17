@@ -1,4 +1,5 @@
 "use client";
+import React from 'react';
 import styles from './page.module.css';
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -6,6 +7,10 @@ import { useState } from "react";
 import Link from 'next/link';
 import { AdminInfo } from '@/app/api/routes/adminInfo';
 import { AdminUpdate } from '@/app/api/routes/adminUpdate';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+
+
 
 
 
@@ -23,7 +28,6 @@ export default function AdminAccountManage() {
   const [accData, setAccData] = useState('');
   const [search, setSearch] = useState('');
   const [adminID, setAdminID] = useState('')
-
   var firstN;
   var lastN;
   var userN;
@@ -33,6 +37,7 @@ export default function AdminAccountManage() {
   var countRY;
   var staTE;
   var ciTY;
+  const printRef = React.useRef();
 
   
 
@@ -64,8 +69,6 @@ export default function AdminAccountManage() {
   const loadPage = async (searcH) =>{
 
     try{
-      console.log("ro")
-      console.log(searcH)
       const acc = await AdminInfo(searcH);
       setAccData(acc);
 
@@ -127,6 +130,31 @@ export default function AdminAccountManage() {
     router.push('/adminViewAdmins') 
   }
 
+  function printScreen(){
+    const confirm = window.confirm("Confirm to download document.")
+    if(confirm){
+      console.log("Downloading...");
+      try{
+        const element = printRef.current;
+        html2canvas(element).then(canvas => {
+          const data = canvas.toDataURL('image/png');
+          const pdf = new jsPDF();
+          const imgProperties = pdf.getImageProperties(data);
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+          pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          pdf.save('AccountInfo.pdf');
+        })
+      }
+      catch(e){
+        alert(e)
+      }
+
+      
+    }
+
+  }
+
 
   const handleSubmit = async (e) => {
     console.log(FIRSTN);
@@ -173,9 +201,6 @@ export default function AdminAccountManage() {
   }
 
 
-  console.log("Rofl copter");
-  console.log(accData);
-
   
   firstN = accData.firstname;
   lastN = accData.lastname;
@@ -201,6 +226,8 @@ export default function AdminAccountManage() {
 
       <div className={styles.title}>
       <button onClick={dashB}> Return </button>
+      <button onClick={printScreen}>Export to PDF</button>
+
       </div>
 
 
@@ -211,7 +238,7 @@ export default function AdminAccountManage() {
       
       
 
-      <div className={styles.container}>
+      <div ref={printRef} className={styles.container}>
         <div className={styles.textbox}>
           <form onSubmit={handleSubmit}>
             <h2>Admin ID: {search}</h2>
