@@ -1,6 +1,7 @@
 'use server'
 import mongoose from "mongoose";
 import Admin from "../schema/Admin";
+import Create from "../schema/Create";
 import connect from "../db/dbConnection";
 import React from "react";
 
@@ -28,12 +29,16 @@ let usernameCheck = data.username;
 let passwordCheck = data.password;
 
 
-const check1 = await Admin.findOne({ email : emailCheck})
-const check2 = await Admin.findOne({username: usernameCheck})
-const check3 = await Admin.findOne({password: passwordCheck})
+const check1 = await Create.findOne({email : emailCheck})
+const check2 = await Create.findOne({username: usernameCheck})
+const check3 = await Create.findOne({password: passwordCheck})
+const check4 = await Admin.findOne({email: emailCheck})
+const check5 = await Admin.findOne({username: usernameCheck})
+const check6 = await Admin.findOne({password: passwordCheck})
 
 
-if(check1 || check2 || check3 != null){
+
+if(check1 != null || check2 != null || check3 != null || check4 != null || check5 != null ||check6 != null){
     console.log(check1)
     console.log(check2)
     console.log(check3)
