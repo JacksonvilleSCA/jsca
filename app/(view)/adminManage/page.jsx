@@ -23,6 +23,7 @@ export default function AdminAccountManage() {
   const [userCountry, setUserCountry] = useState('')
   const [userState, setUserState] = useState('');
   const [userCity, setUserCity] = useState('')
+  const [userStreet, setUserStreet] = useState('');
   const [accData, setAccData] = useState('');
   const [search, setSearch] = useState('');
   var firstN;
@@ -34,6 +35,7 @@ export default function AdminAccountManage() {
   var countRY;
   var staTE;
   var ciTY;
+  var strEET;
   const printRef = React.useRef();
 
 
@@ -118,6 +120,10 @@ export default function AdminAccountManage() {
     setPASSWORD(e.target.value);
   }
 
+  const handleStreet = (e) =>{
+    setUserStreet(e.target.value);
+  }
+
   function manageUsers(){
 
     router.push('/adminViewUsers')
@@ -186,6 +192,7 @@ export default function AdminAccountManage() {
       country: userCountry,
       state: userState,
       city: userCity,
+      street: userStreet
 
     }
 
@@ -223,6 +230,7 @@ export default function AdminAccountManage() {
   countRY = accData.country;
   staTE = accData.state;
   ciTY = accData.city;
+  strEET = accData.street;
 
 
 
@@ -232,7 +240,7 @@ export default function AdminAccountManage() {
 
     return(
       
-      <div>
+      <div ref={printRef}>
       <div className={styles.title}>
       <h1 >Manage Admin Account</h1>
 
@@ -252,7 +260,7 @@ export default function AdminAccountManage() {
       
       
 
-      <div ref={printRef} className={styles.container}>
+      <div className={styles.container}>
         <div className={styles.textbox}>
           <form onSubmit={handleSubmit}>
             <h2>Admin ID: {search}</h2>
@@ -467,6 +475,11 @@ export default function AdminAccountManage() {
             <option value="Zambia">Zambia</option>
             <option value="Zimbabwe">Zimbabwe</option>
             </select>
+
+            <p>Street:</p>
+            <input className={styles.textbox} type="text" id="streeT"
+            value={userStreet} onChange={handleStreet} name="streeT" placeholder={strEET}/>
+
 
             <p>City:</p>
             <input className={styles.textbox} type="text" id="citY"

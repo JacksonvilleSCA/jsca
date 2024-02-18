@@ -88,6 +88,11 @@ if(check1 != null || check2 != null || check3 != null || check4 != null || check
         formData.city = user.city;
         console.log("EMPTY UPDATE: " + formData.city);
     }
+    if(formData.street == ''){
+        console.log("EMPTY FIELD");
+        formData.street = user.street;
+        console.log("EMPTY UPDATE: " + formData.street);
+    }
     
     
     console.log("00000")
@@ -101,6 +106,7 @@ if(check1 != null || check2 != null || check3 != null || check4 != null || check
     var country = formData.country;
     var state = formData.state;
     var city = formData.city;
+    var street = formData.street;
     
     
     const filter = {_id: userID};
@@ -114,6 +120,7 @@ if(check1 != null || check2 != null || check3 != null || check4 != null || check
         country: country,
         state: state,
         city: city,
+        street: street
     
     }
     console.log("INFO TO BE UPDATED");

@@ -21,6 +21,7 @@ export default function Accountmanage() {
   const [userCountry, setUserCountry] = useState('')
   const [userState, setUserState] = useState('');
   const [userCity, setUserCity] = useState('')
+  const [userStreet, setUserStreet] = useState('');
   const [accData, setAccData] = useState('');
   const [search, setSearch] = useState('')
   const [adminID, setAdminID] = useState('')
@@ -33,6 +34,7 @@ export default function Accountmanage() {
   var countRY;
   var staTE;
   var ciTY;
+  var strEET;
   const printRef = React.useRef();
   
 
@@ -107,6 +109,10 @@ export default function Accountmanage() {
     setPASSWORD(e.target.value);
   }
 
+  const handleStreet = (e) =>{
+    setUserStreet(e.target.value);
+  }
+
 
   const handleSubmit = async (e) => {
     console.log("xxxxx")
@@ -129,6 +135,7 @@ export default function Accountmanage() {
       country: userCountry,
       state: userState,
       city: userCity,
+      street: userStreet
 
     }
 
@@ -196,10 +203,11 @@ export default function Accountmanage() {
   countRY = accData.country;
   staTE = accData.state;
   ciTY = accData.city;
+  strEET = accData.street;
 
     return(
       
-      <div>
+      <div ref={printRef}>
 
       <h1>Admin Edit by {adminID}</h1>
       <button onClick={dashB}>Return</button>
@@ -215,7 +223,7 @@ export default function Accountmanage() {
       <br></br>
       <br></br>
       <br></br>
-      <div ref={printRef} className={styles.container}>
+      <div  className={styles.container}>
         <div className={styles.textbox}>
     
           <form onSubmit={handleSubmit}>
@@ -432,6 +440,11 @@ export default function Accountmanage() {
             <option value="Zambia">Zambia</option>
             <option value="Zimbabwe">Zimbabwe</option>
             </select>
+
+            <p>Street:</p>
+            <input className={styles.textbox} type="text" id="streeT"
+            value={userStreet} onChange={handleStreet} name="streeT" placeholder={strEET}/>
+
 
             <p>City:</p>
             <input className={styles.textbox} type="text" id="citY"

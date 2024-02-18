@@ -33,7 +33,8 @@ export async function getAllUsers(acc) {
       phonenumber: user.phonenumber,
       country: user.country,
       state: user.state,
-      city: user.city
+      city: user.city,
+      street: user.street
     }));
 
     console.log("users are:")

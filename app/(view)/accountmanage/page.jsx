@@ -22,7 +22,8 @@ export default function Accountmanage() {
   const [PHONENUMBER, setPHONENUMBER] = useState('');
   const [userCountry, setUserCountry] = useState('')
   const [userState, setUserState] = useState('');
-  const [userCity, setUserCity] = useState('')
+  const [userCity, setUserCity] = useState('');
+  const [userStreet, setUserStreet] = useState('');
   const [accData, setAccData] = useState('');
   const [search, setSearch] = useState('');
   var firstN;
@@ -34,6 +35,7 @@ export default function Accountmanage() {
   var countRY;
   var staTE;
   var ciTY;
+  var strEET;
   const printRef = React.useRef();
 
   
@@ -110,6 +112,10 @@ export default function Accountmanage() {
     setPASSWORD(e.target.value);
   }
 
+  const handleStreet = (e) =>{
+    setUserStreet(e.target.value);
+  }
+
 
   const handleSubmit = async (e,search) => {
     console.log("xxxxx")
@@ -132,6 +138,7 @@ export default function Accountmanage() {
       country: userCountry,
       state: userState,
       city: userCity,
+      street: userStreet
 
     }
     
@@ -198,6 +205,7 @@ export default function Accountmanage() {
   countRY = accData.country;
   staTE = accData.state;
   ciTY = accData.city;
+  strEET = accData.street;
 
     return(
       
@@ -437,6 +445,10 @@ export default function Accountmanage() {
             <option value="Zambia">Zambia</option>
             <option value="Zimbabwe">Zimbabwe</option>
             </select>
+
+            <p>Street:</p>
+            <input className={styles.textbox} type="text" id="streeT"
+            value={userStreet} onChange={handleStreet} name="streeT" placeholder={strEET}/>
 
             <p>City:</p>
             <input className={styles.textbox} type="text" id="citY"

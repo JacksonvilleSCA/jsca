@@ -18,6 +18,7 @@ const Createaccount = () => {
   const [userCountry, setUserCountry] = useState('')
   const [userState, setUserState] = useState('');
   const [userCity, setUserCity] = useState('')
+  const [userStreet, setUserStreet] = useState('')
   const [error, setError] = useState('');
 
 
@@ -68,13 +69,18 @@ const Createaccount = () => {
     console.log(userCity);
   }
 
+  const handleStreet = (e) =>{
+    setUserStreet(e.target.value);
+    console.log(userStreet);
+  }
+
 
   const handleSubmit = async (e) =>{
     e.preventDefault();
 
 
     var Check = 0;
-    if(!userEmail || !userFirst || !userLast || !userN || !userP || !userPhone || !userCountry) {
+    if(!userEmail || !userFirst || !userLast || !userN || !userP || !userPhone || !userCountry || !userStreet) {
       Check = 1;
     }
 
@@ -88,7 +94,8 @@ const Createaccount = () => {
       phonenumber: userPhone,
       country: userCountry,
       state: userState,
-      city: userCity
+      city: userCity,
+      street: userStreet
     }
 
     console.log(Object);
@@ -420,6 +427,16 @@ const Createaccount = () => {
               onChange={handleCity}
               name="usercity"
               placeholder="City"/>
+            </div>
+
+            <div className={styles.textbox2}>
+              <label htmlFor="userStreet">Enter Street: </label>
+              <input 
+              type="text" 
+              id="userStreet" 
+              onChange={handleStreet}
+              name="usercity"
+              placeholder="Street"/>
             </div>
 
 

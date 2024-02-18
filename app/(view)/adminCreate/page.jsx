@@ -19,6 +19,7 @@ const AdminCreate= () => {
   const [userCountry, setUserCountry] = useState('')
   const [userState, setUserState] = useState('');
   const [userCity, setUserCity] = useState('')
+  const [userStreet, setUserStreet] = useState('');
   const [checkBox, setCheckBox] = useState(false)
   const [error, setError] = useState('');
 
@@ -83,6 +84,9 @@ const AdminCreate= () => {
     setCheckBox(e.target.value);
     console.log(checkBox);
   }
+  const handleStreet = (e) =>{
+    setUserStreet(e.target.value);
+  }
 
 
   const handleSubmit = async (e) =>{
@@ -90,7 +94,7 @@ const AdminCreate= () => {
 
 
     var Check = 0;
-    if(!userEmail || !userFirst || !userLast || !userN || !userP || !userPhone || !userCountry) {
+    if(!userEmail || !userFirst || !userLast || !userN || !userP || !userPhone || !userCountry || !userCity || !userStreet) {
       Check = 1;
     }
 
@@ -105,6 +109,7 @@ const AdminCreate= () => {
       country: userCountry,
       state: userState,
       city: userCity,
+      street: userStreet,
       checkbox: checkBox
     }
 
@@ -428,8 +433,18 @@ const AdminCreate= () => {
               name="userstate"
               placeholder="State"/>
             </div>
-        
 
+            <div className={styles.textbox2}>
+              <label htmlFor="userStreet">Enter Street: </label>
+              <input 
+              type="text" 
+              id="userStreet" 
+              onChange={handleStreet}
+              name="usercity"
+              placeholder="Street"/>
+            </div>
+
+          
          
 
             <div className={styles.textbox2}>

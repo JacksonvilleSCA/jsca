@@ -19,7 +19,8 @@ export async function AdminInfo(adminID){
         phonenumber: admin.phonenumber,
         country: admin.country,
         state: admin.state,
-        city: admin.city
+        city: admin.city,
+        street: admin.street
 
     }
     console.log(object);

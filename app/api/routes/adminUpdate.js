@@ -93,6 +93,12 @@ export async function AdminUpdate(adminID,formData){
         console.log("EMPTY UPDATE: " + formData.city);
     }
 
+    if(formData.street == ''){
+        console.log("EMPTY FIELD");
+        formData.street = admin.street;
+        console.log("EMPTY UPDATE: " + formData.street);
+    }
+
     console.log(formData);
     console.log("Checking for user ID")
     console.log(userID);
@@ -107,6 +113,7 @@ export async function AdminUpdate(adminID,formData){
     var country = formData.country;
     var state = formData.state;
     var city = formData.city;
+    var street = formData.street;
 
 
     const filter = { _id: userID };
@@ -122,6 +129,7 @@ export async function AdminUpdate(adminID,formData){
             country: country,
             state: state,
             city: city,
+            street: street
         }
     };
 

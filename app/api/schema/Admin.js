@@ -41,6 +41,10 @@ const AdminSchema = new Schema({
     },
     city: {
         type:String,
+    },
+    street:{
+        type:String,
+
     }
 
 

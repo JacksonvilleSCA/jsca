@@ -19,6 +19,7 @@ const Createaccount = () => {
   const [userCountry, setUserCountry] = useState('')
   const [userState, setUserState] = useState('');
   const [userCity, setUserCity] = useState('')
+  const [userStreet, setUserStreet] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -78,6 +79,11 @@ const Createaccount = () => {
     console.log(userCity);
   }
 
+  const handleStreet = (e) =>{
+    setUserStreet(e.target.value);
+    console.log(userStreet);
+  }
+
 
   const handleSubmit = async (e) =>{
     setError("");
@@ -99,7 +105,8 @@ const Createaccount = () => {
       phonenumber: userPhone,
       country: userCountry,
       state: userState,
-      city: userCity
+      city: userCity,
+      street: userStreet
     }
 
     console.log(Object);
@@ -436,6 +443,16 @@ const Createaccount = () => {
               onChange={handleCity}
               name="usercity"
               placeholder="City"/>
+            </div>
+
+            <div className={styles.textbox2}>
+              <label htmlFor="userStreet">Enter Street: </label>
+              <input 
+              type="text" 
+              id="userStreet" 
+              onChange={handleStreet}
+              name="usercity"
+              placeholder="Street"/>
             </div>
 
 

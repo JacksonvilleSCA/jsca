@@ -58,7 +58,8 @@ else{
         phonenumber: data.phonenumber,
         country: data.country,
         state: data.state,
-        city: data.city
+        city: data.city,
+        street: data.street
     
     
     })
