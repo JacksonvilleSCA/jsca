@@ -3,50 +3,49 @@
 import React from "react";
 import connect from "../db/dbConnection";
 import Create from "../schema/Create";
-import RenderResult from "next/dist/server/render-result";
+import Admin from "../schema/Admin";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { Underdog } from "next/font/google";
 
 export async function POST2(formData){
     var returnValue;
     console.log(formData);
     const username = formData.username;
     const password = formData.password;  
-    const user = await Create.findOne({username,password})
-    
-    if(!user){
-        returnValue = null;
+    const admin = await Admin.findOne({username,password})
+    var user
 
+    if(!admin){
+        console.log("no admin")
+        user = await Create.findOne({username,password})
+        var id
+        if(user != null){
+            id = JSON.stringify(user.id);
+            id = id.replace(/['"]+/g, '')
+        }
+
+        returnValue = {
+            ID: id,
+            value: "user"
+        }
     }
     else{
-        console.log("USER FOUND");
-        console.log(user)
-        console.log("USER ID:" + user.id);
-        var firstName = user.firstname;
-        var id = JSON.stringify(user.id);
+        console.log("no member")
+        var id = JSON.stringify(admin.adminID);
         id = id.replace(/['"]+/g, '')
-        console.log(id);
-        console.log(firstName);
 
-        
-
-
-        var object ={
-            firstname : firstName,
-            ID : id
-
+        returnValue = {
+            ID: id,
+            value: "admin"
         }
-        
 
-        
-
-        
-        
-        
     }
 
-    return object;
+    if(admin == null && user == null){
+        returnValue = null
+    }    
+  
+
+    return returnValue;
     
     
 

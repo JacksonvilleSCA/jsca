@@ -57,6 +57,12 @@
   color: red;
 }
 
+.resetButton{
+  margin-left: 10px;
+  margin-right: 10px; 
+  color: blue;
+}
+
 .editbutton {
   color: blue;
 }
@@ -68,4 +74,10 @@
 
 .darkblue {
   background-color: rgba(11, 90, 180, 0.788);
+}
+
+
+.tagP{
+  color: grey;
+  font-style: italic;
 }

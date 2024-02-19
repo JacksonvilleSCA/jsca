@@ -15,6 +15,7 @@ const AdminAV = () => {
   const [loading, setLoading] = useState(true);
   const [accData, setAccData] = useState('');
   const [search, setSearch] = useState(null);
+  const [filter, setFilter] = useState('');
   const showCreate = search && !search.includes('j');
 
   const router = useRouter();
@@ -87,6 +88,25 @@ const AdminAV = () => {
     router.push('/admindashboard')
   }
 
+
+  function handleSearchReset(){
+    location.reload(true);
+  }
+
+  const handleSearch = () =>{
+    const removeSpace = filter.replace(/\s/g, "") 
+    setFilter(removeSpace)
+    const users1 = users.filter(user => {
+      const fullName = `${user.firstname} ${user.lastname}`.toLowerCase()
+      const userNAME = user.username.toLowerCase().replace(/\s/g, "") 
+      const city = user.city.toLowerCase().replace(/\s/g, "") 
+      const country = user.country.toLowerCase().replace(/\s/g, "") 
+      return fullName.includes(removeSpace.toLowerCase()) || userNAME.includes(removeSpace.toLowerCase())
+      || city.includes(removeSpace.toLowerCase()) || country.includes(removeSpace.toLowerCase());
+    });
+    setUsers(users1);
+  }
+
  
 
 
@@ -95,7 +115,7 @@ const AdminAV = () => {
 
     return (
       <div>
-      <h1>ADMIN OVERVIEW </h1>
+      <h1>|ADMIN OVERVIEW </h1>
       <div className={styles.topContainer}>
         {showCreate && (
             <Link href='/adminCreate'>Admin Creation</Link>
@@ -120,8 +140,27 @@ const AdminAV = () => {
         <p>Loading...</p>
       ) : (
         <div className={styles.container}>
+          {users.length == 0? (
+            <div>
+            <p>No users found.
+            Incase of errors thought, check account details for misspelled city names or contact an admin for support.</p>
+            <button onClick={handleSearchReset}>Reset</button>
+            </div>
+            
+          ) : ( 
           <ul className={styles.userlist}>
             <h1 className={styles.title}>Database Admins</h1>
+            <div className={styles.title}>
+              <input type="text"
+              placeholder="ex.(Keith David)"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}/>
+              <button className={styles.resetButton} onClick={handleSearch}>Search</button>
+              <button onClick={handleSearchReset}>Reset</button>
+              <p className={styles.tagP}>Input must be reset after each search.</p>
+            </div>
+
+            <br></br>
             <br></br>
             {users.map((user, index) => (
               <li key={index} className={`${styles.useritem} ${index % 2 === 0 ? styles.darkblue : styles.lightblue}`}>
@@ -149,7 +188,7 @@ const AdminAV = () => {
                 </div>
 
                 <div className={styles.buttons}>
-                <button className ={styles.editbutton} onClick = {() =>handleEdit(user)}>Edit</button>
+                <button className={styles.editbutton} onClick = {() =>handleEdit(user)}>Edit</button>
                 <button className={styles.deletebutton} onClick={() => handleDelete(user)}>Delete</button>
                 </div>
               
@@ -159,6 +198,7 @@ const AdminAV = () => {
               
             ))}
           </ul>
+          )}
         </div>
       )}
     </div>
