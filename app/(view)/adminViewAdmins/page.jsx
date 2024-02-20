@@ -121,7 +121,10 @@ const AdminAV = () => {
             <Link href='/adminCreate'>Admin Creation</Link>
           )
         }
+        <p>|</p>
         <Link href='/adminStudent'>Student Account Creation</Link>
+        <p>|</p>
+
 
       </div>
       

@@ -234,6 +234,7 @@ export default function AdminAccountManage() {
 
       <div className={styles.title}>
       <button onClick={dashB}> Return </button>
+      <p></p>
       <button onClick={printScreen}>Export to PDF</button>
 
       </div>
@@ -243,6 +244,15 @@ export default function AdminAccountManage() {
       <br></br>
       <br></br>
       <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      
       
       
 
@@ -255,17 +265,26 @@ export default function AdminAccountManage() {
             <p></p>
             <input className={styles.textbox} type="text" id="firstName" 
             value ={FIRSTN} onChange={handleFirstName} name ="firstname" placeholder={firstN}/>
+            <br></br>
+            <br></br>
             <p>Last Name: </p>
             <input className={styles.textbox} type="text" id="lastName" 
             value={LASTN} onChange={handleLastName} name="lastname" placeholder={lastN} />
+            <br></br>
+            <br></br>
             <p>Email: </p>
             <input className={styles.textbox} type="text" id="email" 
             value={EMAIL} onChange={handleEmail} name="email" placeholder={email} />
-            
+            <br></br>
+            <br></br>
+
             <p>Phone Number: </p>
+            
+
             <input className={styles.textbox} type="text" id="phonenumber"
             value={PHONENUMBER} onChange={handlePhone} name="phonenumber" placeholder={phone}/>
-
+            <br></br>
+            <br></br>
             <p>Country:</p>
             <select name="country" id="country" onChange={handleCountry}>
             <option value="">{countRY}</option>
@@ -462,24 +481,38 @@ export default function AdminAccountManage() {
             <option value="Zambia">Zambia</option>
             <option value="Zimbabwe">Zimbabwe</option>
             </select>
+            <br></br>
+            <br></br>
 
             <p>Street:</p>
+            
+            
             <input className={styles.textbox} type="text" id="streeT"
             value={userStreet} onChange={handleStreet} name="streeT" placeholder={strEET}/>
-
+            <br></br>
+            <br></br>
             <p>City:</p>
+            
             <input className={styles.textbox} type="text" id="citY"
             value={userCity} onChange={handleCity} name="citY" placeholder={ciTY}/>
-
+            <br></br>
+            <br></br>
             <p>State:</p>
+            
             <input className={styles.textbox} type="text" id="passWord"
             value={userState} onChange={handleState} name="passWord" placeholder={staTE}/>
+            <br></br>
+            <br></br>
 
             <p>User Name: </p>
+            
             <input className={styles.textbox} type="text" id="userName"
             value={USER} onChange={handleUser} name="userName" placeholder={userN}/>
+            <br></br>
+            <br></br>
             
             <p>Password:</p>
+          
             <input className={styles.textbox} type="text" id="passWord"
             value={PASSWORD} onChange={handlePassword} name="passWord" placeholder={passW}/>
       
