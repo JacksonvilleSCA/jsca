@@ -11,8 +11,6 @@ import { NextRequest } from "next/server";
 const nodemailer = require('nodemailer');
 
 
-//Note: Rewrite server connection function with host for nodemailer.
-//Issue is server timeout on vercel with current code. 
 
 export async function contact(data) {
   const username = process.env.NEXT_PUBLIC_EMAIL_USERNAME;
