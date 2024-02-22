@@ -80,3 +80,10 @@
   color: grey;
   font-style: italic;
 }
+
+.paddingButton{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  
+}

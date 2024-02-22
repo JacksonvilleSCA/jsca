@@ -9,6 +9,7 @@ import { AdminInfo } from '@/app/api/routes/adminInfo';
 import Link from "next/link"
 import { getAllUsers } from "@/app/api/routes/users"
 import { deleteUsers } from "@/app/api/routes/deleteUser"
+import { downloadAllUsers } from "@/app/api/routes/downloadAllUsers"
 
 const AdminUV = () => {
   const [users, setUsers] = useState([]);
@@ -92,6 +93,15 @@ const AdminUV = () => {
     location.reload(true);
   }
 
+
+  function handleDownload(){
+    const result = downloadAllUsers
+    if(result == 'wilco'){
+      alert("Error with download.")
+    }
+    
+  }
+
   const handleSearch = () =>{
     const removeSpace = filter.replace(/\s/g, "") 
     setFilter(removeSpace)
@@ -125,13 +135,16 @@ const AdminUV = () => {
         <Link href='/adminStudent'>Student Account Creation</Link>
         <p>|</p>
 
+
       </div>
       
 
       
       <br></br>
-      <div className={styles.padding}>
+      <div className={styles.paddingButton}>
       <button  onClick={back}>Return</button>
+      <button  onClick={handleDownload}>Download User Data</button>
+
 
       </div>
       
@@ -160,7 +173,8 @@ const AdminUV = () => {
               value={filter}
               onChange={(e) => setFilter(e.target.value)}/>
               <button className={styles.resetButton} onClick={handleSearch}>Search</button>
-              <button onClick={handleSearchReset}>Reset</button>
+              <button className={styles.resetButton} onClick={handleSearchReset}>Reset</button>
+
               <p className={styles.tagP}>Input must be reset after each search.</p>
             </div>
 
