@@ -11,6 +11,7 @@ import { getAllUsers } from "@/app/api/routes/users"
 import { deleteUsers } from "@/app/api/routes/deleteUser"
 import { downloadAllUsers } from "@/app/api/routes/downloadAllUsers"
 
+
 const AdminUV = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -94,11 +95,38 @@ const AdminUV = () => {
   }
 
 
-  function handleDownload(){
-    const result = downloadAllUsers
-    if(result == 'wilco'){
-      alert("Error with download.")
+  const handleDownload = async(search) =>{ 
+    try{
+      const {headers, csvContent} = await downloadAllUsers(search);
+      console.log(headers)
+      console.log(csvContent)
+      
+      if(headers == null || csvContent == null){
+        alert("Error with download.")
+      }
+      else{
+        const csvData = `${headers}\n${csvContent}`;
+            
+        const blob = new Blob([csvData], { type: 'text/csv' });
+
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Members.csv';
+
+        document.body.appendChild(a);
+        a.click();
+
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+
+      }
     }
+    catch(e){
+      console.log(e)
+    }
+    
     
   }
 
@@ -143,7 +171,8 @@ const AdminUV = () => {
       <br></br>
       <div className={styles.paddingButton}>
       <button  onClick={back}>Return</button>
-      <button  onClick={handleDownload}>Download User Data</button>
+      <button onClick={() => handleDownload(accData)}>Download User Data</button>
+
 
 
       </div>
