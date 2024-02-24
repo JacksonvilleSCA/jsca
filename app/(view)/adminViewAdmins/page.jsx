@@ -170,7 +170,7 @@ const AdminAV = () => {
       <br></br>
       <div className={styles.paddingButton}>
       <button  onClick={back}>Return</button>
-      <button onClick={() => handleDownload(accData)}>Download User Data</button>
+      <button onClick={() => handleDownload(accData)}>Download Admin Data</button>
 
 
 
