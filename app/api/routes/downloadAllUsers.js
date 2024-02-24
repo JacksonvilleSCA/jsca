@@ -41,7 +41,7 @@ export async function downloadAllUsers(acc) {
     console.log("users are:")
     console.log(formattedUsers);
 
-    const headers = 'id,email,username,password,firstname,lastname,phonenumber,country,state,city,street'
+    const headers = 'ID,Email,Username,Password,First Name,Last Name,Phone Number,Country,State,City,Street'
     const csvContent = `${formattedUsers.map(user => `${user._id},${user.email},${user.username},${user.password},${user.firstname},${user.lastname},${user.phonenumber},${user.country},${user.state},${user.city},${user.street}`).join('\n')}`;
     console.log(csvContent)
 

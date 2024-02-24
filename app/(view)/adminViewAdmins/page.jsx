@@ -9,6 +9,7 @@ import { AdminInfo } from '@/app/api/routes/adminInfo';
 import Link from "next/link"
 import { getAllAdmins } from "@/app/api/routes/admins"
 import { deleteAdmins } from "@/app/api/routes/deleteAdmin"
+import { DownloadAllAdmins } from "@/app/api/routes/downloadAllAdmins"
 
 const AdminAV = () => {
   const [users, setUsers] = useState([]);
@@ -84,6 +85,42 @@ const AdminAV = () => {
     
   }
 
+
+  const handleDownload = async(search) =>{ 
+    try{
+      const {headers, csvContent} = await DownloadAllAdmins(search);
+      console.log(headers)
+      console.log(csvContent)
+      
+      if(headers == null || csvContent == null){
+        alert("Error with download.")
+      }
+      else{
+        const csvData = `${headers}\n${csvContent}`;
+            
+        const blob = new Blob([csvData], { type: 'text/csv' });
+
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Members.csv';
+
+        document.body.appendChild(a);
+        a.click();
+
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+
+      }
+    }
+    catch(e){
+      console.log(e)
+    }
+    
+    
+  }
+
   function back(){
     router.push('/admindashboard')
   }
@@ -131,8 +168,11 @@ const AdminAV = () => {
 
       
       <br></br>
-      <div className={styles.padding}>
+      <div className={styles.paddingButton}>
       <button  onClick={back}>Return</button>
+      <button onClick={() => handleDownload(accData)}>Download User Data</button>
+
+
 
       </div>
       
