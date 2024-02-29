@@ -1,16 +1,17 @@
-'use server'
+"use server"
 import mongoose from "mongoose";
 import Create from "../schema/Create";
 import connect from "../db/dbConnection";
 import React from "react";
 
 
-export async function getAllUsers(acc) {
+export async function downloadAllUsers(acc) {
   console.log(acc);
   console.log("TESTING FOR JUNIOR")
   const ID = acc.AdminID;
   const Con = acc.city;
   var check = false
+  const fs = require('fs');
   if(ID.includes('j')){
     console.log("JUNIOR ADMIN DETECTED");
     check = true;
@@ -39,15 +40,29 @@ export async function getAllUsers(acc) {
 
     console.log("users are:")
     console.log(formattedUsers);
-    return formattedUsers;
+
+    const headers = 'ID,Email,Username,Password,First Name,Last Name,Phone Number,Country,State,City,Street'
+    const csvContent = `${formattedUsers.map(user => `${user._id},${user.email},${user.username},${user.password},${user.firstname},${user.lastname},${user.phonenumber},${user.country},${user.state},${user.city},${user.street}`).join('\n')}`;
+    console.log(csvContent)
+
+    return {headers,csvContent}
+
+    
+
+   
 
   } catch (error) {
 
     console.error('Error fetching users:', error);
-    return [];
+    return false
 
 
   }
+
+
+
+
+
 
 
 }

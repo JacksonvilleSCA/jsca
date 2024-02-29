@@ -18,16 +18,12 @@ export async function tokencheck(formData){
         resultReturn = false
     }
     else{
-        resultReturn = findToken
+        resultReturn = {
+            token : findToken.token,
+            id : findToken.id
+        }
     }
     
-    console.log("TOKEN RESULT: ")
-    console.log(resultReturn)
-
-    resultReturn = {
-        token : findToken.token,
-        id : findToken.id
-    }
     return resultReturn;
     
     

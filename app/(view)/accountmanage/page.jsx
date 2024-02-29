@@ -1,4 +1,5 @@
 "use client";
+import React from 'react';
 import styles from './page.module.css';
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -6,6 +7,8 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import {accInfo} from "../../api/routes/accountInfo";
 import { accUpdate} from "../../api/routes/accountUpdate"
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 
 
@@ -19,7 +22,8 @@ export default function Accountmanage() {
   const [PHONENUMBER, setPHONENUMBER] = useState('');
   const [userCountry, setUserCountry] = useState('')
   const [userState, setUserState] = useState('');
-  const [userCity, setUserCity] = useState('')
+  const [userCity, setUserCity] = useState('');
+  const [userStreet, setUserStreet] = useState('');
   const [accData, setAccData] = useState('');
   const [search, setSearch] = useState('');
   var firstN;
@@ -31,6 +35,8 @@ export default function Accountmanage() {
   var countRY;
   var staTE;
   var ciTY;
+  var strEET;
+  const printRef = React.useRef();
 
   
   
@@ -106,6 +112,10 @@ export default function Accountmanage() {
     setPASSWORD(e.target.value);
   }
 
+  const handleStreet = (e) =>{
+    setUserStreet(e.target.value);
+  }
+
 
   const handleSubmit = async (e,search) => {
     console.log("xxxxx")
@@ -128,6 +138,7 @@ export default function Accountmanage() {
       country: userCountry,
       state: userState,
       city: userCity,
+      street: userStreet
 
     }
     
@@ -159,6 +170,31 @@ export default function Accountmanage() {
     router.back('/LoginDashboard') 
   }
 
+  function printScreen(){
+    const confirm = window.confirm("Confirm to download document.")
+    if(confirm){
+      console.log("Downloading...");
+      try{
+        const element = printRef.current;
+        html2canvas(element).then(canvas => {
+          const data = canvas.toDataURL('image/png');
+          const pdf = new jsPDF();
+          const imgProperties = pdf.getImageProperties(data);
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+          pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          pdf.save('AccountInfo.pdf');
+        })
+      }
+      catch(e){
+        alert(e)
+      }
+
+      
+    }
+
+  }
+
 
   firstN = accData.firstname;
   lastN = accData.lastname;
@@ -169,21 +205,37 @@ export default function Accountmanage() {
   countRY = accData.country;
   staTE = accData.state;
   ciTY = accData.city;
+  strEET = accData.street;
 
     return(
       
-      <div>
+      <div ref={printRef}>
 
       <div className={styles.title}>
-      <h1 >Manage Account</h1>
+      <h1 >|Manage Account</h1>
 
       </div>
       
-      <div className={styles.title}>
+      <div className={styles.paddingButton}>
       <button onClick={dashB}> Return </button>
+      <button onClick={printScreen}>Export to PDF</button>
+
+
       </div>
 
 
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <br></br>
       <br></br>
       <br></br>
@@ -191,7 +243,7 @@ export default function Accountmanage() {
       
     
 
-      <div className={styles.container}>
+      <div  className={styles.container}>
         <div className={styles.textbox}>
           <form onSubmit={handleSubmit}>
             <h2>User ID: {search}</h2>
@@ -199,16 +251,23 @@ export default function Accountmanage() {
             <p></p>
             <input className={styles.textbox} type="text" id="firstName" 
             value ={FIRSTN} onChange={handleFirstName} name ="firstname" placeholder={firstN}/>
+            <br></br>
+            <br></br>
             <p>Last Name: </p>
             <input className={styles.textbox} type="text" id="lastName" 
             value={LASTN} onChange={handleLastName} name="lastname" placeholder={lastN} />
+            <br></br>
+            <br></br>
             <p>Email: </p>
             <input className={styles.textbox} type="text" id="email" 
             value={EMAIL} onChange={handleEmail} name="email" placeholder={email} />
+            <br></br>
+            <br></br>
             <p>Phone Number: </p>
             <input className={styles.textbox} type="text" id="phonenumber"
             value={PHONENUMBER} onChange={handlePhone} name="phonenumber" placeholder={phone}/>
-
+            <br></br>
+            <br></br>
             <p>Country:</p>
             <select name="country" id="country" onChange={handleCountry}>
             <option value="">{countRY}</option>
@@ -405,19 +464,28 @@ export default function Accountmanage() {
             <option value="Zambia">Zambia</option>
             <option value="Zimbabwe">Zimbabwe</option>
             </select>
-
+            <br></br>
+            <br></br>
+            <p>Street:</p>
+            <input className={styles.textbox} type="text" id="streeT"
+            value={userStreet} onChange={handleStreet} name="streeT" placeholder={strEET}/>
+            <br></br>
+            <br></br>
             <p>City:</p>
             <input className={styles.textbox} type="text" id="citY"
             value={userCity} onChange={handleCity} name="citY" placeholder={ciTY}/>
-
+            <br></br>
+            <br></br>
             <p>State:</p>
             <input className={styles.textbox} type="text" id="passWord"
             value={userState} onChange={handleState} name="passWord" placeholder={staTE}/>
-
+            <br></br>
+            <br></br>
             <p>User Name: </p>
             <input className={styles.textbox} type="text" id="userName"
             value={USER} onChange={handleUser} name="userName" placeholder={userN}/>
-            
+            <br></br>
+            <br></br>
             <p>Password:</p>
             <input className={styles.textbox} type="text" id="passWord"
             value={PASSWORD} onChange={handlePassword} name="passWord" placeholder={passW}/>
@@ -428,22 +496,28 @@ export default function Accountmanage() {
             <button type="submit" className={styles.textbox3}>Update</button>
 
             </form>
+            
 
         </div>
         <div>
           <br></br>
           <br></br>
+          
         </div>
 
 
       </div>
       
 
-      
 
-
-  
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       </div>
+      
     )
   }
   

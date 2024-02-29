@@ -4,6 +4,8 @@ import Button from './components/Button/Button'
 import logo from '/public/jscaNavLogo.png'
 
 
+
+
 export default function Home() {
   return (
     <div className={styles.container}>

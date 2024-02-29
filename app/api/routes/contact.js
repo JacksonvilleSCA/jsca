@@ -11,10 +11,6 @@ import { NextRequest } from "next/server";
 const nodemailer = require('nodemailer');
 
 
-//set up encryption and decryption for the page.
-//We will encryp the user's id then decrypt it on the recieving page.
-//This will then allow the system to know which user this is. 
-//Must find a way to set up a check if it is a member or admin.
 
 export async function contact(data) {
   const username = process.env.NEXT_PUBLIC_EMAIL_USERNAME;
@@ -24,9 +20,9 @@ export async function contact(data) {
   var ID
   console.log(email)
   const admin = await Admin.findOne({email: email})
-  console.log(admin)
   if(admin != null){
     ID = admin._id;
+    console.log(admin)
   }
 
 
@@ -34,6 +30,7 @@ export async function contact(data) {
   if(admin == null){
     member = await Create.findOne({email : email})
     ID = member._id;
+    console.log(member)
 
   }
 
@@ -101,14 +98,13 @@ export async function contact(data) {
   const transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com",
     port: 587,
-    tls: {
-      ciphers: "SSLv3",
-      rejectUnauthorized: false,
-    },
     auth: { 
       user: username,
       pass: password
-    }
+    },
+    connectionTimeout: 20000, 
+    greetingTimeout: 20000,   
+    socketTimeout: 20000  
     
   });
 
@@ -129,6 +125,7 @@ export async function contact(data) {
       <p><a href="https://www.jsca.org/">www.jsca.org</a></p>
       `
     })
+    console.log(mail)
     
     return { status: 200, body: { message: "Success: email was sent" } };
 

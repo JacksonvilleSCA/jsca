@@ -43,7 +43,9 @@ const Dashboard = () => {
  
 
     return (
+      
       <div>
+        
         <div className={styles.container2}>
           <div><h1 className={styles.title}>Dashboard</h1></div>
         </div>

@@ -9,12 +9,15 @@ import { AdminInfo } from '@/app/api/routes/adminInfo';
 import Link from "next/link"
 import { getAllUsers } from "@/app/api/routes/users"
 import { deleteUsers } from "@/app/api/routes/deleteUser"
+import { downloadAllUsers } from "@/app/api/routes/downloadAllUsers"
+
 
 const AdminUV = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [accData, setAccData] = useState('');
   const [search, setSearch] = useState(null);
+  const [filter, setFilter] = useState('');
   const showCreate = search && !search.includes('j');
 
   const router = useRouter();
@@ -45,7 +48,7 @@ const AdminUV = () => {
       setLoading(false);    
     } catch (error) {
       console.error('Error with obtaining data.', error);
-      setLoading(false);
+      setLoading(true);
     }
   }
 
@@ -87,41 +90,124 @@ const AdminUV = () => {
     router.push('/admindashboard')
   }
 
+  function handleSearchReset(){
+    location.reload(true);
+  }
+
+
+  const handleDownload = async(search) =>{ 
+    try{
+      const {headers, csvContent} = await downloadAllUsers(search);
+      console.log(headers)
+      console.log(csvContent)
+      
+      if(headers == null || csvContent == null){
+        alert("Error with download.")
+      }
+      else{
+        const csvData = `${headers}\n${csvContent}`;
+            
+        const blob = new Blob([csvData], { type: 'text/csv' });
+
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Members.csv';
+
+        document.body.appendChild(a);
+        a.click();
+
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+
+      }
+    }
+    catch(e){
+      console.log(e)
+    }
+    
+    
+  }
+
+  const handleSearch = () =>{
+    const removeSpace = filter.replace(/\s/g, "") 
+    setFilter(removeSpace)
+    const users1 = users.filter(user => {
+      const fullName = `${user.firstname} ${user.lastname}`.toLowerCase()
+      const userNAME = user.username.toLowerCase().replace(/\s/g, "") 
+      const city = user.city.toLowerCase().replace(/\s/g, "") 
+      const country = user.country.toLowerCase().replace(/\s/g, "") 
+      return fullName.includes(removeSpace.toLowerCase()) || userNAME.includes(removeSpace.toLowerCase())
+      || city.includes(removeSpace.toLowerCase()) || country.includes(removeSpace.toLowerCase());
+    });
+    setUsers(users1);
+  }
+  
+
  
 
 
   
- 
+  
 
     return (
       <div>
-      <h1>ADMIN OVERVIEW </h1>
+      <h1>|ADMIN OVERVIEW </h1>
       <div className={styles.topContainer}>
         {showCreate && (
             <Link href='/adminCreate'>Admin Creation</Link>
           )
         }
+        <p>|</p>
         <Link href='/adminStudent'>Student Account Creation</Link>
+        <p>|</p>
+
 
       </div>
       
 
       
       <br></br>
-      <div className={styles.padding}>
+      <div className={styles.paddingButton}>
       <button  onClick={back}>Return</button>
+      <button onClick={() => handleDownload(accData)}>Download User Data</button>
+
+
 
       </div>
       
 
       <br></br>
+      
+      
      
       {loading ? (
         <p>Loading...</p>
       ) : (
         <div className={styles.container}>
+          {users.length == 0? (
+            <div>
+            <p>No users found.
+            Incase of errors thought, check account details for misspelled city names or contact an admin for support.</p>
+            <button onClick={handleSearchReset}>Reset</button>
+            </div>
+            
+          ) : ( 
           <ul className={styles.userlist}>
             <h1 className={styles.title}>Database Users</h1>
+            <div className={styles.title}>
+              <input type="text"
+              placeholder="ex.(Keith David)"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}/>
+              <button className={styles.resetButton} onClick={handleSearch}>Search</button>
+              <button className={styles.resetButton} onClick={handleSearchReset}>Reset</button>
+
+              <p className={styles.tagP}>Input must be reset after each search.</p>
+            </div>
+
+            <br></br>
             <br></br>
             {users.map((user, index) => (
               <li key={index} className={`${styles.useritem} ${index % 2 === 0 ? styles.darkblue : styles.lightblue}`}>
@@ -149,7 +235,7 @@ const AdminUV = () => {
                 </div>
 
                 <div className={styles.buttons}>
-                <button className ={styles.editbutton} onClick = {() =>handleEdit(user)}>Edit</button>
+                <button className={styles.editbutton} onClick = {() =>handleEdit(user)}>Edit</button>
                 <button className={styles.deletebutton} onClick={() => handleDelete(user)}>Delete</button>
                 </div>
               
@@ -159,6 +245,7 @@ const AdminUV = () => {
               
             ))}
           </ul>
+          )}
         </div>
       )}
     </div>

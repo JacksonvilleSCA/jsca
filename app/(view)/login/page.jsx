@@ -34,6 +34,7 @@ const Login = () => {
 
 
   const handleSubmit = async (e) =>{
+    setError("");
     e.preventDefault();
     const formData = {
       username: userValue,
@@ -55,9 +56,18 @@ const Login = () => {
 
     }
     else{
-      const myID = Value1.ID
-      sessionStorage.setItem('uid',myID)
-      router.push('/LoginDashboard');
+      const check = Value1.value;
+      if(check == "user"){
+        var myID = Value1.ID
+        sessionStorage.setItem('uid',myID)
+        router.push('/LoginDashboard');
+      }
+      else{
+        var myID2 = Value1.ID
+        sessionStorage.setItem('AID',myID2)
+        router.push('/admindashboard');
+      }
+
       
     }
 
@@ -104,7 +114,6 @@ const Login = () => {
       <div>
         <p>---------------------------------------------</p>
       </div>
-      <p><Link href='/adminLogin'>Staff Login</Link></p>
       {error && <p style={{color: 'red'}}>{error}</p>}
       
 

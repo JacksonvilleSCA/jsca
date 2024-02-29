@@ -5,7 +5,7 @@ import React from "react";
 import Admin from "../schema/Admin";
 
 
-export async function getAllAdmins(acc) {
+export async function DownloadAllAdmins(acc) {
   console.log(acc);
   const ID = acc.AdminID;
   
@@ -30,10 +30,15 @@ export async function getAllAdmins(acc) {
 
     console.log("users are:")
     console.log(formattedUsers);
-    return formattedUsers;
+    
+    const headers = 'ID,Admin ID,Email,Username,Password,First Name,Last Name,Phone Number,Country,State,City,Street'
+    const csvContent = `${formattedUsers.map(user => `${user._id},${user.adminID},${user.email},${user.username},${user.password},${user.firstname},${user.lastname},${user.phonenumber},${user.country},${user.state},${user.city},${user.street}`).join('\n')}`;
+
+    return {headers,csvContent}
+
 
   } catch (error) {
     console.error('Error fetching users:', error);
-    return [];
+    return false;
   }
 }
