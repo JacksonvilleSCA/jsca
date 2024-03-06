@@ -57,3 +57,21 @@ export async function GET() {
     throw error; // Throw the error to handle it in the calling function
   }
 }
+
+export async function getAllForms() {
+    try {
+        // Connect to the MongoDB database
+        await connect;
+
+        // Access the collection using the Form schema
+        const formCollection = mongoose.connection.db.collection('forms'); 
+
+        // Fetch all documents from the collection
+        const forms = await formCollection.find({}).toArray();
+
+        return forms;
+    } catch (error) {
+        console.error('Error fetching forms:', error);
+        throw error;
+    }
+}
