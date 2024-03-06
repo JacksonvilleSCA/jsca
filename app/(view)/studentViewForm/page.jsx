@@ -28,7 +28,7 @@ const ApplicationDisplay = () => {
   return (
     <div>
       <h1>Application Display</h1>
-      <h2>Student's Information</h2>
+      <h2>Student&apos;s Information</h2>
       <p>Last Name: {formData.lastName}</p>
       <p>First Name: {formData.firstName}</p>
       <p>Middle Name: {formData.middleName} </p>
