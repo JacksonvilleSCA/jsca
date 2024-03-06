@@ -1,5 +1,7 @@
-import React from 'react';
+"use cleint"
+import React, {useState, useEffect } from 'react';
 import Link from 'next/link';  
+
 
 const adminForms = () => {
 
