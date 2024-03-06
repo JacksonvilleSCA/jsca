@@ -50,14 +50,10 @@ const adminForms = () => {
                 <td>{index + 1}</td>
                 <td>{form.firstName}</td>
                 <td>{form.lastName}</td>
-                {/* <td>
-                  <Link href={`/adminFormDetails/${form._id}`}>
-                    <Button variant="info" className="me-2">View Form</Button>
-                  </Link>
-                  <Link href={`/adminEssayDetails/${form._id}`}>
-                    <Button variant="success">View Essay</Button>
-                  </Link>
-                </td> */}
+                <td>
+                  <a class="btn btn-primary me-2" href='/adminViewFrom' role="button"> View Form  </a>
+                  <a class="btn btn-primary" href='/adminViewEssay' role="button"> View Essay </a>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -67,7 +63,5 @@ const adminForms = () => {
       </div>
       );
     };
-    
-    
     
     export default adminForms;
