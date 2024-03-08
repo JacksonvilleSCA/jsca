@@ -94,7 +94,7 @@ const ResetPass = () => {
   
     <br></br>
 
-    <h3 className={styles.container}>Rest Password</h3>
+    <h3 className={styles.container}>Reset Password</h3>
 
     <form className={styles.form} onSubmit={handleSubmit}>
 
