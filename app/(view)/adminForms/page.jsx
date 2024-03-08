@@ -1,11 +1,13 @@
-"use client"
-import React, {useState, useEffect } from 'react';
+"use client";
+import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 import Link from 'next/link';  
 import {useRouter} from "next/navigation"; 
 import { getAllForms } from '@/app/api/routes/essayroutes';
 import { Table } from 'react-bootstrap';
 
-const adminForms = () => {
+const AdminForms = () => {
   const[forms, setFroms] = useState([]); 
   const [loading, setLoading] = useState(true); 
   const router = useRouter(); 
@@ -23,6 +25,12 @@ const adminForms = () => {
       console.error('Error fetching forms: ', error ); 
       setLoading(true); 
     }
+  }
+
+  const handleViewForm = (studentId) => {
+    console.log(`/adminViewForm?studentId=${studentId}`); 
+    router.push(`/adminViewForm?studentId=${studentId}`);
+
   }
 
     return (
@@ -51,7 +59,7 @@ const adminForms = () => {
                 <td>{form.firstName}</td>
                 <td>{form.lastName}</td>
                 <td>
-                  <a class="btn btn-primary me-2" href='/adminViewFrom' role="button"> View Form  </a>
+                  <a class="btn btn-primary me-2" href={`/adminViewForm?studentId=${form._id}`} role="button" onClick={() => handleViewForm(form._id)}> View Form  </a>
                   <a class="btn btn-primary" href='/adminViewEssay' role="button"> View Essay </a>
                 </td>
               </tr>
@@ -64,4 +72,4 @@ const adminForms = () => {
       );
     };
     
-    export default adminForms;
+    export default AdminForms;
