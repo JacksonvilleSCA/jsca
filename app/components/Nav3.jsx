@@ -8,8 +8,8 @@ const imageStyle = {
     height: '50px',
     width: '50px',
 }
-//Member nav bar
-export default function NavTwo() {
+//Admin nav bar
+export default function NavThree() {
 
     useEffect(() => {
 
@@ -31,9 +31,11 @@ export default function NavTwo() {
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <div className='navbar-nav ms-auto '>
-                        <Link href='/LoginDashboard' className="nav-link link-opacity-75-hover">Dashboard</Link>
+                        <Link href='/admindashboard' className="nav-link link-opacity-75-hover">Admin Dashboard</Link>
+                        <Link href='/adminViewUsers' className="nav-link link-opacity-75-hover">Manage Members</Link>
+
                         {/*Add links here.*/}
-                        <Link href='/accountmanage' className="nav-link link-opacity-75-hover">My Account</Link>
+                        <Link href='/adminManage' className="nav-link link-opacity-75-hover">My Account</Link>
 
                     </div>
 

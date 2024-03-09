@@ -10,6 +10,7 @@ import Link from "next/link"
 import { getAllAdmins } from "@/app/api/routes/admins"
 import { deleteAdmins } from "@/app/api/routes/deleteAdmin"
 import { DownloadAllAdmins } from "@/app/api/routes/downloadAllAdmins"
+import NavThree from "@/app/components/Nav3"
 
 const AdminAV = () => {
   const [users, setUsers] = useState([]);
@@ -152,6 +153,7 @@ const AdminAV = () => {
 
     return (
       <div>
+      <NavThree/>
       <h1>|ADMIN OVERVIEW </h1>
       <div className={styles.topContainer}>
         {showCreate && (

@@ -8,6 +8,7 @@ import {accInfo} from "../../api/routes/accountInfo";
 import { accUpdate} from "../../api/routes/accountUpdate"
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import NavThree from "@/app/components/Nav3"
 
 
 export default function Accountmanage() {
@@ -206,9 +207,9 @@ export default function Accountmanage() {
   strEET = accData.street;
 
     return(
-      
+      <div>
+      <NavThree/>
       <div ref={printRef} className={styles.pageContainer}>
-  
       <div className={styles.title}>
         <h1>|Manage Account</h1>
       </div>
@@ -559,6 +560,8 @@ export default function Accountmanage() {
 
 
       </div>
+
+    </div>
 
 
 

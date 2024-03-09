@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
 import styles from './page.module.css'
 import {POST2} from '../../api/routes/logIn'
+import Nav from '@/app/components/Nav';
 
 
 
@@ -78,6 +79,7 @@ const Login = () => {
   return (
     
     <div> 
+    <Nav></Nav>
   
     <br></br>
     <h3 className={styles.container}>Login</h3>
