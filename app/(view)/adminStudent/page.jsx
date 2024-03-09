@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react"
 import { STUDP } from "@/app/api/routes/studentCreation";
 import styles from './page.module.css'
+import NavThree from "@/app/components/Nav3";
 
 const Createaccount = () => {
   const Router = useRouter();
@@ -146,6 +147,7 @@ const Createaccount = () => {
 
     return (
       <div>
+      <NavThree/>
         <div className={styles.container}>
         <h1 className={styles.title}>Student Account Creation</h1>
         <button onClick={dashB}> Return </button>

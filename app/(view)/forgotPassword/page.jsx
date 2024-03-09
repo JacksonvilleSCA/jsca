@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
 import styles from './page.module.css'
 import { contact } from '@/app/api/routes/contact';
+import Nav from '@/app/components/Nav';
  
 
 const ForgotPassword = () => {
@@ -60,6 +61,7 @@ const ForgotPassword = () => {
   return (
     
     <div> 
+    <Nav/>
     <button onClick={dashB}> Return </button>
   
     <br></br>

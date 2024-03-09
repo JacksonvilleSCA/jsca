@@ -7,6 +7,8 @@ import { useSearchParams } from "next/navigation"
 import { POST } from "@/app/api/routes/adminAccount"
 import Link from "next/link"
 import styles from "./page.module.css"
+import NavThree from "@/app/components/Nav3"
+
 
 const AdminCreate= () => {
   const Router = useRouter();
@@ -151,6 +153,8 @@ const AdminCreate= () => {
 
   
     return (
+      <div>
+      <NavThree/>
       <div  className={styles.container}>
       <h1 className={styles.title}>JSCA ADMIN CREATION</h1>
       <button onClick={back}> Return </button>
@@ -496,6 +500,8 @@ const AdminCreate= () => {
            
 
       </div>
+
+    </div>
      
 
       

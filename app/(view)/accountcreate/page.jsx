@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {POST} from "../../api/routes/createAccount"
 import styles from './page.module.css'
+import Nav from "@/app/components/Nav";
 
 const Createaccount = () => {
   const Router = useRouter();
@@ -134,6 +135,7 @@ const Createaccount = () => {
 
     return (
       <div>
+      <Nav/>
         <div className={styles.container}>
         <h1 className={styles.title}>Account Creation</h1>
           <br></br>

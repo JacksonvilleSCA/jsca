@@ -32,21 +32,6 @@ export default function Nav() {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <div className='navbar-nav ms-auto '>
                         <Link href='/' className="nav-link link-opacity-75-hover"> Home</Link>
-
-                        <li className="nav-item dropdown">
-                            <Link href='/' className="nav-link dropdown-toggle link-opacity-75-hover" data-bs-toggle="dropdown" aria-expanded="false" > Event</Link>
-
-                            <ul className='dropdown-menu'>
-                                <li><Link href='/Dashboard/EventHistory' className='dropdown-item'>Event List</Link></li>
-                                <li><Link href='/Dashboard/Home' className='dropdown-item'>Create Event</Link></li>
-                                <li><Link href='/listMenu' className='dropdown-item'> Create Itenerary</Link></li>
-                                <li><Link href='/ItineraryView' className='dropdown-item'>Itenerary</Link></li>
-                                <li><Link href='/createPackingList' className='dropdown-item'>Packing List</Link></li>
-                                <li><Link href ='/studentform' className = 'dropdown-item'> Student Form</Link></li>
-                            </ul>
-                        </li>
-
-                        <Link href='/' className="nav-link link-opacity-75-hover" >Members</Link>
                         <Link href='/accountcreate' className="nav-link link-opacity-75-hover" >Create account</Link>
                         <Link href='/login' className="nav-link link-opacity-75-hover" >Login</Link>
                     </div>

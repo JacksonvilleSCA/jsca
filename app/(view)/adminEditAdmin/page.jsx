@@ -9,6 +9,8 @@ import { AdminInfo } from '@/app/api/routes/adminInfo';
 import { AdminUpdate } from '@/app/api/routes/adminUpdate';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import NavThree from "@/app/components/Nav3"
+
 
 
 
@@ -227,6 +229,7 @@ export default function AdminAccountManage() {
     return(
       
       <div ref={printRef}>
+      <NavThree/>
       <div className={styles.title}>
       <h1 >|Manage Admin Account</h1>
 

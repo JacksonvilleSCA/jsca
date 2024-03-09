@@ -2,6 +2,7 @@ import Image from 'next/image'
 import styles from './page.module.css'
 import Button from './components/Button/Button'
 import logo from '/public/jscaNavLogo.png'
+import Nav from './components/Nav'
 
 
 

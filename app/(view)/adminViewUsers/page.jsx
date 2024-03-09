@@ -10,6 +10,7 @@ import Link from "next/link"
 import { getAllUsers } from "@/app/api/routes/users"
 import { deleteUsers } from "@/app/api/routes/deleteUser"
 import { downloadAllUsers } from "@/app/api/routes/downloadAllUsers"
+import NavThree from "@/app/components/Nav3"
 
 
 const AdminUV = () => {
@@ -153,6 +154,7 @@ const AdminUV = () => {
 
     return (
       <div>
+      <NavThree/>
       <h1>|ADMIN OVERVIEW </h1>
       <div className={styles.topContainer}>
         {showCreate && (
