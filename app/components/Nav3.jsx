@@ -8,7 +8,7 @@ const imageStyle = {
     height: '50px',
     width: '50px',
 }
-//Member nav bar
+//Admin nav bar
 export default function NavThree() {
 
     useEffect(() => {

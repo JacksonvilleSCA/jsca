@@ -8,7 +8,7 @@ const imageStyle = {
     height: '50px',
     width: '50px',
 }
-
+//Not logged in nav bar
 export default function Nav() {
 
     useEffect(() => {
