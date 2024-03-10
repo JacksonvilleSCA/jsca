@@ -9,6 +9,8 @@ import {accInfo} from "../../api/routes/accountInfo";
 import { accUpdate} from "../../api/routes/accountUpdate"
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import NavTwo from "@/app/components/Nav2"
+
 
 
 
@@ -208,8 +210,10 @@ export default function Accountmanage() {
   strEET = accData.street;
 
   return (
+    <div>
+    <NavTwo/>
     <div ref={printRef} className={styles.pageContainer}>
-  
+    
       <div className={styles.title}>
         <h1>|Manage Account</h1>
       </div>
@@ -560,6 +564,7 @@ export default function Accountmanage() {
 
 
       </div>
+    </div>
 
 
 

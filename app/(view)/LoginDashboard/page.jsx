@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import {accInfo} from "../../api/routes/accountInfo"
 import styles from "./page.module.css"
+import NavTwo from "@/app/components/Nav2"
 
 const Dashboard = () => {
   const router = useRouter();
@@ -45,10 +46,11 @@ const Dashboard = () => {
     return (
       
       <div>
+      <NavTwo/>
         
-        <div className={styles.container2}>
-          <div><h1 className={styles.title}>Dashboard</h1></div>
-        </div>
+      <div className={styles.container2}>
+        <div><h1 className={styles.title}>Dashboard</h1></div>
+      </div>
       <br></br>
       <br></br>
       <div className={styles.padding}>

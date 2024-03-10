@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
 import { resetPassword } from '@/app/api/routes/resetPassword';
 import styles from './page.module.css'
+import Nav from '@/app/components/Nav';
  
 //make secondary window that requires the user to enter their token.
 //after they enter their token they are taken to the password reset
@@ -91,10 +92,11 @@ const ResetPass = () => {
   return (
     
     <div> 
+    <Nav/>
   
     <br></br>
 
-    <h3 className={styles.container}>Rest Password</h3>
+    <h3 className={styles.container}>Reset Password</h3>
 
     <form className={styles.form} onSubmit={handleSubmit}>
 
