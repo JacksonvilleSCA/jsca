@@ -3,11 +3,10 @@ import { Schema } from "mongoose";
 
 const packingSchema = new Schema(
     {
-         eventId: {
-             type: Schema.Types.ObjectId,
-             ref:'event',
-             required: false
-         },
+        eventId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:'event'
+        },
         items: [{
             type: String
           }]

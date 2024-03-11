@@ -32,6 +32,11 @@ const AdminForms = () => {
     router.push(`/adminViewForm?studentId=${studentId}`);
 
   }
+  const handleViewEssay = (studentId) => {
+    console.log(`/adminViewEssay?studentId=${studentId}`); 
+    router.push(`/adminViewEssay?studentId=${studentId}`);
+
+  }
 
     return (
       <div className="page-container">
@@ -60,7 +65,7 @@ const AdminForms = () => {
                 <td>{form.lastName}</td>
                 <td>
                   <a class="btn btn-primary me-2" href={`/adminViewForm?studentId=${form._id}`} role="button" onClick={() => handleViewForm(form._id)}> View Form  </a>
-                  <a class="btn btn-primary" href='/adminViewEssay' role="button"> View Essay </a>
+                  <a class="btn btn-primary" href={`/adminViewEssay?studentId=${form._id}`} role="button" onClick={() => handleViewEssay(form._id)}> View Essay </a>
                 </td>
               </tr>
             ))}

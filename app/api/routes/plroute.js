@@ -4,26 +4,23 @@ import Packlist from "../schema/packinglist";
 // import { NextResponse } from "next/server";
 
 
-export const AddItem = async (formData)=> {
+export async function AddItem (formData){
     "use server"
     const data = (formData)
     try {
-        // connect();
-        const newList = await Packlist.create({
-            // eventId: formData.eventId,
+        const newList = new Packlist({
+            eventId: formData.eventId,
             items: formData.items
         });
 
         await newList.save();
 
-        // if(newList){
-        //     console.log('ok');
-        //     console.log(newList);
-        //     newList.save()
-        // }
+        if(newList){
+            console.log(newList);
+        }
    
     } catch (error) {
-        console.log(error)
+        
          throw new Error('failed to create the list')
         
     }
@@ -31,43 +28,44 @@ export const AddItem = async (formData)=> {
 }
   
 export async function GET(){
-    const data = await Packlist.find()
-    const packlists = data.map((doc) =>{
-        const plist = doc.toObject();
-        plist._id = plist._id.toString()
-        return plist;
-    })
+    try{
+        const data = await Packlist.find()
+        const packlists = data.map((doc) =>{
+            const plist = doc.toObject();
+            plist._id = plist._id.toString()
+            return plist;
+        })
+    
+        return {props: {packlists: JSON.parse(JSON.stringify(packlists))}}
 
-    return {props: {packlists: JSON.parse(JSON.stringify(packlists))}}
+    }catch(error){
+        throw new Error('failed to fetch the list')
+
+    }
+  
 }
 
 
-// export async function AddItem(formData){
-//     const  packinglist = formData.get('item');
+  
+export async function GETROUTE(eventId){
+    try{
+        const data = await Packlist.findOne( {eventId: eventId.id } ).populate('eventId').lean().exec();
 
+        if(!data){
+            return {props: {packingList: [] }};
+        }
 
-//   }
+        const packlist = JSON.parse(JSON.stringify(data));
+        packlist._id = packlist._id.toString();
 
+        if(packlist.eventId && packlist.eventId._id){
+            packlist.eventId._id = packlist.eventId._id.toString();
+        }
 
+        return {props: {packlist: JSON.parse(JSON.stringify(packlist))}};
 
-// export async function POST(formData) {
-//     const {description} = await req.json();
-//     await connect();
-//     await Packlist.create({description});
-//     return NextResponse.json({message: "topic created"}, {status: 201});
+    }catch(error){
+        throw new Error('failed to fetch the list')
 
-// }
-
-// //get method
-// export async function GET(){
-//     await connect();
-//     const packlist = await Packlist.find();
-//     return NextResponse.json({ packlist})
-// } 
-
-// export async function DELETE(req){
-//     const id = request.nextUrl.searchParams.get("id");
-//     await connect();
-//     await Packlist.findByIdAndDelete(id);
-//     return NextResponse.json({ message: "Topic deleted"}, {status: 200})
-// }
+    }
+}
