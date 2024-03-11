@@ -14,12 +14,12 @@ function ItineraryModal(props) {
     <>
       <Modal show={props.value} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Deletion</Modal.Title>
+          <Modal.Title>Event Details</Modal.Title>
         </Modal.Header>
 
         <Modal.Body style={{ fontSize: "25px" }}>
           {" "}
-           View Packing{" "}
+           Create a Packing list{" "}
           <Button
             style={{ marginLeft: "9rem" }}
             variant="primary"
@@ -33,7 +33,7 @@ function ItineraryModal(props) {
         <hr />
         <Modal.Body style={{ fontSize: "25px" }}>
           {" "}
-          View Itinerary{" "}
+          Create a Itinerary{" "}
           <Button
             style={{ marginLeft: "9rem" }}
             variant="primary"
@@ -47,7 +47,7 @@ function ItineraryModal(props) {
         <hr />
         <Modal.Body style={{ fontSize: "25px" }}>
           {" "}
-          Event Planning{" "}
+          Manage planning{" "}
           <Button
             style={{ marginLeft: "9rem" }}
             variant="primary"

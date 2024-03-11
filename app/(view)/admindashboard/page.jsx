@@ -35,12 +35,8 @@ const AdminDash = () => {
     function signOut(){
       sessionStorage.removeItem('AID')
       router.push('/adminLogin');
-      
-        
+            
     }
-
-  
- 
 
     return (
       <div>
@@ -63,6 +59,8 @@ const AdminDash = () => {
           <br></br>
           <div className={styles.square}>
           <p><Link className={styles.colorP} href='/adminViewUsers'>Manage Users</Link></p>
+          <p><Link className={styles.colorP} href='/'>Manage Event Itinerary</Link></p>
+          <p><Link className={styles.colorP} href='/'>Manage Event Packing list</Link></p>
 
           </div>
           <br></br>

@@ -21,6 +21,8 @@ export async function GET() {
   return data;
 }
 
+
+
 export async function getEvent(eventData) {
   let data = await Event.findOne({ _id: eventData.id }).lean().exec();
 
@@ -29,7 +31,7 @@ export async function getEvent(eventData) {
 
   data["_id"] = data["_id"].toString();
 
-  return data;
+  return {props: {data: JSON.parse(JSON.stringify(data))}};
 }
 
 export async function DELETE(Data) {

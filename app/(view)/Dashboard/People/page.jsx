@@ -7,9 +7,9 @@ import DOMPurify from "dompurify";
 import Image from "next/image";
 
 export default function Page() {
-  const router = useRouter();
 
-  
+
+  const router = useRouter();
 
   const [eventInformation, setEventInformation] = useState([]);
 
