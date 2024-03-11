@@ -105,7 +105,7 @@ const AdminAV = () => {
 
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'Members.csv';
+        a.download = 'Admins.csv';
 
         document.body.appendChild(a);
         a.click();
