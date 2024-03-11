@@ -3,6 +3,7 @@
 import React from "react";
 import connect from "../db/dbConnection";
 import Admin from "../schema/Admin";
+import Create from "../schema/Create";
 
 
 export async function AdminUpdate(adminID,formData){
@@ -19,12 +20,15 @@ export async function AdminUpdate(adminID,formData){
     let passwordCheck = formData.password;
 
 
-    const check1 = await Admin.findOne({email : emailCheck})
-    const check2 = await Admin.findOne({username: usernameCheck})
-    const check3 = await Admin.findOne({password: passwordCheck})
+    const check1 = await Create.findOne({email : emailCheck})
+    const check2 = await Create.findOne({username: usernameCheck})
+    const check3 = await Create.findOne({password: passwordCheck})
+    const check4 = await Admin.findOne({email: emailCheck})
+    const check5 = await Admin.findOne({username: usernameCheck})
+    const check6 = await Admin.findOne({password: passwordCheck})
 
 
-    if(check1 || check2 || check3 != null){
+    if(check1 != null || check2 != null || check3 != null || check4 != null || check5 != null ||check6 != null){
         console.log(check1)
         console.log(check2)
         console.log(check3)
@@ -89,6 +93,12 @@ export async function AdminUpdate(adminID,formData){
         console.log("EMPTY UPDATE: " + formData.city);
     }
 
+    if(formData.street == ''){
+        console.log("EMPTY FIELD");
+        formData.street = admin.street;
+        console.log("EMPTY UPDATE: " + formData.street);
+    }
+
     console.log(formData);
     console.log("Checking for user ID")
     console.log(userID);
@@ -103,6 +113,7 @@ export async function AdminUpdate(adminID,formData){
     var country = formData.country;
     var state = formData.state;
     var city = formData.city;
+    var street = formData.street;
 
 
     const filter = { _id: userID };
@@ -118,6 +129,7 @@ export async function AdminUpdate(adminID,formData){
             country: country,
             state: state,
             city: city,
+            street: street
         }
     };
 

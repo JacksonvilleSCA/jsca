@@ -9,7 +9,7 @@ export async function getAllUsers(acc) {
   console.log(acc);
   console.log("TESTING FOR JUNIOR")
   const ID = acc.AdminID;
-  const Con = acc.country;
+  const Con = acc.city;
   var check = false
   if(ID.includes('j')){
     console.log("JUNIOR ADMIN DETECTED");
@@ -22,7 +22,7 @@ export async function getAllUsers(acc) {
     const users = await Create.find({}); 
     
     const formattedUsers = users
-    .filter(user => !check || user.country == Con)
+    .filter(user => !check || user.city == Con)
     .map(user => ({
       _id: user._id ? user._id.toString() : null,
       email: user.email,
@@ -33,7 +33,8 @@ export async function getAllUsers(acc) {
       phonenumber: user.phonenumber,
       country: user.country,
       state: user.state,
-      city: user.city
+      city: user.city,
+      street: user.street
     }));
 
     console.log("users are:")

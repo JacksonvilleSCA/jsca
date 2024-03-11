@@ -6,11 +6,15 @@ import { useSearchParams } from "next/navigation"
 import { useParams } from "next/navigation"
 import Link from "next/link"
 import styles from './page.module.css';
+import NavThree from "@/app/components/Nav3"
 
 
 const AdminDash = () => {
   const router = useRouter();
   const [search, setSearch] = useState(null);
+
+  const showCreate = search && !search.includes('j');
+
 
   useEffect(() => {
     const searcH = sessionStorage.getItem('AID');
@@ -34,12 +38,14 @@ const AdminDash = () => {
 
     function signOut(){
       sessionStorage.removeItem('AID')
-      router.push('/adminLogin');
-            
+      router.push('/login');
+      
+        
     }
 
     return (
       <div>
+      <NavThree/>
         <div className={styles.container2}>
           <div><h1 className={styles.title}>Dashboard</h1></div>
         </div>
@@ -58,9 +64,13 @@ const AdminDash = () => {
           </div>
           <br></br>
           <div className={styles.square}>
-          <p><Link className={styles.colorP} href='/adminViewUsers'>Manage Users</Link></p>
-          <p><Link className={styles.colorP} href='/'>Manage Event Itinerary</Link></p>
-          <p><Link className={styles.colorP} href='/'>Manage Event Packing list</Link></p>
+          <p><Link className={styles.colorP} href='/adminViewUsers'>Manage Members/Students</Link></p>
+          {showCreate && (
+            <p><Link className={styles.colorP} href='/adminViewAdmins'>Manage Admins</Link></p>
+
+          )
+        }
+
 
           </div>
           <br></br>

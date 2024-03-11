@@ -1,0 +1,90 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.topContainer{
+  display: flex;
+  padding: 10px;
+  align-items: center;
+
+}
+
+.topContainer > * {
+  margin-right: 20px; 
+}
+
+.padding{
+  padding: 20px;
+}
+
+.userlist {
+  list-style: none;
+  padding: 0;
+}
+
+.useritem {
+  font-size: large;
+  border: 3px solid rgba(0, 0, 0, 0.747);  
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px; 
+  color: white;
+}
+
+.userInfo {
+  flex: 1; 
+  margin-bottom: 5px;
+}
+
+
+
+.title{
+  text-align: center;
+  text-decoration: underline;
+}
+
+.buttons {
+  display: flex;
+  margin-left: 100px;
+}
+
+.deletebutton {
+  margin-left: 10px;
+  margin-right: 10px; 
+  color: red;
+}
+
+.resetButton{
+  margin-left: 10px;
+  margin-right: 10px; 
+  color: blue;
+}
+
+.editbutton {
+  color: blue;
+}
+
+.lightblue{
+  background-color: rgba(5, 109, 179, 0.637);
+ 
+}
+
+.darkblue{
+  background-color: rgba(11, 90, 180, 0.788);
+}
+
+
+.tagP{
+  color: grey;
+  font-style: italic;
+}
+
+.paddingButton{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  
+}

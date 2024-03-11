@@ -1,32 +1,41 @@
-'use client'
-import React, { useState } from "react";
-import Link from 'next/link'; 
-import { POST } from '@/app/api/routes/essayroutes';
-import { useRef } from "react";
+"use client"
+import React from 'react';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import EditTwo from "@/app/components/EditTwo";
 
-const Essay = (props) => {
-
+const Essay = () => {
+  const router = useRouter();
   const [details, setDetails] = useState("");
-  const [textarea, setTextarea] = useState("");
-  
-   
-   // const editorRef = useRef(null);
 
-  
-    return (
-      <div>
-        <form action = {POST}> 
-          <div className = "page-container"> 
+  const handleDetails = (content) => {
+    setDetails(content); //Update essay contents 
+  }
 
-          <EditTwo valueOfTextarea={textarea} details={setDetails} />
-            <input type="hidden" value={details}  name="essay" />
-           </div>
-        <br></br>
-        <button type = "submit" value= "submit" class="btn btn-primary">  Submit</button>
-        </form>
-      </div>
-    );
-  };
-  
-  export default Essay;
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent default form submission
+    if (!details){ 
+      alert ("Please write your essay before submitting!"); 
+      return; 
+    }
+    
+    sessionStorage.setItem('essay', details); //store essay content in sessionstorage
+    router.push('/studentform'); //redirct to studentform after "submitting" 
+  }
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <EditTwo  details={handleDetails}  />
+        </div>
+        <br />
+        <div class = "col-sm-12 text-center">
+        <button type="submit" value= "submit" class = "btn btn-primary">Submit Essay </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default Essay;

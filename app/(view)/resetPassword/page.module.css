@@ -1,0 +1,43 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    border-bottom: 2px solid #ccc;
+  
+    
+  }
+  
+  .form{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    align-items: center;
+    margin-top: 10px;
+  
+  }
+  
+
+
+  .inputcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .inputgroup {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; 
+  }
+  
+  .inputgroup label {
+    flex: 1;
+    margin-right: 5px;  
+  }
+  
+  .inputgroup input {
+    flex: 2; 
+  }
+  
+  

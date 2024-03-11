@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
 import styles from './page.module.css'
 import {POST2} from '../../api/routes/logIn'
+import Nav from '@/app/components/Nav';
 
 
 
@@ -34,6 +35,7 @@ const Login = () => {
 
 
   const handleSubmit = async (e) =>{
+    setError("");
     e.preventDefault();
     const formData = {
       username: userValue,
@@ -55,9 +57,18 @@ const Login = () => {
 
     }
     else{
-      const myID = Value1.ID
-      sessionStorage.setItem('uid',myID)
-      router.push('/LoginDashboard');
+      const check = Value1.value;
+      if(check == "user"){
+        var myID = Value1.ID
+        sessionStorage.setItem('uid',myID)
+        router.push('/LoginDashboard');
+      }
+      else{
+        var myID2 = Value1.ID
+        sessionStorage.setItem('AID',myID2)
+        router.push('/admindashboard');
+      }
+
       
     }
 
@@ -68,6 +79,7 @@ const Login = () => {
   return (
     
     <div> 
+    <Nav></Nav>
   
     <br></br>
     <h3 className={styles.container}>Login</h3>
@@ -100,7 +112,10 @@ const Login = () => {
       <br>
       </br>
       <br></br>
-      <p><Link href='/adminLogin'>Staff Login</Link></p>
+      <p><Link href='/forgotPassword'>Forgot Password?</Link></p>
+      <div>
+        <p>---------------------------------------------</p>
+      </div>
       {error && <p style={{color: 'red'}}>{error}</p>}
       
 

@@ -21,6 +21,7 @@ export async function accInfo(ID){
         country: user.country,
         state: user.state,
         city: user.city,
+        street: user.street
 
     }
 
