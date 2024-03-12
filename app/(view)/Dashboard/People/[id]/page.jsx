@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 import { getEvent as GET, PostWaitList } from "@/app/api/routes/evemtRoute";
 import Image from "next/image";
 import { Form } from "react-bootstrap";
-import Router from "next/router";
 import EventModalOne from "@/app/components/EventModalOne";
 import EventModalTwo from "@/app/components/EventModalTwo";
-import { PostApproveListRemovalNotification } from "@/app/api/routes/evemtRoute";
-import { PostWaitListRemovalNotification } from "@/app/api/routes/evemtRoute";
 import { GetMemberListStatus } from "@/app/api/routes/evemtRoute";
 import { contactMember } from "@/app/api/routes/memberContact";
+import { getEventItinerary } from "@/app/api/routes/itineraryroute";
+import { GETROUTE } from "@/app/api/routes/plroute";
+import { useRouter } from "next/navigation";
 
 export default function Page({ params }) {
   const [eventInfo, setEventInfo] = useState("");
@@ -26,7 +26,7 @@ export default function Page({ params }) {
   const [userStatus, setUserStatus] = useState("");
 
 
-  const router = Router;
+  const router = useRouter();
   
 
   // This code checks to see if the user when accessing the page has an ID.
@@ -92,7 +92,6 @@ export default function Page({ params }) {
 console.log(userID)
 
   async function postToWaitList(e){
-       e.preventDefault();
        const res = await PostWaitList({eventID: params.id, userID: sessionStorage.getItem('uid')});
        
         if(res.Bad){
@@ -100,6 +99,8 @@ console.log(userID)
         }if (res.Good) {
           alert("You have been added to the wait-list");
         } 
+    router.push("/Dashboard/People");
+
   }
 
 
@@ -118,7 +119,7 @@ function ReverserPop(holdValue) {
   if (holdValue.onActive) {
       alert("Admin has been notify regarding your wait list removal");
       contactMember(adminEmail);
-      router.push(`Dashboard/People`);
+      router.push("/Dashboard/People");
   }else{
     console.log("not being called ++++++++")
   }
@@ -140,7 +141,7 @@ function PopTwo(id,email) {
   if (holdValue.onActive) {
     alert("Admin has been notify regarding your approve list removal");
     contactMember(adminEmail);
-    router.push(`Dashboard/People`);
+    router.push("/Dashboard/People");
   }
 }
 
