@@ -29,17 +29,18 @@ export default function Page({ params }) {
   useEffect(() => {
     const fetchData = async () => {
       const data = await GET(params);
-      setMaxPeople(data.amount);
+      console.log(data.props.data)
+      // setMaxPeople(data.amount);
 
-      if (data.attendees.length === 0) {
-        setCurrentPeople(data.attendees.length);
-      } else {
-        setCurrentPeople(0);
-      }
+      // if (data.attendees.length() === 0) {
+      //   setCurrentPeople(data.attendees.length);
+      // } else {
+      //   setCurrentPeople(0);
+      // }
 
-      setAvailableSpace(maxPeople - data.attendees.length);
+      // setAvailableSpace(maxPeople - data.attendees.length);
 
-      setEventInfo(data);
+      setEventInfo(data.props.data);
     };
     fetchData();
   }, [maxPeople,params]);
