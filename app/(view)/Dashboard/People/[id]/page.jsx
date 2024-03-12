@@ -134,9 +134,6 @@ function PopTwo(id,email) {
      alert("Notice has been sent regarding removable from wait-list");
   }
 }
-
-
-
   return (
     <>
 
