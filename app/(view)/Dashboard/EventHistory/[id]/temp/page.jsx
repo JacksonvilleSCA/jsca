@@ -81,7 +81,7 @@ export default function Page({ params }) {
           router.push(`/ItineraryCreate?eventId=${eventInfo._id}`);
       }else if(holdValue.location === "Planning"){
           console.log("Planning")
-          router.push(`/listMenu`);
+          router.push(`/listMenu?eventId=${eventInfo._id}`);
       }
     }
   }
