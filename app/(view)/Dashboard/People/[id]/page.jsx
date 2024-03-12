@@ -1,44 +1,122 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { getEvent as GET } from "@/app/api/routes/evemtRoute";
+import { getEvent as GET, PostWaitList } from "@/app/api/routes/evemtRoute";
 import Image from "next/image";
 import { Form } from "react-bootstrap";
+import Router from "next/router";
+import EventModalOne from "@/app/components/EventModalOne";
+import EventModalTwo from "@/app/components/EventModalTwo";
+import { PostApproveListRemovalNotification } from "@/app/api/routes/evemtRoute";
+import { PostWaitListRemovalNotification } from "@/app/api/routes/evemtRoute";
+import { GetMemberListStatus } from "@/app/api/routes/evemtRoute";
 
 export default function Page({ params }) {
   const [eventInfo, setEventInfo] = useState("");
   //userID can be used for the member currently signed in.
   const [userID, setUserID] = useState("");
 
-  //This code checks to see if the user when accessing the page has an ID.
+  const [active, setActive] = useState({ Active: false, id: -1, email: " " });
+  const [active2, setActive2] = useState({ Active: false, id: -1, email: " " });
+
+  const router = Router;
+  
+
+  // This code checks to see if the user when accessing the page has an ID.
   useEffect(() => {
+    let id;
     var search = sessionStorage.getItem("uid");
     if (search == null) {
       //If no ID then kick back to login
       router.push("/login");
     } else {
       setUserID(search);
+      id = search;
     }
     //Code above was added
 
     const fetchData = async () => {
-      const data = await GET(params);
+      const data = await GetMemberListStatus({params, id});
       setEventInfo(data);
     };
     fetchData();
   }, []);
 
+console.log(userID)
 
-  function postToWaitList(e){
-
-      console.log(e.target.action)
-      console.log("hello there")
-
-      e.preventDefault();
+  async function postToWaitList(e){
+       e.preventDefault();
+       const res = await PostWaitList({eventID: params.id, userID: sessionStorage.getItem('uid')});
+       
+        if(res.Bad){
+            alert("You are already in the wait-list");
+        }if (res.Good) {
+          alert("You have been added to the wait-list");
+        } 
   }
+
+
+  
+function Pop(id,email) {
+  setActive({ Active: true, id: id, email });
+}
+
+function ReverserPop(holdValue) {
+  if (holdValue.onActive) {
+    setActive({ Active: false, id: holdValue.holdId });
+  } else {
+    setActive({ Active: holdValue.onActive, id: holdValue.holdId });
+  }
+
+  if (holdValue.onActive) {
+    console.log("shades")
+    // PostToAcceptanceList({ val: active.id, event: eventID, email: active.email, check: "accept" });
+    alert("A notice of acceptance has been to repaint");
+  }else{
+    console.log("not being called ++++++++")
+  }
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+function PopTwo(id,email) {
+  setActive2({ Active: true, id: id, email });
+}
+
+ function ReverserPopTwo(holdValue) {
+  if (holdValue.onActive) {
+    setActive2({ Active: false, id: holdValue.holdId });
+  } else {
+    setActive2({ Active: holdValue.onActive, id: holdValue.holdId });
+  }
+
+  if (holdValue.onActive) {
+    console.log("shades")
+  //  DeleteFromWaitList({ val: active2.id, event: eventID, email: active2.email, check: "removeW"});
+     alert("Notice has been sent regarding removable from wait-list");
+  }
+}
+
+
 
   return (
     <>
+
+    {active2.Active && (
+        <EventModalTwo
+          value={active2.Active}
+          value2={active2.id}
+          reverse={ReverserPopTwo}
+        />
+      )}
+
+   {active.Active && (
+        <EventModalOne
+          value={active.Active}
+          value2={active.id}
+          reverse={ReverserPop}
+        />
+      )}
 
     <Form onSubmit={postToWaitList}>
 
@@ -90,18 +168,56 @@ export default function Page({ params }) {
                 </p>
               </div>
 
+                  {   }
               <button
+                type="submit"
+                className="btn btn-primary"
+                style={{
+                  marginTop: "60px",
+                  marginLeft: "40px",
+                  width: "80%",
+                  boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
+                }}
+                >
+                Join Event
+              </button>
+
+              {/* <button onClick={(e) => Pop(list._id, list.email)} className={`btn btn-success ${styles.b}`}>Add</button> */}
+
+                {  }
+              <button
+                type="submit"
+                className="btn btn-warning"
+                style={{
+                  marginTop: "60px",
+                  marginLeft: "40px",
+                  width: "80%",
+                  boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
+                }}
+                >
+                Remove from Wait-list
+              </button>
+
+              {/* <button onClick={(e) => Pop(list._id, list.email)} className={`btn btn-success ${styles.b}`}>Add</button> */}
+
+
+                  {  }
+               <button
                 type="submit"
                 className="btn btn-success"
                 style={{
                   marginTop: "60px",
-                  marginLeft: "100px",
-                  width: "60%",
+                  marginLeft: "40px",
+                  width: "80%",
                   boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
                 }}
                 >
-                Join
+                Remove from Approve-list
               </button>
+
+              {/* <button onClick={(e) => Pop(list._id, list.email)} className={`btn btn-success ${styles.b}`}>Add</button> */}
+
+
             </div>
           </div>
         </div>
@@ -111,33 +227,3 @@ export default function Page({ params }) {
     </>
   );
 }
-
-
-
-
-            {/* <div>
-            {eventInfo.img.startsWith("data:image") ? (
-              <img
-                alt="Picture of the Event"
-                src={eventInfo.img}
-                width={100}
-                height={422}
-                style={{
-                  width: "100%",
-                  height: "100%"
-                }}
-              />
-            ) : (
-              <Image
-                alt="Picture of the Event"
-                src={eventInfo.img}
-                width={100}
-                height={300}
-                style={{
-                  width: "100%",
-                  height: "100%"
-
-                }}
-              />
-            )}
-            </div> */}

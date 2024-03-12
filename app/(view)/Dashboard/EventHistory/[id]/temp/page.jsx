@@ -46,7 +46,7 @@ export default function Page({ params }) {
       setEventInfo(data);
     };
     fetchData();
-  }, []);
+  }, [maxPeople,params]);
 
 
 
@@ -91,6 +91,8 @@ export default function Page({ params }) {
       }
     }
   }
+
+
 
 
 
@@ -212,9 +214,11 @@ export default function Page({ params }) {
                 Itinerary
               </button>
 
+
               <button
                 onClick={(e) => {
-                  router.push(`/Dashboard/admin`);
+                    // waitListHandler(eventInfo._id)
+                    router.push(`/Dashboard/EventHistory/${eventInfo._id}/list`);
                 }}
                 className="btn btn-info px-5"
               >

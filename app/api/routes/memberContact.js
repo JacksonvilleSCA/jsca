@@ -12,12 +12,11 @@ const nodemailer = require('nodemailer');
 //Note: Rewrite server connection function with host for nodemailer.
 //Issue is server timeout on vercel with current code. 
 
-export async function contact(data) {
+export async function contactMember(data) {
   const username = process.env.NEXT_PUBLIC_EMAIL_USERNAME;
   const password = process.env.NEXT_PUBLIC_EMAIL_PASSWORD;
 
-  console.log(data.checkStatus + " +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-  const email = data.email
+  const email = data
 
   const transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com",
@@ -32,13 +31,12 @@ export async function contact(data) {
     
   });
 
+  let info = ``;
+
 
   try {
 
-    let info = ``;
-
-      if(data.checkStatus === "accept"){
-
+      if(data.checkStatus === "join"){
         info = `
         <h1>Hello JSCA Member!</h1>
         <p>This email is sent because of a password reset request.</p>
@@ -67,6 +65,7 @@ export async function contact(data) {
         <p>If you are not a member of JSCA please ignore this email or consider joining today!</p>
         <p><a href="https://www.jsca.org/">www.jsca.org</a></p>
         `
+
       }
 
     const mail = await transporter.sendMail({
@@ -76,6 +75,7 @@ export async function contact(data) {
       subject: `Password reset from ${email}`,
       html:info
     });
+
 
     console.log(mail)
     

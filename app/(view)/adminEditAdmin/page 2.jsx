@@ -57,7 +57,7 @@ export default function AdminAccountManage() {
       loadPage(searcH);
 
     }
-  },[]);
+  });
 
 
 

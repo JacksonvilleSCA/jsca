@@ -28,7 +28,7 @@ const AdminAV = () => {
       fetchUsers(searcH);
     }
     
-  },[]);
+  });
 
 
 

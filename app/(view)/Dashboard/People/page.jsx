@@ -7,6 +7,7 @@ import DOMPurify from "dompurify";
 import Image from "next/image";
 import Loading from "./loading";
 
+
 export default function Page() {
   const router = useRouter();
 
@@ -40,8 +41,6 @@ export default function Page() {
           {eventInformation.map((event, index) => (
             <div key={event._id} className="col">
 
-              
-              
               {event.active && (
                   
 
@@ -122,10 +121,7 @@ export default function Page() {
 
               )}
                 
-
             </div>
-
-            
           ))}
         </div>
       </div>
