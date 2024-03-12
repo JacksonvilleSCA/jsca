@@ -18,6 +18,9 @@ export default function Page({ params }) {
   const [active, setActive] = useState({ Active: false, id: -1, email: " " });
   const [active2, setActive2] = useState({ Active: false, id: -1, email: " " });
 
+  const [itineraryInfo, setItineraryInfo] = useState({});
+  const [packingListInfo, setPackingListInfo] = useState({});
+
   const router = Router;
   
 
@@ -158,6 +161,9 @@ function PopTwo(id,email) {
 
     <Form onSubmit={postToWaitList}>
 
+
+
+
       <div className="container mt-5">
         <div
           className="card"
@@ -236,9 +242,6 @@ function PopTwo(id,email) {
                 Remove from Wait-list
               </button>
 
-              {/* <button onClick={(e) => Pop(list._id, list.email)} className={`btn btn-success ${styles.b}`}>Add</button> */}
-
-
                   {  }
                <button
                 type="submit"
@@ -260,7 +263,66 @@ function PopTwo(id,email) {
           </div>
         </div>
       </div>
+
+
+
+
     </Form>
+
+    <div className="container mt-5">
+        <div className="card mx-auto w-100">
+          <div className="card-body">
+            <button
+              type="button"
+              data-bs-toggle='collapse'
+              data-bs-target='#multiCollapse'
+              aria-expanded='false'
+              aria-controls='multiCollapse'
+              className="btn btn-success"
+              style={{
+
+                boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
+              }}>
+              Event information
+            </button>
+            <div className="collapse" id='multiCollapse'>
+              <div className="card card-body mt-2">
+
+                <p>Itinerary for: {itineraryInfo.title}</p>
+
+                {itineraryInfo.schedule?.map((item, index) => (
+                  <div key={index}>
+                    <p>Day: {item.day}</p>
+                    <p>Details: {item.activity}</p>
+                    <p>Time: {item.time}</p>
+                  </div>
+                ))}
+
+                {/*               
+                {itineraryInfo ? (
+                    {itineraryInfo.map((item, index) =>(
+                    ))};
+                  <h1>{itineraryInfo.title}</h1>
+                ): (<p>Loading...</p> )} */}
+
+
+              </div>
+              <div className="card card-body mt-5">
+                 <p>Recommended items to bring</p> 
+                {packingListInfo.items?.map((item, index) =>(
+                  <div key={index}>
+                    <p>item: {item}</p>
+                    </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+
       
     </>
   );
