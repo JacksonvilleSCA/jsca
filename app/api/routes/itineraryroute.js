@@ -37,6 +37,7 @@ export async function getServerSideProps() {
   }
 }
 
+//Get by id
 export async function getEventItinerary(eventId) {
 
   try {
@@ -62,7 +63,36 @@ export async function getEventItinerary(eventId) {
 }
 
 
+export async function getItineraryById(eventId) {
 
+  try {
+   
+    const result = await Itinerary.findOne({ eventId: eventId.id } ).populate('eventId').lean().exec();  
+    
+    if (!result) {
+      return { props: { itinerary: [] } };
+    }
+
+    const itinerary = JSON.parse(JSON.stringify(result));
+
+ 
+
+    return itinerary;
+  } catch (error) {
+    throw new Error("Failed to get itinerary");
+  }
+}
+
+//delete by id
+export async function DeleteItinerary(eventId){
+  try{
+    const data = Itinerary.deleteOne({eventId: eventId});
+
+  }catch(error){
+    throw Error("Failed to delete");
+
+  }
+}
     // itinerary.schedule = itinerary.schedule.map((item) => {
     //     const itemObj = JSON.parse(JSON.stringify(item));
     //     itemObj._id = itemObj._id.toString();

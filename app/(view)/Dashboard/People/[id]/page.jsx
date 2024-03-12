@@ -144,9 +144,6 @@ function PopTwo(id,email) {
     router.push("/Dashboard/People");
   }
 }
-
-
-
   return (
     <>
 
