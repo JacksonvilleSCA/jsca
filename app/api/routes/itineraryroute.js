@@ -67,7 +67,7 @@ export async function getItineraryById(eventId) {
 
   try {
    
-    const result = await Itinerary.findOne({ eventId: eventId.id } ).populate('eventId').lean().exec();  
+    const result = await Itinerary.findOne({ eventId: eventId} ).populate('eventId').lean().exec();  
     
     if (!result) {
       return { props: { itinerary: [] } };

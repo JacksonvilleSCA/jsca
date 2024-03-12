@@ -74,7 +74,7 @@ export async function GETROUTE(eventId){
 //finding by id 
 export async function GETROUTEBYID(eventId){
     try{
-        const data = await Packlist.findOne({eventId: eventId.id}).populate('eventId').lean().exec();
+        const data = await Packlist.findOne({eventId: eventId}).populate('eventId').lean().exec();
 
         if(!data){
             return {props: {packingList: [] }};

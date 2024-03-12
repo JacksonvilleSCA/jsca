@@ -4,6 +4,7 @@ import { DELETE, GETROUTEBYID } from "@/app/api/routes/plroute"
 import { DeleteItinerary, getItineraryById } from "../api/routes/itineraryroute";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from 'next/navigation';
+import { event } from "jquery";
 
 export default function CreateMenu() {
 
@@ -13,67 +14,83 @@ export default function CreateMenu() {
 
     const router = useRouter();
 
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const searchParams = new URLSearchParams(window.location.search);
-            const eventId = searchParams.get('eventId')
-            setEventId(eventId);
-        }
-        console.log("Current eventId:", eventId);
+    // useEffect(() => {
+    //     if (typeof window !== 'undefined') {
+    //         const searchParams = new URLSearchParams(window.location.search);
+    //         const eventId = searchParams.get('eventId')
+    //         setEventId(eventId);
+    //     }
+    //     console.log("Current eventId:", eventId);
 
-        // if(eventId){
-        //     const fetchPackingList = async () => {
-        //         try{
-        //             const {props: {packlist}} = await GETROUTEBYID(eventId);
-        //             setPackingListInfo(packlist);
-        //             console.log(packlist);
-        //         }catch(error){
-        //             console.log("Error fetching the data")
-        //         }
-        //     }
+    
 
-        //     fetchPackingList();
-        // }
-
-    }, [eventId])
-
+    // }, [eventId])
 
     useEffect(() => {
+       
+           
 
-        if (eventId) {
-            const fetchPackingList = async () => {
-                try {
+                const fetchData = async () =>{
+
+                    const searchParams = new URLSearchParams(window.location.search);
+                    const eventId = searchParams.get('eventId')
+                    setEventId(eventId);
+
+
                     const packlist = await GETROUTEBYID(eventId);
                     setPackingListInfo(packlist);
                     console.log(packlist);
-                } catch (error) {
-                    console.log("Error fetching the data")
-                }
-            }
-
-            fetchPackingList();
-        }
-
-    }, [eventId])
 
 
-    useEffect(() => {
-
-        if (eventId) {
-            const fetchItinerary = async () => {
-                try {
                     const  itinerary  = await getItineraryById(eventId);
                     setItineraryInfo(itinerary);
                     console.log(itinerary);
-                } catch (error) {
-                    console.log("Error fetching the data")
-                }
-            }
 
-            fetchItinerary();
-        }
+                    
+
+                }
+
+                fetchData();
 
     }, [eventId])
+
+    // useEffect(() => {
+
+    //     if (eventId) {
+    //         const fetchPackingList = async () => {
+    //             try {
+    //                 const packlist = await GETROUTEBYID(eventId);
+    //                 setPackingListInfo(packlist);
+    //                 console.log(packlist);
+    //             } catch (error) {
+    //                 console.log("Error fetching the data")
+    //             }
+    //         }
+
+    //         fetchPackingList();
+    //     }
+
+    // }, [eventId])
+
+
+    // useEffect(() => {
+
+    //     if (eventId) {
+    //         const fetchItinerary = async () => {
+    //             try {
+    //                 console.log(eventId)
+    //                 const  itinerary  = await getItineraryById(eventId);
+    //                 setItineraryInfo(itinerary);
+    //                 console.log(itinerary);
+    //             } catch (error) {
+    //                 console.log("Error fetching the data")
+    //             }
+    //         }
+
+    //         fetchItinerary();
+    //     }
+
+    // }, [eventId])
 
 
         //go back function
