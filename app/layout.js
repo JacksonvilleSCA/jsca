@@ -19,7 +19,6 @@ export default function RootLayout({ children }) {
         <Script src="https://cdn.tiny.cloud/1/mnjsi8c00iga0yq3zcnsif090me3lskqlwtz5y5mmr6twwdg/tinymce/6/plugins/anchor/plugin.min.js" referrerPolicy="origin"></Script>
         </head>
       <body className={inter.className}>
-        <Nav/>
         {children}
         </body>
     </html>

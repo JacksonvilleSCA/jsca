@@ -9,6 +9,8 @@ import Loading from "./loading";
 
 
 export default function Page() {
+
+
   const router = useRouter();
 
   const [eventInformation, setEventInformation] = useState([]);

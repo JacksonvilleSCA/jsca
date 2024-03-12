@@ -19,12 +19,8 @@ export default function Page({ params }) {
     router.push('/login');
   }
 
-
-
   const [active, setActive] = useState({ Active: false, id: -1 });
   const [active2, setActive2] = useState({ Active: false, id: -1 });
-
-
   const [eventInfo, setEventInfo] = useState("");
   const [maxPeople, setMaxPeople] = useState("");
   const [currentPeople, setCurrentPeople] = useState("");
@@ -47,8 +43,6 @@ export default function Page({ params }) {
     };
     fetchData();
   }, [maxPeople,params]);
-
-
 
   function Pop(id) {
     setActive({ Active: true, id: id });
@@ -81,10 +75,10 @@ export default function Page({ params }) {
     if (holdValue.onActive) {
       if (holdValue.location === "Packaging") {
           console.log("Packaging")
-          router.push(`/packingView`);
+          router.push(`/createPackingList?eventId=${eventInfo._id}`);
       } else if(holdValue.location === "Itinerary"){
           console.log("Itinerary")
-          router.push(`/ItineraryView`);
+          router.push(`/ItineraryCreate?eventId=${eventInfo._id}`);
       }else if(holdValue.location === "Planning"){
           console.log("Planning")
           router.push(`/listMenu`);
@@ -211,7 +205,7 @@ export default function Page({ params }) {
                 onClick={(e) => Itinerary(eventInfo._id)}
                 className="btn btn-primary px-5"
               >
-                Itinerary
+                Itinerary/Packing list
               </button>
 
 

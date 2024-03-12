@@ -1,15 +1,12 @@
 import mongoose, { SchemaType } from 'mongoose';
 const {Schema} = mongoose;
 
-
-
 const ItinerarySchema = new Schema(
     {
-        // eventId: {
-        //     type: Schema.Types.ObjectId,
-        //     ref:'event',
-        //     required: false
-        // },
+        eventId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:'event'
+        },
         title: {
             type: String
         },

@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import { getEvent as GET, PostWaitList } from "@/app/api/routes/evemtRoute";
 import Image from "next/image";
@@ -38,8 +37,47 @@ export default function Page({ params }) {
     const fetchData = async () => {
       const data = await GetMemberListStatus({params, id});
       setEventInfo(data);
+      console.log(data)
     };
     fetchData();
+
+  }, []);
+
+  //use effect for the itinerary information based on ID 
+  useEffect(() => {
+    const fetchItinerary = async () => {
+      try {
+        const { props: { itinerary } } = await getEventItinerary(params);
+        // const itinerary = await getEventItinerary(params)
+        setItineraryInfo(itinerary);
+        console.log(itinerary);
+      } catch (error) {
+        console.log('Error fetching id for itinerary', error);
+        throw error;
+      }
+    };
+
+    fetchItinerary();
+  }, []);
+
+  //use effect for the packing list information based on ID 
+  useEffect(() => {
+
+    const fetchPackingList = async () => {
+      try {
+        const { props: { packlist } } = await GETROUTE(params);
+
+        setPackingListInfo(packlist);
+
+        console.log(packlist);
+      } catch (error) {
+        console.log("Error fetching id for packing list", error);
+        throw error;
+      }
+    };
+
+    fetchPackingList();
+
   }, []);
 
 console.log(userID)

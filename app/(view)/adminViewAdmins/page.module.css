@@ -57,15 +57,34 @@
   color: red;
 }
 
+.resetButton{
+  margin-left: 10px;
+  margin-right: 10px; 
+  color: blue;
+}
+
 .editbutton {
   color: blue;
 }
 
-.lightblue {
+.lightblue{
   background-color: rgba(5, 109, 179, 0.637);
  
 }
 
-.darkblue {
+.darkblue{
   background-color: rgba(11, 90, 180, 0.788);
+}
+
+
+.tagP{
+  color: grey;
+  font-style: italic;
+}
+
+.paddingButton{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  
 }

@@ -1,14 +1,31 @@
 'use client'
 import 'bootstrap-icons/font/bootstrap-icons.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AddItem } from '@/app/api/routes/plroute'
+import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function TodoList() {
+export default function PackingList() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
   const [edit, setEdit] = useState(null);
   const [editText, setEditText] = useState('');
   const [isLoading, setLoading] = useState(false); // New state for loading
+  const [eventId, setEventId] = useState(null);
+
+
+  const router = useRouter();
+    //this extracts eventId from the URL query parameter.
+    // const {eventId} = router.query;
+    useEffect(() =>{
+        if(typeof window !== 'undefined'){
+            const searchParams = new URLSearchParams(window.location.search);
+            const eventId = searchParams.get('eventId')
+            setEventId(eventId);
+        }
+        console.log("Current eventId:", eventId);
+
+    },[])
+
 
   const addTask = () => {
     if (!newTask) return; // Don't add empty tasks
@@ -34,8 +51,15 @@ export default function TodoList() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //only passing one object 
+    const packingListData = {
+      eventId, 
+      items: tasks.map(task => task.text) 
+      }
+
     try {
-      await AddItem({ items: tasks.map(task => task.text) }); // Pass the list of tasks
+      
+      AddItem(packingListData); // Pass the list of tasks
       setTasks([]); // Clear the list after saving
     } catch (error) {
       console.error("Error saving the list:", error);

@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation"
 import { useParams } from "next/navigation"
 import Link from "next/link"
 import styles from './page.module.css';
+import NavThree from "@/app/components/Nav3"
 
 
 const AdminDash = () => {
@@ -37,16 +38,14 @@ const AdminDash = () => {
 
     function signOut(){
       sessionStorage.removeItem('AID')
-      router.push('/adminLogin');
+      router.push('/login');
       
         
     }
 
-  
- 
-
     return (
       <div>
+      <NavThree/>
         <div className={styles.container2}>
           <div><h1 className={styles.title}>Dashboard</h1></div>
         </div>
