@@ -25,7 +25,7 @@ export default function Page() {
     }
     const fetchData = async () => {
       const data = await GetEvent();
-
+     
       if (!AreArraysEqual(eventInformation, data)) {
         setEventInformation(data);
       }

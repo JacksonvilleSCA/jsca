@@ -4,14 +4,20 @@ import React, { useEffect, useState } from "react";
 import { getEvent as GET, PostWaitList } from "@/app/api/routes/evemtRoute";
 import Image from "next/image";
 import { Form } from "react-bootstrap";
-import Router from "next/router";
 import EventModalOne from "@/app/components/EventModalOne";
 import EventModalTwo from "@/app/components/EventModalTwo";
 import { PostApproveListRemovalNotification } from "@/app/api/routes/evemtRoute";
+import { contactMember } from "@/app/api/routes/memberContact";
 import { PostWaitListRemovalNotification } from "@/app/api/routes/evemtRoute";
 import { GetMemberListStatus } from "@/app/api/routes/evemtRoute";
+import { redirect, useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
+
 
 export default function Page({ params }) {
+
+  console.log(params)
+  console.log("=====================")
   const [eventInfo, setEventInfo] = useState("");
   //userID can be used for the member currently signed in.
   const [userID, setUserID] = useState("");
@@ -23,8 +29,8 @@ export default function Page({ params }) {
   const [userStatus, setUserStatus] = useState("");
 
 
-  const router = Router;
-  
+
+  const router = useRouter();
 
   // This code checks to see if the user when accessing the page has an ID.
   useEffect(() => {
@@ -51,9 +57,7 @@ export default function Page({ params }) {
 
 console.log(userID)
 
-  async function postToWaitList(e){
-     console.log("+++++++++++++++++++++++++++++++++++++++++++++++++")
-       e.preventDefault();
+  async function postToWaitList(data){
        const res = await PostWaitList({eventID: params.id, userID: sessionStorage.getItem('uid')});
        
         if(res.Bad){
@@ -61,12 +65,12 @@ console.log(userID)
         }if (res.Good) {
           alert("You have been added to the wait-list");
         } 
-  }
 
 
-  
+        router.push(`/Dashboard/People`);
+  } 
+
 function Pop(id,email) {
-  console.log("yes")
   setActive({ Active: true, id: id, email });
 }
 
@@ -78,10 +82,9 @@ function ReverserPop(holdValue) {
   }
 
   if (holdValue.onActive) {
-    console.log("shades")
-    postToWaitList();
-    // PostToAcceptanceList({ val: active.id, event: eventID, email: active.email, check: "accept" });
-    // alert("A notice of acceptance has been to repaint");
+    alert("Admin has been notify regarding your wait list removal");
+    contactMember(adminEmail);
+    router.push(`/Dashboard/People`);
   }else{
     console.log("not being called ++++++++")
   }
@@ -101,9 +104,10 @@ function PopTwo(id,email) {
   }
 
   if (holdValue.onActive) {
-    console.log("shades")
-  //  DeleteFromWaitList({ val: active2.id, event: eventID, email: active2.email, check: "removeW"});
-    //  alert("Notice has been sent regarding removable from wait-list");
+    alert("Admin has been notify regarding your approve list removal");
+    contactMember(adminEmail);
+    router.push(`/Dashboard/People`);
+
   }
 }
 
@@ -182,9 +186,9 @@ function PopTwo(id,email) {
 
                   {userStatus === "FF" && <button
                   onClick={(e) => {
-                      postToWaitList();
+                    e.preventDefault();
+                      postToWaitList(eventInfo._id);
                   }}
-                // type="submit"
                 className="btn btn-primary"
                 style={{
                   marginTop: "60px",
@@ -231,10 +235,6 @@ function PopTwo(id,email) {
                 Remove from Approve-list
               </button> }
  
-
-              {/* <button onClick={(e) => Pop(list._id, list.email)} className={`btn btn-success ${styles.b}`}>Add</button> */}
-
-
             </div>
           </div>
         </div>

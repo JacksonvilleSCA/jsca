@@ -135,9 +135,8 @@ export async function POST(formData) {
 
 
 export async function PostWaitList(formData) {
-  console.log("free")
-  console.log("+++++++++++++++++++++++++++++++++++++++++++++++++")
-  console.log(formData);
+
+
 
  
   const eventWaitList = await Event.findOne({ _id: formData.eventID, waitlist: formData.userID });
@@ -366,10 +365,10 @@ export async function GetMemberListStatus(eventData){
 
 
 }
-export async function PostWaitListRemovalNotification(){
-
+export async function PostWaitListRemovalNotification(Data){
+  console.log(Data);
 }
 
-export async function PostApproveListRemovalNotification(){
-  
+export async function PostApproveListRemovalNotification(Data){
+  console.log(Data);
 }

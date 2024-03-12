@@ -18,6 +18,7 @@ export async function contactMember(data) {
 
   const email = data
 
+
   const transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com",
     port: 587,
