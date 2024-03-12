@@ -171,7 +171,7 @@ export async function GetList(eventData) {
 
     const objectId = new mongoose.Types.ObjectId(eventData.id); // Convert string to ObjectId
 
-    const res = await Event.findById(objectId).select('waitlist attendees');
+    const res = await Event.findById(eventData.id).select('waitlist attendees');
     
     console.log(res)
     const resTwo = await res.populate('waitlist attendees')
@@ -268,8 +268,8 @@ export async function DeleteFromWaitList(Data){
     const memberObjectID = new mongoose.Types.ObjectId(Data.val);
 
   const res = await Event.updateOne(
-    { _id: eventObjectID }, // Matching criteria
-    { $pull: { waitlist: memberObjectID } } // Removing an element from the waitlist array
+    { _id: Data.event }, // Matching criteria
+    { $pull: { waitlist: Data.val } } // Removing an element from the waitlist array
   );
 
   if(res.acknowledged){
@@ -291,8 +291,8 @@ export async function DeleteFromAcceptanceList(Data){
 
   
 const res = await Event.updateOne(
-  { _id: eventObjectID }, // Matching criteria
-  { $pull: { attendees: memberObjectID } } // Removing an element from the waitlist array
+  { _id: Data.event }, // Matching criteria
+  { $pull: { attendees: Data.val } } // Removing an element from the waitlist array
 );
 
 if(res.acknowledged){
@@ -309,8 +309,8 @@ export async function GetMemberEvents(Data){
       const eventObjectID = new mongoose.Types.ObjectId(Data.id);
       const memberObjectID = new mongoose.Types.ObjectId(Data.userID);
 
-      const memberInfo = await Create.findOne({ _id: memberObjectID }).lean().exec();
-      const eventInfo = await Event.find({ attendees: memberObjectID }).select("_id location").lean().exec();
+      const memberInfo = await Create.findOne({ _id: Data.userID }).lean().exec();
+      const eventInfo = await Event.find({ attendees: Data.userID }).select("_id location").lean().exec();
 
       return {memberInfo, eventInfo};
     
@@ -321,7 +321,7 @@ export async function GetMemberEvents(Data){
 export async function GetMoreInfoEvent(eventData) {
   const eventObjectID = new mongoose.Types.ObjectId(eventData);
 
-  let data = await Event.findOne({ _id: eventObjectID }).lean().exec();
+  let data = await Event.findOne({ _id: eventData }).lean().exec();
 
   const base64Image = data["img"].data.buffer.toString("base64");
   data["img"] = `data:${data["img"].contentType};base64,${base64Image}`;
@@ -338,6 +338,7 @@ export async function GetMemberListStatus(eventData){
   // let test = new mongoose.Types.ob
   const objectId = new mongoose.Types.ObjectId(eventData.params.id);
 
+
   let data = await Event.findOne({ _id: eventData.params.id }).lean().exec(); 
   const res = await Event.findById(eventData.params.id).select('admin');
   
@@ -347,8 +348,8 @@ export async function GetMemberListStatus(eventData){
   let adminEmail = adminInfo.admin.email;
 
 
-  const waitListStatus = await Event.find({ waitlist: eventData.id }).select("_id location").lean().exec();
-  const approveListStatus = await Event.find({ attendees: eventData.id }).select("_id location").lean().exec();
+  const waitListStatus = await Event.find({_id: eventData.params.id, waitlist: eventData.id }).select("_id location").lean().exec();
+  const approveListStatus = await Event.find({_id: eventData.params.id, attendees: eventData.id }).select("_id location").lean().exec();
 
   const base64Image = data["img"].data.buffer.toString("base64");
   data["img"] = `data:${data["img"].contentType};base64,${base64Image}`;
