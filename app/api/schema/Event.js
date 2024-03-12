@@ -33,7 +33,7 @@ const eventSchema = new Schema({
   },
   admin:{
     type: SchemaTypes.ObjectId,
-    ref: 'create',
+    ref: 'Admin',
   },
   attendees: [{
         type: SchemaTypes.ObjectId,

@@ -9,6 +9,7 @@ import mongoose from 'mongoose';
 import { redirect } from "next/navigation";
 import { contact } from "./eventContact";
 import { contactMember } from "./memberContact";
+import { clearLine } from "readline";
 
 
 
@@ -132,7 +133,10 @@ export async function POST(formData) {
     redirect("/Dashboard/EventHistory");
 }
 
+
 export async function PostWaitList(formData) {
+  console.log("free")
+  console.log("+++++++++++++++++++++++++++++++++++++++++++++++++")
   console.log(formData);
 
  
@@ -332,9 +336,12 @@ export async function GetMoreInfoEvent(eventData) {
 export async function GetMemberListStatus(eventData){
 
   const memberObjectID = new mongoose.Types.ObjectId(eventData.id);
+  const objectId = new mongoose.Types.ObjectId(eventData.params.id);
 
   let data = await Event.findOne({ _id: eventData.params.id }).lean().exec(); 
-
+  const res = await Event.findById(objectId).select('admin');
+  const adminInfo = await res.populate('admin');
+  let adminEmail = adminInfo.admin.email;
   const waitListStatus = await Event.find({ waitlist: memberObjectID }).select("_id location").lean().exec();
   const approveListStatus = await Event.find({ attendees: memberObjectID }).select("_id location").lean().exec();
 
@@ -347,17 +354,16 @@ export async function GetMemberListStatus(eventData){
   if(waitListStatus.length > 0){
     console.log(waitListStatus)
       console.log("wait *************************************")
+    return {data,adminEmail, status: "TF" }
   }if(approveListStatus.length > 0){
     console.log(approveListStatus)
     console.log("approve *************************************")
+      return {data, adminEmail, status: "TT"}
   }else{
     console.log("nothing *************************************")
-
+     return {data, adminEmail, status:"FF"}
   }
 
-
-
-  return data;
 
 }
 export async function PostWaitListRemovalNotification(){

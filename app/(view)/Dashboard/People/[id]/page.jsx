@@ -19,6 +19,10 @@ export default function Page({ params }) {
   const [active, setActive] = useState({ Active: false, id: -1, email: " " });
   const [active2, setActive2] = useState({ Active: false, id: -1, email: " " });
 
+  const [adminEmail, setAdminEmail] = useState("");
+  const [userStatus, setUserStatus] = useState("");
+
+
   const router = Router;
   
 
@@ -37,7 +41,10 @@ export default function Page({ params }) {
 
     const fetchData = async () => {
       const data = await GetMemberListStatus({params, id});
-      setEventInfo(data);
+      setEventInfo(data.data);
+      setAdminEmail(data.adminEmail);
+      setUserStatus(data.status);
+      console.log(data)
     };
     fetchData();
   }, []);
@@ -45,6 +52,7 @@ export default function Page({ params }) {
 console.log(userID)
 
   async function postToWaitList(e){
+     console.log("+++++++++++++++++++++++++++++++++++++++++++++++++")
        e.preventDefault();
        const res = await PostWaitList({eventID: params.id, userID: sessionStorage.getItem('uid')});
        
@@ -58,6 +66,7 @@ console.log(userID)
 
   
 function Pop(id,email) {
+  console.log("yes")
   setActive({ Active: true, id: id, email });
 }
 
@@ -70,8 +79,9 @@ function ReverserPop(holdValue) {
 
   if (holdValue.onActive) {
     console.log("shades")
+    postToWaitList();
     // PostToAcceptanceList({ val: active.id, event: eventID, email: active.email, check: "accept" });
-    alert("A notice of acceptance has been to repaint");
+    // alert("A notice of acceptance has been to repaint");
   }else{
     console.log("not being called ++++++++")
   }
@@ -93,7 +103,7 @@ function PopTwo(id,email) {
   if (holdValue.onActive) {
     console.log("shades")
   //  DeleteFromWaitList({ val: active2.id, event: eventID, email: active2.email, check: "removeW"});
-     alert("Notice has been sent regarding removable from wait-list");
+    //  alert("Notice has been sent regarding removable from wait-list");
   }
 }
 
@@ -118,7 +128,9 @@ function PopTwo(id,email) {
         />
       )}
 
-    <Form onSubmit={postToWaitList}>
+    <Form >
+    {/* <Form onSubmit={postToWaitList}> */}
+
 
       <div className="container mt-5">
         <div
@@ -168,9 +180,11 @@ function PopTwo(id,email) {
                 </p>
               </div>
 
-                  {   }
-              <button
-                type="submit"
+                  {userStatus === "FF" && <button
+                  onClick={(e) => {
+                      postToWaitList();
+                  }}
+                // type="submit"
                 className="btn btn-primary"
                 style={{
                   marginTop: "60px",
@@ -180,13 +194,14 @@ function PopTwo(id,email) {
                 }}
                 >
                 Join Event
-              </button>
+              </button> }
 
-              {/* <button onClick={(e) => Pop(list._id, list.email)} className={`btn btn-success ${styles.b}`}>Add</button> */}
-
-                {  }
-              <button
-                type="submit"
+                { userStatus === "TF" && <button 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    Pop(eventInfo._id, adminEmail)
+                  }}
+                // type="submit"
                 className="btn btn-warning"
                 style={{
                   marginTop: "60px",
@@ -196,14 +211,15 @@ function PopTwo(id,email) {
                 }}
                 >
                 Remove from Wait-list
-              </button>
+              </button> }
 
-              {/* <button onClick={(e) => Pop(list._id, list.email)} className={`btn btn-success ${styles.b}`}>Add</button> */}
+               {userStatus === "TT" && <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    PopTwo(eventInfo._id, adminEmail)
+                  }}
 
-
-                  {  }
-               <button
-                type="submit"
+                // type="submit"
                 className="btn btn-success"
                 style={{
                   marginTop: "60px",
@@ -213,7 +229,8 @@ function PopTwo(id,email) {
                 }}
                 >
                 Remove from Approve-list
-              </button>
+              </button> }
+ 
 
               {/* <button onClick={(e) => Pop(list._id, list.email)} className={`btn btn-success ${styles.b}`}>Add</button> */}
 
