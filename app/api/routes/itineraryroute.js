@@ -87,7 +87,7 @@ export async function getItineraryById(eventId) {
 export async function DeleteItinerary(eventId){
   try{
     const data = await Itinerary.deleteOne({eventId: eventId});
-
+     
   }catch(error){
     throw Error("Failed to delete");
 
