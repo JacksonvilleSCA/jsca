@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getAllForms } from '@/app/api/routes/essayroutes';
+import NavThree from '@/app/components/Nav3';
 
 const AdminViewForm = () => {
   const [studentData, setStudentData] = useState(null);
@@ -37,6 +38,8 @@ const AdminViewForm = () => {
   
 
   return (
+  <div> 
+    <NavThree/> 
     <div className="page-container">
       <h1 style={{ textAlign: 'center' }}>View Student Application</h1>
       <div className='mb-3'> 
@@ -94,7 +97,7 @@ const AdminViewForm = () => {
         
       </div> 
     </div>
-    
+   </div> 
   );
 };
 

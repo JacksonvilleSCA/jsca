@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { GET } from '@/app/api/routes/essayroutes'; // Import the GET function to fetch form data from the backend
+import NavTwo from "@/app/components/Nav2"
 
 const ApplicationDisplay = () => {
   const router = useRouter();
@@ -22,10 +23,18 @@ const ApplicationDisplay = () => {
   }, []);
 
   if (!formData) {
-    return <div>Loading...</div>; // Display loading message while fetching data
+    return (
+      <div> 
+    <NavTwo/> 
+    <div>Loading...</div>
+    </div> 
+    )
+
   }
 
   return (
+    <div> 
+    <NavTwo/> 
     <div>
       <h1>Application Display</h1>
       <h2>Student&apos;s Information</h2>
@@ -40,6 +49,7 @@ const ApplicationDisplay = () => {
       <h2>Essay</h2>
       <p>{formData.essay}</p> {/* Render the essay content */}
     </div>
+    </div> 
   );
 };
 

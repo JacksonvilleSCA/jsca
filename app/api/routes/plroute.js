@@ -3,7 +3,7 @@ import connect from "../db/dbConnection";
 import Packlist from "../schema/packinglist";
 // import { NextResponse } from "next/server";
 
-
+//posting data to the DB 
 export async function AddItem (formData){
     "use server"
     const data = (formData)
@@ -26,7 +26,8 @@ export async function AddItem (formData){
     }
 
 }
-  
+
+//getting all the data  
 export async function GET(){
     try{
         const data = await Packlist.find()
@@ -46,7 +47,7 @@ export async function GET(){
 }
 
 
-  
+//getting specific data
 export async function GETROUTE(eventId){
     try{
         const data = await Packlist.findOne( {eventId: eventId.id } ).populate('eventId').lean().exec();
@@ -66,6 +67,37 @@ export async function GETROUTE(eventId){
 
     }catch(error){
         throw new Error('failed to fetch the list')
+
+    }
+}
+
+//finding by id 
+export async function GETROUTEBYID(eventId){
+    try{
+        const data = await Packlist.findOne({eventId: eventId.id}).populate('eventId').lean().exec();
+
+        if(!data){
+            return {props: {packingList: [] }};
+        }
+
+        const packlist = JSON.parse(JSON.stringify(data));
+
+
+        return packlist;
+
+    }catch(error){
+        throw new Error('failed to fetch the list')
+
+    }
+}
+
+//deleting data 
+export async function DELETE(eventId){
+    try{
+        const data = await Packlist.deleteOne({eventId: eventId});
+
+    }catch(error){
+        throw new Error('Failed to delete');
 
     }
 }
