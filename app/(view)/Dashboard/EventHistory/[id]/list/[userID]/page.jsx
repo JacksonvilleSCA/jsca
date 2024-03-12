@@ -97,7 +97,7 @@ export default function Page(params) {
               type="text"
               className="form-control"
               name="totalPeople"
-              style={{ width: "20%" }}
+              style={{ width: "50%" }}
               defaultValue={memberInfo.country}
               required
               readOnly
