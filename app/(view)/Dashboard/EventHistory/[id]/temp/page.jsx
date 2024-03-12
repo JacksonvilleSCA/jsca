@@ -29,20 +29,21 @@ export default function Page({ params }) {
   useEffect(() => {
     const fetchData = async () => {
       const data = await GET(params);
-      setMaxPeople(data.amount);
+      console.log(data.props.data)
+      // setMaxPeople(data.amount);
 
-      if (data.attendees.length === 0) {
-        setCurrentPeople(data.attendees.length);
-      } else {
-        setCurrentPeople(0);
-      }
+      // if (data.attendees.length() === 0) {
+      //   setCurrentPeople(data.attendees.length);
+      // } else {
+      //   setCurrentPeople(0);
+      // }
 
-      setAvailableSpace(maxPeople - data.attendees.length);
+      // setAvailableSpace(maxPeople - data.attendees.length);
 
-      setEventInfo(data);
+      setEventInfo(data.props.data);
     };
     fetchData();
-  }, []);
+  }, [maxPeople,params]);
 
   function Pop(id) {
     setActive({ Active: true, id: id });
@@ -85,6 +86,8 @@ export default function Page({ params }) {
       }
     }
   }
+
+
 
 
 
@@ -206,9 +209,11 @@ export default function Page({ params }) {
                 Itinerary/Packing list
               </button>
 
+
               <button
                 onClick={(e) => {
-                  router.push(`/Dashboard/admin`);
+                    // waitListHandler(eventInfo._id)
+                    router.push(`/Dashboard/EventHistory/${eventInfo._id}/list`);
                 }}
                 className="btn btn-info px-5"
               >

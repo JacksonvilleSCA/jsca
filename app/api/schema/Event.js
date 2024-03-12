@@ -1,4 +1,5 @@
 import mongoose, { SchemaType } from "mongoose";
+import Create from "./Create";
 const { Schema, model, SchemaTypes } = mongoose;
 
 const eventSchema = new Schema({
@@ -30,16 +31,32 @@ const eventSchema = new Schema({
     type: Boolean,
     default: true
   },
-  attendees: [
-    {
-      user: {
+  admin:{
+    type: SchemaTypes.ObjectId,
+    ref: 'create',
+  },
+  attendees: [{
         type: SchemaTypes.ObjectId,
-        ref: "User",
-      },
+        ref: 'create',
     },
   ],
+  waitlist : [ {
+        type: SchemaTypes.ObjectId,
+        ref: 'create',
+    }
+  ],
+  items:[{
+      type: String
+  }],
+  itinerary:[{
+     title: {type: String},
+     days: {type: String},
+     time: {type: String},
+     activity: {type: String}
+  }]
 });
 
 const Event = mongoose.models.event || mongoose.model('event', eventSchema)
 
 export default Event;
+

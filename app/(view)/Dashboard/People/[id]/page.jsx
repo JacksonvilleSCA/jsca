@@ -1,32 +1,41 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { getEvent as GET } from "@/app/api/routes/evemtRoute";
+import { getEvent as GET, PostWaitList } from "@/app/api/routes/evemtRoute";
 import Image from "next/image";
-import { getEventItinerary } from "@/app/api/routes/itineraryroute";
-import { GETROUTE } from "@/app/api/routes/plroute";
-
+import { Form } from "react-bootstrap";
+import Router from "next/router";
+import EventModalOne from "@/app/components/EventModalOne";
+import EventModalTwo from "@/app/components/EventModalTwo";
+import { PostApproveListRemovalNotification } from "@/app/api/routes/evemtRoute";
+import { PostWaitListRemovalNotification } from "@/app/api/routes/evemtRoute";
+import { GetMemberListStatus } from "@/app/api/routes/evemtRoute";
 
 export default function Page({ params }) {
+  const [eventInfo, setEventInfo] = useState("");
+  //userID can be used for the member currently signed in.
+  const [userID, setUserID] = useState("");
 
-  const [itineraryInfo, setItineraryInfo] = useState({});
-  const [packingListInfo, setPackingListInfo] = useState({});
-  const [eventInfo, setEventInfo] = useState({});
-  //userID can be used for the member currently signed in. 
-  const [userID, setUserID] = useState("")
+  const [active, setActive] = useState({ Active: false, id: -1, email: " " });
+  const [active2, setActive2] = useState({ Active: false, id: -1, email: " " });
 
-  //This code checks to see if the user when accessing the page has an ID.
+  const router = Router;
+  
+
+  // This code checks to see if the user when accessing the page has an ID.
   useEffect(() => {
-    var search = sessionStorage.getItem('uid');
+    let id;
+    var search = sessionStorage.getItem("uid");
     if (search == null) {
       //If no ID then kick back to login
-      router.push('/login');
+      router.push("/login");
     } else {
-      setUserID(search)
+      setUserID(search);
+      id = search;
     }
     //Code above was added
 
     const fetchData = async () => {
-      const { props: { data } } = await GET(params);
+      const data = await GetMemberListStatus({params, id});
       setEventInfo(data);
       console.log(data)
     };
@@ -71,8 +80,84 @@ export default function Page({ params }) {
 
   }, []);
 
+console.log(userID)
+
+  async function postToWaitList(e){
+       e.preventDefault();
+       const res = await PostWaitList({eventID: params.id, userID: sessionStorage.getItem('uid')});
+       
+        if(res.Bad){
+            alert("You are already in the wait-list");
+        }if (res.Good) {
+          alert("You have been added to the wait-list");
+        } 
+  }
+
+
+  
+function Pop(id,email) {
+  setActive({ Active: true, id: id, email });
+}
+
+function ReverserPop(holdValue) {
+  if (holdValue.onActive) {
+    setActive({ Active: false, id: holdValue.holdId });
+  } else {
+    setActive({ Active: holdValue.onActive, id: holdValue.holdId });
+  }
+
+  if (holdValue.onActive) {
+    console.log("shades")
+    // PostToAcceptanceList({ val: active.id, event: eventID, email: active.email, check: "accept" });
+    alert("A notice of acceptance has been to repaint");
+  }else{
+    console.log("not being called ++++++++")
+  }
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+function PopTwo(id,email) {
+  setActive2({ Active: true, id: id, email });
+}
+
+ function ReverserPopTwo(holdValue) {
+  if (holdValue.onActive) {
+    setActive2({ Active: false, id: holdValue.holdId });
+  } else {
+    setActive2({ Active: holdValue.onActive, id: holdValue.holdId });
+  }
+
+  if (holdValue.onActive) {
+    console.log("shades")
+  //  DeleteFromWaitList({ val: active2.id, event: eventID, email: active2.email, check: "removeW"});
+     alert("Notice has been sent regarding removable from wait-list");
+  }
+}
+
+
+
   return (
     <>
+
+    {active2.Active && (
+        <EventModalTwo
+          value={active2.Active}
+          value2={active2.id}
+          reverse={ReverserPopTwo}
+        />
+      )}
+
+   {active.Active && (
+        <EventModalOne
+          value={active.Active}
+          value2={active.id}
+          reverse={ReverserPop}
+        />
+      )}
+
+    <Form onSubmit={postToWaitList}>
+
       <div className="container mt-5">
         <div
           className="card"
@@ -80,25 +165,25 @@ export default function Page({ params }) {
             width: "100%",
             boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
           }}
-        >
+          >
           <div className="card-title text-center mt-3 mb-3">
             {eventInfo.location}
           </div>
 
           <div className="d-flex">
             <div>
-              {eventInfo.img &&
+              {eventInfo.img && (
                 <Image
-                  alt="Picture of the Event"
-                  src={eventInfo.img}
-                  width={100}
-                  height={300}
-                  style={{
-                    width: "100%",
-                    height: "100%"
-                  }}
-                />}
-
+                alt="Picture of the Event"
+                src={eventInfo.img}
+                width={100}
+                height={300}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                }}
+                />
+                )}
             </div>
 
             <div className="card-body" style={{ width: "100%" }}>
@@ -121,81 +206,62 @@ export default function Page({ params }) {
                 </p>
               </div>
 
+                  {   }
               <button
-                type="button"
+                type="submit"
+                className="btn btn-primary"
+                style={{
+                  marginTop: "60px",
+                  marginLeft: "40px",
+                  width: "80%",
+                  boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
+                }}
+                >
+                Join Event
+              </button>
+
+              {/* <button onClick={(e) => Pop(list._id, list.email)} className={`btn btn-success ${styles.b}`}>Add</button> */}
+
+                {  }
+              <button
+                type="submit"
+                className="btn btn-warning"
+                style={{
+                  marginTop: "60px",
+                  marginLeft: "40px",
+                  width: "80%",
+                  boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
+                }}
+                >
+                Remove from Wait-list
+              </button>
+
+              {/* <button onClick={(e) => Pop(list._id, list.email)} className={`btn btn-success ${styles.b}`}>Add</button> */}
+
+
+                  {  }
+               <button
+                type="submit"
                 className="btn btn-success"
                 style={{
                   marginTop: "60px",
-                  marginLeft: "100px",
-                  width: "60%",
+                  marginLeft: "40px",
+                  width: "80%",
                   boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
                 }}
-              >
-                Join
+                >
+                Remove from Approve-list
               </button>
 
+              {/* <button onClick={(e) => Pop(list._id, list.email)} className={`btn btn-success ${styles.b}`}>Add</button> */}
+
 
             </div>
           </div>
         </div>
       </div>
-
-
-      <div className="container mt-5">
-        <div className="card mx-auto w-100">
-          <div className="card-body">
-            <button
-              type="button"
-              data-bs-toggle='collapse'
-              data-bs-target='#multiCollapse'
-              aria-expanded='false'
-              aria-controls='multiCollapse'
-              className="btn btn-success"
-              style={{
-
-                boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
-              }}>
-              Event information
-            </button>
-            <div className="collapse" id='multiCollapse'>
-              <div className="card card-body mt-2">
-
-                <p>Itinerary for: {itineraryInfo.title}</p>
-
-                {itineraryInfo.schedule?.map((item, index) => (
-                  <div key={index}>
-                    <p>Day: {item.day}</p>
-                    <p>Details: {item.activity}</p>
-                    <p>Time: {item.time}</p>
-                  </div>
-                ))}
-
-                {/*               
-                {itineraryInfo ? (
-                    {itineraryInfo.map((item, index) =>(
-
-                    ))};
-                  <h1>{itineraryInfo.title}</h1>
-
-
-                ): (<p>Loading...</p> )} */}
-
-
-              </div>
-              <div className="card card-body mt-5">
-                 <p>Recommended items to bring</p> 
-                {packingListInfo.items?.map((item, index) =>(
-                  <div key={index}>
-                    <p>item: {item}</p>
-                    </div>
-                ))}
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
+    </Form>
+      
     </>
   );
 }

@@ -1,0 +1,147 @@
+  
+  .wrapper{
+    /* background-color: #996ed9; */
+    width: 100%;
+      max-width: 1440px;
+      margin: 80px auto;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 20px;
+  }
+  
+
+  .card{
+    background: #fff;
+    border-radius: 50px;
+    padding: 30px;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    margin-bottom: 10px;
+}
+
+.one{
+  grid-row: 1/20;    
+  width: 100%;
+}
+
+
+.two{
+    grid-row: 1/35;
+}
+
+.three{
+    grid-row: 1/35;
+}
+
+.test{
+    /* background-color: rgb(194, 168, 168); */
+    height:600px;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.box{
+    box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.1);
+    /* background-color: bisque; */
+    background-color: rgba(239, 237, 237, 0.416);
+    height: 128px;
+    max-height: 200px;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-bottom: 90px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.a{
+    margin-top: 10px;
+    width: 100%;
+    box-shadow: 8px 8px 8px 0px rgba(0,0,0,0.1);
+}
+
+.b{
+    width: 100%;
+    box-shadow: 8px 8px 8px 0px rgba(0,0,0,0.1);
+
+}
+
+.c{
+    width: 100%;
+    box-shadow: 8px 8px 8px 0px rgba(0,0,0,0.1);
+    
+}
+
+.line{
+    width: 100%;
+}
+
+.div1{
+/* background-color: rgb(116, 80, 36); */
+/* width: 50%; */
+/* margin-right: 50px; */
+}
+
+
+
+.name{
+    /* background-color: aquamarine; */
+    /* width: 250px; */
+    /* max-width: 194px; */
+    height: 40px;
+    overflow: hidden;
+    overflow-y: scroll;
+    /* width: 10px; */
+}
+
+
+@media (max-width: 1130px) {
+
+    .one{
+        grid-row: 1/4;    
+        grid-column: 1/10;
+      }
+      
+      
+      .two{
+          grid-row: 4/20;
+          grid-column: 1/10;
+      }
+      
+      .three{
+          grid-row: 1/20;
+            grid-column: 10/40;
+      }
+
+}
+
+@media(max-width: 980px){
+
+
+.one{
+    grid-row: 1/4;    
+    grid-column: 1/40;
+  }
+
+.indicator{
+    /* display: flex;
+    justify-content: space-around; */
+    text-align: center;
+}
+  
+  
+  .two{
+      grid-row: 4/10;
+      grid-column: 1/40;
+  }
+  
+  .three{
+      grid-row: 10/20;
+        grid-column: 1/40;
+  }
+
+
+}

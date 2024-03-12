@@ -1,20 +1,22 @@
 "use client";
-import { useState } from "react";
 import {POST} from "../../../api/routes/evemtRoute"
 import Edit from "../../../components/Edit";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home(props) {
+
+   const [adminID, SetAdminID] = useState("");
 
   const router = useRouter();
   //Add possible loading check? -Sam
   useEffect(() => {
     var search = sessionStorage.getItem('AID');
+    SetAdminID(search);
     if(search == null){
     router.push('/login');
     }
-  }, []);
+  },[]);
 
     const [amount, setAmount] = useState("");
     const [image, setImage] = useState("");
@@ -161,6 +163,7 @@ export default function Home(props) {
               </button>
             {/* <button type="button" onClick={test}>Submit</button> */}
             </div>
+            <input type="hidden" value={adminID}  name="adminID" />
           </form>
         </div>
       </>
