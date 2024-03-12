@@ -362,10 +362,4 @@ export async function GetMemberListStatus(eventData){
   return data;
 
 }
-export async function PostWaitListRemovalNotification(){
 
-}
-
-export async function PostApproveListRemovalNotification(){
-  
-}
