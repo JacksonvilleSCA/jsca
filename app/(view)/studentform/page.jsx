@@ -6,6 +6,8 @@ import { POST } from '@/app/api/routes/essayroutes';
 import {useEffect } from "react"; 
 import {useRouter} from 'next/navigation';
 import { useState } from 'react';
+import NavTwo from "@/app/components/Nav2"
+
 
  const StudentForm = () => {
     const router = useRouter();
@@ -48,6 +50,8 @@ import { useState } from 'react';
     
   return (
     <>
+    <div> 
+    <NavTwo/> 
     <div className="page-container">
         <div>{essay}</div>
     <h2 style={{ textAlign: 'center' }}>
@@ -366,6 +370,7 @@ import { useState } from 'react';
         
         </div>
     </div>  
+    </div> 
     </>
     ); 
 }; 
