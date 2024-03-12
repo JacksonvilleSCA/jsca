@@ -6,6 +6,7 @@ import { useState } from "react";
 import Edit from "@/app/components/Edit";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import NavThree from "@/app/components/Nav3";
 
 export default function Page({ params }) {
   console.log(params)
@@ -31,6 +32,7 @@ export default function Page({ params }) {
   
   return (
     <>
+    <NavThree/>
       <div
         key={eventInfo._id}
         className="container-sm "

@@ -10,6 +10,7 @@ import { contactMember } from "@/app/api/routes/memberContact";
 import { getEventItinerary } from "@/app/api/routes/itineraryroute";
 import { GETROUTE } from "@/app/api/routes/plroute";
 import { useRouter } from "next/navigation";
+import NavTwo from "@/app/components/Nav2";
 
 export default function Page({ params }) {
   const [eventInfo, setEventInfo] = useState("");
@@ -149,6 +150,7 @@ function PopTwo(id,email) {
 
   return (
     <>
+    <NavTwo/>
 
     {active2.Active && (
         <EventModalTwo
