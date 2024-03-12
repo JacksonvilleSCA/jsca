@@ -12,6 +12,7 @@ import { contactMember } from "./memberContact";
 
 
 
+
 export async function GET() {
   let data = await Event.find({}).lean().exec();
 
@@ -334,11 +335,20 @@ export async function GetMoreInfoEvent(eventData) {
 export async function GetMemberListStatus(eventData){
 
   const memberObjectID = new mongoose.Types.ObjectId(eventData.id);
+  // let test = new mongoose.Types.ob
+  const objectId = new mongoose.Types.ObjectId(eventData.params.id);
 
   let data = await Event.findOne({ _id: eventData.params.id }).lean().exec(); 
+  const res = await Event.findById(eventData.params.id).select('admin');
+  
+  console.log(res)
+  const adminInfo = await res.populate('admin');
+  console.log(adminInfo)
+  let adminEmail = adminInfo.admin.email;
 
-  const waitListStatus = await Event.find({ waitlist: memberObjectID }).select("_id location").lean().exec();
-  const approveListStatus = await Event.find({ attendees: memberObjectID }).select("_id location").lean().exec();
+
+  const waitListStatus = await Event.find({ waitlist: eventData.id }).select("_id location").lean().exec();
+  const approveListStatus = await Event.find({ attendees: eventData.id }).select("_id location").lean().exec();
 
   const base64Image = data["img"].data.buffer.toString("base64");
   data["img"] = `data:${data["img"].contentType};base64,${base64Image}`;
@@ -349,23 +359,16 @@ export async function GetMemberListStatus(eventData){
   if(waitListStatus.length > 0){
     console.log(waitListStatus)
       console.log("wait *************************************")
+    return {data,adminEmail, status: "TF" }
   }if(approveListStatus.length > 0){
     console.log(approveListStatus)
     console.log("approve *************************************")
+      return {data, adminEmail, status: "TT"}
   }else{
     console.log("nothing *************************************")
-
+     return {data, adminEmail, status:"FF"}
   }
 
 
-
-  return data;
-
-}
-export async function PostWaitListRemovalNotification(){
-
 }
 
-export async function PostApproveListRemovalNotification(){
-  
-}
