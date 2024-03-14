@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { GET as GetEvent } from "../../../api/routes/evemtRoute";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import NavThree from "@/app/components/Nav3";
 
 export default function Page() {
   const router = useRouter();
@@ -36,6 +37,7 @@ export default function Page() {
 
   return (
     <>
+    <NavThree/>
       <div className="container" style={{ marginBottom: "30px" }}>
         <div className="row row-cols-1 row-cols-md-3 g-4">
           {eventInformation.map((event, index) => (

@@ -1,4 +1,5 @@
 "use client";
+import React from 'react';
 import styles from './page.module.css';
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -6,7 +7,9 @@ import { useState } from "react";
 import Link from 'next/link';
 import { AdminInfo } from '@/app/api/routes/adminInfo';
 import { AdminUpdate } from '@/app/api/routes/adminUpdate';
-
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import NavThree from '@/app/components/Nav3';
 
 
 export default function AdminAccountManage() {
@@ -20,6 +23,7 @@ export default function AdminAccountManage() {
   const [userCountry, setUserCountry] = useState('')
   const [userState, setUserState] = useState('');
   const [userCity, setUserCity] = useState('')
+  const [userStreet, setUserStreet] = useState('');
   const [accData, setAccData] = useState('');
   const [search, setSearch] = useState('');
   var firstN;
@@ -31,6 +35,9 @@ export default function AdminAccountManage() {
   var countRY;
   var staTE;
   var ciTY;
+  var strEET;
+  const printRef = React.useRef();
+
 
   
 
@@ -113,6 +120,10 @@ export default function AdminAccountManage() {
     setPASSWORD(e.target.value);
   }
 
+  const handleStreet = (e) =>{
+    setUserStreet(e.target.value);
+  }
+
   function manageUsers(){
 
     router.push('/adminViewUsers')
@@ -123,6 +134,42 @@ export default function AdminAccountManage() {
 
     router.push('/admindashboard') 
   }
+  
+  
+  function dashB(){
+
+    router.back('/LoginDashboard') 
+  }
+
+  function printScreen(){
+    const confirm = window.confirm("Confirm to download document.")
+    if(confirm){
+      console.log("Downloading...");
+      try{
+        const element = printRef.current;
+        html2canvas(element).then(canvas => {
+          const data = canvas.toDataURL('image/png');
+          const pdf = new jsPDF();
+          const imgProperties = pdf.getImageProperties(data);
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+          pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          pdf.save('AccountInfo.pdf');
+        })
+      }
+      catch(e){
+        alert(e)
+      }
+
+      
+    }
+
+  }
+
+  <button onClick={printScreen}>Export to PDF</button>
+
+  
+
 
 
   const handleSubmit = async (e) => {
@@ -145,6 +192,7 @@ export default function AdminAccountManage() {
       country: userCountry,
       state: userState,
       city: userCity,
+      street: userStreet
 
     }
 
@@ -182,57 +230,75 @@ export default function AdminAccountManage() {
   countRY = accData.country;
   staTE = accData.state;
   ciTY = accData.city;
+  strEET = accData.street;
 
 
 
 
 
 
-  //Add button to take a admin to a page containing all admins with edit and delete (only for super admins).
-  //Set up account recovery.
-  //Show junior admins cities that are checked by string.
 
     return(
-      
-      <div>
+      <div ref={printRef}>
+      <NavThree/>
       <div className={styles.title}>
-      <h1 >Manage Admin Account</h1>
+      <h1 >|Manage Admin Account</h1>
 
       </div>
 
-      <div className={styles.title}>
+      <div className={styles.paddingButton}>
       <button onClick={dashB}> Return </button>
+      <button onClick={printScreen}>Export to PDF</button>
+
       </div>
+      <div className={styles.Container2}>
+      <form onSubmit={handleSubmit} className={styles.container}>
+        <div className={styles.row}>
+          <div className={styles.column}>
+          <p>First Name:</p>
+          <input
+          type="text"
+          id="firstName"
+          value={FIRSTN}
+          onChange={handleFirstName}
+          name="firstname"
+          placeholder={firstN}
+          className={styles.textbox}
+          />
+          </div>
 
+          <div className={styles.column}>
+          <p>Last Name:</p>
+          <input
+          type="text"
+          id="lastName"
+          value={LASTN}
+          onChange={handleLastName}
+          name="lastname"
+          placeholder={lastN}
+          className={styles.textbox}
+          />
+          </div>
 
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      
-      
-
-      <div className={styles.container}>
-        <div className={styles.textbox}>
-          <form onSubmit={handleSubmit}>
-            <h2>Admin ID: {search}</h2>
-
-            <p>First Name:</p>
-            <p></p>
-            <input className={styles.textbox} type="text" id="firstName" 
-            value ={FIRSTN} onChange={handleFirstName} name ="firstname" placeholder={firstN}/>
-            <p>Last Name: </p>
-            <input className={styles.textbox} type="text" id="lastName" 
-            value={LASTN} onChange={handleLastName} name="lastname" placeholder={lastN} />
-            <p>Email: </p>
-            <input className={styles.textbox} type="text" id="email" 
-            value={EMAIL} onChange={handleEmail} name="email" placeholder={email} />
-            <p>Phone Number: </p>
-            <input className={styles.textbox} type="text" id="phonenumber"
-            value={PHONENUMBER} onChange={handlePhone} name="phonenumber" placeholder={phone}/>
-
-            <p>Country:</p>
-            <select name="country" id="country" onChange={handleCountry}>
+          <div className={styles.column}>
+          <p>Phone Number:</p>
+          <input
+          type="text"
+          id="phonenumber"
+          value={PHONENUMBER}
+          onChange={handlePhone}
+          name="phonenumber"
+          placeholder={phone}
+          className={styles.textbox}
+          />
+          </div>
+          
+        </div>
+  
+        <div className={styles.row}>
+          <div className={styles.column}>
+          <p>Country:</p>
+          <select name="country" id="country" onChange={handleCountry}>
             <option value="">{countRY}</option>
             <option value="Afghanistan">Afghanistan</option>
             <option value="Albania">Albania</option>
@@ -426,50 +492,108 @@ export default function AdminAccountManage() {
             <option value="Yemen">Yemen</option>
             <option value="Zambia">Zambia</option>
             <option value="Zimbabwe">Zimbabwe</option>
-            </select>
-
-            <p>City:</p>
-            <input className={styles.textbox} type="text" id="citY"
-            value={userCity} onChange={handleCity} name="citY" placeholder={ciTY}/>
-
-            <p>State:</p>
-            <input className={styles.textbox} type="text" id="passWord"
-            value={userState} onChange={handleState} name="passWord" placeholder={staTE}/>
-
-            <p>User Name: </p>
-            <input className={styles.textbox} type="text" id="userName"
-            value={USER} onChange={handleUser} name="userName" placeholder={userN}/>
-            
-            <p>Password:</p>
-            <input className={styles.textbox} type="text" id="passWord"
-            value={PASSWORD} onChange={handlePassword} name="passWord" placeholder={passW}/>
-      
-            
-            
-
-             
-         
-          <br></br>
-          <br></br>
-          <br></br>
-
-            <button type="submit" className={styles.textbox3}>Update</button>
-
-            </form>
-
+          </select>
           </div>
-          <br></br>
-          
-
-
-      </div>
-      
-
-      
-
-
+          <div className={styles.column}>
+          <p>State:</p>
+          <input
+          type="text"
+          id="passWord"
+          value={userState}
+          onChange={handleState}
+          name="passWord"
+          placeholder={staTE}
+          className={styles.textbox}
+          />
+          </div>
+        </div>
   
+        <div className={styles.row}>
+          <div className={styles.column}>
+          <p>City:</p>
+          <input
+          type="text"
+          id="citY"
+          value={userCity}
+          onChange={handleCity}
+          name="citY"
+          placeholder={ciTY}
+          className={styles.textbox}
+          />
+          </div>
+          <div className={styles.column}>
+          <p>Street:</p>
+          <input
+          type="text"
+          id="streeT"
+          value={userStreet}
+          onChange={handleStreet}
+          name="streeT"
+          placeholder={strEET}
+          className={styles.textbox}
+          />
+          </div>
+        </div>
+  
+        <div className={styles.row}>
+          <div className={styles.column}>
+          <p>User Name:</p>
+          <input
+          type="text"
+          id="userName"
+          value={USER}
+          onChange={handleUser}
+          name="userName"
+          placeholder={userN}
+          className={styles.textbox}
+          />
+          </div>
+          <div className={styles.column}>
+          <p>Password:</p>
+          <input
+          type="text"
+          id="passWord"
+          value={PASSWORD}
+          onChange={handlePassword}
+          name="passWord"
+          placeholder={passW}
+          className={styles.textbox}
+          />
+          </div>
+          <div className={styles.column}>
+          <p>Email:</p>
+          <input
+          type="text"
+          id="email"
+          value={EMAIL}
+          onChange={handleEmail}
+          name="email"
+          placeholder={email}
+          className={styles.textbox}
+          />
+          </div>
+          
+        </div>
+        <div className={styles.row + ' ' + styles.centeredButton}>
+        <button type="submit" className={styles.textbox3}>Update</button>
+        </div>
+        
+      </form>
+
       </div>
-    )
-  }
+
+
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+
+
+      </div>
+  )
+}
   

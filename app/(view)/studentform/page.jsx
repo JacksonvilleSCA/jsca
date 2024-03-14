@@ -1,19 +1,65 @@
+"use client"
 import React from 'react';
 import Link from 'next/link'; 
 import essay from '../essay/page';
 import { POST } from '@/app/api/routes/essayroutes';
+import {useEffect } from "react"; 
+import {useRouter} from 'next/navigation';
+import { useState } from 'react';
+import NavTwo from "@/app/components/Nav2"
+
 
  const StudentForm = () => {
-  
+    const router = useRouter();
+    const [essay, setEssay] = useState('');
+    
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        // const formData = new FormData(e.target);
+        const submittedEssay = sessionStorage.getItem('essay'); //gets submitted essay 
+        if(!submittedEssay) {
+            alert("Please fill out the essay before submitting the form.")
+            return; 
+        }
+        const formData = new FormData(e.target);
+        formData.append("essay", submittedEssay); //apend submitted essay to form
+        try {
+            await POST(formData);
+            console.log("form submitted!"); 
+            
+            setTimeout(() => {
+                
+                router.push('/studentViewForm'); 
+                
+            }, 2000); 
+            sessionStorage.removeItem('essay'); 
+            
+        } catch (error) {
+            console.error('Error submitting form:', error)
+        }
+    }
+    useEffect(() => {
+        const uid = sessionStorage.getItem('uid');
+        if (!uid) {
+            router.push('/login');
+        }
+    }, []);
+
+    
+    
   return (
     <>
+    <div> 
+    <NavTwo/> 
     <div className="page-container">
+        <div>{essay}</div>
     <h2 style={{ textAlign: 'center' }}>
                 Jacksonville Sister Cities  Landon Middle Student Exchange Program Application Form</h2>
         <div class =" contrainer">
             <h4 style={{ textAlign: 'center' }}>Section I: Student&apos;s Legal Name, Contact Data and Information (Do not use nicknames)</h4>
 
-            <form action={POST}>
+            <form onSubmit = {handleSubmit}>
             <div class = "row">
                 <div class = "col"> </div>
                 <div class = "col">
@@ -321,11 +367,10 @@ import { POST } from '@/app/api/routes/essayroutes';
             <button type = "submit" value= "submit" class="btn btn-primary">  Submit</button>
             </div>
         </form>
-        </div>
-        <div class="alert alert-success" role="alert">
-            A simple success alert—check it out!
+        
         </div>
     </div>  
+    </div> 
     </>
     ); 
 }; 

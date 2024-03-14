@@ -8,6 +8,7 @@ import ConfirmDelete from "@/app/components/ConfirmDeletion";
 import TextContent from "@/app/components/Text";
 import { redirect, useRouter } from "next/navigation";
 import ItineraryModal from "@/app/components/ItineraryModal";
+import NavThree from "@/app/components/Nav3";
 
 export default function Page({ params }) {
 
@@ -19,12 +20,8 @@ export default function Page({ params }) {
     router.push('/login');
   }
 
-
-
   const [active, setActive] = useState({ Active: false, id: -1 });
   const [active2, setActive2] = useState({ Active: false, id: -1 });
-
-
   const [eventInfo, setEventInfo] = useState("");
   const [maxPeople, setMaxPeople] = useState("");
   const [currentPeople, setCurrentPeople] = useState("");
@@ -33,22 +30,21 @@ export default function Page({ params }) {
   useEffect(() => {
     const fetchData = async () => {
       const data = await GET(params);
-      setMaxPeople(data.amount);
+      console.log(data.props.data)
+      // setMaxPeople(data.amount);
 
-      if (data.attendees.length === 0) {
-        setCurrentPeople(data.attendees.length);
-      } else {
-        setCurrentPeople(0);
-      }
+      // if (data.attendees.length() === 0) {
+      //   setCurrentPeople(data.attendees.length);
+      // } else {
+      //   setCurrentPeople(0);
+      // }
 
-      setAvailableSpace(maxPeople - data.attendees.length);
+      // setAvailableSpace(maxPeople - data.attendees.length);
 
-      setEventInfo(data);
+      setEventInfo(data.props.data);
     };
     fetchData();
   }, [maxPeople,params]);
-
-
 
   function Pop(id) {
     setActive({ Active: true, id: id });
@@ -81,13 +77,13 @@ export default function Page({ params }) {
     if (holdValue.onActive) {
       if (holdValue.location === "Packaging") {
           console.log("Packaging")
-          router.push(`/packingView`);
+          router.push(`/createPackingList?eventId=${eventInfo._id}`);
       } else if(holdValue.location === "Itinerary"){
           console.log("Itinerary")
-          router.push(`/ItineraryView`);
+          router.push(`/ItineraryCreate?eventId=${eventInfo._id}`);
       }else if(holdValue.location === "Planning"){
           console.log("Planning")
-          router.push(`/listMenu`);
+          router.push(`/listMenu?eventId=${eventInfo._id}`);
       }
     }
   }
@@ -98,6 +94,7 @@ export default function Page({ params }) {
 
   return (
     <>
+    <NavThree/>
         {active2.Active && (
         <ItineraryModal
           value={active2.Active}
@@ -211,7 +208,7 @@ export default function Page({ params }) {
                 onClick={(e) => Itinerary(eventInfo._id)}
                 className="btn btn-primary px-5"
               >
-                Itinerary
+                Itinerary/Packing list
               </button>
 
 

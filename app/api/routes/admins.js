@@ -8,8 +8,7 @@ import Admin from "../schema/Admin";
 export async function getAllAdmins(acc) {
   console.log(acc);
   const ID = acc.AdminID;
-  console.log("GETTING ALL ADMINS")
-  console.log("xxxxx")
+  
   
   try {
     const users = await Admin.find({});
@@ -25,7 +24,8 @@ export async function getAllAdmins(acc) {
       phonenumber: user.phonenumber,
       country: user.country,
       state: user.state,
-      city: user.city
+      city: user.city,
+      street: user.street
     }));
 
     console.log("users are:")

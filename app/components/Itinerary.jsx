@@ -1,14 +1,13 @@
 "use client"
-import { Suspense, useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link'
-import { useFormStatus } from "react-dom";
 import { POST } from '../api/routes/itineraryroute';
 import 'bootstrap-icons/font/bootstrap-icons.css'
-// import loading from '../(view)/ItineraryCreate/loading';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function Itinerary() {
 
-
+        
     const [title, setTitle] = useState('')
     const [schedule, setSchedule] = useState([]);
     const [day, setDay] = useState('');
@@ -17,15 +16,21 @@ export default function Itinerary() {
     const [editText, setEditText] = useState('');
     const [editId, setEditId] = useState(null);
     const [isLoading, setLoading] = useState(false); // New state for loading
+    const [eventId, setEventId] = useState(null);
 
-    // function loading() {
-    //     const { pending } = useFormStatus();
-    //     return (
-    //         <button type="submit" disabled={pending} className="btn btn-outline-dark mx-2">
-    //             {pending ? "Submitting..." : "Save"}
-    //         </button>
-    //     )
-    // }
+
+    const router = useRouter();
+    //this extracts eventId from the URL query parameter.
+    // const {eventId} = router.query;
+    useEffect(() =>{
+        if(typeof window !== 'undefined'){
+            const searchParams = new URLSearchParams(window.location.search);
+            const eventId = searchParams.get('eventId')
+            setEventId(eventId);
+        }
+        console.log("Current eventId:", eventId);
+
+    },[])
 
 
     const handleAddSchedule = () => {
@@ -52,7 +57,14 @@ export default function Itinerary() {
         e.preventDefault();
         setLoading(true); // Start loading
 
+        if(!eventId){
+            console.error("Event ID is not set");
+            setLoading(false);
+            return;
+        }
+
         const itineraryData = {
+            eventId,
             title,
             schedule
         };
@@ -96,8 +108,8 @@ export default function Itinerary() {
                     <div className="card my-3 w-75 mx-auto">
                         <div className="card-body">
                             <div className="row">
-                            <div className="col"> <label className="fs-3" htmlFor="title" >Select an Event: </label></div>
-                                <div className="col"> <input className="form-control" name='title' value={title} onChange={(e) => setTitle(e.target.value)} id='title' placeholder="search an event" type="text"></input></div>
+                            {/* <div className="col"> <label className="fs-3" htmlFor="title" >Select an Event: </label></div>
+                                <div className="col"> <input className="form-control" name='title' value={title} onChange={(e) => setTitle(e.target.value)} id='title' placeholder="search an event" type="text"></input></div> */}
 
                                 <div className="col"> <label className="fs-3" htmlFor="title" >Set a title: </label></div>
                                 <div className="col"> <input className="form-control" name='title' value={title} onChange={(e) => setTitle(e.target.value)} id='title' placeholder="e.g. Travel itinerary" type="text"></input></div>
@@ -188,7 +200,8 @@ export default function Itinerary() {
                                 <button
                                     type="submit"
                                     className="btn btn-outline-dark mx-2"
-                                    disabled={isLoading}>
+                                    // disabled={!eventId}
+                                    disabled={isLoading && !eventId}>
                                     {isLoading ? "Submitting..." : "Save"}
                                 </button>
 

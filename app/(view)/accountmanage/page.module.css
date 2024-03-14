@@ -1,18 +1,42 @@
+.pageContainer{
+    padding-left: 20px; 
+}
+  
+
 .container{
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    gap: 20px;
+}
+
+.Container2{
+    background-color: #0f2ad938;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto; 
+    max-width: 600px; 
+  }
+
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px; 
+    width: 100%;
+    
+}
+
+.column{
+    flex: 1 0 20%; 
+    margin-right: 2%
 }
 
 .textbox{
-    border: 5px solid #5b5b5ebc;
-    padding: 5px;
-    border-radius: 10px;
-    text-align: center;
+    width: 100%;
+}
 
+.textbox1{
+    width: 100%; 
+    margin-top: 10px; 
 }
 
 .textbox2{
@@ -33,6 +57,21 @@
 
 }
 
+
 .title{
     padding: 20px;
+}
+
+
+.paddingButton{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+
+.centeredButton{
+    padding: 0 20px;
+    justify-content: center;
+    margin-top: 40px;
 }

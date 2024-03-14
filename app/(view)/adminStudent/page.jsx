@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react"
 import { STUDP } from "@/app/api/routes/studentCreation";
 import styles from './page.module.css'
+import NavThree from "@/app/components/Nav3";
 
 const Createaccount = () => {
   const Router = useRouter();
@@ -19,6 +20,7 @@ const Createaccount = () => {
   const [userCountry, setUserCountry] = useState('')
   const [userState, setUserState] = useState('');
   const [userCity, setUserCity] = useState('')
+  const [userStreet, setUserStreet] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -78,8 +80,14 @@ const Createaccount = () => {
     console.log(userCity);
   }
 
+  const handleStreet = (e) =>{
+    setUserStreet(e.target.value);
+    console.log(userStreet);
+  }
+
 
   const handleSubmit = async (e) =>{
+    setError("");
     e.preventDefault();
 
 
@@ -98,7 +106,8 @@ const Createaccount = () => {
       phonenumber: userPhone,
       country: userCountry,
       state: userState,
-      city: userCity
+      city: userCity,
+      street: userStreet
     }
 
     console.log(Object);
@@ -138,6 +147,7 @@ const Createaccount = () => {
 
     return (
       <div>
+      <NavThree/>
         <div className={styles.container}>
         <h1 className={styles.title}>Student Account Creation</h1>
         <button onClick={dashB}> Return </button>
@@ -435,6 +445,16 @@ const Createaccount = () => {
               onChange={handleCity}
               name="usercity"
               placeholder="City"/>
+            </div>
+
+            <div className={styles.textbox2}>
+              <label htmlFor="userStreet">Enter Street: </label>
+              <input 
+              type="text" 
+              id="userStreet" 
+              onChange={handleStreet}
+              name="usercity"
+              placeholder="Street"/>
             </div>
 
 
