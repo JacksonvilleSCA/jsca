@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getAllForms } from '@/app/api/routes/essayroutes';
+import {DELETE} from '@/app/api/routes/essayroutes';
 import NavThree from '@/app/components/Nav3';
 
 const AdminViewForm = () => {
@@ -27,6 +28,15 @@ const AdminViewForm = () => {
       setStudentData(student);
     } catch (error) {
       console.error('Error fetching student data:', error);
+    }
+  };
+  const handleDelete = async () => {
+    try {
+      await DELETE(studentId); // Make the API call to delete the form
+      // Redirect the user to the admin dashboard or any other appropriate page
+      router.push('/adminForms');
+    } catch (error) {
+      console.error('Error deleting form:', error);
     }
   };
   
@@ -87,7 +97,7 @@ const AdminViewForm = () => {
                     <p> </p>
                     <a class="btn btn-secondary me-2" href={`/adminViewEssay?studentId=${studentData._id}`} role="button" onClick={() => handleViewEssay(studentData._id)}> View Essay  </a>
                     <a class="btn btn-secondary me-2" role = "button"> Approve </a>
-                    <a class="btn btn-secondary me-2" role = "button"> Delete  </a>
+                    <button class="btn btn-secondary me-2" onClick={handleDelete}> Delete </button>
                 </div>
                 )}
              </div> 

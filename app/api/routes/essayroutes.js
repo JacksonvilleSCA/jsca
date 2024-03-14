@@ -6,9 +6,6 @@ import Form from "../schema/Form";
 
 export async function POST(formData){
 
-//const data = Object.fromEntries(formData);
-// console.log(data)
-
 try {
     // Connect to the MongoDB database
     await connect;
@@ -74,4 +71,27 @@ export async function getAllForms() {
         console.error('Error fetching forms:', error);
         throw error;
     }
+}
+export async function DELETE(formId) {
+  try {
+    // Connect to the MongoDB database
+    await connect;
+
+    // Access the collection using the Form schema
+    const formCollection = mongoose.connection.db.collection('forms');
+
+    // Delete the document with the specified Id
+    const result = await formCollection.deleteOne({ _id: new mongoose.Types.ObjectId(formId) });
+
+    if (result.deletedCount === 0) {
+      throw new Error('Document not found');
+    }
+
+    console.log('Document deleted:', formId);
+    return { success: true };
+
+  } catch (error) {
+    console.error('Error deleting form data:', error);
+    throw error;
+  }
 }
