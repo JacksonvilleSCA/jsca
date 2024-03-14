@@ -3,6 +3,7 @@ import {POST} from "../../../api/routes/evemtRoute"
 import Edit from "../../../components/Edit";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import NavThree from "@/app/components/Nav3";
 
 export default function Home(props) {
 
@@ -46,6 +47,7 @@ export default function Home(props) {
 
     return (
       <>
+      <NavThree/>
         <div
           className="container-sm "
           style={{ width: "60%", height: "100vh", marginBottom: "300px" }}

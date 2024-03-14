@@ -67,7 +67,7 @@ export async function getItineraryById(eventId) {
 
   try {
    
-    const result = await Itinerary.findOne({ eventId: eventId.id } ).populate('eventId').lean().exec();  
+    const result = await Itinerary.findOne({ eventId: eventId} ).populate('eventId').lean().exec();  
     
     if (!result) {
       return { props: { itinerary: [] } };
@@ -86,8 +86,8 @@ export async function getItineraryById(eventId) {
 //delete by id
 export async function DeleteItinerary(eventId){
   try{
-    const data = Itinerary.deleteOne({eventId: eventId});
-
+    const data = await Itinerary.deleteOne({eventId: eventId});
+     
   }catch(error){
     throw Error("Failed to delete");
 

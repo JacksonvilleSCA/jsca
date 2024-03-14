@@ -1,7 +1,4 @@
 "use client";
-'use client'
-
-
 
 import React, { useEffect, useState } from "react";
 import styles from "./style.module.css"
@@ -13,6 +10,7 @@ import { PostToAcceptanceList } from "@/app/api/routes/evemtRoute";
 import { DeleteFromWaitList } from "@/app/api/routes/evemtRoute";
 import { DeleteFromAcceptanceList } from "@/app/api/routes/evemtRoute";
 import { useRouter } from "next/navigation";
+import NavThree from "@/app/components/Nav3";
 
 export default function Page({params}) {
 
@@ -119,7 +117,7 @@ function ReverserPopThree(holdValue) {
 
     return (
       <>
-
+      <NavThree/>
      {active3.Active && (
         <ListModalThree
           value={active3.Active}
