@@ -52,10 +52,15 @@ const AdminViewEssay = () => {
               <div className="card-body">
                 {studentData && (
                  <div>
-                    <p>Student ID: {studentData._id}</p>
-                    <p>First Name: {studentData.firstName}</p>
-                    <p>Last Name: {studentData.lastName}</p>
-                    <p> Essay: {studentData.essay} </p> 
+                    <div class = "row"> 
+                      <div class = "col"> 
+                        <p>First Name: {studentData.firstName}</p>
+                      </div> 
+                      <div class = "col"> 
+                        <p>Last Name: {studentData.lastName}</p>
+                      </div> 
+                    </div> {/* row */}
+                    <p> Essay: <div dangerouslySetInnerHTML={{ __html: studentData.essay }} /> </p> 
                     <a class="btn btn-secondary me-2" href={`/adminViewForm?studentId=${studentData._id}`} role="button" onClick={() => handleViewForm(studentData._id)}> View Form  </a>
                 </div>
                 )}

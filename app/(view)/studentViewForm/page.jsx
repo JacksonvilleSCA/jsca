@@ -47,35 +47,90 @@ const StudentViewForm = () => {
               <div className="card-body">
                 {formData && (
                  <div>
-                    <p>Student ID: {formData._id}</p>
-                    <p>First Name: {formData.firstName}</p>
-                    <p>Last Name: {formData.lastName}</p>
-                    <p> Middle Name: {formData.middleName} </p> 
-                    <p> Perferred Name: {formData.perferredName} </p>
-                    <p>Student Phone Number:  {formData.studentPhone}</p>
-                    <p> Sex: {formData.sex} </p>
-                    <p> Date of Birth: {formData.dob.toLocaleDateString()} </p>
-                    <p> School: {formData.school} </p>
-                    <p> Grade Level: {formData.grade} </p>
+                  <div class = "row"> 
+                    <div class = "col"> 
+                      <p>First Name: {formData.firstName}</p>
+                    </div> 
+                    <div class = "col"> 
+                      <p>Last Name: {formData.lastName}</p>
+                    </div> 
+                    <div class = "col"> 
+                      <p> Middle Name: {formData.middleName} </p> 
+                    </div> 
+                  </div> {/* first row */} 
+                  <div class = "row"> 
+                    <div class = "col"> 
+                      <p> Perferred Name: {formData.perferredName} </p>
+                    </div> 
+                    <div class = "col"> 
+                      <p>Student Phone Number:  {formData.studentPhone}</p>
+                    </div> 
+                  </div> {/* second row */} 
+                  <div class = "row"> 
+                    <div class = "col"> 
+                      <p> Sex: {formData.sex} </p>
+                    </div> 
+                    <div class = "col"> 
+                      <p> Date of Birth: {formData.dob.toLocaleDateString()} </p>
+                    </div> 
+                    <div class = "col"> 
+                      <p> Grade Level: {formData.grade} </p>
+                    </div> 
+                   </div> {/* third row */}  
+                   <div class = "row"> 
+                    <div class = "col"> 
+                      <p> School: {formData.school} </p>
+                    </div>
+                    </div> {/* fourth row */} 
+
                     {/* add Programs of Interest */}
-                    <p> Have a passport: {formData.passport} </p>
-                    <p> Passport Country: {formData.passportCount} </p>
-                    <p> Passport Expiration Date: {formData.passportexp.toLocaleDateString()}</p>
+                    <div class = "row"> 
+                      <div class = "col"> 
+                        <p> Have a passport: {formData.passport} </p>
+                      </div> 
+                      <div class = "col"> 
+                       <p> Passport Expiration Date: {formData.passportexp.toLocaleDateString()}</p>
+                      </div> 
+                      <div class = "col"> 
+                       <p> Passport Country: {formData.passportCount} </p>
+                      </div> 
+                    </div> {/* fifth row */} 
                     <p> Allgeries: {formData.allergies} </p>
-                    <h4> SECTION TWO </h4>
-                    <p> Parent Name: {formData.parentname} </p>
-                    <p> Second Parent Name: {formData.parenttwoname} </p>
+
+                    <h4 style={{ textAlign: 'center' }}> SECTION TWO </h4>
+                    <div class = "row"> 
+                      <div class = "col"> 
+                        <p> Parent Name: {formData.parentname} </p>
+                      </div> 
+                      <div class = "col"> 
+                        <p> Second Parent Name: {formData.parenttwoname} </p>
+                      </div> 
+                    </div> {/* row */} 
                     <p> Street : {formData.street} </p>
-                    <p> City: {formData.city} </p>
-                    <p> State: {formData.state} </p>
-                    <p> Zip: {formData.zip} </p>
+                    <div class = "row"> 
+                      <div class = "col"> 
+                        <p> City: {formData.city} </p>
+                      </div> 
+                      <div class = "col"> 
+                        <p> State: {formData.state} </p>
+                      </div> 
+                      <div class = "col"> 
+                        <p> Zip: {formData.zip} </p>
+                      </div> 
+                    </div> {/* row */} 
                     <p> First Parents Phone Number: {formData.parentphone} </p>
                     <p> Second Parents Phone Number: {formData.parenttwophone} </p>
                     <p> Email: {formData.parentemail} </p>
                     <p> Parent signed on: {formData.signdate.toLocaleDateString()}</p>
-                    <p> Host Family and/or Travel: {formData.host}  </p>
-                    <p> Willing to host a family? {formData.hostfam} </p>
-                    <p> Essay: {formData.essay} </p>
+                    <div class = "row"> 
+                      <div class = "col"> 
+                        <p> Host Family and/or Travel: {formData.host}  </p>
+                      </div> 
+                      <div class = "col"> 
+                       <p> Willing to host a family? {formData.hostfam} </p>
+                      </div> 
+                    </div> {/* row */}
+                    <p> Essay: <div dangerouslySetInnerHTML={{ __html: formData.essay }} /> </p>
 
                     <p> </p>
                     
