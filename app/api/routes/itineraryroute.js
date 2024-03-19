@@ -2,6 +2,8 @@
 import { NextResponse } from "next/server";
 import connect from "../db/dbConnection";
 import Itinerary from "../schema/Itinerary";
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export async function POST(formData) {
   "use server";
@@ -88,6 +90,8 @@ export async function DeleteItinerary(eventId){
   try{
     const data = await Itinerary.deleteOne({eventId: eventId});
      
+    revalidatePath(`/EventHistory/${eventId}/temp`);
+    redirect(`/EventHistory/${eventId}/temp`);
   }catch(error){
     throw Error("Failed to delete");
 

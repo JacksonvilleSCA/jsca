@@ -147,7 +147,7 @@ export default function Page({ params }) {
   }
   return (
     <>
-    <NavTwo/>
+      <NavTwo />
 
       {active2.Active && (
         <EventModalTwo
@@ -306,7 +306,12 @@ export default function Page({ params }) {
                     <p>Time: {item.time}</p>
                   </div>
                 ))} */}
-                <p>Itinerary for: {itineraryInfo.title}</p>
+
+                {itineraryInfo > 0 ? (
+                  <p>Itinerary for: {itineraryInfo.title}</p>
+
+                ) : (<p></p>)}
+
                 {itineraryInfo.schedule && itineraryInfo.schedule.length > 0 ? (
                   itineraryInfo.schedule.map((item, index) => (
                     <div key={index}>

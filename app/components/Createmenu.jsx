@@ -22,35 +22,35 @@ export default function CreateMenu() {
     //     }
     //     console.log("Current eventId:", eventId);
 
-    
+
 
     // }, [eventId])
 
     useEffect(() => {
-       
-           
-
-                const fetchData = async () =>{
-
-                    const searchParams = new URLSearchParams(window.location.search);
-                    const eventId = searchParams.get('eventId')
-                    setEventId(eventId);
 
 
-                    const packlist = await GETROUTEBYID(eventId);
-                    setPackingListInfo(packlist);
-                    console.log(packlist);
+
+        const fetchData = async () => {
+
+            const searchParams = new URLSearchParams(window.location.search);
+            const eventId = searchParams.get('eventId')
+            setEventId(eventId);
 
 
-                    const  itinerary  = await getItineraryById(eventId);
-                    setItineraryInfo(itinerary);
-                    console.log(itinerary);
+            const packlist = await GETROUTEBYID(eventId);
+            setPackingListInfo(packlist);
+            console.log(packlist);
 
-                    
 
-                }
+            const itinerary = await getItineraryById(eventId);
+            setItineraryInfo(itinerary);
+            console.log(itinerary);
 
-                fetchData();
+
+
+        }
+
+        fetchData();
 
     }, [eventId])
 
@@ -93,32 +93,32 @@ export default function CreateMenu() {
     // }, [eventId])
 
 
-        //go back function
-        function returnBack(){
-            router.push('/Dashboard/EventHistory/${eventId}/temp');
-    
+    //go back function
+    function returnBack() {
+        router.push('/Dashboard/EventHistory/${eventId}/temp');
+
+    }
+    //for packing list
+    const handleDelete = async () => {
+        try {
+            await DELETE(eventId);
+            // Redirect or perform any additional action after successful deletion
+            console.log('Item deleted successfully.');
+            router.reload();
+        } catch (error) {
+            console.log("Error deleting the item");
         }
-        //for packing list
-        const handleDelete = async () => {
-            try {
-                await DELETE(eventId);
-                // Redirect or perform any additional action after successful deletion
-                console.log('Item deleted successfully.');
-                router.reload();
-            } catch (error) {
-                console.log("Error deleting the item");
-            }
+    }
+    //deleting the itinerary
+    const handleDeleteItinerary = async () => {
+        try {
+            await DeleteItinerary(eventId);
+            console.log("Item deleted successfully");
+            router.reload();
+        } catch (error) {
+            console.log("Failed to delete");
         }
-        //deleting the itinerary
-        const handleDeleteItinerary = async () =>{
-            try{
-                await DeleteItinerary(eventId);
-                console.log("Item deleted successfully");
-                router.reload();
-            }catch(error){
-                console.log("Failed to delete");
-            }
-        }
+    }
 
     return (
         <div>
@@ -129,12 +129,19 @@ export default function CreateMenu() {
                         <div className="card-body">
                             <h5 className="card-title">Manage a packing list</h5>
                             <p className="card-text">Update or delete your packing list.</p>
+                            {packingListInfo && packingListInfo.items && packingListInfo.items.length > 0 ? (
 
-                            {packingListInfo.items?.map((item, index) => (
-                                <div key={index}>
-                                    <p>item: {item}</p>
-                                </div>
-                            ))}
+                                packingListInfo.items?.map((item, index) => (
+                                    <div key={index}>
+                                        <p>item: {item}</p>
+                                    </div>
+                                ))
+
+
+                            ) : (
+                                <p> No information </p>
+                            )}
+
                         </div>
                         <div className="mt-auto">
                             <div className="d-flex gap-2 p-3">
@@ -151,15 +158,25 @@ export default function CreateMenu() {
                             <h5 className="card-title">Manage an itinerary</h5>
                             <p className="card-text">Update or delete your planned routes and journeys.</p>
 
-                            <p>Itinerary for: {itineraryInfo.title}</p>
+                            {itineraryInfo > 0 ? (
+                                <p>Itinerary for: {itineraryInfo.title}</p>
 
-                            {itineraryInfo.schedule?.map((item, index) => (
-                                <div key={index}>
-                                    <p>Day: {item.day}</p>
-                                    <p>Details: {item.activity}</p>
-                                    <p>Time: {item.time}</p>
-                                </div>
-                            ))}
+                            ) : (<p></p>)}
+
+                            {itineraryInfo.schedule && itineraryInfo.schedule.length > 0 ? (
+
+                                itineraryInfo.schedule?.map((item, index) => (
+                                    <div key={index}>
+                                        <p>Day: {item.day}</p>
+                                        <p>Details: {item.activity}</p>
+                                        <p>Time: {item.time}</p>
+                                    </div>
+                                ))
+
+                            ) : (
+                                <p> No information </p>
+                            )}
+
                         </div>
                         <div className="mt-auto">
                             <div className="d-flex gap-2 p-3">
