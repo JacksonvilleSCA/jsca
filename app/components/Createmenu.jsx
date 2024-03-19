@@ -1,10 +1,8 @@
 "use client"
-import Link from "next/link";
 import { DELETE, GETROUTEBYID } from "@/app/api/routes/plroute"
 import { DeleteItinerary, getItineraryById } from "../api/routes/itineraryroute";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from 'next/navigation';
-import { event } from "jquery";
 
 export default function CreateMenu() {
 
@@ -31,12 +29,13 @@ export default function CreateMenu() {
 
 
         const fetchData = async () => {
+            if (typeof window !== 'undefined') {
+                const searchParams = new URLSearchParams(window.location.search);
+                const eventId = searchParams.get('eventId')
+                setEventId(eventId);
+            }
 
-            const searchParams = new URLSearchParams(window.location.search);
-            const eventId = searchParams.get('eventId')
-            setEventId(eventId);
-
-
+    
             const packlist = await GETROUTEBYID(eventId);
             setPackingListInfo(packlist);
             console.log(packlist);
