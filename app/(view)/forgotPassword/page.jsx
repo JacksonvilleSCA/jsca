@@ -62,7 +62,9 @@ const ForgotPassword = () => {
     
     <div> 
     <Nav/>
-    <button onClick={dashB}> Return </button>
+    <div classname={styles.container2}>
+    <button onClick={dashB} className={styles.centeredButton}> Return </button>
+    </div>
   
     <br></br>
     <h3 className={styles.container}>Forgot Password?</h3>
