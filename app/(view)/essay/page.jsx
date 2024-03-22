@@ -3,6 +3,7 @@ import React from 'react';
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import EditTwo from "@/app/components/EditTwo";
+import NavTwo from "@/app/components/Nav2"
 
 const Essay = () => {
   const router = useRouter();
@@ -24,6 +25,8 @@ const Essay = () => {
   }
 
   return (
+    <div> 
+      <NavTwo/> 
     <div>
       <form onSubmit={handleSubmit}>
         <div>
@@ -35,6 +38,7 @@ const Essay = () => {
         </div>
       </form>
     </div>
+    </div> 
   );
 };
 

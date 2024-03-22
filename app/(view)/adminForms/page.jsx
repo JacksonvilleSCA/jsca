@@ -6,6 +6,7 @@ import Link from 'next/link';
 import {useRouter} from "next/navigation"; 
 import { getAllForms } from '@/app/api/routes/essayroutes';
 import { Table } from 'react-bootstrap';
+import NavThree from '@/app/components/Nav3';
 
 const AdminForms = () => {
   const[forms, setFroms] = useState([]); 
@@ -39,6 +40,8 @@ const AdminForms = () => {
   }
 
     return (
+      <div> 
+      <NavThree/> 
       <div className="page-container">
       <h1 style={{ textAlign: 'center' }}>Exchange Program Applications </h1>
       <div className='mb-3'> 
@@ -74,6 +77,7 @@ const AdminForms = () => {
       )}
       </div> 
       </div>
+      </div> 
       );
     };
     

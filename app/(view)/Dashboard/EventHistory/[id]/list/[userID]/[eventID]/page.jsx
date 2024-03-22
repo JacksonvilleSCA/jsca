@@ -3,6 +3,7 @@
 import { useEffect,useState } from "react"
 import { GetMoreInfoEvent } from "@/app/api/routes/evemtRoute";
 import Edit from "@/app/components/Edit";
+import NavThree from "@/app/components/Nav3";
 
 export default function Page(params) {
     console.log(params.params.id)
@@ -22,6 +23,7 @@ export default function Page(params) {
 
       return (
         <>
+        <NavThree/>
           <div
             key={eventInfo._id}
             className="container-sm "

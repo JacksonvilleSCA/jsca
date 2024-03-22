@@ -2,6 +2,11 @@ import mongoose, { SchemaType } from "mongoose";
 const { Schema, model, SchemaTypes } = mongoose;
 
 const formSchema = new Schema({
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "create", // Refers to the User model
+        required: true,
+    },
     lastName:{
         type: String, 
         required: true, 

@@ -6,9 +6,6 @@ import Form from "../schema/Form";
 
 export async function POST(formData){
 
-//const data = Object.fromEntries(formData);
-// console.log(data)
-
 try {
     // Connect to the MongoDB database
     await connect;
@@ -23,6 +20,10 @@ try {
     for (const [name, value] of formData.entries()) {
       formObject[name] = value;
     }
+    
+    const uid = formData.get('uid');
+    formObject.user = uid;
+
     // Create a new document based on the Form schema
     const newForm = new Form(formObject);
 
@@ -40,21 +41,21 @@ try {
   }
 }
 // GET endpoint to retrieve form data
-export async function GET() {
+export async function GET(uid) {
   try {
-    // Connect to the MongoDB database
-    await connect;
+      // Connect to the MongoDB database
+      await connect;
 
-    // Access the collection using the Form schema
-    const formCollection = mongoose.connection.db.collection('forms');
+      // Access the collection using the Form schema
+      const formCollection = mongoose.connection.db.collection('forms');
 
-    // Retrieve all documents from the collection
-    const formData = await formCollection.find({}).toArray();
+      // Retrieve the document based on the UID
+      const formData = await formCollection.findOne({ uid: uid });
 
-    return formData; // Return the retrieved form data
+      return formData; // Return the retrieved form data
   } catch (error) {
-    console.error('Error retrieving form data:', error);
-    throw error; // Throw the error to handle it in the calling function
+      console.error('Error retrieving form data:', error);
+      throw error; // Throw the error to handle it in the calling function
   }
 }
 
@@ -74,4 +75,27 @@ export async function getAllForms() {
         console.error('Error fetching forms:', error);
         throw error;
     }
+}
+export async function DELETE(formId) {
+  try {
+    // Connect to the MongoDB database
+    await connect;
+
+    // Access the collection using the Form schema
+    const formCollection = mongoose.connection.db.collection('forms');
+
+    // Delete the document with the specified Id
+    const result = await formCollection.deleteOne({ _id: new mongoose.Types.ObjectId(formId) });
+
+    if (result.deletedCount === 0) {
+      throw new Error('Document not found');
+    }
+
+    console.log('Document deleted:', formId);
+    return { success: true };
+
+  } catch (error) {
+    console.error('Error deleting form data:', error);
+    throw error;
+  }
 }

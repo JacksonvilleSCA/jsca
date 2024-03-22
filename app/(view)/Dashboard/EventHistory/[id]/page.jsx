@@ -6,29 +6,33 @@ import { useState } from "react";
 import Edit from "@/app/components/Edit";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import NavThree from "@/app/components/Nav3";
 
 export default function Page({ params }) {
+  console.log(params)
 
   const router = useRouter();
 
-  var search = sessionStorage.getItem('AID');
-  if(search == null){
-    router.push('/login');
-  }
 
   const [details, setDetails] = useState("");
   const [eventInfo, setEventInfo] = useState("");
 
   useEffect(() => {
+    var search = sessionStorage.getItem('AID');
+    if(search == null){
+    router.push('/login');
+    }
     const fetchData = async () => {
       const data = await GET(params);
-      setEventInfo(data);
+      console.log(data)
+      setEventInfo(data.props.data);
     };
     fetchData();
   }, [params]);
-
+  
   return (
     <>
+    <NavThree/>
       <div
         key={eventInfo._id}
         className="container-sm "

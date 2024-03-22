@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import DOMPurify from "dompurify";
 import Image from "next/image";
 import Loading from "./loading";
+import NavTwo from "@/app/components/Nav2";
 
 
 export default function Page() {
@@ -37,6 +38,7 @@ export default function Page() {
 
   return (
     <>
+    <NavTwo/>
          <div className="container" style={{ marginBottom: "30px" }}>
         <div className="row row-cols-1 row-cols-md-3 g-4">
 

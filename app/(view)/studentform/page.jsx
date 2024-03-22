@@ -3,53 +3,65 @@ import React from 'react';
 import Link from 'next/link'; 
 import essay from '../essay/page';
 import { POST } from '@/app/api/routes/essayroutes';
+import { getAllForms } from '@/app/api/routes/essayroutes';
 import {useEffect } from "react"; 
 import {useRouter} from 'next/navigation';
 import { useState } from 'react';
+import axios from 'axios'; 
+import NavTwo from "@/app/components/Nav2"
+
 
  const StudentForm = () => {
     const router = useRouter();
     const [essay, setEssay] = useState('');
+    const [formData, setFormData] = useState(null); 
+
+    useEffect(() => {
+        const checkApplication = async () => {
+            const uid = sessionStorage.getItem('uid');
+            if (!uid) {
+                router.push('/login');
+            } else {
+                try {
+                    const formsData = await getAllForms(); 
+                    if (formsData.find (form=> form.user === uid)) {
+                        router.push('/studentViewForm'); 
+                    }
+                } catch (error) {
+                    console.error('Error checking if user has submitted an application:', error);
+                }
+            }
+        };
     
+        checkApplication();
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // const formData = new FormData(e.target);
-        const submittedEssay = sessionStorage.getItem('essay'); //gets submitted essay 
-        if(!submittedEssay) {
-            alert("Please fill out the essay before submitting the form.")
-            return; 
-        }
-        const formData = new FormData(e.target);
-        formData.append("essay", submittedEssay); //apend submitted essay to form
-        try {
-            await POST(formData);
-            console.log("form submitted!"); 
-            
-            setTimeout(() => {
-                
-                router.push('/studentViewForm'); 
-                
-            }, 2000); 
-            sessionStorage.removeItem('essay'); 
-            
-        } catch (error) {
-            console.error('Error submitting form:', error)
-        }
-    }
-    useEffect(() => {
-        const uid = sessionStorage.getItem('uid');
-        if (!uid) {
-            router.push('/login');
-        }
-    }, []);
 
-    
-    
+        const submittedEssay = sessionStorage.getItem('essay');
+        if (!submittedEssay) {
+            alert("Please fill out the essay before submitting the form.");
+            return;
+        }
+
+        const formData = new FormData(e.target);
+        formData.append("essay", submittedEssay);
+        formData.append("uid", sessionStorage.getItem('uid'));
+
+        try {
+            const response = await POST(formData);
+            router.push(`/studentViewForm`);
+            sessionStorage.removeItem('essay');
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+    };
   return (
     <>
+    <div> 
+    <NavTwo/> 
     <div className="page-container">
-        <div>{essay}</div>
     <h2 style={{ textAlign: 'center' }}>
                 Jacksonville Sister Cities  Landon Middle Student Exchange Program Application Form</h2>
         <div class =" contrainer">
@@ -366,6 +378,7 @@ import { useState } from 'react';
         
         </div>
     </div>  
+    </div> 
     </>
     ); 
 }; 

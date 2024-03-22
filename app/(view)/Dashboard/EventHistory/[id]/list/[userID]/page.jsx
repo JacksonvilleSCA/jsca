@@ -5,6 +5,7 @@ import { useEffect,useState } from "react"
 import styles from "./style.module.css"
 import { useRouter } from "next/navigation"
 import { GetMemberEvents } from "@/app/api/routes/evemtRoute"
+import NavThree from "@/app/components/Nav3"
 
 export default function Page(params) {
 
@@ -26,6 +27,8 @@ export default function Page(params) {
       }, [params]);
 
     return (
+          <>
+          <NavThree/>
 
         <div>
     
@@ -97,7 +100,7 @@ export default function Page(params) {
               type="text"
               className="form-control"
               name="totalPeople"
-              style={{ width: "20%" }}
+              style={{ width: "50%" }}
               defaultValue={memberInfo.country}
               required
               readOnly
@@ -177,6 +180,7 @@ export default function Page(params) {
       </div>
 
       </div>
+      </>
     )
 
 }

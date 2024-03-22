@@ -8,6 +8,7 @@ import ConfirmDelete from "@/app/components/ConfirmDeletion";
 import TextContent from "@/app/components/Text";
 import { redirect, useRouter } from "next/navigation";
 import ItineraryModal from "@/app/components/ItineraryModal";
+import NavThree from "@/app/components/Nav3";
 
 export default function Page({ params }) {
 
@@ -82,7 +83,7 @@ export default function Page({ params }) {
           router.push(`/ItineraryCreate?eventId=${eventInfo._id}`);
       }else if(holdValue.location === "Planning"){
           console.log("Planning")
-          router.push(`/listMenu`);
+          router.push(`/listMenu?eventId=${eventInfo._id}`);
       }
     }
   }
@@ -93,6 +94,7 @@ export default function Page({ params }) {
 
   return (
     <>
+    <NavThree/>
         {active2.Active && (
         <ItineraryModal
           value={active2.Active}
