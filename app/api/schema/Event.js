@@ -44,16 +44,7 @@ const eventSchema = new Schema({
         type: SchemaTypes.ObjectId,
         ref: 'create',
     }
-  ],
-  items:[{
-      type: String
-  }],
-  itinerary:[{
-     title: {type: String},
-     days: {type: String},
-     time: {type: String},
-     activity: {type: String}
-  }]
+  ]
 });
 
 const Event = mongoose.models.event || mongoose.model('event', eventSchema)

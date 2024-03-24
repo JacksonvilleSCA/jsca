@@ -41,11 +41,12 @@ export async function getServerSideProps() {
 
 //Get by id
 export async function getEventItinerary(eventId) {
-
   try {
-   
-    const result = await Itinerary.findOne({ eventId: eventId.id } ).populate('eventId').lean().exec();  
-    
+    const result = await Itinerary.findOne({ eventId: eventId.id })
+      .populate("eventId")
+      .lean()
+      .exec();
+
     if (!result) {
       return { props: { itinerary: [] } };
     }
@@ -54,9 +55,8 @@ export async function getEventItinerary(eventId) {
     itinerary._id = itinerary._id.toString();
 
     if (itinerary.eventId && itinerary.eventId._id) {
-        itinerary.eventId._id = itinerary.eventId._id.toString();
-      }
-
+      itinerary.eventId._id = itinerary.eventId._id.toString();
+    }
 
     return { props: { itinerary: JSON.parse(JSON.stringify(itinerary)) } };
   } catch (error) {
@@ -64,20 +64,18 @@ export async function getEventItinerary(eventId) {
   }
 }
 
-
 export async function getItineraryById(eventId) {
-
   try {
-   
-    const result = await Itinerary.findOne({ eventId: eventId} ).populate('eventId').lean().exec();  
-    
+    const result = await Itinerary.findOne({ eventId: eventId })
+      .populate("eventId")
+      .lean()
+      .exec();
+
     if (!result) {
       return { props: { itinerary: [] } };
     }
 
     const itinerary = JSON.parse(JSON.stringify(result));
-
- 
 
     return itinerary;
   } catch (error) {
@@ -86,31 +84,28 @@ export async function getItineraryById(eventId) {
 }
 
 //delete by id
-export async function DeleteItinerary(eventId){
-  try{
-    const data = await Itinerary.deleteOne({eventId: eventId});
-     
+export async function DeleteItinerary(eventId) {
+  try {
+    const data = await Itinerary.deleteOne({ eventId: eventId });
+
     revalidatePath(`/EventHistory/${eventId}/temp`);
     redirect(`/EventHistory/${eventId}/temp`);
-  }catch(error){
+  } catch (error) {
     throw Error("Failed to delete");
-
   }
 }
-    // itinerary.schedule = itinerary.schedule.map((item) => {
-    //     const itemObj = JSON.parse(JSON.stringify(item));
-    //     itemObj._id = itemObj._id.toString();
-    //     return itemObj;
-    //   });
 
-    // const itinerary = result.toObject();
-
-    // itinerary._id = itinerary._id.toString();
-    // if(itinerary.eventId && itinerary.eventId._id){
-    //     itinerary.eventId._id = itinerary.eventId._id.toString();
-    // }
-
-    // itinerary.schedule = itinerary.schedule.map((item) => {
-    //     const { _id, ...rest } = item;
-    //     return { ...rest, _id: _id.toString() };
-    //   });
+//update itinerary
+export async function UpdateItinerary(eventId, formData) {
+  try {
+    const data = await Itinerary.updateOne(
+      { eventId: eventId },
+      {
+        title: formData.title,
+        schedule: formData.schedule,
+      }
+    );
+  } catch (error) {
+    throw new Error("Failed to update");
+  }
+}

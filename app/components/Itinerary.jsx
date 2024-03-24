@@ -204,8 +204,6 @@ export default function Itinerary() {
                                     disabled={isLoading && !eventId}>
                                     {isLoading ? "Submitting..." : "Save"}
                                 </button>
-
-                                <button type="button" className="btn btn-outline-dark ">Delete</button>
                                 <Link href='/ItineraryView'><button type="button" className="btn btn-outline-dark mx-2">View itinerary </button></Link> 
 
                             </div>

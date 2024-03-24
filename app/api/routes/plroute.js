@@ -1,6 +1,7 @@
 'use server'
 import connect from "../db/dbConnection";
 import Packlist from "../schema/packinglist";
+
 // import { NextResponse } from "next/server";
 
 //posting data to the DB 
@@ -77,7 +78,7 @@ export async function GETROUTEBYID(eventId){
         const data = await Packlist.findOne({eventId: eventId}).populate('eventId').lean().exec();
 
         if(!data){
-            return {props: {packingList: [] }};
+            return {packingList: [] };
         }
 
         const packlist = JSON.parse(JSON.stringify(data));
@@ -99,5 +100,18 @@ export async function DELETE(eventId){
     }catch(error){
         throw new Error('Failed to delete');
 
+    }
+}
+
+
+//update data 
+export async function UPDATEBYID(eventId, formData){
+    try{
+        const data = await Packlist.updateOne({eventId: eventId}, {
+            items: formData.items
+        });
+       
+    }catch(error){
+        throw new Error('Failed to update');
     }
 }
