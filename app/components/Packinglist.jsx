@@ -5,10 +5,10 @@ import { AddItem } from '@/app/api/routes/plroute'
 import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function PackingList() {
-  const [tasks, setTasks] = useState([]);
-  const [newTask, setNewTask] = useState('');
-  const [edit, setEdit] = useState(null);
-  const [editText, setEditText] = useState('');
+  const [tasks, setTasks] = useState([]); //array holding the packing list items
+  const [newTask, setNewTask] = useState(''); //value of input fields for adding new task
+  const [edit, setEdit] = useState(null); //holds the id of the task being 
+  const [editText, setEditText] = useState(''); //holds the text of the task being edited
   const [isLoading, setLoading] = useState(false); // New state for loading
   const [eventId, setEventId] = useState(null);
 

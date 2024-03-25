@@ -74,4 +74,16 @@
     padding: 0 20px;
     justify-content: center;
     margin-top: 40px;
+    
+}
+
+.color1{
+    background-color: rgb(11, 90, 180);
+    color: white;
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    margin: 20px;  
+
 }
