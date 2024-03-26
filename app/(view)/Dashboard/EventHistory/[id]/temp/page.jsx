@@ -188,7 +188,7 @@ export default function Page({ params }) {
           <div className="card-footer">
             <div>
               <button
-                style={{ marginRight: "10px", marginTop: "10px" }}
+                style={{marginLeft: "20px", marginRight: "30px", marginTop: "10px" }}
                 onClick={(e) => Itinerary(eventInfo._id)}
                 className="btn btn-primary px-5"
               >
@@ -196,7 +196,7 @@ export default function Page({ params }) {
               </button>
 
               <button
-                style={{ marginRight: "10px", marginTop: "10px" }}
+                style={{ marginRight: "30px", marginTop: "10px" }}
                 onClick={(e) => {
                   router.push(`/Dashboard/EventHistory/${eventInfo._id}/list`);
                 }}
@@ -206,7 +206,7 @@ export default function Page({ params }) {
               </button>
 
               <button
-                style={{ marginRight: "10px", marginTop: "10px" }}
+                style={{ marginRight: "30px", marginTop: "10px" }}
                 onClick={(e) => {
                   router.push(
                     `/Dashboard/EventHistory/${eventInfo._id}/temp/${eventInfo._id}`
@@ -218,7 +218,7 @@ export default function Page({ params }) {
               </button>
 
               <button
-                style={{ marginRight: "10px", marginTop: "10px" }}
+                style={{ marginRight: "30px", marginTop: "10px" }}
                 onClick={(e) => {
                   router.push(`/adminStaticViewForm?id=${eventInfo._id}`);
                 }}
@@ -228,7 +228,7 @@ export default function Page({ params }) {
               </button>
 
               <button
-                style={{ marginRight: "10px", marginTop: "10px" }}
+                style={{marginRight: "30px", marginTop: "10px" }}
                 onClick={(e) => {
                   router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
                 }}
@@ -238,7 +238,7 @@ export default function Page({ params }) {
               </button>
 
               <button
-                style={{ marginRight: "10px", marginTop: "10px" }}
+                style={{ marginRight: "30px", marginTop: "10px" }}
                 onClick={(e) => Pop(eventInfo._id)}
                 className="btn btn-danger px-5"
               >
