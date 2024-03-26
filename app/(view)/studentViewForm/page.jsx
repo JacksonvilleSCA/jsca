@@ -135,10 +135,10 @@ const StudentViewForm = () => {
 
                       <div className="row mb-3">
                         <div className="col">
-                          <p>First Parent's Phone Number: {formData.parentphone}</p>
+                          <p>First Parent&apos;s Phone Number: {formData.parentphone}</p>
                         </div>
                         <div className="col">
-                          <p>Second Parent's Phone Number: {formData.parenttwophone}</p>
+                          <p>Second Parent&apos;s Phone Number: {formData.parenttwophone}</p>
                         </div>
                       </div> 
                       <div className="row mb-3">
