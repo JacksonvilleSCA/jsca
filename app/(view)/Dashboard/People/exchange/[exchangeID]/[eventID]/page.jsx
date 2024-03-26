@@ -1,8 +1,7 @@
 "use client"
 import React from 'react';
-import Link from 'next/link'; 
-import essay from '../essay/page';
 import { POST } from '@/app/api/routes/essayroutes';
+import { PostToEvent } from '@/app/api/routes/essayroutes';
 import {useEffect } from "react"; 
 import {useRouter} from 'next/navigation';
 import { useState } from 'react';
@@ -13,7 +12,10 @@ import NavTwo from "@/app/components/Nav2"
     console.log(params)
     const router = useRouter();
     const [essay, setEssay] = useState('');
-    
+    const [eventID, setEventID] = useState(params.eventID);
+    const [currentID, setCurrentID] = useState(params.eventID);
+
+    console.log(eventID)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -42,6 +44,7 @@ import NavTwo from "@/app/components/Nav2"
     }
     useEffect(() => {
         const uid = sessionStorage.getItem('uid');
+        setCurrentID(uid);
         if (!uid) {
             router.push('/login');
         }
@@ -103,6 +106,12 @@ import NavTwo from "@/app/components/Nav2"
                             required="" />
                     </label>
                 </div>
+                {/* <div className = "col"> 
+                    <label>
+                        Student email:
+                        <input type="text" className = "form-control" name="studentEmail" required="" />
+                    </label>
+                </div> */}
                 <div className = "col"> 
                 <label> Sex:  </label>
                     <div className = "col"> 
@@ -305,8 +314,8 @@ import NavTwo from "@/app/components/Nav2"
 
             <div className = "row"> 
                 <div className = "col"> 
-                     <label style = {{textAlign: 'center' }} htmlFor ="email" className = "form-label" name = "email" > Primary Email  </label> 
-                    <input type = "text" className = "form-control" id = "email" name = "email" /> 
+                     <label style = {{textAlign: 'center' }} htmlFor ="parentemail" className = "form-label" name = "parentemail" > Primary Email  </label> 
+                    <input type = "text" className = "form-control" id = "parentemail" name = "parentemail" /> 
                 </div>
             </div>
             <br />
@@ -361,12 +370,13 @@ import NavTwo from "@/app/components/Nav2"
                     </div>
             </div> {/* row */}
             <br/>
-            <input type="hidden" value={params.eventID}  className = "form-control" id = "event" name = "event" />
+            <input type="hidden" value={currentID}   className = "form-control" id = "student" name = "student" />
+            <input type="hidden" value={eventID}   className = "form-control" id = "event" name = "event" />
              { /* UPLOAD ESSAY */ }
              <div className = "col-sm-12 text-center">
             <button onClick={(e) => {
                  e.preventDefault();
-                 router.push(`/essay`);
+                 router.push(`/Dashboard/People/exchange/${ params.eventID}/${ params.eventID}/EssayPage`);
             }} value= "submit" className="btn btn-primary"> Essay</button>
             <button type = "submit" value= "submit" className="btn btn-primary">  Submit</button>
             </div>

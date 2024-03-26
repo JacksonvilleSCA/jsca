@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import EditTwo from "@/app/components/EditTwo";
 import NavTwo from "@/app/components/Nav2"
 
-const Essay = () => {
+const Essay = ({params}) => {
+console.log(params)
   const router = useRouter();
   const [details, setDetails] = useState("");
 
@@ -14,6 +15,9 @@ const Essay = () => {
   }
 
   const handleSubmit = (e) => {
+
+      console.log("------------------------------------")
+
     e.preventDefault(); // Prevent default form submission
     if (!details){ 
       alert ("Please write your essay before submitting!"); 
@@ -21,7 +25,8 @@ const Essay = () => {
     }
     
     sessionStorage.setItem('essay', details); //store essay content in sessionstorage
-    router.push('/studentform'); //redirct to studentform after "submitting" 
+    // router.push('/studentform'); //redirct to studentform after "submitting" 
+    router.push(`/Dashboard/People/exchange/${ params.eventID}/${ params.eventID}`);
   }
 
   return (
@@ -35,6 +40,7 @@ const Essay = () => {
         <br />
         <div className = "col-sm-12 text-center">
         <button type="submit" value= "submit" className = "btn btn-primary">Submit Essay </button>
+
         </div>
       </form>
     </div>

@@ -11,6 +11,7 @@ import { getEventItinerary } from "@/app/api/routes/itineraryroute";
 import { GETROUTE } from "@/app/api/routes/plroute";
 import { useRouter } from "next/navigation";
 import NavTwo from "@/app/components/Nav2";
+import { checkFormCreation } from "@/app/api/routes/essayroutes";
 
 export default function Page({ params }) {
   console.log(params);
@@ -44,8 +45,8 @@ export default function Page({ params }) {
     //Code above was added
 
     const fetchData = async () => {
-      console.log(params + "++++");
-      console.log(id + "++++");
+      console.log(params + "++++")
+      console.log(id + "++++")
       const data = await GetMemberListStatus({ params, id });
       setEventInfo(data.data);
       setAdminEmail(data.data);
@@ -149,6 +150,13 @@ export default function Page({ params }) {
       router.push("/Dashboard/People");
     }
   }
+
+    function checkForm(){
+    let search = sessionStorage.getItem("uid");
+    checkFormCreation({"uid": search, event: params.exchangeID});
+    }
+
+
   return (
     <>
       <NavTwo />
@@ -199,7 +207,7 @@ export default function Page({ params }) {
               </div>
 
               <div className="card-body" style={{ width: "100%" }}>
-                <div>
+              <div>
                   <h2>{eventInfo.location}</h2>
                   <hr />
                   <h3> Time & Location </h3>
@@ -218,10 +226,10 @@ export default function Page({ params }) {
                 {/* <button
                   onClick={(e) => {
                     e.preventDefault();
-                    router.push(`/Dashboard/People/${params.id}/${params.id}`);
+                    router.push(`/Dashboard/People/exchange/${params.exchangeID}/${params.exchangeID}`);
                     // postToWaitList(eventInfo._id);
                   }}
-                  className="btn btn-danger"
+                  className="btn btn-primary"
                   style={{
                     marginTop: "60px",
                     marginLeft: "40px",
@@ -232,6 +240,25 @@ export default function Page({ params }) {
                   Join Event
                 </button> */}
 
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                        checkForm();
+                    // router.push(`/Dashboard/People/exchange/${params.exchangeID}/${params.exchangeID}`);
+                    // postToWaitList(eventInfo._id);
+                  }}
+                  className="btn btn-primary"
+                  style={{
+                    margin: " 0 auto",
+                    marginTop: "60px",
+                    display: "block",
+                    width: "50%",
+                    boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  Join Event
+                </button>
+{/* 
                 {userStatus === "FF" && (
                   <button
                     onClick={(e) => {
@@ -240,10 +267,9 @@ export default function Page({ params }) {
                     }}
                     className="btn btn-primary"
                     style={{
-                      margin: " 0 auto", 
                       marginTop: "60px",
-                      display: "block", 
-                      width: "50%",
+                      marginLeft: "40px",
+                      width: "80%",
                       boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
                     }}
                   >
@@ -257,12 +283,12 @@ export default function Page({ params }) {
                       e.preventDefault();
                       Pop(eventInfo._id, adminEmail);
                     }}
+                    // type="submit"
                     className="btn btn-warning"
                     style={{
-                      margin: " 0 auto", 
                       marginTop: "60px",
-                      display: "block", 
-                      width: "50%",
+                      marginLeft: "40px",
+                      width: "80%",
                       boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
                     }}
                   >
@@ -276,18 +302,18 @@ export default function Page({ params }) {
                       e.preventDefault();
                       PopTwo(eventInfo._id, adminEmail);
                     }}
+                    // type="submit"
                     className="btn btn-success"
                     style={{
-                      margin: " 0 auto",
                       marginTop: "60px",
-                      display: "block",
-                      width: "50%",
+                      marginLeft: "40px",
+                      width: "30%",
                       boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
                     }}
                   >
                     Remove from Approve-list
                   </button>
-                )}
+                )} */}
               </div>
             </div>
           </div>
