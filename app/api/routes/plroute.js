@@ -97,6 +97,7 @@ export async function DELETE(eventId){
     try{
         const data = await Packlist.deleteOne({eventId: eventId});
 
+
     }catch(error){
         throw new Error('Failed to delete');
 

@@ -51,7 +51,7 @@ export default function PackingList() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //only passing one object 
+    //only passing one object  
     const packingListData = {
       eventId, 
       items: tasks.map(task => task.text) 
@@ -123,6 +123,11 @@ export default function PackingList() {
             className="btn btn-outline-primary"
             disabled={isLoading}>
             {isLoading ? "Submitting..." : "Save"}
+          </button>
+
+          <button className="btn btn-outline-primary mx-2"
+           onClick={() => router.push(`/listMenu?eventId=${eventId}`)}>
+                    View Packing list
           </button>
 
         </div>

@@ -297,64 +297,49 @@ export default function Page({ params }) {
             <div className="collapse" id='multiCollapse'>
               <div className="card card-body mt-2">
 
-                {/* <p>Itinerary for: {itineraryInfo.title}</p>
-
-                {itineraryInfo.schedule?.map((item, index) => (
-                  <div key={index}>
-                    <p>Day: {item.day}</p>
-                    <p>Details: {item.activity}</p>
-                    <p>Time: {item.time}</p>
-                  </div>
-                ))} */}
-
-                {itineraryInfo > 0 ? (
-                  <p>Itinerary for: {itineraryInfo.title}</p>
-
-                ) : (<p></p>)}
+                {itineraryInfo.title && <div><p className="fw-medium d-inline">Itinerary for: <p className="lead d-inline">{itineraryInfo.title}</p></p></div>}
 
                 {itineraryInfo.schedule && itineraryInfo.schedule.length > 0 ? (
                   itineraryInfo.schedule.map((item, index) => (
                     <div key={index}>
-                      <p>Day: {item.day}</p>
-                      <p>Details: {item.activity}</p>
-                      <p>Time: {item.time}</p>
+                      <hr className="border border-primary border-3 opacity-75" />
+                      <div> <p className="fw-medium d-inline">Day: <p className="lead d-inline">{item.day} </p>  </p> </div>
+                      <div> <p className="fw-medium d-inline">Details: <p className="lead d-inline">{item.activity}</p></p> </div>
+                      <div> <p className="fw-medium  d-inline">Time: <p className="lead d-inline">{item.time} </p> </p> </div>
                     </div>
                   ))
                 ) : (
                   <p>No information</p>
                 )}
-
-                {/*               
-                {itineraryInfo ? (
-                    {itineraryInfo.map((item, index) =>(
-                    ))};
-                  <h1>{itineraryInfo.title}</h1>
-                ): (<p>Loading...</p> )} */}
 
 
               </div>
               <div className="card card-body mt-5">
-                <p>Recommended items to bring</p>
-                {/* {packingListInfo.items?.map((item, index) => (
-                  <div key={index}>
-                    <p>item: {item}</p>
-                  </div>
-                ))} */}
+
+                {packingListInfo && <p className="display-6 fs-3">Recommended Items to bring</p>}
                 {packingListInfo && packingListInfo.items && packingListInfo.items.length > 0 ? (
+
                   packingListInfo.items?.map((item, index) => (
                     <div key={index}>
-                      <p>item: {item}</p>
+                      <ul>
+                        <li>
+                          <p className="lead"> {item}</p>
+                        </li>
+                      </ul>
+
                     </div>
                   ))
-                ) : (
-                  <p>No information</p>
-                )}
-              </div>
-            </div>
 
+
+                ) : (
+                  <p> No information </p>
+                )}
+            </div>
           </div>
+
         </div>
       </div>
+    </div >
 
 
 

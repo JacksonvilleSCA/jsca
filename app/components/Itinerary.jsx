@@ -30,12 +30,12 @@ export default function Itinerary() {
         }
         console.log("Current eventId:", eventId);
 
-    },[])
+    },[eventId])
 
 
     const handleAddSchedule = () => {
         // Add the new schedule item
-        setSchedule([...schedule, { day, time, activity }]);
+        setSchedule([...schedule, { id: Date.now(),day, time, activity }]);
         // Reset schedule input fields
         setDay('');
         setTime('');
@@ -136,11 +136,11 @@ export default function Itinerary() {
 
                                             <th><textarea rows="4" cols="50" name='activity' value={activity} onChange={(e) => setActivity(e.target.value)} style={{ resize: 'none' }}></textarea></th>
                                             <th> <div className="d-flex">
-                                                <button onClick={handleAddSchedule} className="btn btn-primary mx-2"
+                                                <button onClick={ handleAddSchedule} className="btn btn-primary mx-2"
                                                     type="button">
                                                     submit
                                                 </button>
-                                                <button className="btn btn-primary" onClick={handleCancel} >cancel</button>
+                                                <button type ="button" className="btn btn-primary" onClick={handleCancel}> cancel</button>
                                             </div></th>
                                         </tr>
                                     </tbody>
@@ -171,12 +171,14 @@ export default function Itinerary() {
                                             <td>{item.activity}</td>
                                             <td>
                                                 <button
+                                                type='button'
                                                     onClick={() => handleEdit(item.id)}
                                                     className="btn btn-primary mx-1"
                                                 >
                                                     Edit
                                                 </button>
                                                 <button
+                                                type='button'
                                                     onClick={() => handleDelete(item.id)}
                                                     className="btn btn-danger mx-1"
                                                 >
@@ -204,7 +206,7 @@ export default function Itinerary() {
                                     disabled={isLoading && !eventId}>
                                     {isLoading ? "Submitting..." : "Save"}
                                 </button>
-                                <Link href='/ItineraryView'><button type="button" className="btn btn-outline-dark mx-2">View itinerary </button></Link> 
+                                <button type="button" className="btn btn-outline-dark mx-2" onClick={() => router.push(`/listMenu?eventId=${eventId}`)}>View itinerary </button>
 
                             </div>
                         </div>
