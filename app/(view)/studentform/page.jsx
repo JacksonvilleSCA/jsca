@@ -290,7 +290,7 @@ import NavTwo from "@/app/components/Nav2"
                         <input
                             type="tel"
                             class = "form-control"
-                            name="parentonePhone"
+                            name="parentphone"
                             pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
                             required="" />
                     </label>
@@ -301,7 +301,7 @@ import NavTwo from "@/app/components/Nav2"
                         <input
                             type="tel"
                             class = "form-control"
-                            name="parenttwoPhone"
+                            name="parenttwophone"
                             pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
                             required="" />
                      </label>
@@ -312,8 +312,8 @@ import NavTwo from "@/app/components/Nav2"
 
             <div class = "row"> 
                 <div class = "col"> 
-                     <label style = {{textAlign: 'center' }} for ="email" class = "form-label" name = "email" > Primary Email  </label> 
-                    <input type = "text" class = "form-control" id = "email" name = "email" /> 
+                     <label style = {{textAlign: 'center' }} for ="email" class = "form-label" name = "parentemail" > Primary Email  </label> 
+                    <input type = "text" class = "form-control" id = "parentemail" name = "parentemail" /> 
                 </div>
             </div>
             <br />
