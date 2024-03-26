@@ -4,8 +4,10 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { getAllForms } from "@/app/api/routes/essayroutes";
+import { getAllFormsTwo } from "@/app/api/routes/essayroutes";
 import { Table } from "react-bootstrap";
 import NavThree from "@/app/components/Nav3";
+import { clearConfig } from "dompurify";
 
 const AdminForms = (param) => {
   // console.log(param)
@@ -39,7 +41,8 @@ const AdminForms = (param) => {
 
   const fetchForms = async () => {
     try {
-      const formsData = await getAllForms("two");
+      const formsData = await getAllFormsTwo();
+      console.log(formsData);
       setFroms(formsData);
       setLoading(false);
     } catch (error) {

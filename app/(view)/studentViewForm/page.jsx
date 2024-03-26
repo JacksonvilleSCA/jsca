@@ -16,7 +16,7 @@ const StudentViewForm = () => {
         // Get the user ID from the session or context
         const userId = sessionStorage.getItem('uid'); 
         // Find the form data where the user ID matches the ID stored in the form
-        const studentForm = formsData.find(form => form.user === userId);
+        const studentForm = formsData.find(form => form.student === userId);
         if (studentForm) {
           setFormData(studentForm);
         } else {
@@ -35,7 +35,7 @@ const StudentViewForm = () => {
       <NavTwo /> 
         <h1 style={{ textAlign: 'center' }}>Your Application </h1>
         <div className='mb-3'> 
-          <a class="btn btn-primary me-2 " href='/LoginDashboard' role="button">Back to Dashboard </a>
+          <a className="btn btn-primary me-2 " href='/LoginDashboard' role="button">Back to Dashboard </a>
         </div>
 
         <div className="container">
