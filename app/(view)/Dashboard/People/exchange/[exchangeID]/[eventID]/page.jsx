@@ -1,9 +1,7 @@
 "use client"
 import React from 'react';
-import Link from 'next/link'; 
-import essay from '../essay/page';
 import { POST } from '@/app/api/routes/essayroutes';
-import { getAllForms } from '@/app/api/routes/essayroutes';
+import { PostToEvent } from '@/app/api/routes/essayroutes';
 import {useEffect } from "react"; 
 import {useRouter} from 'next/navigation';
 import { useState } from 'react';
@@ -14,54 +12,52 @@ import NavTwo from "@/app/components/Nav2"
     console.log(params)
     const router = useRouter();
     const [essay, setEssay] = useState('');
-    const [formData, setFormData] = useState(null); 
+    const [eventID, setEventID] = useState(params.eventID);
+    const [currentID, setCurrentID] = useState(params.eventID);
 
-    useEffect(() => {
-        const checkApplication = async () => {
-            const uid = sessionStorage.getItem('uid');
-            if (!uid) {
-                router.push('/login');
-            } else {
-                try {
-                    const formsData = await getAllForms(); 
-                    if (formsData.find (form=> form.user === uid)) {
-                        router.push('/studentViewForm'); 
-                    }
-                } catch (error) {
-                    console.error('Error checking if user has submitted an application:', error);
-                }
-            }
-        };
-    
-        checkApplication();
-    }, []);
+    console.log(eventID)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const submittedEssay = sessionStorage.getItem('essay');
-        if (!submittedEssay) {
-            alert("Please fill out the essay before submitting the form.");
-            return;
+        // const formData = new FormData(e.target);
+        const submittedEssay = sessionStorage.getItem('essay'); //gets submitted essay 
+        if(!submittedEssay) {
+            alert("Please fill out the essay before submitting the form.")
+            return; 
         }
-
         const formData = new FormData(e.target);
-        formData.append("essay", submittedEssay);
-        formData.append("uid", sessionStorage.getItem('uid'));
-
+        formData.append("essay", submittedEssay); //apend submitted essay to form
         try {
-            const response = await POST(formData);
-            router.push(`/studentViewForm`);
-            sessionStorage.removeItem('essay');
+            await POST(formData);
+            console.log("form submitted!"); 
+            
+            setTimeout(() => {
+                
+                router.push('/studentViewForm'); 
+                
+            }, 2000); 
+            sessionStorage.removeItem('essay'); 
+            
         } catch (error) {
-            console.error('Error submitting form:', error);
+            console.error('Error submitting form:', error)
         }
-    };
+    }
+    useEffect(() => {
+        const uid = sessionStorage.getItem('uid');
+        setCurrentID(uid);
+        if (!uid) {
+            router.push('/login');
+        }
+    }, []);
+
+    
+    
   return (
     <>
     <div> 
     <NavTwo/> 
     <div className="page-container">
+        <div>{essay}</div>
     <h2 style={{ textAlign: 'center' }}>
                 Jacksonville Sister Cities  Landon Middle Student Exchange Program Application Form</h2>
         <div className =" contrainer">
@@ -110,6 +106,12 @@ import NavTwo from "@/app/components/Nav2"
                             required="" />
                     </label>
                 </div>
+                {/* <div className = "col"> 
+                    <label>
+                        Student email:
+                        <input type="text" className = "form-control" name="studentEmail" required="" />
+                    </label>
+                </div> */}
                 <div className = "col"> 
                 <label> Sex:  </label>
                     <div className = "col"> 
@@ -289,8 +291,8 @@ import NavTwo from "@/app/components/Nav2"
                         Parent 1 Phone Number: 
                         <input
                             type="tel"
-                            class = "form-control"
-                            name="parentphone"
+                            className = "form-control"
+                            name="parentonePhone"
                             pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
                             required="" />
                     </label>
@@ -300,8 +302,8 @@ import NavTwo from "@/app/components/Nav2"
                         Parent 2 Phone Number: 
                         <input
                             type="tel"
-                            class = "form-control"
-                            name="parenttwophone"
+                            className = "form-control"
+                            name="parenttwoPhone"
                             pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
                             required="" />
                      </label>
@@ -310,10 +312,10 @@ import NavTwo from "@/app/components/Nav2"
               
             </div> {/* 6th row end */}
 
-            <div class = "row"> 
-                <div class = "col"> 
-                     <label style = {{textAlign: 'center' }} for ="email" class = "form-label" name = "parentemail" > Primary Email  </label> 
-                    <input type = "text" class = "form-control" id = "parentemail" name = "parentemail" /> 
+            <div className = "row"> 
+                <div className = "col"> 
+                     <label style = {{textAlign: 'center' }} htmlFor ="parentemail" className = "form-label" name = "parentemail" > Primary Email  </label> 
+                    <input type = "text" className = "form-control" id = "parentemail" name = "parentemail" /> 
                 </div>
             </div>
             <br />
@@ -368,12 +370,13 @@ import NavTwo from "@/app/components/Nav2"
                     </div>
             </div> {/* row */}
             <br/>
-            <input type="hidden" value={params.eventID}  className = "form-control" id = "event" name = "event" />
+            <input type="hidden" value={currentID}   className = "form-control" id = "student" name = "student" />
+            <input type="hidden" value={eventID}   className = "form-control" id = "event" name = "event" />
              { /* UPLOAD ESSAY */ }
              <div className = "col-sm-12 text-center">
             <button onClick={(e) => {
                  e.preventDefault();
-                 router.push(`/essay`);
+                 router.push(`/Dashboard/People/exchange/${ params.eventID}/${ params.eventID}/EssayPage`);
             }} value= "submit" className="btn btn-primary"> Essay</button>
             <button type = "submit" value= "submit" className="btn btn-primary">  Submit</button>
             </div>

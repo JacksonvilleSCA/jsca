@@ -28,7 +28,7 @@ export default function Page() {
     }
     const fetchData = async () => {
       const data = await GetEvent();
-
+     
       if (!AreArraysEqual(eventInformation, data)) {
         setEventInformation(data);
       }
@@ -45,7 +45,7 @@ export default function Page() {
           {eventInformation.map((event, index) => (
             <div key={event._id} className="col">
 
-              {event.active && (
+              {event.active && event.event === "Standard" && (
                   
 
                 <div

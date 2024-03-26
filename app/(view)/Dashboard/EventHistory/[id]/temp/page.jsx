@@ -11,13 +11,11 @@ import ItineraryModal from "@/app/components/ItineraryModal";
 import NavThree from "@/app/components/Nav3";
 
 export default function Page({ params }) {
-
   const router = useRouter();
 
-
-  var search = sessionStorage.getItem('AID');
-  if(search == null){
-    router.push('/login');
+  var search = sessionStorage.getItem("AID");
+  if (search == null) {
+    router.push("/login");
   }
 
   const [active, setActive] = useState({ Active: false, id: -1 });
@@ -30,21 +28,26 @@ export default function Page({ params }) {
   useEffect(() => {
     const fetchData = async () => {
       const data = await GET(params);
-      console.log(data.props.data)
-      // setMaxPeople(data.amount);
+      setMaxPeople(data.props.data.amount);
 
-      // if (data.attendees.length() === 0) {
-      //   setCurrentPeople(data.attendees.length);
-      // } else {
-      //   setCurrentPeople(0);
-      // }
+      if (data.props.data.attendees.length === 0) {
+        setCurrentPeople(0);
+      } else {
+        setCurrentPeople(data.props.data.attendees.length);
+      }
 
-      // setAvailableSpace(maxPeople - data.attendees.length);
+      const formattedData = {
+        ...data.props.data,
+        startTime: formatTime(data.props.data.startTime),
+        endTime: formatTime(data.props.data.endTime),
+      };
 
-      setEventInfo(data.props.data);
+      setAvailableSpace(maxPeople - currentPeople);
+      setEventInfo(formattedData);
     };
+
     fetchData();
-  }, [maxPeople,params]);
+  }, [maxPeople, params]);
 
   function Pop(id) {
     setActive({ Active: true, id: id });
@@ -62,7 +65,6 @@ export default function Page({ params }) {
     }
   }
 
-
   function Itinerary(id) {
     setActive2({ Active: true, id: id });
   }
@@ -76,26 +78,41 @@ export default function Page({ params }) {
 
     if (holdValue.onActive) {
       if (holdValue.location === "Packaging") {
-          console.log("Packaging")
-          router.push(`/createPackingList?eventId=${eventInfo._id}`);
-      } else if(holdValue.location === "Itinerary"){
-          console.log("Itinerary")
-          router.push(`/ItineraryCreate?eventId=${eventInfo._id}`);
-      }else if(holdValue.location === "Planning"){
-          console.log("Planning")
-          router.push(`/listMenu?eventId=${eventInfo._id}`);
+        console.log("Packaging");
+        router.push(`/createPackingList?eventId=${eventInfo._id}`);
+      } else if (holdValue.location === "Itinerary") {
+        console.log("Itinerary");
+        router.push(`/ItineraryCreate?eventId=${eventInfo._id}`);
+      } else if (holdValue.location === "Planning") {
+        console.log("Planning");
+        router.push(`/listMenu?eventId=${eventInfo._id}`);
       }
     }
   }
 
+  function formatTime(timeString) {
+    const date = new Date(timeString);
+    if (isNaN(date.getTime())) {
+      return "Invalid Date";
+    }
 
+    const formattedTime = date.toLocaleString("en-US", {
+      month: "numeric",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+      hour12: true,
+    });
 
-
+    return formattedTime;
+  }
 
   return (
     <>
-    <NavThree/>
-        {active2.Active && (
+      <NavThree />
+      {active2.Active && (
         <ItineraryModal
           value={active2.Active}
           value2={active2.id}
@@ -136,64 +153,30 @@ export default function Page({ params }) {
               </span>
             </div>
           </div>
-          <div className="d-flex">
 
-            
-
-            {/* {eventInfo.img && eventInfo.img.startsWith("data:image") ? (
+          <div>
+            <div>
               <img
                 alt="Picture of the Event"
                 src={eventInfo.img}
-                width={100}
-                height={300}
                 style={{
                   width: "100%",
-                }}
-              />
-            ) : (
-              <Image
-                alt="Picture of the Event"
-                src={eventInfo.img}
-                width={100}
-                height={300}
-                style={{
-                  width: "100%",
-                }}
-              />
-            )} */}
-
-
-            <div>
-            <img
-                alt="Picture of the Event"
-                src={eventInfo.img}
-                style={{
-                  width: "100%",
-                  height: "100%"
+                  height: "550px",
                 }}
               />
             </div>
 
-
-
             <div className="card-body" style={{ width: "100%" }}>
-              {/* <div>
-                  <h3> {eventInfo.startTime} </h3>
-                  <hr />
-                  <p className="card-text">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  </p>
-                  <p className="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  </p>
-                </div> */}
               <div>
-                <h3>
-                  {/* {eventInfo.location}, {eventInfo.startTime} */}
-                </h3>
+                <h2>{eventInfo.location}</h2>
+                <hr />
+                <h3> Time & Location </h3>
+                 
+                <h4>
+                  {eventInfo.startTime} -  {eventInfo.endTime}
+                </h4>
                 <hr />
                 <div className="card-text">
-                  {/* <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(eventInfo.details) }} /> */}
                   <div
                     dangerouslySetInnerHTML={{ __html: eventInfo.details }}
                   />
@@ -201,21 +184,21 @@ export default function Page({ params }) {
               </div>
             </div>
           </div>
-          <div className="card-footer">
-            <div className="d-flex justify-content-evenly">
 
+          <div className="card-footer">
+            <div>
               <button
+                style={{marginLeft: "20px", marginRight: "30px", marginTop: "10px" }}
                 onClick={(e) => Itinerary(eventInfo._id)}
                 className="btn btn-primary px-5"
               >
                 Itinerary/Packing list
               </button>
 
-
               <button
+                style={{ marginRight: "30px", marginTop: "10px" }}
                 onClick={(e) => {
-                    // waitListHandler(eventInfo._id)
-                    router.push(`/Dashboard/EventHistory/${eventInfo._id}/list`);
+                  router.push(`/Dashboard/EventHistory/${eventInfo._id}/list`);
                 }}
                 className="btn btn-info px-5"
               >
@@ -223,6 +206,29 @@ export default function Page({ params }) {
               </button>
 
               <button
+                style={{ marginRight: "30px", marginTop: "10px" }}
+                onClick={(e) => {
+                  router.push(
+                    `/Dashboard/EventHistory/${eventInfo._id}/temp/${eventInfo._id}`
+                  );
+                }}
+                className="btn btn-warning px-5"
+              >
+                Event Info
+              </button>
+
+              <button
+                style={{ marginRight: "30px", marginTop: "10px" }}
+                onClick={(e) => {
+                  router.push(`/adminStaticViewForm?id=${eventInfo._id}`);
+                }}
+                className="btn btn-secondary px-5"
+              >
+                Forms
+              </button>
+
+              <button
+                style={{marginRight: "30px", marginTop: "10px" }}
                 onClick={(e) => {
                   router.push(`/Dashboard/EventHistory/${eventInfo._id}`);
                 }}
@@ -232,13 +238,12 @@ export default function Page({ params }) {
               </button>
 
               <button
+                style={{ marginRight: "30px", marginTop: "10px" }}
                 onClick={(e) => Pop(eventInfo._id)}
                 className="btn btn-danger px-5"
               >
                 Delete
               </button>
-
-
             </div>
           </div>
         </div>
@@ -246,5 +251,3 @@ export default function Page({ params }) {
     </>
   );
 }
-
-

@@ -1,4 +1,6 @@
 import mongoose, { SchemaType } from "mongoose";
+import Event from "./Event";
+import Create from "./Create";
 const { Schema, model, SchemaTypes } = mongoose;
 
 const formSchema = new Schema({
@@ -124,10 +126,22 @@ const formSchema = new Schema({
         type: String, 
         required: true, 
     },
+    student:{
+        type: SchemaTypes.ObjectId,
+        ref: 'create',
+    },
+    event:{
+        type: SchemaTypes.ObjectId,
+        ref: 'event',
+      },
     essay: {
         type: String, 
         required: true, 
-    }
+    },
+    active: {
+        type: Boolean,
+        default: null
+      },
     //userID:{
        // type: String
     //}

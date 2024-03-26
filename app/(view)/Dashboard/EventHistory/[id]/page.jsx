@@ -9,30 +9,29 @@ import Image from "next/image";
 import NavThree from "@/app/components/Nav3";
 
 export default function Page({ params }) {
-  console.log(params)
+  console.log(params);
 
   const router = useRouter();
-
 
   const [details, setDetails] = useState("");
   const [eventInfo, setEventInfo] = useState("");
 
   useEffect(() => {
-    var search = sessionStorage.getItem('AID');
-    if(search == null){
-    router.push('/login');
+    var search = sessionStorage.getItem("AID");
+    if (search == null) {
+      router.push("/login");
     }
     const fetchData = async () => {
       const data = await GET(params);
-      console.log(data)
+      console.log(data);
       setEventInfo(data.props.data);
     };
     fetchData();
   }, [params]);
-  
+
   return (
     <>
-    <NavThree/>
+      <NavThree />
       <div
         key={eventInfo._id}
         className="container-sm "
@@ -49,10 +48,6 @@ export default function Page({ params }) {
               min="1"
               max="10000"
               style={{ width: "10%" }}
-              // onChange={(e) => {
-              //   setAmount(e.target.value);
-              // }}
-              // value={amount}
               defaultValue={eventInfo.amount}
               required
             ></input>
@@ -83,6 +78,34 @@ export default function Page({ params }) {
           </div>
 
           <div className="mb-4">
+            <label className="form-label">Event Type</label>
+
+
+
+            <select
+                name="eventType"
+                className="form-select"
+                style={{ width: "30%" }}
+              >
+                {eventInfo.event === "Standard" && (
+                  <>
+                 <option value="Standard">Standard event</option>
+                 <option value="Exchange">Exchange program</option>
+                  </>
+                )}
+                {eventInfo.event === "Exchange" && (
+                  <>
+                  <option value="Exchange">Exchange program</option>
+                   <option value="Standard">Standard event</option>
+                  </>
+                )}
+              </select>
+
+
+
+          </div>
+
+          <div className="mb-4">
             <div className="card mb-3" style={{ maxWidth: "800px" }}>
               <div className="row g-0">
                 <div className="col-md-4">
@@ -99,15 +122,15 @@ export default function Page({ params }) {
                       />
                     } */}
 
-                      <Image
-                      alt="Picture of the Event"
-                      src={eventInfo.img}
-                      width={100}
-                      height={300}
-                      style={{
-                        width: "100%",
-                      }}
-                    />
+                  <Image
+                    alt="Picture of the Event"
+                    src={eventInfo.img}
+                    width={100}
+                    height={300}
+                    style={{
+                      width: "100%",
+                    }}
+                  />
                 </div>
                 <div className="col-md-8">
                   <div className="card-body">
@@ -115,16 +138,19 @@ export default function Page({ params }) {
                       className="card-title"
                       style={{ textAlign: "center", marginBottom: "60px" }}
                     >
-                      Update Image 
+                      Update Image
                     </h5>
                     <input
                       type="file"
                       className="form-control"
                       name="avatar"
                       accept="image/png, image/jpeg"
-                      // onChange={(e) => setImage(e.target.files?.[0])}
                     />
-                    <input type="hidden" name="avatarTwo" value={eventInfo.img} />
+                    <input
+                      type="hidden"
+                      name="avatarTwo"
+                      value={eventInfo.img}
+                    />
                   </div>
                 </div>
               </div>
@@ -137,10 +163,6 @@ export default function Page({ params }) {
               type="datetime-local"
               className="form-control"
               name="startTime"
-              // onChange={(e) => {
-              //   setStartTime(e.target.value);
-              // }}
-              // value={startTime}
               defaultValue={eventInfo.startTime}
               required
             ></input>
@@ -152,10 +174,6 @@ export default function Page({ params }) {
               type="datetime-local"
               className="form-control"
               name="endTime"
-              // onChange={(e) => {
-              //   setEndTime(e.target.value);
-              // }}
-              // value={endTime}
               defaultValue={eventInfo.endTime}
               required
             ></input>
@@ -168,29 +186,10 @@ export default function Page({ params }) {
               className="form-control"
               name="Location"
               placeholder="Enter the location"
-              // onChange={(e) => {
-              //   setLocation(e.target.value);
-              // }}
-              // value={location}
               defaultValue={eventInfo.location}
               required
             ></input>
           </div>
-
-          {/* <div>
-        <label  className="form-label ">
-            Details
-        </label>
-        <div>
-            <textarea style={{width: "100%"}} name="details" id="" cols="" rows="10"  onChange={(e) => {
-              setDetails(e.target.value);
-            }}
-            defaultValue={eventInfo.details}
-             >
-            </textarea>
-        </div>
-        </div> */}
-
           <div className="mb-4">
             <label className="form-label ">Details</label>
             <Edit currentDetails={eventInfo.details} details={setDetails} />

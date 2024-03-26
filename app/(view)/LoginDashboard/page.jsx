@@ -65,7 +65,7 @@ const Dashboard = () => {
           </div>
          
           <div className={styles.square}>
-            <p className={styles.colorP}><Link className={styles.colorP} href='/studentform'>Student Forms and Essays</Link></p>
+            <p className={styles.colorP}><Link className={styles.colorP} href='/Dashboard/People/exchange'>Student Forms and Essays</Link></p>
           </div>
 
         </div>

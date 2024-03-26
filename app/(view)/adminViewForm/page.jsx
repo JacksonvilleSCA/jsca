@@ -53,8 +53,8 @@ const AdminViewForm = () => {
     <div className="page-container">
       <h1 style={{ textAlign: 'center' }}>View Student Application</h1>
       <div className='mb-3'> 
-          <a class="btn btn-primary me-2" href='/admindashboard' role="button">Back to Dashboard </a>
-          <a class="btn btn-primary" href='/adminForms' role="button">Back to all Student Applications </a>
+          <a className="btn btn-primary me-2" href='/admindashboard' role="button">Back to Dashboard </a>
+          <a className="btn btn-primary" href='/adminForms' role="button">Back to all Student Applications </a>
       </div>
        
      
@@ -95,9 +95,7 @@ const AdminViewForm = () => {
                     <p> Willing to host a family? {studentData.hostfam} </p>
 
                     <p> </p>
-                    <a class="btn btn-secondary me-2" href={`/adminViewEssay?studentId=${studentData._id}`} role="button" onClick={() => handleViewEssay(studentData._id)}> View Essay  </a>
-                    <a class="btn btn-secondary me-2" role = "button"> Approve </a>
-                    <button class="btn btn-secondary me-2" onClick={handleDelete}> Delete </button>
+                    <a className="btn btn-secondary me-2" href={`/adminViewEssay?studentId=${studentData._id}`} role="button" onClick={() => handleViewEssay(studentData._id)}> View Essay  </a>
                 </div>
                 )}
              </div> 

@@ -1,34 +1,24 @@
 "use server";
-import fs from "fs/promises";
 import connect from "../db/dbConnection";
 import Event from "../schema/Event";
 import Create from "../schema/Create";
 import Admin from "../schema/Admin";
 import { revalidatePath } from "next/cache";
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 import { redirect } from "next/navigation";
 import { contact } from "./eventContact";
-import { contactMember } from "./memberContact";
-
-
-
 
 export async function GET() {
   let data = await Event.find({}).lean().exec();
 
   data.forEach((item, index) => {
-    // console.log(typeof item.img);
     const base64Image = item.img.data.buffer.toString("base64");
     data[index].img = `data:${item.img.contentType};base64,${base64Image}`;
     item._id = item._id.toString();
     data[index]._id = data[index]._id.toString();
   });
-
-  // console.log(data);
   return data;
 }
-
-
 
 export async function getEvent(eventData) {
   let data = await Event.findOne({ _id: eventData.id }).lean().exec();
@@ -38,7 +28,7 @@ export async function getEvent(eventData) {
 
   data["_id"] = data["_id"].toString();
 
-  return {props: {data: JSON.parse(JSON.stringify(data))}};
+  return { props: { data: JSON.parse(JSON.stringify(data)) } };
 }
 
 export async function DELETE(Data) {
@@ -72,6 +62,7 @@ export async function PUT(formData) {
       { _id: data.event },
       {
         amount: data.totalPeople,
+        event: data.eventType,
         startTime: data.startTime,
         endTime: data.endTime,
         location: data.Location,
@@ -106,59 +97,64 @@ export async function PUT(formData) {
 }
 
 export async function POST(formData) {
+  const data = Object.fromEntries(formData);
 
-    const data = Object.fromEntries(formData);
-    
-    const adminID = await Admin.findOne({ adminID: data.adminID }).select("_id").lean().exec();
+  console.log(data.event);
 
-    const file = data.avatar;
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+  const adminID = await Admin.findOne({ adminID: data.adminID })
+    .select("_id")
+    .lean()
+    .exec();
 
-    const res = await Event.create({
-      amount: data.totalPeople,
-      img: {
-        data: buffer,
-        contentType: file.type,
-      },
-      startTime: data.startTime,
-      endTime: data.endTime,
-      location: data.Location,
-      details: data.details,
-      admin:adminID
-    });
+  const file = data.avatar;
+  const bytes = await file.arrayBuffer();
+  const buffer = Buffer.from(bytes);
 
-    if (res) {
-      console.log("ok");
-    }
-    revalidatePath("/Dashboard/EventHistory");
-    redirect("/Dashboard/EventHistory");
+  const res = await Event.create({
+    amount: data.totalPeople,
+    img: {
+      data: buffer,
+      contentType: file.type,
+    },
+    startTime: data.startTime,
+    endTime: data.endTime,
+    location: data.Location,
+    details: data.details,
+    event: data.event,
+    admin: adminID,
+  });
+
+  if (res) {
+    console.log("ok");
+  }
+  revalidatePath("/Dashboard/EventHistory");
+  redirect("/Dashboard/EventHistory");
 }
 
 export async function PostWaitList(formData) {
-  console.log(formData);
-
- 
-  const eventWaitList = await Event.findOne({ _id: formData.eventID, waitlist: formData.userID });
-  const eventApproveList = await Event.findOne({ _id: formData.eventID, attendees: formData.userID});
+  const eventWaitList = await Event.findOne({
+    _id: formData.eventID,
+    waitlist: formData.userID,
+  });
+  const eventApproveList = await Event.findOne({
+    _id: formData.eventID,
+    attendees: formData.userID,
+  });
 
   if (eventWaitList) {
-    console.log("User is already in the waitlist.");
-    return {Bad: "User is already in the waitlist"}; 
+    return { Bad: "User is already in the waitlist" };
   }
-  if(eventApproveList){
-    console.log("User is already in the approveList.");
-    return {Bad: "User is already in the approve list"}; 
+  if (eventApproveList) {
+    return { Bad: "User is already in the approve list" };
   }
 
   const res = await Event.updateOne(
-    { _id: formData.eventID }, 
-    { $push: { waitlist: formData.userID } } 
+    { _id: formData.eventID },
+    { $push: { waitlist: formData.userID } }
   );
 
   if (res.acknowledged) {
-    console.log("Event has been updated");
-    return {Good: "User has been added to wait list"}; 
+    return { Good: "User has been added to wait list" };
   } else {
     console.log("Event has not been updated");
   }
@@ -168,14 +164,9 @@ export async function GetList(eventData) {
   const EventID = eventData.id;
 
   try {
-
-    const objectId = new mongoose.Types.ObjectId(eventData.id); // Convert string to ObjectId
-
-    const res = await Event.findById(eventData.id).select('waitlist attendees');
-    
-    console.log(res)
-    const resTwo = await res.populate('waitlist attendees')
-    console.log(resTwo);
+    const res = await Event.findById(eventData.id).select("amount waitlist attendees");
+    console.log(res.amount)
+    const resTwo = await res.populate("waitlist attendees");
 
     if (resTwo) {
       console.log("good");
@@ -186,141 +177,103 @@ export async function GetList(eventData) {
         resTwo._id = resTwo._id.toString();
       }
 
-      // Deep copy and convert ObjectId to string for each item in waitlist
-      const convertedWaitlist = resTwo.waitlist.map(item => {
-        const newItem = JSON.parse(JSON.stringify(item)); // Deep copy
-        // Convert ObjectId to string for _id
+      const convertedWaitlist = resTwo.waitlist.map((item) => {
+        const newItem = JSON.parse(JSON.stringify(item));
         if (newItem._id) {
           newItem._id = newItem._id.toString();
         }
-        // Convert ObjectId to string for creates
         if (newItem.creates) {
           newItem.creates = newItem.creates.toString();
         }
         return newItem;
       });
 
-      // Deep copy and convert ObjectId to string for each item in attendees
-      const convertedAttendees = resTwo.attendees.map(attendee => {
-        const newAttendee = JSON.parse(JSON.stringify(attendee)); // Deep copy
-        // Convert ObjectId to string for _id
+      const convertedAttendees = resTwo.attendees.map((attendee) => {
+        const newAttendee = JSON.parse(JSON.stringify(attendee));
         if (newAttendee._id) {
           newAttendee._id = newAttendee._id.toString();
         }
-        // Convert ObjectId to string for other fields if necessary
-        // Add similar conversion logic for other ObjectId fields in attendees
         return newAttendee;
       });
 
-    console.log("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
-    console.log(convertedWaitlist)
-    console.log("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
-
-     return { waitlist: convertedWaitlist, attendees: convertedAttendees, eventID : EventID };
+      return {
+        waitlist: convertedWaitlist,
+        attendees: convertedAttendees,
+        eventID: EventID,
+        max: res.amount
+      };
     } else {
-      console.log("not good");
-      return { waitlist: [], attendees: [] }; // Return empty arrays
+      return { waitlist: [], attendees: [] };
     }
   } catch (error) {
-    console.error("Error:", error);
-    return { waitlist: [], attendees: [] }; // Return empty arrays in case of error
+    return { waitlist: [], attendees: [] };
   }
 }
 
-export async function PostToAcceptanceList(Data){
- 
-
-      const res = await Event.updateOne(
-        { _id: Data.event }, // Matching criteria
-        { $push: { attendees: Data.val } } // Adding an element to the waitlist array
-      );
-
-    if(res.acknowledged){
-        console.log("Member has been added to acceptance list")
-
-        const emailObject = {email: Data.email, checkStatus: Data.check};
-        contact(emailObject);
-
-        const resTwo = await Event.updateOne(
-          { _id: Data.event }, // Matching criteria
-          { $pull: { waitlist: Data.val } } // Adding an element to the waitlist array
-        );
-
-          if(resTwo.acknowledged){
-             console.log("Member has been removed from wait list")
-
-          }else{
-             console.log("Error has occurred removing member from wait list")
-          }
-
-    }else{
-      console.log("Member has not been added to acceptance list")
-    }
-
-    
-}
-
-
-export async function DeleteFromWaitList(Data){
-    console.log("Remove from wait list")
-
-    const eventObjectID = new mongoose.Types.ObjectId(Data.event);
-    const memberObjectID = new mongoose.Types.ObjectId(Data.val);
-
+export async function PostToAcceptanceList(Data) {
   const res = await Event.updateOne(
-    { _id: Data.event }, // Matching criteria
-    { $pull: { waitlist: Data.val } } // Removing an element from the waitlist array
+    { _id: Data.event },
+    { $push: { attendees: Data.val } }
   );
 
-  if(res.acknowledged){
-    console.log("Member has been removed from wait list")
-  }else{
-    console.log("Member has been removed from wait list")
+  if (res.acknowledged) {
+    const emailObject = { email: Data.email, checkStatus: Data.check };
+    contact(emailObject);
+
+    const resTwo = await Event.updateOne(
+      { _id: Data.event }, // Matching criteria
+      { $pull: { waitlist: Data.val } } // Adding an element to the waitlist array
+    );
+
+    if (resTwo.acknowledged) {
+      console.log("Member has been removed from wait list");
+    } else {
+      console.log("Error has occurred removing member from wait list");
+    }
+  } else {
+    console.log("Member has not been added to acceptance list");
   }
-
 }
 
+export async function DeleteFromWaitList(Data) {
+  console.log("Remove from wait list");
 
-export async function DeleteFromAcceptanceList(Data){
-  console.log("Remove from acceptance list")
+  const res = await Event.updateOne(
+    { _id: Data.event },
+    { $pull: { waitlist: Data.val } }
+  );
 
-  const eventObjectID = new mongoose.Types.ObjectId(Data.event);
-  const memberObjectID = new mongoose.Types.ObjectId(Data.val);
-  console.log(eventObjectID);
-  console.log(memberObjectID);
-
-  
-const res = await Event.updateOne(
-  { _id: Data.event }, // Matching criteria
-  { $pull: { attendees: Data.val } } // Removing an element from the waitlist array
-);
-
-if(res.acknowledged){
-  console.log("Member has been removed from acceptance list");
-}else{
-  console.log("Member has been removed from acceptance list");
+  if (res.acknowledged) {
+    console.log("Member has been removed from wait list");
+  } else {
+    console.log("Member has been removed from wait list");
+  }
 }
 
+export async function DeleteFromAcceptanceList(Data) {
+  const res = await Event.updateOne(
+    { _id: Data.event },
+    { $pull: { attendees: Data.val } }
+  );
+
+  if (res.acknowledged) {
+    console.log("Member has been removed from acceptance list");
+  } else {
+    console.log("Member has been removed from acceptance list");
+  }
 }
 
+export async function GetMemberEvents(Data) {
+  const memberInfo = await Create.findOne({ _id: Data.userID }).lean().exec();
+  const eventInfo = await Event.find({ attendees: Data.userID })
+    .select("_id location")
+    .lean()
+    .exec();
 
-export async function GetMemberEvents(Data){
-
-      const eventObjectID = new mongoose.Types.ObjectId(Data.id);
-      const memberObjectID = new mongoose.Types.ObjectId(Data.userID);
-
-      const memberInfo = await Create.findOne({ _id: Data.userID }).lean().exec();
-      const eventInfo = await Event.find({ attendees: Data.userID }).select("_id location").lean().exec();
-
-      return {memberInfo, eventInfo};
-    
+  return { memberInfo, eventInfo };
 }
-
-
 
 export async function GetMoreInfoEvent(eventData) {
-  const eventObjectID = new mongoose.Types.ObjectId(eventData);
-
   let data = await Event.findOne({ _id: eventData }).lean().exec();
 
   const base64Image = data["img"].data.buffer.toString("base64");
@@ -331,45 +284,54 @@ export async function GetMoreInfoEvent(eventData) {
   return data;
 }
 
+export async function GetMemberListStatus(eventData) {
+  let data;
+  let res;
 
-export async function GetMemberListStatus(eventData){
+  if (eventData.params.exchangeID) {
+    data = await Event.findOne({ _id: eventData.params.exchangeID })
+      .lean()
+      .exec();
+    res = await Event.findById(eventData.params.exchangeID).select("admin");
+  }
 
-  const memberObjectID = new mongoose.Types.ObjectId(eventData.id);
-  // let test = new mongoose.Types.ob
-  const objectId = new mongoose.Types.ObjectId(eventData.params.id);
+  if (eventData.params.id) {
+    data = await Event.findOne({ _id: eventData.params.id }).lean().exec();
+    res = await Event.findById(eventData.params.id).select("admin");
+  }
 
-
-  let data = await Event.findOne({ _id: eventData.params.id }).lean().exec(); 
-  const res = await Event.findById(eventData.params.id).select('admin');
-  
-  console.log(res)
-  const adminInfo = await res.populate('admin');
-  console.log(adminInfo)
+  const adminInfo = await res.populate("admin");
   let adminEmail = adminInfo.admin.email;
+  console.log(adminEmail);
 
-
-  const waitListStatus = await Event.find({_id: eventData.params.id, waitlist: eventData.id }).select("_id location").lean().exec();
-  const approveListStatus = await Event.find({_id: eventData.params.id, attendees: eventData.id }).select("_id location").lean().exec();
+  const waitListStatus = await Event.find({
+    _id: eventData.params.id,
+    waitlist: eventData.id,
+  })
+    .select("_id location")
+    .lean()
+    .exec();
+  const approveListStatus = await Event.find({
+    _id: eventData.params.id,
+    attendees: eventData.id,
+  })
+    .select("_id location")
+    .lean()
+    .exec();
 
   const base64Image = data["img"].data.buffer.toString("base64");
   data["img"] = `data:${data["img"].contentType};base64,${base64Image}`;
   data["_id"] = data["_id"].toString();
 
-
-
-  if(waitListStatus.length > 0){
-    console.log(waitListStatus)
-      console.log("wait *************************************")
-    return {data,adminEmail, status: "TF" }
-  }if(approveListStatus.length > 0){
-    console.log(approveListStatus)
-    console.log("approve *************************************")
-      return {data, adminEmail, status: "TT"}
-  }else{
-    console.log("nothing *************************************")
-     return {data, adminEmail, status:"FF"}
+  if (waitListStatus.length > 0) {
+    return { data, adminEmail, status: "TF" };
   }
-
-
+  if (approveListStatus.length > 0) {
+    console.log(approveListStatus);
+    console.log("approve *************************************");
+    return { data, adminEmail, status: "TT" };
+  } else {
+    console.log("nothing *************************************");
+    return { data, adminEmail, status: "FF" };
+  }
 }
-
