@@ -152,7 +152,10 @@ export default function Page({ params }) {
   }
 
     function checkForm(){
+      console.log("hello")
     let search = sessionStorage.getItem("uid");
+    console.log(search)
+    console.log(params.exchangeID)
     checkFormCreation({"uid": search, event: params.exchangeID});
     }
 
@@ -258,62 +261,6 @@ export default function Page({ params }) {
                 >
                   Join Event
                 </button>
-{/* 
-                {userStatus === "FF" && (
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      postToWaitList(eventInfo._id);
-                    }}
-                    className="btn btn-primary"
-                    style={{
-                      marginTop: "60px",
-                      marginLeft: "40px",
-                      width: "80%",
-                      boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
-                    }}
-                  >
-                    Join Event
-                  </button>
-                )}
-
-                {userStatus === "TF" && (
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      Pop(eventInfo._id, adminEmail);
-                    }}
-                    // type="submit"
-                    className="btn btn-warning"
-                    style={{
-                      marginTop: "60px",
-                      marginLeft: "40px",
-                      width: "80%",
-                      boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
-                    }}
-                  >
-                    Remove from Wait-list
-                  </button>
-                )}
-
-                {userStatus === "TT" && (
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      PopTwo(eventInfo._id, adminEmail);
-                    }}
-                    // type="submit"
-                    className="btn btn-success"
-                    style={{
-                      marginTop: "60px",
-                      marginLeft: "40px",
-                      width: "30%",
-                      boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
-                    }}
-                  >
-                    Remove from Approve-list
-                  </button>
-                )} */}
               </div>
             </div>
           </div>

@@ -115,7 +115,7 @@ const AdminForms = () => {
 
   const fetchForms = async () => {
     try {
-      const formsData = await getAllFormsTwo("one");
+      const formsData = await getAllFormsTwo({"value": "one", "eventID:": null});
       console.log(formsData);
       setFroms(formsData);
       setLoading(false);

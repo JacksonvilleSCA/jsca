@@ -7,16 +7,9 @@ import { getAllForms } from "@/app/api/routes/essayroutes";
 import { getAllFormsTwo } from "@/app/api/routes/essayroutes";
 import { Table } from "react-bootstrap";
 import NavThree from "@/app/components/Nav3";
-import { clearConfig } from "dompurify";
 
 const AdminForms = (param) => {
-  // console.log(param)
-
-  console.log(Object.values(param.searchParams));
-  let hold = Object.values(param.searchParams);
-  console.log(hold[0]);
-
-  const [forms, setFroms] = useState([]);
+  const [forms, setForms] = useState([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -41,9 +34,10 @@ const AdminForms = (param) => {
 
   const fetchForms = async () => {
     try {
-      const formsData = await getAllFormsTwo();
-      console.log(formsData);
-      setFroms(formsData);
+     let hold = Object.values(param.searchParams);
+      const formsData = await getAllFormsTwo({ "eventID": hold, "value": "two" });
+      console.log(formsData)
+      setForms(formsData);
       setLoading(false);
     } catch (error) {
       setLoading(true);

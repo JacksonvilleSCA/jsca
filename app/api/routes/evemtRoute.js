@@ -165,7 +165,6 @@ export async function GetList(eventData) {
 
   try {
     const res = await Event.findById(eventData.id).select("amount waitlist attendees");
-    console.log(res.amount)
     const resTwo = await res.populate("waitlist attendees");
 
     if (resTwo) {

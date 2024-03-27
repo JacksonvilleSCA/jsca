@@ -8,6 +8,7 @@ import { ObjectId } from 'mongodb';
 import { FormContact } from "./formContact";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+
 import form from "../schema/Form";
 export async function POST(formData){
 
@@ -67,6 +68,7 @@ export async function GET(uid) {
 
 export async function getAllFormsTwo(check) {
   console.log(check)
+  console.log(check.eventID[0])
   try {
       // Connect to the MongoDB database
       await connect;
@@ -76,10 +78,10 @@ export async function getAllFormsTwo(check) {
 
       // Fetch documents from the collection where active is null
       let forms;
-      if(check === "one"){
+      if(check.value === "one"){
         forms = await formCollection.find({ active: null }).toArray();
-      }if(check === "two"){
-        forms = await formCollection.find({ active: { $in: [true, false] } }).toArray();
+      }if(check.value === "two"){
+        forms = await formCollection.find({ active: { $in: [true, false] } }).toArray(); 
       }
 
       // Convert objects with ObjectId to plain JavaScript objects
@@ -94,7 +96,9 @@ export async function getAllFormsTwo(check) {
           };
       });
 
-      return formattedForms;
+        const filteredForms = formattedForms.filter(form => form.event === check.eventID[0]);
+
+        return filteredForms;
   } catch (error) {
       console.error('Error fetching forms:', error);
       throw error;
@@ -193,7 +197,7 @@ export async function checkFormCreation(data){
           revalidatePath("/studentViewForm");
           redirect("/studentViewForm");
       }else{
-        console.log('no')
+        redirect(`/Dashboard/People/exchange/${data.event}/${data.event}`);
       }
 
 }
