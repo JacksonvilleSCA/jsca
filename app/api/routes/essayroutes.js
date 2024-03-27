@@ -65,48 +65,49 @@ export async function GET(uid) {
   }
 }
 
-
 export async function getAllFormsTwo(check) {
-
   try {
-      // Connect to the MongoDB database
-      await connect;
+    // Connect to the MongoDB database
+    await connect;
 
-      // Access the collection using the Form schema
-      const formCollection = mongoose.connection.db.collection('forms'); 
+    // Access the collection using the Form schema
+    const formCollection = mongoose.connection.db.collection('forms');
 
-      // Fetch documents from the collection where active is null
-      let forms;
-      if(check.value === "one"){
-        forms = await formCollection.find({ active: null }).toArray();
-      }if(check.value === "two"){
-        forms = await formCollection.find({ active: { $in: [true, false] } }).toArray(); 
-      }
+    // Fetch documents from the collection based on the check value
+    let forms;
+    if (check.value === "one") {
+      forms = await formCollection.find({ active: null }).toArray();
+    } else if (check.value === "two") {
+      forms = await formCollection.find({ active: { $in: [true, false] } }).toArray();
+    }
 
-      // Convert objects with ObjectId to plain JavaScript objects
-      const formattedForms = forms.map(form => {
-          // Convert event property to a plain JavaScript object
-          const formattedEvent = form.event instanceof ObjectId ? form.event.toString() : form.event;
-
-          // Return the updated form object
-          return {
-              ...form,
-              event: formattedEvent
-          };
+    // Convert objects with ObjectId to plain JavaScript objects
+    const formattedForms = forms.map(form => {
+      // Iterate over each field of the form
+      const formattedFields = {};
+      Object.entries(form).forEach(([key, value]) => {
+        // Check if the field is an ObjectId instance, if so, convert it to string
+        formattedFields[key] = value instanceof ObjectId ? value.toString() : value;
       });
+      return formattedFields;
+    });
 
-      if(check.value === "two"){
-        if(check.eventID[0]){
-          const filteredForms = formattedForms.filter(form => form.event === check.eventID[0]);
-          return filteredForms;
-        }
-      }
-        return formattedForms;
+    console.log(formattedForms);
+
+    // Filter forms based on eventID if necessary
+    if (check.value === "two" && check.eventID[0]) {
+      const filteredForms = formattedForms.filter(form => form.event === check.eventID[0]);
+      console.log(filteredForms);
+      return filteredForms;
+    }
+
+    return formattedForms;
   } catch (error) {
-      console.error('Error fetching forms:', error);
-      throw error;
+    console.error('Error fetching forms:', error);
+    throw error;
   }
 }
+
 
 export async function getAllForms() {
   
@@ -119,8 +120,19 @@ export async function getAllForms() {
 
     //
     const forms = await formCollection.find({}).toArray();
+    
+        // Convert objects with ObjectId to plain JavaScript objects
+        const formattedForms = forms.map(form => {
+          // Iterate over each field of the form
+          const formattedFields = {};
+          Object.entries(form).forEach(([key, value]) => {
+            // Check if the field is an ObjectId instance, if so, convert it to string
+            formattedFields[key] = value instanceof ObjectId ? value.toString() : value;
+          });
+          return formattedFields;
+        });
 
-    return forms;
+    return formattedForms;
 
   } catch (error) {
     console.error('Error deleting form data:', error);
@@ -187,6 +199,7 @@ export async function RemoveFromEvent(Data){
   }
 
 }
+
 
 // export async function checkFormCreation(data){
 //   console.log(data);

@@ -12,10 +12,6 @@ export default function Page() {
 
   const [eventInformation, setEventInformation] = useState([]);
 
-  const AreArraysEqual = (array1, array2) => {
-    return JSON.stringify(array1) === JSON.stringify(array2);
-  };
-
   useEffect(() => {
     var search = sessionStorage.getItem("AID");
     if (search == null) {
@@ -23,10 +19,7 @@ export default function Page() {
     }
     const fetchData = async () => {
       const data = await GetEvent();
-      console.log(data);
-      if (!AreArraysEqual(eventInformation, data)) {
-        setEventInformation(data);
-      }
+      setEventInformation(data);
     };
     fetchData();
   }, []);

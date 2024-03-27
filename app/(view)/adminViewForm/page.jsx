@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getAllForms } from '@/app/api/routes/essayroutes';
-import {DELETE} from '@/app/api/routes/essayroutes';
 import NavThree from '@/app/components/Nav3';
 
 const AdminViewForm = () => {

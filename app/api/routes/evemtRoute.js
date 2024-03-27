@@ -14,9 +14,22 @@ export async function GET() {
   data.forEach((item, index) => {
     const base64Image = item.img.data.buffer.toString("base64");
     data[index].img = `data:${item.img.contentType};base64,${base64Image}`;
+
     item._id = item._id.toString();
     data[index]._id = data[index]._id.toString();
+
+    item.admin = item.admin.toString();
+    data[index].admin = data[index].admin.toString();
+
+    data[index].attendees = item.attendees.map((attendee) =>
+      attendee.toString()
+    );
+
+    data[index].waitlist = item.waitlist.map((waitlistItem) =>
+      waitlistItem.toString()
+    );
   });
+
   return data;
 }
 
@@ -25,7 +38,6 @@ export async function getEvent(eventData) {
 
   const base64Image = data["img"].data.buffer.toString("base64");
   data["img"] = `data:${data["img"].contentType};base64,${base64Image}`;
-
   data["_id"] = data["_id"].toString();
 
   return { props: { data: JSON.parse(JSON.stringify(data)) } };
@@ -164,7 +176,9 @@ export async function GetList(eventData) {
   const EventID = eventData.id;
 
   try {
-    const res = await Event.findById(eventData.id).select("amount waitlist attendees");
+    const res = await Event.findById(eventData.id).select(
+      "amount waitlist attendees"
+    );
     const resTwo = await res.populate("waitlist attendees");
 
     if (resTwo) {
@@ -199,7 +213,7 @@ export async function GetList(eventData) {
         waitlist: convertedWaitlist,
         attendees: convertedAttendees,
         eventID: EventID,
-        max: res.amount
+        max: res.amount,
       };
     } else {
       return { waitlist: [], attendees: [] };
@@ -264,21 +278,32 @@ export async function DeleteFromAcceptanceList(Data) {
 
 export async function GetMemberEvents(Data) {
   const memberInfo = await Create.findOne({ _id: Data.userID }).lean().exec();
+  memberInfo._id = memberInfo._id.toString();
   const eventInfo = await Event.find({ attendees: Data.userID })
     .select("_id location")
     .lean()
     .exec();
-
+  eventInfo.forEach((item, index) => {
+    item._id = item._id.toString();
+    eventInfo[index]._id = eventInfo[index]._id.toString();
+  });
   return { memberInfo, eventInfo };
 }
 
 export async function GetMoreInfoEvent(eventData) {
   let data = await Event.findOne({ _id: eventData }).lean().exec();
-
   const base64Image = data["img"].data.buffer.toString("base64");
   data["img"] = `data:${data["img"].contentType};base64,${base64Image}`;
-
   data["_id"] = data["_id"].toString();
+  data.admin = data.admin.toString();
+  
+  data.attendees.forEach((item, index) => {
+    data.attendees[index] = item.toString();
+  });
+
+  data.waitlist.forEach((item, index) => {
+    data.waitlist[index] = item.toString();
+  });
 
   return data;
 }
@@ -321,6 +346,14 @@ export async function GetMemberListStatus(eventData) {
   const base64Image = data["img"].data.buffer.toString("base64");
   data["img"] = `data:${data["img"].contentType};base64,${base64Image}`;
   data["_id"] = data["_id"].toString();
+  data.admin = data.admin.toString();   
+  data.attendees.forEach((item, index) => {
+    data.attendees[index] = item.toString();
+  });
+
+  data.waitlist.forEach((item, index) => {
+    data.waitlist[index] = item.toString();
+  });
 
   if (waitListStatus.length > 0) {
     return { data, adminEmail, status: "TF" };
