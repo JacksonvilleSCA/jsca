@@ -152,7 +152,7 @@ export default function Page({ params }) {
   }
 
     function checkForm(){
-      console.log("hello")
+    console.log("hello")
     let search = sessionStorage.getItem("uid");
     console.log(search)
     console.log(params.exchangeID)

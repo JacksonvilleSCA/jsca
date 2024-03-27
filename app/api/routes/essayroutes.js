@@ -67,8 +67,7 @@ export async function GET(uid) {
 
 
 export async function getAllFormsTwo(check) {
-  console.log(check)
-  console.log(check.eventID[0])
+
   try {
       // Connect to the MongoDB database
       await connect;
@@ -96,9 +95,13 @@ export async function getAllFormsTwo(check) {
           };
       });
 
-        const filteredForms = formattedForms.filter(form => form.event === check.eventID[0]);
-
-        return filteredForms;
+      if(check.value === "two"){
+        if(check.eventID[0]){
+          const filteredForms = formattedForms.filter(form => form.event === check.eventID[0]);
+          return filteredForms;
+        }
+      }
+        return formattedForms;
   } catch (error) {
       console.error('Error fetching forms:', error);
       throw error;
@@ -185,19 +188,37 @@ export async function RemoveFromEvent(Data){
 
 }
 
-export async function checkFormCreation(data){
+// export async function checkFormCreation(data){
+//   console.log(data);
+
+//  let res = await Form.exists({ event: data.event }).lean().exec();
+//  let resTwo = await Form.exists({ student: data.uid }).lean().exec();
+
+//         if(res && resTwo){
+//           revalidatePath("/studentViewForm");
+//           redirect("/studentViewForm");
+//       }else{
+//         redirect(`/Dashboard/People/exchange/${data.event}/${data.event}`);
+//       }
+
+// }
+
+export async function checkFormCreation(data) {
   console.log(data);
 
- let res = await Form.exists({ event: data.event }).lean().exec();
- let resTwo = await Form.exists({ student: data.uid }).lean().exec();
-  console.log(res)
-  console.log(resTwo)
+  try {
+    // Check if a form exists with both event and uid
+    const formExists = await Form.exists({ event: data.event, student: data.uid }).lean().exec();
 
-        if(res && resTwo){
-          revalidatePath("/studentViewForm");
-          redirect("/studentViewForm");
-      }else{
-        redirect(`/Dashboard/People/exchange/${data.event}/${data.event}`);
-      }
-
+    if (formExists) {
+      revalidatePath("/studentViewForm");
+      redirect("/studentViewForm");
+    } else {
+      redirect(`/Dashboard/People/exchange/${data.event}/${data.event}`);
+    }
+  } catch (error) {
+    console.error('Error checking form creation:', error);
+    throw error;
+  }
 }
+
