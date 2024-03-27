@@ -179,7 +179,7 @@ import NavTwo from "@/app/components/Nav2"
             </div> {/* third row end */}
             <br /> 
             <div className = "row"> 
-                <div className = "col"> 
+                {/* <div className = "col"> 
                     <label> Select Program(s) of Interest: </label>
                         <div className = "col"> 
                             <div className = "form-check"> 
@@ -195,7 +195,7 @@ import NavTwo from "@/app/components/Nav2"
                                  <label className = "form-check-label" htmlFor = "Puerto Rico"> Puerto Rico  </label>    
                              </div>
                         </div>
-                </div> 
+                </div>  */}
                 <div className = "col"> 
                     <label> Do you have a passport? </label>
                         <div className = "col"> 
