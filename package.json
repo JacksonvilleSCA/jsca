@@ -33,7 +33,8 @@
     "react-bootstrap": "^2.9.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
-    "sass": "^1.68.0"
+    "sass": "^1.68.0",
+    "sharp": "^0.33.3"
   },
   "devDependencies": {
     "@types/hoist-non-react-statics": "^3.3.5"

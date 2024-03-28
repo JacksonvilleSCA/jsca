@@ -13,8 +13,6 @@ import { useRouter } from "next/navigation";
 import NavTwo from "@/app/components/Nav2";
 
 export default function Page({ params }) {
-  console.log(params);
-  console.log("=====================");
   const [eventInfo, setEventInfo] = useState("");
   //userID can be used for the member currently signed in.
   const [userID, setUserID] = useState("");
@@ -44,10 +42,15 @@ export default function Page({ params }) {
     //Code above was added
 
     const fetchData = async () => {
-      console.log(params + "++++");
-      console.log(id + "++++");
       const data = await GetMemberListStatus({ params, id });
-      setEventInfo(data.data);
+      
+
+      const formattedData = {
+        ...data.data,
+        startTime: formatTime(data.data.startTime),
+        endTime: formatTime(data.data.endTime),
+      };
+      setEventInfo(formattedData);
       setAdminEmail(data.data);
       setUserStatus(data.status);
     };
@@ -149,6 +152,26 @@ export default function Page({ params }) {
       router.push("/Dashboard/People");
     }
   }
+
+  function formatTime(timeString) {
+    const date = new Date(timeString);
+    if (isNaN(date.getTime())) {
+      return "Invalid Date";
+    }
+
+    const formattedTime = date.toLocaleString("en-US", {
+      month: "numeric",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+      hour12: true,
+    });
+
+    return formattedTime;
+  }
+
   return (
     <>
       <NavTwo />
@@ -202,7 +225,7 @@ export default function Page({ params }) {
                 <div>
                   <h2>{eventInfo.location}</h2>
                   <hr />
-                  <h3> Time & Location </h3>
+                  <h3>Event Duration</h3>
 
                   <h4>
                     {eventInfo.startTime} - {eventInfo.endTime}

@@ -57,8 +57,8 @@ export default function Home(props) {
           <div className="mb-4">
             <label className="form-label">Event Type</label>
             <select className="form-select" name="event">
-              <option value="Standard">Standard event</option>
-              <option value="Exchange">Exchange program</option>
+              <option value="Standard">Local Event</option>
+              <option value="Exchange">Exchange Program</option>
             </select>
           </div>
 

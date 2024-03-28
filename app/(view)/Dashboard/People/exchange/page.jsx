@@ -7,6 +7,21 @@ import DOMPurify from "dompurify";
 import Image from "next/image";
 // import Loading from "./loading";
 import NavTwo from "@/app/components/Nav2";
+import { Merriweather } from "next/font/google";
+import { Roboto } from "next/font/google";
+
+const merriweather = Merriweather({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const roboto = Roboto({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 
 export default function Page() {
 
@@ -47,11 +62,12 @@ export default function Page() {
               className="card mt-5"
               style={{
                 width: "80%",
+                backgroundColor: index % 2 === 0 ? "#C4E4FF" : "#DFF5FF",
                 boxShadow: "14px 14px 15px 0px rgba(0,0,0,0.1)",
                 position: "relative",
               }}
             >
-              {event.img.startsWith("data:image") ? (
+              {/* {event.img.startsWith("data:image") ? (
                 <img
                   alt="Picture of the Event"
                   src={event.img}
@@ -71,13 +87,14 @@ export default function Page() {
                     width: "100%",
                   }}
                 />
-              )}
+              )} */}
 
               <div className="card-body" style={{ position: "relative" }}>
                 <div className="card-title" style={{ textAlign: "center" }}>
-                  {event.location}
+                <h1 className={merriweather.className}>{event.location}</h1>
                 </div>
                 <hr />
+                <h3 className={roboto.className}>Event Details</h3>
                 <div className="card-text">
                   <div
                     className="card-text"

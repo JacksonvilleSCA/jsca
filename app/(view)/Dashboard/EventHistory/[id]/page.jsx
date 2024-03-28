@@ -23,8 +23,8 @@ export default function Page({ params }) {
     }
     const fetchData = async () => {
       const data = await GET(params);
-      console.log(data);
       setEventInfo(data.props.data);
+      setDetails(data.props.data.details);
     };
     fetchData();
   }, [params]);
@@ -200,7 +200,7 @@ export default function Page({ params }) {
 
           <div className="d-grid vstack gap-2">
             <button type="submit" className="btn btn-primary mb-4">
-              Update
+              Update Event
             </button>
           </div>
         </form>

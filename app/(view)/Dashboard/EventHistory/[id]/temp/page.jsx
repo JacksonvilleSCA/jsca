@@ -170,7 +170,7 @@ export default function Page({ params }) {
               <div>
                 <h2>{eventInfo.location}</h2>
                 <hr />
-                <h3> Time & Location </h3>
+                <h3>Event Duration</h3>
                  
                 <h4>
                   {eventInfo.startTime} -  {eventInfo.endTime}

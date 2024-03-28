@@ -7,6 +7,8 @@ import { revalidatePath } from "next/cache";
 import mongoose from "mongoose";
 import { redirect } from "next/navigation";
 import { contact } from "./eventContact";
+const sharp = require('sharp');
+
 
 export async function GET() {
   let data = await Event.find({}).lean().exec();
@@ -24,12 +26,13 @@ export async function GET() {
     data[index].attendees = item.attendees.map((attendee) =>
       attendee.toString()
     );
-
     data[index].waitlist = item.waitlist.map((waitlistItem) =>
       waitlistItem.toString()
     );
+
   });
 
+  // console.log(data)
   return data;
 }
 
@@ -120,12 +123,19 @@ export async function POST(formData) {
 
   const file = data.avatar;
   const bytes = await file.arrayBuffer();
-  const buffer = Buffer.from(bytes);
+  
+  let buffer = Buffer.from(bytes);
+  // console.log(buffer)
+
+  const compressedImageBuffer = await sharp(buffer)
+  .jpeg({ quality: 60 }) // Adjust quality as needed
+  .resize({ width: 600, height: 400 })
+  .toBuffer();
 
   const res = await Event.create({
     amount: data.totalPeople,
     img: {
-      data: buffer,
+      data:compressedImageBuffer,
       contentType: file.type,
     },
     startTime: data.startTime,
