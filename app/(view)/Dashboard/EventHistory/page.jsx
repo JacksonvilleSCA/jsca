@@ -42,7 +42,7 @@ export default function Page() {
     const fetchData = async () => {
       const data = await GetEvent();
       setEventInformation(data);
-      console.log(data)
+      console.log(data);
       // Format time for each event in the data array
       const formattedData = data.map((event) => ({
         ...event,
@@ -91,22 +91,6 @@ export default function Page() {
                   position: "relative",
                 }}
               >
-
-              <div style={{
-                width: '50px',  
-                height: '50px',
-                borderRadius: '50%', 
-                backgroundColor: 'lightblue',
-                position: 'relative',
-                top:'10px',
-                left: '352px', 
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}> {event.event === "Standard"? "L" : "E"}  </div>
-
-
-
                 {event.active === false && (
                   <div
                     style={{
@@ -121,8 +105,24 @@ export default function Page() {
                     {" "}
                   </div>
                 )}
-
                 <div className="card-body" style={{ position: "relative" }}>
+                  <div
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      borderRadius: "50%",
+                      backgroundColor: "lightblue",
+                      position: "relative",
+                      top: "1px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    {" "}
+                    {event.event === "Standard" ? "L" : "E"}{" "}
+                  </div>
+
                   <div className="card-title" style={{ textAlign: "center" }}>
                     <h2 className={merriweather.className}>
                       {" "}
