@@ -89,14 +89,14 @@ export default function Page({ params }) {
               >
                 {eventInfo.event === "Standard" && (
                   <>
-                 <option value="Standard">Standard event</option>
-                 <option value="Exchange">Exchange program</option>
+                 <option value="Standard">Local Event</option>
+                 <option value="Exchange">Exchange Program</option>
                   </>
                 )}
                 {eventInfo.event === "Exchange" && (
                   <>
-                  <option value="Exchange">Exchange program</option>
-                   <option value="Standard">Standard event</option>
+                  <option value="Exchange">Exchange Program</option>
+                   <option value="Standard">Local Event</option>
                   </>
                 )}
               </select>
